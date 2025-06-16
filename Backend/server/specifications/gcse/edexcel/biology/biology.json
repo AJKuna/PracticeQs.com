@@ -1,0 +1,104 @@
+{
+  "exam_board": "Edexcel",
+  "subject": "Biology",
+  "qualification": "GCSE",
+  "specification_code": "1BI0",
+  "topics": [
+    {
+      "name": "Key concepts in biology",
+      "subtopics": [
+        "Cells and control",
+        "Genetics",
+        "Natural selection and genetic modification",
+        "Health, disease and development of medicines"
+      ]
+    },
+    {
+      "name": "Plant structures and their functions",
+      "subtopics": [
+        "Plant tissues",
+        "Plant organs",
+        "Photosynthesis",
+        "Transport in plants",
+        "Plant hormones"
+      ]
+    },
+    {
+      "name": "Animal coordination, control and homeostasis",
+      "subtopics": [
+        "The nervous system",
+        "The endocrine system",
+        "Homeostasis",
+        "The brain",
+        "The eye"
+      ]
+    },
+    {
+      "name": "Exchange and transport in animals",
+      "subtopics": [
+        "Transport systems",
+        "The heart",
+        "The blood",
+        "Respiration",
+        "The lungs"
+      ]
+    },
+    {
+      "name": "Ecosystems and material cycles",
+      "subtopics": [
+        "Communities",
+        "Abiotic factors",
+        "Biotic factors",
+        "Energy transfer",
+        "Nutrient cycles"
+      ]
+    }
+  ],
+  "assessment": {
+    "papers": [
+      {
+        "name": "Paper 1: Key concepts in biology",
+        "duration": "1 hour 45 minutes",
+        "marks": 100,
+        "weighting": "50%",
+        "content": [
+          "Topics 1-5",
+          "Multiple choice",
+          "Short answer",
+          "Extended writing"
+        ]
+      },
+      {
+        "name": "Paper 2: Key concepts in biology",
+        "duration": "1 hour 45 minutes",
+        "marks": 100,
+        "weighting": "50%",
+        "content": [
+          "Topics 1-5",
+          "Multiple choice",
+          "Short answer",
+          "Extended writing"
+        ]
+      }
+    ]
+  },
+  "practical_skills": {
+    "core_practicals": [
+      "Using microscopes to observe cells",
+      "Enzyme investigations",
+      "Food tests",
+      "Photosynthesis rates",
+      "Reaction times",
+      "Field investigations",
+      "Osmosis in plant tissues",
+      "Aseptic techniques"
+    ],
+    "mathematical_skills": [
+      "Arithmetic and numerical computation",
+      "Handling data",
+      "Algebra",
+      "Graphs",
+      "Geometry and trigonometry"
+    ]
+  }
+} 

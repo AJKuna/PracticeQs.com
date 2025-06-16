@@ -1,0 +1,61 @@
+{
+  "questions": [
+    {
+      "question": "Describe the structure of a bacterial cell.",
+      "marks": 4,
+      "topic": "Cell Biology",
+      "answer": [
+        "1. Circular DNA/genetic material/chromosome (1)",
+        "2. Cell wall (1)",
+        "3. Cell membrane (1)",
+        "4. Cytoplasm (1)"
+      ],
+      "explanation": "This question tests knowledge of cell structure. Each correct structural feature earns one mark."
+    },
+    {
+      "question": "Calculate the magnification of a cell image if the real width of the cell is 0.002mm and the image width is 20mm.",
+      "marks": 3,
+      "topic": "Cell Biology",
+      "answer": [
+        "1. Correct formula: magnification = image size ÷ real size (1)",
+        "2. Convert units to same scale: 0.002mm = 0.002mm (no conversion needed) (1)",
+        "3. Correct calculation: 20 ÷ 0.002 = ×10,000 (1)"
+      ],
+      "explanation": "This mathematical skills question requires using the magnification formula and handling units correctly."
+    },
+    {
+      "question": "Explain how oxygen moves from the alveoli into the blood.",
+      "marks": 4,
+      "topic": "Organisation",
+      "answer": [
+        "1. Oxygen moves by diffusion (1)",
+        "2. From high concentration in alveoli to low concentration in blood (1)",
+        "3. Through thin alveolar wall/capillary wall (1)",
+        "4. Short diffusion distance/one cell thick (1)"
+      ],
+      "explanation": "This question tests understanding of gas exchange and the factors that make it efficient."
+    },
+    {
+      "question": "Name three ways that white blood cells help to defend against pathogens.",
+      "marks": 3,
+      "topic": "Infection and Response",
+      "answer": [
+        "1. Phagocytosis/engulf pathogens (1)",
+        "2. Produce antibodies (1)",
+        "3. Produce antitoxins (1)"
+      ],
+      "explanation": "This recall question tests knowledge of the immune system and white blood cell functions."
+    },
+    {
+      "question": "Describe the process of photosynthesis using the word equation.",
+      "marks": 3,
+      "topic": "Bioenergetics",
+      "answer": [
+        "1. Carbon dioxide + water (1)",
+        "2. (Light energy) → (1)",
+        "3. Glucose + oxygen (1)"
+      ],
+      "explanation": "This question tests basic knowledge of photosynthesis and the ability to write word equations."
+    }
+  ]
+} 

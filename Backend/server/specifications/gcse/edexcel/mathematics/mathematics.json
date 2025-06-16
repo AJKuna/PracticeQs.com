@@ -1,0 +1,145 @@
+{
+  "exam_board": "Edexcel",
+  "subject": "Mathematics",
+  "qualification": "GCSE",
+  "specification_code": "1MA1",
+  "command_words": [
+    "Calculate",
+    "Solve",
+    "Find",
+    "Work out",
+    "Show that",
+    "Prove",
+    "Draw",
+    "Sketch",
+    "Complete",
+    "Describe",
+    "Explain",
+    "Give",
+    "Write down",
+    "State",
+    "Simplify"
+  ],
+  "topics": [
+    {
+      "id": "1",
+      "name": "Number",
+      "subtopics": [
+        "Types of number and sequences",
+        "Fractions, decimals and percentages",
+        "Powers and roots",
+        "Standard form",
+        "Surds",
+        "Ratio and proportion",
+        "Degree of accuracy",
+        "Standard units",
+        "Compound measures"
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Algebra",
+      "subtopics": [
+        "Manipulation",
+        "Expressions",
+        "Equations",
+        "Inequalities",
+        "Sequences",
+        "Functions",
+        "Graphs",
+        "Quadratic equations",
+        "Simultaneous equations",
+        "Algebraic fractions",
+        "Proof"
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Ratio, proportion and rates of change",
+      "subtopics": [
+        "Direct and inverse proportion",
+        "Growth and decay",
+        "Compound interest",
+        "Percentages",
+        "Ratios",
+        "Speed, distance, time",
+        "Density",
+        "Pressure",
+        "Kinematics"
+      ]
+    },
+    {
+      "id": "4",
+      "name": "Geometry and measures",
+      "subtopics": [
+        "Properties of shapes",
+        "Circle theorems",
+        "Geometric proof",
+        "Transformations",
+        "Constructions and loci",
+        "Vectors",
+        "Similarity",
+        "Congruence",
+        "Pythagoras' theorem",
+        "Trigonometry"
+      ]
+    },
+    {
+      "id": "5",
+      "name": "Probability",
+      "subtopics": [
+        "Single events",
+        "Combined events",
+        "Tree diagrams",
+        "Venn diagrams",
+        "Set notation",
+        "Conditional probability",
+        "Independent events",
+        "Mutually exclusive events"
+      ]
+    },
+    {
+      "id": "6",
+      "name": "Statistics",
+      "subtopics": [
+        "Types of data",
+        "Collecting data",
+        "Sampling",
+        "Representing data",
+        "Measures of central tendency",
+        "Measures of spread",
+        "Cumulative frequency",
+        "Box plots",
+        "Histograms",
+        "Scatter graphs",
+        "Time series"
+      ]
+    }
+  ],
+  "assessment": {
+    "papers": [
+      {
+        "name": "Paper 1 (Non-Calculator)",
+        "duration": "1 hour 30 minutes",
+        "marks": 80,
+        "weighting": "33.33%"
+      },
+      {
+        "name": "Paper 2 (Calculator)",
+        "duration": "1 hour 30 minutes",
+        "marks": 80,
+        "weighting": "33.33%"
+      },
+      {
+        "name": "Paper 3 (Calculator)",
+        "duration": "1 hour 30 minutes",
+        "marks": 80,
+        "weighting": "33.33%"
+      }
+    ],
+    "tiers": {
+      "foundation": "Grades 1-5",
+      "higher": "Grades 4-9"
+    }
+  }
+} 

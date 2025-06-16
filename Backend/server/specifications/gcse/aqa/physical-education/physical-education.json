@@ -1,0 +1,109 @@
+{
+  "exam_board": "AQA",
+  "subject": "Physical Education",
+  "qualification": "GCSE",
+  "specification_code": "8582",
+  "topics": [
+    {
+      "name": "Applied anatomy and physiology",
+      "subtopics": [
+        "Skeletal system",
+        "Muscular system",
+        "Cardiovascular system",
+        "Respiratory system",
+        "Effects of exercise",
+        "Movement analysis"
+      ]
+    },
+    {
+      "name": "Sports psychology",
+      "subtopics": [
+        "Classification of skills",
+        "Goal setting",
+        "Mental preparation",
+        "Types of guidance",
+        "Types of feedback",
+        "Arousal and stress management"
+      ]
+    },
+    {
+      "name": "Physical training",
+      "subtopics": [
+        "Components of fitness",
+        "Principles of training",
+        "Types of training",
+        "Preventing injury",
+        "Effective warm up and cool down",
+        "Training methods"
+      ]
+    },
+    {
+      "name": "Socio-cultural influences",
+      "subtopics": [
+        "Participation in physical activity",
+        "Commercialisation of sport",
+        "Ethical issues",
+        "Performance-enhancing drugs",
+        "Violence in sport",
+        "Spectator behaviour"
+      ]
+    },
+    {
+      "name": "Health, fitness and well-being",
+      "subtopics": [
+        "Physical, emotional and social health",
+        "Lifestyle choices",
+        "Diet and nutrition",
+        "Energy use",
+        "Water balance",
+        "Sedentary lifestyles"
+      ]
+    }
+  ],
+  "assessment": {
+    "theory": {
+      "paper_1": {
+        "name": "The human body and movement in physical activity and sport",
+        "duration": "1 hour 15 minutes",
+        "marks": 78,
+        "weighting": "30%"
+      },
+      "paper_2": {
+        "name": "Socio-cultural influences and well-being in physical activity and sport",
+        "duration": "1 hour 15 minutes",
+        "marks": 78,
+        "weighting": "30%"
+      }
+    },
+    "practical": {
+      "name": "Practical performance in physical activity and sport",
+      "content": [
+        "Three different physical activities",
+        "Analysis and evaluation of performance",
+        "One team activity",
+        "One individual activity",
+        "One free choice"
+      ],
+      "marks": 100,
+      "weighting": "40%"
+    }
+  },
+  "practical_activities": {
+    "team_activities": [
+      "Football",
+      "Rugby",
+      "Basketball",
+      "Cricket",
+      "Hockey",
+      "Netball"
+    ],
+    "individual_activities": [
+      "Athletics",
+      "Swimming",
+      "Gymnastics",
+      "Tennis",
+      "Badminton",
+      "Dance"
+    ]
+  }
+} 

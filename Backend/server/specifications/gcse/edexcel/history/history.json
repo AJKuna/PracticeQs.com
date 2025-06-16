@@ -1,0 +1,123 @@
+{
+  "exam_board": "Edexcel",
+  "subject": "History",
+  "qualification": "GCSE",
+  "specification_code": "1HI0",
+  "papers": [
+    {
+      "name": "Paper 1: Thematic study and historic environment",
+      "topics": [
+        {
+          "name": "Medicine in Britain, c1250–present",
+          "subtopics": [
+            "Medieval medicine, c1250-c1500",
+            "Medical Renaissance in England, c1500-c1700",
+            "Medicine in eighteenth and nineteenth century Britain",
+            "Medicine in modern Britain, c1900-present",
+            "The British sector of the Western Front, 1914-18",
+            "Historical environment case study"
+          ]
+        }
+      ],
+      "assessment": {
+        "duration": "1 hour 15 minutes",
+        "marks": 52,
+        "weighting": "30%"
+      }
+    },
+    {
+      "name": "Paper 2: Period study and British depth study",
+      "topics": [
+        {
+          "name": "Early Elizabethan England, 1558-88",
+          "subtopics": [
+            "Queen, government and religion",
+            "Challenges to Elizabeth at home and abroad",
+            "Elizabethan society in the Age of Exploration",
+            "Religious settlement",
+            "Mary Queen of Scots",
+            "Spanish Armada"
+          ]
+        },
+        {
+          "name": "Superpower relations and the Cold War, 1941-91",
+          "subtopics": [
+            "Origins of the Cold War, 1941-58",
+            "Cold War crises, 1958-70",
+            "End of the Cold War, 1970-91",
+            "Berlin Crisis",
+            "Cuban Missile Crisis",
+            "Prague Spring"
+          ]
+        }
+      ],
+      "assessment": {
+        "duration": "1 hour 45 minutes",
+        "marks": 64,
+        "weighting": "40%"
+      }
+    },
+    {
+      "name": "Paper 3: Modern depth study",
+      "topics": [
+        {
+          "name": "Weimar and Nazi Germany, 1918-39",
+          "subtopics": [
+            "The Weimar Republic 1918-29",
+            "Hitler's rise to power, 1919-33",
+            "Nazi control and dictatorship, 1933-39",
+            "Life in Nazi Germany, 1933-39",
+            "Impact on young people",
+            "Terror and persuasion"
+          ]
+        }
+      ],
+      "assessment": {
+        "duration": "1 hour 20 minutes",
+        "marks": 52,
+        "weighting": "30%"
+      }
+    }
+  ],
+  "assessment_objectives": {
+    "AO1": {
+      "description": "Demonstrate knowledge and understanding of the key features and characteristics of the periods studied",
+      "weighting": "35%"
+    },
+    "AO2": {
+      "description": "Explain and analyse historical events and periods studied using second-order historical concepts",
+      "weighting": "35%"
+    },
+    "AO3": {
+      "description": "Analyse, evaluate and use sources (contemporary to the period) to make substantiated judgements, in the context of historical events studied",
+      "weighting": "15%"
+    },
+    "AO4": {
+      "description": "Analyse, evaluate and make substantiated judgements about interpretations (including how and why interpretations may differ) in the context of historical events studied",
+      "weighting": "15%"
+    }
+  },
+  "historical_skills": {
+    "source_skills": [
+      "Nature, origin and purpose",
+      "Utility evaluation",
+      "Reliability assessment",
+      "Cross-referencing",
+      "Contextual knowledge application"
+    ],
+    "interpretations": [
+      "Identifying different views",
+      "Explaining differences",
+      "Evaluating interpretations",
+      "Using evidence",
+      "Historical context"
+    ],
+    "writing_skills": [
+      "Extended writing",
+      "Analytical paragraphs",
+      "Balanced arguments",
+      "Supporting evidence",
+      "Historical terminology"
+    ]
+  }
+} 

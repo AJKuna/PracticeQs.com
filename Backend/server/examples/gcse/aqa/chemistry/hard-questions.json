@@ -1,0 +1,47 @@
+{
+  "difficulty": "hard",
+  "questions": [
+    {
+      "id": "H1",
+      "topic": "Quantitative chemistry",
+      "question": "A student reacts 3.85g of copper(II) oxide with excess hydrochloric acid. The equation for the reaction is: CuO + 2HCl → CuCl₂ + H₂O. Calculate the theoretical yield of copper(II) chloride in grams. (Ar: Cu=63.5, O=16, Cl=35.5)",
+      "answer": "5.38g CuCl₂",
+      "explanation": "1. Mr CuO = 79.5, Mr CuCl₂ = 134.5\n2. Moles of CuO = 3.85/79.5 = 0.0484 moles\n3. 1:1 ratio so moles of CuCl₂ = 0.0484\n4. Mass CuCl₂ = 0.0484 × 134.5 = 5.38g",
+      "marks": 6
+    },
+    {
+      "id": "H2",
+      "topic": "Organic chemistry",
+      "question": "Explain how fractional distillation of crude oil works, including why different fractions are collected at different temperatures. In your answer, refer to intermolecular forces and molecular size.",
+      "answer": "1. Crude oil heated to vaporize components\n2. Vapor rises up fractionating column\n3. Different fractions have different boiling points due to different chain lengths\n4. Longer chains have stronger intermolecular forces\n5. Therefore need higher temperatures to overcome these forces\n6. Fractions condense at different levels when temperature matches their boiling point",
+      "explanation": "The separation is based on the principle that larger molecules have stronger intermolecular forces, requiring more energy (higher temperature) to overcome these forces and vaporize.",
+      "marks": 6
+    },
+    {
+      "id": "H3",
+      "topic": "Chemical changes",
+      "question": "During electrolysis of copper(II) sulfate solution using copper electrodes, the mass of the anode decreased by 0.635g. Calculate the mass change of the cathode and explain any difference. (Ar: Cu=63.5)",
+      "answer": "Mass increase at cathode = 0.635g. The mass change is the same because:\n1. Cu²⁺ + 2e⁻ → Cu at cathode\n2. Cu → Cu²⁺ + 2e⁻ at anode\n3. For every Cu atom lost at anode, one is gained at cathode",
+      "explanation": "This is a conservation of mass question involving redox reactions at electrodes. The copper ions moving through the solution carry the same mass from anode to cathode.",
+      "marks": 5
+    },
+    {
+      "id": "H4",
+      "topic": "Energy changes",
+      "question": "Using bond energies, calculate the overall energy change for the reaction:\nCH₄ + 2O₂ → CO₂ + 2H₂O\nBond energies (kJ/mol): C-H = 413, O=O = 498, C=O = 799, O-H = 463",
+      "answer": "1. Energy to break bonds:\nCH₄: 4 × C-H = 4 × 413 = 1652\nO₂: 2 × O=O = 2 × 498 = 996\nTotal = 2648 kJ/mol\n\n2. Energy released forming bonds:\nCO₂: 2 × C=O = 2 × 799 = 1598\nH₂O: 4 × O-H = 4 × 463 = 1852\nTotal = 3450 kJ/mol\n\n3. Overall change = -802 kJ/mol (exothermic)",
+      "explanation": "Energy change = energy to break bonds - energy released forming bonds. Negative value means exothermic reaction.",
+      "marks": 6
+    },
+    {
+      "id": "H5",
+      "topic": "Rates and equilibrium",
+      "question": "The Haber process produces ammonia: N₂ + 3H₂ ⇌ 2NH₃ ΔH = -92kJ/mol\nExplain how the following conditions affect yield and rate, and why 450°C and 200 atmospheres are used industrially:\na) High temperature\nb) High pressure\nc) Iron catalyst",
+      "answer": "Temperature:\n- Increases rate (more successful collisions)\n- Decreases yield (exothermic reaction favors lower temp)\n- 450°C is compromise between rate and yield\n\nPressure:\n- Increases rate (more frequent collisions)\n- Increases yield (fewer gas molecules on product side)\n- 200 atm is compromise due to cost of higher pressures\n\nCatalyst:\n- Increases rate only (provides alternative pathway)\n- No effect on yield (affects forward and reverse equally)\n- Iron is cheap and effective",
+      "explanation": "This tests understanding of how different factors affect both kinetics and equilibrium, and the compromises made in industrial processes.",
+      "marks": 8
+    }
+  ],
+  "total_marks": 31,
+  "recommended_time": "40 minutes"
+} 

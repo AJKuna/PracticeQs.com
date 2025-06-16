@@ -1,0 +1,213 @@
+{
+  "exam_board": "AQA",
+  "qualification": "GCSE",
+  "subject": "Mathematics",
+  "specification_code": "8300",
+  "command_words": [
+    "calculate", "solve", "show", "prove", "explain", "justify",
+    "work out", "determine", "find", "give", "state", "write"
+  ],
+  "topics": [
+    {
+      "name": "1 Number",
+      "subtopics": [
+        {
+          "code": "N1",
+          "title": "Number operations and integers",
+          "content": [
+            "Order of operations (BIDMAS)",
+            "Properties of integers (factors, multiples, primes)",
+            "Prime factorisation",
+            "HCF and LCM",
+            "Powers and roots",
+            "Standard form",
+            "Surds (HT only)",
+            "Rational and irrational numbers"
+          ],
+          "required_skills": [
+            "Use positive and negative integers",
+            "Use the four operations (+, -, ×, ÷)",
+            "Find factors, multiples and primes",
+            "Express numbers as products of prime factors",
+            "Calculate with powers and roots",
+            "Convert between standard form and ordinary numbers",
+            "(HT only) Simplify surds",
+            "(HT only) Rationalise denominators"
+          ],
+          "examples": [
+            "Express 360 as a product of prime factors",
+            "Calculate the HCF of 48 and 72",
+            "Write 0.00234 in standard form",
+            "(HT) Simplify √48",
+            "(HT) Rationalise the denominator of 1/√3"
+          ]
+        },
+        {
+          "code": "N2",
+          "title": "Fractions, decimals and percentages",
+          "content": [
+            "Equivalent fractions",
+            "Operations with fractions",
+            "Converting between fractions, decimals and percentages",
+            "Recurring decimals",
+            "Percentage calculations",
+            "Percentage change",
+            "Reverse percentages",
+            "Compound interest and depreciation"
+          ],
+          "required_skills": [
+            "Simplify fractions",
+            "Add, subtract, multiply and divide fractions",
+            "Convert between different number forms",
+            "Calculate percentages of amounts",
+            "Calculate percentage increase/decrease",
+            "Solve reverse percentage problems",
+            "Solve compound interest problems"
+          ],
+          "examples": [
+            "Express 2.5 as a fraction in its simplest form",
+            "Calculate 2/3 + 3/4",
+            "Find 15% of 80",
+            "Calculate the original price if 20% off is £40",
+            "Calculate compound interest over 3 years at 5% per annum"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "2 Algebra",
+      "subtopics": [
+        {
+          "code": "A1",
+          "title": "Algebraic expressions",
+          "content": [
+            "Algebraic notation",
+            "Simplifying expressions",
+            "Index laws",
+            "Expanding brackets",
+            "Factorising",
+            "Algebraic fractions",
+            "Completing the square (HT only)",
+            "Proof"
+          ],
+          "required_skills": [
+            "Use algebraic notation correctly",
+            "Collect like terms",
+            "Multiply out brackets",
+            "Factorise expressions",
+            "Use index laws",
+            "(HT only) Complete the square",
+            "Construct mathematical proofs"
+          ],
+          "examples": [
+            "Simplify 4x + 2y + 3x - 5y",
+            "Expand (x + 3)(x - 2)",
+            "Factorise x² - 4",
+            "(HT) Complete the square for x² + 6x + 5"
+          ]
+        },
+        {
+          "code": "A2",
+          "title": "Equations and inequalities",
+          "content": [
+            "Linear equations",
+            "Quadratic equations",
+            "Simultaneous equations",
+            "Linear inequalities",
+            "Quadratic inequalities (HT only)",
+            "Algebraic fractions",
+            "Functions",
+            "Iterative methods (HT only)"
+          ],
+          "required_skills": [
+            "Solve linear equations",
+            "Solve quadratic equations by factorising",
+            "Use the quadratic formula",
+            "Solve simultaneous equations",
+            "Solve linear inequalities",
+            "(HT only) Solve quadratic inequalities",
+            "Use iterative methods"
+          ],
+          "examples": [
+            "Solve 3x + 4 = 19",
+            "Solve x² + 5x + 6 = 0",
+            "Solve the simultaneous equations: y = 2x + 1, y = x² + 3",
+            "(HT) Solve x² - 3x > 10"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "3 Ratio, proportion and rates of change",
+      "subtopics": [
+        {
+          "code": "R1",
+          "title": "Ratio and proportion",
+          "content": [
+            "Ratios in simplest form",
+            "Dividing in a ratio",
+            "Direct proportion",
+            "Inverse proportion",
+            "Compound units",
+            "Scale factors",
+            "Currency conversion",
+            "Unit conversion"
+          ],
+          "required_skills": [
+            "Write ratios in simplest form",
+            "Divide quantities in a given ratio",
+            "Solve direct proportion problems",
+            "Solve inverse proportion problems",
+            "Convert between units",
+            "Use scale factors",
+            "Convert between currencies"
+          ],
+          "examples": [
+            "Simplify the ratio 24:36",
+            "Share £360 in the ratio 3:5",
+            "If y ∝ x², find y when x = 4 given that y = 18 when x = 3",
+            "Convert 2.5 hours to minutes"
+          ]
+        }
+      ]
+    }
+  ],
+  "assessment_objectives": {
+    "AO1": "Use and apply standard techniques",
+    "AO2": "Reason, interpret and communicate mathematically",
+    "AO3": "Solve problems within mathematics and in other contexts"
+  },
+  "grade_descriptors": {
+    "9": "Exceptional performance demonstrating deep understanding and application",
+    "8": "Excellent performance across all aspects of the specification",
+    "7": "Very good performance showing comprehensive understanding",
+    "6": "Good performance showing strong understanding of most concepts",
+    "5": "Reasonable performance showing understanding of key concepts",
+    "4": "Satisfactory performance showing basic understanding",
+    "3": "Basic performance with some understanding",
+    "2": "Limited performance with gaps in understanding",
+    "1": "Minimal performance with significant gaps"
+  },
+  "equipment_required": [
+    "Scientific calculator",
+    "Ruler graduated in centimetres and millimetres",
+    "Protractor",
+    "Pair of compasses",
+    "HB pencil",
+    "Eraser"
+  ],
+  "formulae_given": [
+    "Area of a trapezium = ½(a + b)h",
+    "Volume of a prism = area of cross section × length",
+    "Quadratic formula: x = (-b ± √(b² - 4ac)) ÷ 2a",
+    "Sine rule: a/sin A = b/sin B = c/sin C",
+    "Cosine rule: a² = b² + c² - 2bc cos A"
+  ],
+  "formulae_to_memorise": [
+    "Area of rectangle = length × width",
+    "Area of triangle = ½ × base × height",
+    "Area of circle = πr²",
+    "Circumference of circle = 2πr",
+    "Pythagoras' theorem: a² + b² = c²"
+  ]
+} 

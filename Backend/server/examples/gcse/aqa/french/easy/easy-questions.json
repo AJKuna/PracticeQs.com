@@ -1,0 +1,25 @@
+{
+  "questions": [
+    {
+      "question": "Translate the following sentence into French: 'I live in a big house with my family.'",
+      "topic": "Home, town, neighborhood and region",
+      "marks": 4,
+      "answer": "J'habite dans une grande maison avec ma famille.",
+      "explanation": "Key vocabulary: habiter (to live), maison (house), famille (family). Adjective 'grande' agrees with feminine noun 'maison'."
+    },
+    {
+      "question": "Listen to the audio clip about Marie's hobbies and choose the correct activities she does:\nA) Swimming and tennis\nB) Football and reading\nC) Dancing and cycling\nD) Running and cooking",
+      "topic": "Free-time activities",
+      "marks": 4,
+      "answer": "C) Dancing and cycling",
+      "explanation": "Marie mentions 'Je fais de la danse' and 'Je fais du vélo' in the recording."
+    },
+    {
+      "question": "Complete the sentences with the correct form of the verb 'être' (to be) in the present tense:\n1. Je ___ français\n2. Tu ___ anglaise\n3. Il ___ étudiant\n4. Nous ___ amis",
+      "topic": "Grammar",
+      "marks": 4,
+      "answer": "1. suis\n2. es\n3. est\n4. sommes",
+      "explanation": "Present tense conjugation of 'être': je suis, tu es, il/elle est, nous sommes."
+    }
+  ]
+} 

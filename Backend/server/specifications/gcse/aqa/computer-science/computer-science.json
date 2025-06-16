@@ -1,0 +1,251 @@
+{
+  "exam_board": "AQA",
+  "qualification": "GCSE",
+  "subject": "Computer Science",
+  "specification_code": "8525",
+  "command_words": [
+    "describe", "explain", "compare", "evaluate", "analyse", "implement",
+    "create", "debug", "test", "justify", "discuss", "demonstrate"
+  ],
+  "topics": [
+    {
+      "name": "Fundamentals of algorithms",
+      "subtopics": [
+        {
+          "code": "1.1",
+          "title": "Algorithms",
+          "content": [
+            "Computational thinking concepts",
+            "Designing algorithms using pseudocode",
+            "Designing algorithms using flowcharts",
+            "Interpreting algorithms",
+            "Searching algorithms (linear and binary search)",
+            "Sorting algorithms (bubble, merge, insertion sort)",
+            "Algorithm efficiency",
+            "Trace tables"
+          ],
+          "required_skills": [
+            "Design algorithms using pseudocode",
+            "Create flowcharts for algorithms",
+            "Implement searching algorithms",
+            "Implement sorting algorithms",
+            "Compare algorithm efficiency",
+            "Use trace tables to track variables"
+          ],
+          "programming_concepts": [
+            "Sequence",
+            "Selection",
+            "Iteration",
+            "Arrays and lists",
+            "Procedures and functions",
+            "Input and output"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Programming",
+      "subtopics": [
+        {
+          "code": "2.1",
+          "title": "Programming fundamentals",
+          "content": [
+            "Data types",
+            "Programming concepts",
+            "Arithmetic operations",
+            "Boolean operations",
+            "String handling",
+            "Arrays (1D and 2D)",
+            "File handling",
+            "Exception handling",
+            "Subroutines",
+            "Structured programming"
+          ],
+          "required_skills": [
+            "Write programs in a high-level language",
+            "Use sequence, selection, iteration",
+            "Implement arrays and lists",
+            "Create and use subroutines",
+            "Handle files and exceptions",
+            "Debug and test programs"
+          ],
+          "programming_constructs": [
+            "Variables and constants",
+            "Input/output operations",
+            "Arithmetic operators",
+            "Boolean operators",
+            "String manipulation",
+            "Random number generation"
+          ]
+        },
+        {
+          "code": "2.2",
+          "title": "Data structures",
+          "content": [
+            "Arrays",
+            "Records",
+            "Lists",
+            "2D arrays",
+            "File structures",
+            "Data validation",
+            "SQL basics",
+            "Database concepts"
+          ],
+          "required_skills": [
+            "Implement arrays and records",
+            "Use lists and 2D arrays",
+            "Perform file operations",
+            "Validate input data",
+            "Write basic SQL queries",
+            "Work with databases"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Computer systems",
+      "subtopics": [
+        {
+          "code": "3.1",
+          "title": "Hardware and software",
+          "content": [
+            "CPU architecture",
+            "CPU performance",
+            "Memory hierarchy",
+            "Storage devices",
+            "Input/output devices",
+            "Operating systems",
+            "Utility software",
+            "Software classification"
+          ],
+          "required_skills": [
+            "Explain CPU components and function",
+            "Compare storage devices",
+            "Describe memory types",
+            "Understand operating systems",
+            "Classify software types",
+            "Evaluate system performance"
+          ]
+        },
+        {
+          "code": "3.2",
+          "title": "Networks and security",
+          "content": [
+            "Network types",
+            "Network topologies",
+            "Network protocols",
+            "Network security",
+            "Cyber security threats",
+            "Security measures",
+            "Encryption",
+            "Authentication"
+          ],
+          "required_skills": [
+            "Compare network types",
+            "Understand protocols",
+            "Identify security threats",
+            "Implement security measures",
+            "Explain encryption methods",
+            "Evaluate network performance"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Impacts of digital technology",
+      "subtopics": [
+        {
+          "code": "4.1",
+          "title": "Ethical, legal and environmental impacts",
+          "content": [
+            "Ethical issues in computing",
+            "Legal issues in computing",
+            "Environmental impacts",
+            "Privacy and data protection",
+            "Intellectual property",
+            "Computer legislation",
+            "Digital divide",
+            "Environmental sustainability"
+          ],
+          "required_skills": [
+            "Evaluate ethical implications",
+            "Understand legal requirements",
+            "Assess environmental impact",
+            "Apply legislation",
+            "Analyse privacy issues",
+            "Consider sustainability"
+          ]
+        }
+      ]
+    }
+  ],
+  "assessment_objectives": {
+    "AO1": "Demonstrate knowledge and understanding of key concepts and principles of Computer Science",
+    "AO2": "Apply knowledge and understanding of key concepts and principles of Computer Science",
+    "AO3": "Analyse problems in computational terms to make reasoned judgements and design solutions"
+  },
+  "programming_languages": {
+    "recommended": [
+      "Python",
+      "Java",
+      "C#",
+      "Visual Basic",
+      "JavaScript"
+    ],
+    "required_features": [
+      "Sequence, selection, iteration",
+      "String handling",
+      "File handling",
+      "Arrays/lists",
+      "Functions/procedures",
+      "Basic input/output"
+    ]
+  },
+  "practical_skills": {
+    "programming": [
+      "Program design",
+      "Implementation",
+      "Testing and debugging",
+      "Documentation",
+      "Maintenance",
+      "Code review"
+    ],
+    "problem_solving": [
+      "Decomposition",
+      "Pattern recognition",
+      "Abstraction",
+      "Algorithm design",
+      "Evaluation"
+    ]
+  },
+  "exam_structure": {
+    "paper_1": {
+      "title": "Computational thinking and programming skills",
+      "duration": "2 hours",
+      "marks": 100,
+      "percentage": 50
+    },
+    "paper_2": {
+      "title": "Computing concepts",
+      "duration": "2 hours",
+      "marks": 100,
+      "percentage": 50
+    }
+  },
+  "programming_project": {
+    "requirements": [
+      "Analysis of problem",
+      "Design of solution",
+      "Implementation of solution",
+      "Testing and evaluation",
+      "Documentation"
+    ],
+    "deliverables": [
+      "Program code",
+      "Testing evidence",
+      "User guide",
+      "Technical documentation",
+      "Evaluation report"
+    ]
+  }
+} 

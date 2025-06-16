@@ -1,0 +1,257 @@
+{
+  "exam_board": "AQA",
+  "qualification": "GCSE",
+  "subject": "Geography",
+  "specification_code": "8035",
+  "command_words": [
+    "describe", "explain", "assess", "evaluate", "analyse", "compare",
+    "contrast", "discuss", "justify", "suggest", "outline", "examine"
+  ],
+  "topics": [
+    {
+      "name": "Living with the physical environment",
+      "subtopics": [
+        {
+          "code": "1.1",
+          "title": "The challenge of natural hazards",
+          "content": [
+            "Tectonic hazards",
+            "Weather hazards",
+            "Climate change",
+            "Plate tectonics theory",
+            "Distribution of earthquakes and volcanoes",
+            "Effects and responses to tectonic hazards",
+            "Tropical storms",
+            "UK extreme weather",
+            "Global warming causes and effects",
+            "Managing climate change"
+          ],
+          "required_skills": [
+            "Use and interpret maps of tectonic hazards",
+            "Analyse patterns of hazard distribution",
+            "Evaluate hazard management strategies",
+            "Use case studies to support points",
+            "Interpret climate graphs",
+            "Analyse weather data"
+          ],
+          "case_studies": [
+            "HIC earthquake: L'Aquila, Italy",
+            "LIC earthquake: Nepal",
+            "Tropical storm: Typhoon Haiyan",
+            "UK extreme weather event: Somerset Levels floods"
+          ]
+        },
+        {
+          "code": "1.2",
+          "title": "The living world",
+          "content": [
+            "Ecosystems and biomes",
+            "Tropical rainforests",
+            "Hot deserts",
+            "Cold environments",
+            "Adaptations of plants and animals",
+            "Deforestation causes and impacts",
+            "Desert development opportunities",
+            "Challenges of hot desert environments",
+            "Cold environment characteristics",
+            "Economic development in cold environments"
+          ],
+          "required_skills": [
+            "Use and interpret ecosystem diagrams",
+            "Analyse climate data",
+            "Calculate rates of deforestation",
+            "Use satellite images",
+            "Interpret population data",
+            "Evaluate development strategies"
+          ],
+          "case_studies": [
+            "Tropical rainforest: Amazon Rainforest",
+            "Hot desert: Thar Desert",
+            "Cold environment: Svalbard"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Challenges in the human environment",
+      "subtopics": [
+        {
+          "code": "2.1",
+          "title": "Urban issues and challenges",
+          "content": [
+            "Global urbanisation trends",
+            "Megacities",
+            "Urban growth in LICs/NEEs",
+            "Urban change in HICs",
+            "Sustainable urban development",
+            "Urban transport strategies",
+            "Urban regeneration",
+            "Urban planning",
+            "Squatter settlements",
+            "Urban environmental challenges"
+          ],
+          "required_skills": [
+            "Interpret population statistics",
+            "Use and analyse urban land use models",
+            "Calculate population density",
+            "Use GIS to analyse urban patterns",
+            "Evaluate urban planning strategies",
+            "Analyse quality of life indicators"
+          ],
+          "case_studies": [
+            "LIC/NEE city: Rio de Janeiro",
+            "HIC city: London",
+            "UK urban regeneration: London Docklands"
+          ]
+        },
+        {
+          "code": "2.2",
+          "title": "The changing economic world",
+          "content": [
+            "Global development gap",
+            "Economic indicators",
+            "Demographic transition model",
+            "Population pyramids",
+            "Causes of uneven development",
+            "Strategies for reducing development gap",
+            "Economic change in the UK",
+            "Post-industrial economy",
+            "North-South divide",
+            "UK in the wider world"
+          ],
+          "required_skills": [
+            "Calculate development indicators",
+            "Interpret population pyramids",
+            "Analyse economic data",
+            "Use choropleth maps",
+            "Evaluate development strategies",
+            "Analyse employment statistics"
+          ],
+          "case_studies": [
+            "NEE: Nigeria",
+            "LIC: Ghana",
+            "UK economic change: Cambridge"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Geographical applications",
+      "subtopics": [
+        {
+          "code": "3.1",
+          "title": "Issue evaluation",
+          "content": [
+            "Critical thinking and problem-solving",
+            "Analysis of pre-release material",
+            "Decision-making exercise",
+            "Justification of choices",
+            "Evaluation of options",
+            "Consideration of stakeholder views"
+          ],
+          "required_skills": [
+            "Analyse sources of geographical information",
+            "Develop arguments",
+            "Make justified decisions",
+            "Evaluate different viewpoints",
+            "Use evidence to support conclusions"
+          ]
+        },
+        {
+          "code": "3.2",
+          "title": "Fieldwork",
+          "content": [
+            "Human geography investigation",
+            "Physical geography investigation",
+            "Data collection methods",
+            "Sampling techniques",
+            "Risk assessment",
+            "Data presentation",
+            "Analysis and conclusions"
+          ],
+          "required_skills": [
+            "Select appropriate methods",
+            "Collect primary data",
+            "Present data using various techniques",
+            "Analyse results",
+            "Draw conclusions",
+            "Evaluate methods"
+          ]
+        }
+      ]
+    }
+  ],
+  "assessment_objectives": {
+    "AO1": "Demonstrate knowledge of locations, places, processes, environments and different scales",
+    "AO2": "Demonstrate geographical understanding of concepts and how they are used in relation to places, environments and processes",
+    "AO3": "Apply knowledge and understanding to interpret, analyse and evaluate geographical information and issues",
+    "AO4": "Select, adapt and use a variety of skills and techniques to investigate questions and issues and communicate findings"
+  },
+  "geographical_skills": {
+    "cartographic": [
+      "Atlas maps",
+      "Ordnance Survey maps",
+      "Relief and contour maps",
+      "Thematic maps",
+      "Route maps"
+    ],
+    "graphical": [
+      "Line graphs",
+      "Bar charts",
+      "Pie charts",
+      "Scatter graphs",
+      "Population pyramids",
+      "Climate graphs"
+    ],
+    "numerical": [
+      "Mean, median, mode",
+      "Range and interquartile range",
+      "Percentages and ratios",
+      "Population density calculations",
+      "Scale calculations"
+    ],
+    "statistical": [
+      "Spearman's rank correlation",
+      "Chi-squared test",
+      "Standard deviation",
+      "Measures of central tendency",
+      "Statistical significance"
+    ]
+  },
+  "fieldwork_requirements": {
+    "physical": [
+      "River studies",
+      "Coastal processes",
+      "Microclimate studies",
+      "Soil studies",
+      "Vegetation surveys"
+    ],
+    "human": [
+      "Land use surveys",
+      "Environmental quality surveys",
+      "Traffic counts",
+      "Questionnaires",
+      "Tourism impact studies"
+    ]
+  },
+  "exam_structure": {
+    "paper_1": {
+      "title": "Living with the physical environment",
+      "duration": "1 hour 30 minutes",
+      "marks": 88,
+      "percentage": 35
+    },
+    "paper_2": {
+      "title": "Challenges in the human environment",
+      "duration": "1 hour 30 minutes",
+      "marks": 88,
+      "percentage": 35
+    },
+    "paper_3": {
+      "title": "Geographical applications",
+      "duration": "1 hour 15 minutes",
+      "marks": 76,
+      "percentage": 30
+    }
+  }
+} 

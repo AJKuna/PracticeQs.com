@@ -1,0 +1,59 @@
+{
+  "questions": [
+    {
+      "question": "Explain how the principle of progressive overload can be applied to improve muscular strength. Use practical examples in your answer.",
+      "topic": "Physical training",
+      "marks": 6,
+      "answer": [
+        "1. Definition of progressive overload (1 mark)",
+        "- Gradually increasing the demand on the body",
+        "",
+        "2. Application to strength training (3 marks)",
+        "- Increasing weight/resistance",
+        "- Increasing number of repetitions",
+        "- Increasing number of sets",
+        "",
+        "3. Practical example (2 marks)",
+        "- Starting with 3 sets of 8 reps at 20kg",
+        "- Progressing to 3 sets of 10 reps at 25kg after 4 weeks"
+      ],
+      "explanation": "This question tests understanding of training principles and their practical application."
+    },
+    {
+      "question": "Describe two functions of the skeletal system and explain how they help a basketball player during a game.",
+      "topic": "Applied anatomy and physiology",
+      "marks": 6,
+      "answer": [
+        "Function 1: Protection (3 marks)",
+        "- Protects vital organs",
+        "- Skull protects brain during physical contact",
+        "- Ribs protect heart/lungs during rebounds",
+        "",
+        "Function 2: Movement (3 marks)",
+        "- Provides leverage for muscles",
+        "- Allows jumping for shots/rebounds",
+        "- Enables quick directional changes"
+      ],
+      "explanation": "This question links theoretical knowledge of body systems to practical sporting situations."
+    },
+    {
+      "question": "Analyse how the commercialisation of football has affected participation rates at grassroots level. Include both positive and negative effects.",
+      "topic": "Socio-cultural influences",
+      "marks": 8,
+      "answer": [
+        "Positive effects (4 marks):",
+        "- Increased funding for facilities",
+        "- Better coaching qualifications available",
+        "- More media coverage inspiring young players",
+        "- Improved equipment quality",
+        "",
+        "Negative effects (4 marks):",
+        "- Higher costs of participation",
+        "- Focus on elite level rather than grassroots",
+        "- Pressure to specialize early",
+        "- Unrealistic expectations of success"
+      ],
+      "explanation": "This question requires analysis of social factors affecting sport participation."
+    }
+  ]
+} 

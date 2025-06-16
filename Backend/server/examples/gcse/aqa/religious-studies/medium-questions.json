@@ -1,0 +1,73 @@
+{
+  "questions": [
+    {
+      "question": "'Religious believers should not use contraception.' Evaluate this statement.",
+      "marks": 12,
+      "topic": "Theme A: Relationships and families",
+      "answer": [
+        "Arguments supporting the statement:",
+        "• Catholic Church teaches contraception is wrong as it prevents natural purpose of sex",
+        "• Some believe it goes against God's command to 'be fruitful and multiply'",
+        "• Natural family planning is seen as acceptable alternative",
+        "• Life begins at conception, some contraceptives prevent implantation",
+        "",
+        "Arguments against the statement:",
+        "• Many Protestant denominations accept contraception for family planning",
+        "• Islamic teaching generally permits contraception within marriage",
+        "• Responsible parenthood includes planning family size",
+        "• Contraception can protect health and prevent spread of disease",
+        "",
+        "Evaluation:",
+        "• Different religious traditions have varying views",
+        "• Modern interpretations often more accepting than traditional views",
+        "• Personal conscience plays important role in decision",
+        "",
+        "Conclusion:",
+        "While some religious groups oppose contraception, many accept it as part of responsible family planning, suggesting the statement is too absolute."
+      ],
+      "explanation": "This question requires detailed knowledge of religious teachings about contraception and the ability to evaluate different viewpoints."
+    },
+    {
+      "question": "Explain how religious believers might respond to the problem of evil and suffering.",
+      "marks": 8,
+      "topic": "Theme C: The existence of God and revelation",
+      "answer": [
+        "1. Free will defence (2 marks):",
+        "• God gave humans free will",
+        "• Evil results from human choices",
+        "",
+        "2. Test of faith (2 marks):",
+        "• Suffering tests and strengthens faith",
+        "• Example of Job in scripture",
+        "",
+        "3. Soul-making (2 marks):",
+        "• Suffering helps develop moral character",
+        "• Opportunity for spiritual growth",
+        "",
+        "4. Greater good argument (2 marks):",
+        "• God has a greater purpose we can't understand",
+        "• Evil and suffering serve ultimate divine plan"
+      ],
+      "explanation": "This question tests understanding of theological responses to a key philosophical challenge to religious belief."
+    },
+    {
+      "question": "Compare and contrast Islamic and Christian beliefs about life after death.",
+      "marks": 8,
+      "topic": "Beliefs and teachings",
+      "answer": [
+        "Similarities (4 marks):",
+        "1. Both believe in resurrection of the body (1)",
+        "2. Both teach final judgment by God (1)",
+        "3. Actions in this life affect afterlife (1)",
+        "4. Eternal existence of the soul (1)",
+        "",
+        "Differences (4 marks):",
+        "1. Islamic belief in Barzakh vs Christian immediate judgment (1)",
+        "2. Different descriptions of paradise/heaven (1)",
+        "3. Islamic physical descriptions vs Christian spiritual focus (1)",
+        "4. Role of Jesus in Christian judgment vs Allah's direct judgment (1)"
+      ],
+      "explanation": "This question tests ability to analyze similarities and differences between religious beliefs."
+    }
+  ]
+} 

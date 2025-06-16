@@ -1,0 +1,55 @@
+{
+  "difficulty": "medium",
+  "questions": [
+    {
+      "id": "M1",
+      "topic": "Atomic structure",
+      "question": "Calculate the number of neutrons in an atom of sulfur-32 (atomic number 16). Show your working.",
+      "answer": "Number of neutrons = mass number - atomic number\n32 - 16 = 16 neutrons",
+      "explanation": "The mass number (32) is the total number of protons and neutrons. Subtracting the number of protons (atomic number 16) gives the number of neutrons.",
+      "marks": 2
+    },
+    {
+      "id": "M2",
+      "topic": "Quantitative chemistry",
+      "question": "Calculate the relative formula mass of magnesium hydroxide, Mg(OH)₂. (Ar: Mg=24, O=16, H=1)",
+      "answer": "Mg(OH)₂ = 24 + 2(16 + 1) = 24 + 2(17) = 24 + 34 = 58",
+      "explanation": "Add the relative atomic masses: one Mg atom plus two OH groups. Each OH group has one oxygen and one hydrogen.",
+      "marks": 3
+    },
+    {
+      "id": "M3",
+      "topic": "Chemical changes",
+      "question": "Write a balanced equation for the reaction between calcium carbonate and hydrochloric acid. Include state symbols.",
+      "answer": "CaCO₃(s) + 2HCl(aq) → CaCl₂(aq) + H₂O(l) + CO₂(g)",
+      "explanation": "This is a neutralization reaction where the acid reacts with a carbonate to produce a salt, water, and carbon dioxide.",
+      "marks": 3
+    },
+    {
+      "id": "M4",
+      "topic": "Rates of reaction",
+      "question": "Explain how increasing temperature affects the rate of a chemical reaction in terms of particle collisions.",
+      "answer": "1. Higher temperature means particles have more kinetic energy\n2. Particles move faster and collide more frequently\n3. More particles have energy above activation energy\n4. Therefore more successful collisions per second\n5. This increases the rate of reaction",
+      "explanation": "Temperature affects both collision frequency and the proportion of successful collisions.",
+      "marks": 5
+    },
+    {
+      "id": "M5",
+      "topic": "Electrolysis",
+      "question": "Predict the products formed at each electrode when copper(II) sulfate solution is electrolysed using inert electrodes.",
+      "answer": "Cathode (negative): Copper (Cu)\nAnode (positive): Oxygen (O₂)",
+      "explanation": "Cu²⁺ ions are discharged at cathode to form copper metal. OH⁻ ions are discharged at anode to form oxygen gas and water.",
+      "marks": 3
+    },
+    {
+      "id": "M6",
+      "topic": "Groups in the periodic table",
+      "question": "Describe and explain the trend in reactivity as you go down Group 7 (the halogens).",
+      "answer": "1. Reactivity decreases down the group\n2. Outer electron is further from nucleus\n3. More electron shells cause more shielding\n4. Less attraction between nucleus and outer electron\n5. Therefore harder to gain an electron",
+      "explanation": "The trend is opposite to Group 1 because Group 7 elements gain electrons rather than lose them.",
+      "marks": 5
+    }
+  ],
+  "total_marks": 21,
+  "recommended_time": "25 minutes"
+} 

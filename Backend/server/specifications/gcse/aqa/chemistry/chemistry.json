@@ -1,0 +1,143 @@
+{
+  "exam_board": "AQA",
+  "qualification": "GCSE",
+  "subject": "Chemistry",
+  "specification_code": "8462",
+  "command_words": [
+    "state", "describe", "explain", "compare", "evaluate", "calculate", "determine",
+    "predict", "justify", "analyse", "suggest", "deduce", "outline", "identify"
+  ],
+  "topics": [
+    {
+      "name": "4.1 Atomic structure and the periodic table",
+      "subtopics": [
+        {
+          "code": "4.1.1.1",
+          "title": "Atoms, elements and compounds",
+          "content": [
+            "All substances are made of atoms. An atom is the smallest part of an element that can exist.",
+            "Atoms of each element are represented by a chemical symbol (eg O for oxygen, Na for sodium)",
+            "Elements are shown in the periodic table (approximately 100 different elements)",
+            "Compounds are formed from elements by chemical reactions",
+            "Chemical reactions involve formation of new substances and often have energy changes",
+            "Compounds contain two or more elements chemically combined in fixed proportions",
+            "Compounds can be represented by formulae using atomic symbols",
+            "Compounds can only be separated into elements by chemical reactions"
+          ],
+          "required_skills": [
+            "Use names and symbols of first 20 elements in periodic table",
+            "Use names and symbols of elements in Groups 1 and 7",
+            "Name compounds from given formulae or symbol equations",
+            "Write word equations for specification reactions",
+            "Write formulae and balanced chemical equations",
+            "(HT only) Write balanced half equations and ionic equations"
+          ],
+          "mathematical_skills": [
+            "Balance chemical equations",
+            "Use ratios in chemical equations"
+          ]
+        },
+        {
+          "code": "4.1.1.2",
+          "title": "Mixtures",
+          "content": [
+            "A mixture consists of two or more elements or compounds not chemically combined",
+            "Mixtures can be separated by physical processes: filtration, crystallisation, distillation, chromatography",
+            "Paper chromatography separates mixtures based on different solubilities",
+            "RF values in chromatography can be calculated",
+            "Pure substances melt and boil at specific temperatures",
+            "Pure substances produce sharp melting/boiling point graphs"
+          ],
+          "required_skills": [
+            "Calculate RF values from chromatography results",
+            "Interpret melting point and boiling point data for purity",
+            "Design suitable separation techniques based on substance properties"
+          ],
+          "mathematical_skills": [
+            "Calculate RF values",
+            "Plot and interpret melting/boiling point graphs"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "4.2 Bonding, structure, and properties of matter",
+      "subtopics": [
+        {
+          "code": "4.2.1.1",
+          "title": "Chemical bonds",
+          "content": [
+            "There are three types of chemical bonds: ionic, covalent and metallic",
+            "Ionic bonding occurs between metals and non-metals",
+            "Ionic bonds involve transfer of electrons forming oppositely charged ions",
+            "Covalent bonding occurs between non-metals",
+            "Covalent bonds involve sharing of electron pairs",
+            "Metallic bonding occurs between metal atoms",
+            "Metallic bonds involve delocalised electrons"
+          ],
+          "required_skills": [
+            "Draw dot and cross diagrams for ionic compounds",
+            "Draw dot and cross diagrams for simple covalent molecules",
+            "Explain properties of substances based on bonding",
+            "(HT only) Work out the charge on ions of elements in Groups 1, 2 and 7"
+          ],
+          "mathematical_skills": [
+            "Work with charges in ionic compounds",
+            "Calculate numbers of electrons involved in bonding"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "4.3 Quantitative chemistry",
+      "subtopics": [
+        {
+          "code": "4.3.1",
+          "title": "Conservation of mass and balanced equations",
+          "content": [
+            "Law of conservation of mass states mass is not created or destroyed in chemical reactions",
+            "Mass of products equals mass of reactants in closed system",
+            "Balanced equations show equal numbers of atoms of each element on both sides",
+            "Relative formula mass (Mr) is sum of relative atomic masses of atoms in formula",
+            "(HT only) Moles relate mass of substance to relative formula mass"
+          ],
+          "required_skills": [
+            "Balance chemical equations",
+            "Calculate relative formula masses",
+            "(HT only) Calculate moles from mass and Mr",
+            "(HT only) Calculate reacting masses using moles"
+          ],
+          "mathematical_skills": [
+            "Balance equations",
+            "Calculate relative formula masses",
+            "(HT only) Use mole calculations",
+            "(HT only) Use ratios in reacting mass calculations"
+          ]
+        }
+      ]
+    }
+  ],
+  "assessment_objectives": {
+    "AO1": "Demonstrate knowledge and understanding of scientific ideas, scientific techniques and procedures",
+    "AO2": "Apply knowledge and understanding of scientific ideas, scientific enquiry, techniques and procedures",
+    "AO3": "Analyse information and ideas to interpret and evaluate, make judgements and draw conclusions, develop and improve experimental procedures"
+  },
+  "mathematical_requirements": [
+    "Arithmetic and numerical computation",
+    "Handling data",
+    "Algebra",
+    "Graphs",
+    "Geometry and trigonometry"
+  ],
+  "practical_skills": [
+    "Following procedures",
+    "Handling apparatus",
+    "Making observations",
+    "Taking measurements",
+    "Recording results",
+    "Presenting results",
+    "Analysing results",
+    "Drawing conclusions",
+    "Evaluating methods"
+  ]
+} 

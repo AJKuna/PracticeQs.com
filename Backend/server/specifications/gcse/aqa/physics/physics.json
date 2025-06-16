@@ -1,0 +1,201 @@
+{
+  "exam_board": "AQA",
+  "qualification": "GCSE",
+  "subject": "Physics",
+  "specification_code": "8463",
+  "command_words": [
+    "state", "describe", "explain", "compare", "evaluate", "calculate", "determine",
+    "predict", "justify", "analyse", "suggest", "deduce", "outline", "identify"
+  ],
+  "topics": [
+    {
+      "name": "4.1 Energy",
+      "subtopics": [
+        {
+          "code": "4.1.1",
+          "title": "Energy changes in a system",
+          "content": [
+            "Energy is conserved in any closed system",
+            "Energy can be stored in various ways: kinetic, gravitational potential, elastic potential, thermal, chemical, nuclear",
+            "Changes in energy stores can be calculated using equations",
+            "Power is the rate of energy transfer",
+            "Efficiency is the proportion of energy transferred usefully",
+            "Energy can be transferred usefully, stored or dissipated",
+            "Unwanted energy transfers reduce efficiency",
+            "Ways to reduce unwanted energy transfers"
+          ],
+          "required_skills": [
+            "Calculate kinetic energy using Ek = ½mv²",
+            "Calculate gravitational potential energy using Ep = mgh",
+            "Calculate power using P = E/t or P = W/t",
+            "Calculate efficiency as a decimal or percentage",
+            "Describe energy transfers in systems",
+            "(HT only) Calculate elastic potential energy using Ee = ½ke²"
+          ],
+          "mathematical_skills": [
+            "Recall and apply equations for energy calculations",
+            "Convert between units (joules, watts, kilowatt-hours)",
+            "Calculate percentage efficiency",
+            "Use prefixes (kilo, mega, giga)",
+            "Interpret and draw energy transfer diagrams"
+          ],
+          "required_practicals": [
+            {
+              "name": "Specific heat capacity",
+              "skills": [
+                "Use heating method to investigate specific heat capacity",
+                "Control variables affecting temperature change",
+                "Record and process temperature-time data",
+                "Calculate specific heat capacity"
+              ]
+            }
+          ]
+        },
+        {
+          "code": "4.1.2",
+          "title": "Conservation and dissipation of energy",
+          "content": [
+            "Energy cannot be created or destroyed",
+            "Energy is dissipated when transferred",
+            "Dissipated energy causes heating of surroundings",
+            "Ways to reduce unwanted energy dissipation",
+            "Energy efficiency can be improved",
+            "Energy resources can be renewable or non-renewable",
+            "Advantages and disadvantages of different energy resources",
+            "Factors affecting choice of energy resources"
+          ],
+          "required_skills": [
+            "Calculate energy efficiency",
+            "Compare ways of reducing energy dissipation",
+            "Evaluate different energy resources",
+            "Describe energy transfers in real-world contexts",
+            "Calculate payback time for energy-saving measures"
+          ],
+          "mathematical_skills": [
+            "Calculate percentages",
+            "Interpret energy transfer diagrams",
+            "Compare numerical values of efficiency",
+            "Use cost-benefit analysis for energy-saving measures"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "4.2 Electricity",
+      "subtopics": [
+        {
+          "code": "4.2.1",
+          "title": "Current, potential difference and resistance",
+          "content": [
+            "Standard circuit symbols",
+            "Electric current is flow of charge",
+            "Current (I) = charge flow (Q) ÷ time (t)",
+            "Potential difference (V) drives current",
+            "Resistance (R) = p.d. (V) ÷ current (I)",
+            "Factors affecting resistance",
+            "I-V characteristics of components",
+            "Series and parallel circuits"
+          ],
+          "required_skills": [
+            "Draw circuit diagrams using standard symbols",
+            "Calculate current, p.d., resistance using V = IR",
+            "Explain how resistance varies in different components",
+            "Plot and interpret I-V graphs",
+            "(HT only) Explain shape of I-V graphs"
+          ],
+          "mathematical_skills": [
+            "Use and rearrange V = IR equation",
+            "Plot graphs and identify relationships",
+            "Calculate gradients of I-V graphs",
+            "Convert units (amps, volts, ohms)"
+          ],
+          "required_practicals": [
+            {
+              "name": "I-V characteristics",
+              "skills": [
+                "Set up circuits to measure I-V characteristics",
+                "Control variables affecting measurements",
+                "Plot and interpret I-V graphs",
+                "Identify relationships from graphs"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "4.3 Particle model of matter",
+      "subtopics": [
+        {
+          "code": "4.3.1",
+          "title": "Changes of state and particle model",
+          "content": [
+            "Density = mass ÷ volume",
+            "States of matter and particle arrangement",
+            "Changes of state",
+            "Internal energy and temperature",
+            "Specific latent heat",
+            "Particle motion in gases",
+            "Gas pressure and temperature",
+            "Gas pressure and volume"
+          ],
+          "required_skills": [
+            "Calculate density using ρ = m/V",
+            "Explain state changes in terms of particles",
+            "Calculate specific latent heat",
+            "Explain pressure in terms of particles",
+            "(HT only) Explain relationship between pressure and volume"
+          ],
+          "mathematical_skills": [
+            "Use and rearrange density equation",
+            "Convert units of density",
+            "Calculate changes in thermal energy",
+            "Use pressure-volume relationships"
+          ],
+          "required_practicals": [
+            {
+              "name": "Density",
+              "skills": [
+                "Measure mass and volume accurately",
+                "Calculate density of regular and irregular objects",
+                "Use displacement method for irregular objects",
+                "Consider uncertainties in measurements"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "assessment_objectives": {
+    "AO1": "Demonstrate knowledge and understanding of scientific ideas, scientific techniques and procedures",
+    "AO2": "Apply knowledge and understanding of scientific ideas, scientific enquiry, techniques and procedures",
+    "AO3": "Analyse information and ideas to interpret and evaluate, make judgements and draw conclusions, develop and improve experimental procedures"
+  },
+  "mathematical_requirements": [
+    "Arithmetic and numerical computation",
+    "Handling data",
+    "Algebra",
+    "Graphs",
+    "Geometry and trigonometry"
+  ],
+  "required_apparatus_and_techniques": [
+    "Use appropriate apparatus to measure and record length, mass, time, temperature, current, potential difference",
+    "Use circuit diagrams to construct and check series and parallel circuits",
+    "Use appropriate apparatus to measure energy transfers and determine specific heat capacity",
+    "Use appropriate apparatus to measure density",
+    "Use appropriate apparatus to measure acceleration, velocity, force"
+  ],
+  "equations_to_recall": [
+    "weight = mass × gravitational field strength",
+    "work done = force × distance",
+    "power = energy transferred ÷ time",
+    "efficiency = useful output energy transfer ÷ total input energy transfer",
+    "gravitational potential energy = mass × gravitational field strength × height",
+    "kinetic energy = ½ × mass × velocity²",
+    "potential difference = current × resistance",
+    "power = potential difference × current",
+    "energy transferred = power × time",
+    "density = mass ÷ volume"
+  ]
+} 

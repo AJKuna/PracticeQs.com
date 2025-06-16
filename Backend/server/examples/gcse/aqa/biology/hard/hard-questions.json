@@ -1,0 +1,85 @@
+{
+  "questions": [
+    {
+      "question": "A scientist investigated the effect of exercise on heart rate and blood glucose levels. The results are shown in the graph.\n\nTime (mins): 0, 10, 20, 30, 40, 50, 60\nHeart rate (bpm): 70, 140, 150, 155, 90, 75, 72\nBlood glucose (mmol/L): 5.0, 4.8, 4.5, 4.2, 4.6, 4.8, 5.0\n\na) Plot both sets of data on the same graph\nb) Explain why heart rate increases during exercise\nc) Explain why blood glucose decreases during exercise\nd) Explain why both measurements return to normal after exercise\ne) Suggest how the body maintains blood glucose levels during extended exercise",
+      "marks": 10,
+      "topic": "Homeostasis and Response",
+      "answer": [
+        "a) Graph (2 marks):",
+        "• Correct axes, labels, units for both variables (1)",
+        "• Both lines plotted accurately with different colors/styles (1)",
+        "",
+        "b) Heart rate increase (2 marks):",
+        "• Muscles need more oxygen/glucose (1)",
+        "• Heart beats faster to increase blood flow to muscles (1)",
+        "",
+        "c) Glucose decrease (2 marks):",
+        "• Muscles use more glucose for respiration (1)",
+        "• Rate of glucose use exceeds rate of replacement (1)",
+        "",
+        "d) Return to normal (2 marks):",
+        "• Negative feedback systems restore balance (1)",
+        "• Reduced oxygen/glucose demand as exercise stops (1)",
+        "",
+        "e) Extended exercise (2 marks):",
+        "• Glucagon released from pancreas (1)",
+        "• Converts glycogen to glucose/breaks down fats (1)"
+      ],
+      "explanation": "This question combines data analysis with detailed understanding of multiple body systems and their interaction."
+    },
+    {
+      "question": "A student investigated antibiotic resistance in bacteria. They placed filter paper discs soaked in different antibiotics onto agar plates with bacteria. The diameter of the clear zone around each disc was measured after 24 hours.\n\nAntibiotic: A, B, C, D\nClear zone diameter (mm): 0, 15, 8, 12\n\na) Why was there no clear zone around disc A?\nb) Which antibiotic was most effective? Explain your answer.\nc) Explain how antibiotic resistance develops in bacteria populations\nd) Suggest why doctors are concerned about antibiotic resistance\ne) Describe two ways to reduce the development of antibiotic resistance",
+      "marks": 10,
+      "topic": "Infection and Response",
+      "answer": [
+        "a) No clear zone (2 marks):",
+        "• Bacteria resistant to antibiotic A (1)",
+        "• Bacteria have genes for resistance/can break down antibiotic (1)",
+        "",
+        "b) Most effective (2 marks):",
+        "• Antibiotic B - largest clear zone of 15mm (1)",
+        "• Larger zone means more bacteria killed/stronger antibiotic (1)",
+        "",
+        "c) Development of resistance (2 marks):",
+        "• Random mutations give resistance (1)",
+        "• Natural selection - resistant bacteria survive and reproduce (1)",
+        "",
+        "d) Concerns (2 marks):",
+        "• Infections become untreatable (1)",
+        "• No new antibiotics being developed quickly enough (1)",
+        "",
+        "e) Reducing resistance (2 marks):",
+        "• Complete prescribed course of antibiotics (1)",
+        "• Only use antibiotics when necessary/not for viral infections (1)"
+      ],
+      "explanation": "This question combines practical skills with understanding of evolution and application to real-world medical issues."
+    },
+    {
+      "question": "Scientists investigated inheritance of flower color in snapdragons. Red (RR) × white (rr) produces pink (Rr).\n\na) Draw a genetic diagram to show the cross between two pink flowers\nb) Calculate the probability of producing a red flower from this cross\nc) In a cross between pink and white flowers, 380 offspring were produced. Calculate the expected number of each phenotype\nd) The actual results showed 175 pink and 205 white flowers. Use the chi-squared test to determine if these results support the predicted ratio\ne) Suggest reasons for any differences between expected and actual results",
+      "marks": 10,
+      "topic": "Inheritance, Variation and Evolution",
+      "answer": [
+        "a) Genetic diagram (2 marks):",
+        "• Correct gametes: R,r × R,r (1)",
+        "• Correct offspring genotypes: RR, 2Rr, rr (1)",
+        "",
+        "b) Probability (1 mark):",
+        "• 1/4 or 25% chance of red (RR) (1)",
+        "",
+        "c) Expected numbers (2 marks):",
+        "• Pink (Rr): 190 (1)",
+        "• White (rr): 190 (1)",
+        "",
+        "d) Chi-squared test (3 marks):",
+        "• Correct formula and calculation (1)",
+        "• Correct degrees of freedom (1)",
+        "• Correct interpretation of probability (1)",
+        "",
+        "e) Differences (2 marks):",
+        "• Environmental factors affecting survival (1)",
+        "• Chance variations in fertilization (1)"
+      ],
+      "explanation": "This question combines genetic diagrams with statistical analysis and evaluation of scientific data."
+    }
+  ]
+} 

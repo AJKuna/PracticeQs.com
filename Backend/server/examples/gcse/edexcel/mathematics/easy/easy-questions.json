@@ -1,0 +1,69 @@
+{
+  "difficulty": "easy",
+  "questions": [
+    {
+      "id": "E1",
+      "topic": "Number",
+      "question": "Write 0.0035 in standard form.",
+      "answer": "3.5 × 10⁻³",
+      "explanation": "Move the decimal point 3 places to the right to get a number between 1 and 10, then multiply by 10⁻³.",
+      "marks": 1
+    },
+    {
+      "id": "E2",
+      "topic": "Number",
+      "question": "Calculate 15% of 80.",
+      "answer": "12",
+      "explanation": "Method 1: 15% = 15/100 = 0.15, then 0.15 × 80 = 12\nMethod 2: 10% of 80 = 8, 5% of 80 = 4, so 15% = 8 + 4 = 12",
+      "marks": 2
+    },
+    {
+      "id": "E3",
+      "topic": "Algebra",
+      "question": "Simplify 3x + 2x - 5x",
+      "answer": "0",
+      "explanation": "Collect like terms: 3x + 2x - 5x = (3 + 2 - 5)x = 0x = 0",
+      "marks": 1
+    },
+    {
+      "id": "E4",
+      "topic": "Geometry",
+      "question": "What is the size of each interior angle in a regular pentagon?",
+      "answer": "108°",
+      "explanation": "For a pentagon (5 sides), interior angle = (5-2) × 180° ÷ 5 = 540° ÷ 5 = 108°",
+      "marks": 2
+    },
+    {
+      "id": "E5",
+      "topic": "Statistics",
+      "question": "Find the mean of the numbers: 3, 7, 8, 4, 3",
+      "answer": "5",
+      "explanation": "Sum = 3 + 7 + 8 + 4 + 3 = 25\nMean = 25 ÷ 5 = 5",
+      "marks": 2
+    },
+    {
+      "id": "E6",
+      "topic": "Probability",
+      "question": "On a fair six-sided dice, what is the probability of rolling an even number?",
+      "answer": "½ or 0.5 or 3/6",
+      "explanation": "Even numbers on a dice are 2, 4, 6\nNumber of favorable outcomes = 3\nTotal possible outcomes = 6\nProbability = 3/6 = ½",
+      "marks": 2
+    },
+    {
+      "id": "E7",
+      "topic": "Ratio",
+      "question": "Simplify the ratio 24:36",
+      "answer": "2:3",
+      "explanation": "Divide both numbers by their highest common factor (12)\n24 ÷ 12 = 2\n36 ÷ 12 = 3",
+      "marks": 1
+    },
+    {
+      "id": "E8",
+      "topic": "Number",
+      "question": "Round 3.14159 to 2 decimal places.",
+      "answer": "3.14",
+      "explanation": "Look at the third decimal digit (1). Since it's less than 5, round down and keep the first two decimal places.",
+      "marks": 1
+    }
+  ]
+} 

@@ -1,0 +1,122 @@
+{
+  "exam_board": "Edexcel",
+  "subject": "Physics",
+  "qualification": "GCSE",
+  "specification_code": "1PH0",
+  "topics": [
+    {
+      "name": "Forces and Motion",
+      "subtopics": [
+        "Motion calculations",
+        "Forces and acceleration",
+        "Newton's laws",
+        "Momentum",
+        "Conservation of energy",
+        "Work and power"
+      ]
+    },
+    {
+      "name": "Waves",
+      "subtopics": [
+        "Wave properties",
+        "Electromagnetic spectrum",
+        "Light",
+        "Sound",
+        "Reflection and refraction",
+        "Wave phenomena"
+      ]
+    },
+    {
+      "name": "Electricity and Circuits",
+      "subtopics": [
+        "Circuit components",
+        "Series and parallel",
+        "Resistance",
+        "Domestic electricity",
+        "Static electricity",
+        "Electrical safety"
+      ]
+    },
+    {
+      "name": "Energy Resources and Particles",
+      "subtopics": [
+        "Energy transfers",
+        "Renewable energy",
+        "Nuclear physics",
+        "Radioactivity",
+        "Atomic structure",
+        "Particle model"
+      ]
+    },
+    {
+      "name": "Magnetism and Electromagnetism",
+      "subtopics": [
+        "Magnetic fields",
+        "Electromagnets",
+        "Motor effect",
+        "Electromagnetic induction",
+        "Transformers",
+        "Applications"
+      ]
+    },
+    {
+      "name": "Space Physics",
+      "subtopics": [
+        "Solar system",
+        "Life cycle of stars",
+        "Orbital motion",
+        "Red-shift",
+        "Universe expansion",
+        "Big Bang theory"
+      ]
+    }
+  ],
+  "assessment": {
+    "papers": [
+      {
+        "name": "Paper 1",
+        "duration": "1 hour 45 minutes",
+        "marks": 100,
+        "weighting": "50%",
+        "content": [
+          "Topics 1-3",
+          "Multiple choice",
+          "Short answer",
+          "Extended response"
+        ]
+      },
+      {
+        "name": "Paper 2",
+        "duration": "1 hour 45 minutes",
+        "marks": 100,
+        "weighting": "50%",
+        "content": [
+          "Topics 4-6",
+          "Multiple choice",
+          "Short answer",
+          "Extended response"
+        ]
+      }
+    ]
+  },
+  "practical_skills": {
+    "core_practicals": [
+      "Investigating force and acceleration",
+      "Wave properties investigation",
+      "Resistance in circuits",
+      "Specific heat capacity",
+      "Investigating radiation",
+      "Electromagnetic induction",
+      "Light and refraction",
+      "Investigating springs"
+    ],
+    "mathematical_skills": [
+      "Arithmetic and numerical computation",
+      "Handling data",
+      "Algebra",
+      "Graphs",
+      "Geometry and trigonometry",
+      "Units and measurements"
+    ]
+  }
+} 

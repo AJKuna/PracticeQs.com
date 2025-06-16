@@ -1,0 +1,86 @@
+{
+  "questions": [
+    {
+      "question": "A car accelerates uniformly from rest to 20 m/s over a distance of 100m.\n\na) Calculate the acceleration of the car. (3 marks)\nb) Calculate the time taken. (3 marks)\nc) If the mass of the car is 1200 kg, calculate the force needed to produce this acceleration. (3 marks)\nd) Explain why the actual force needed would be greater than your calculated value. (3 marks)",
+      "topic": "Forces and Motion",
+      "marks": 12,
+      "answer": [
+        "a) Using v² = u² + 2as (3 marks)",
+        "- 20² = 0² + 2a(100)",
+        "- 400 = 200a",
+        "- a = 2 m/s²",
+        "",
+        "b) Using v = u + at (3 marks)",
+        "- 20 = 0 + 2t",
+        "- t = 10 seconds",
+        "",
+        "c) Using F = ma (3 marks)",
+        "- F = 1200 × 2",
+        "- F = 2400 N",
+        "",
+        "d) Additional forces (3 marks):",
+        "- Air resistance",
+        "- Friction in engine/transmission",
+        "- Rolling resistance of tyres"
+      ],
+      "explanation": "This question tests understanding of motion equations, forces, and real-world applications."
+    },
+    {
+      "question": "A transformer has 500 turns on its primary coil and 100 turns on its secondary coil. The input voltage is 230V.\n\na) Calculate the output voltage. (2 marks)\nb) If the output current is 10A, calculate the input current assuming 100% efficiency. (3 marks)\nc) Calculate the power loss if the actual input current is 2.5A. (3 marks)\nd) Suggest two ways the efficiency could be improved and explain how each would work. (4 marks)",
+      "topic": "Magnetism and Electromagnetism",
+      "marks": 12,
+      "answer": [
+        "a) Voltage calculation (2 marks):",
+        "- Vs/Vp = Ns/Np",
+        "- Vs = (100/500) × 230 = 46V",
+        "",
+        "b) Current calculation (3 marks):",
+        "- Input power = Output power",
+        "- VpIp = VsIs",
+        "- 230Ip = 46 × 10",
+        "- Ip = 2A",
+        "",
+        "c) Power loss (3 marks):",
+        "- Actual input power = 230V × 2.5A = 575W",
+        "- Output power = 46V × 10A = 460W",
+        "- Power loss = 115W",
+        "",
+        "d) Improvements (4 marks):",
+        "- Laminated core to reduce eddy currents",
+        "- Better insulation to reduce heat loss",
+        "- Thicker wire to reduce resistance",
+        "- Improved core material to reduce magnetic losses"
+      ],
+      "explanation": "This question combines calculations with practical understanding of transformers and energy efficiency."
+    },
+    {
+      "question": "The half-life of a radioactive isotope is 6 hours.\n\na) Calculate the fraction of the original atoms remaining after 24 hours. (3 marks)\nb) The initial count rate is 800 counts per minute. Calculate the count rate after 18 hours. (4 marks)\nc) Plot a graph to show how the count rate changes over 24 hours. (4 marks)\nd) Explain why the actual count rate might be lower than your calculated values. (3 marks)",
+      "topic": "Energy Resources and Particles",
+      "marks": 14,
+      "answer": [
+        "a) Fraction calculation (3 marks):",
+        "- 24 hours = 4 half-lives",
+        "- Fraction = (1/2)⁴",
+        "- = 1/16 = 0.0625",
+        "",
+        "b) Count rate after 18 hours (4 marks):",
+        "- 18 hours = 3 half-lives",
+        "- Fraction remaining = (1/2)³ = 1/8",
+        "- Count rate = 800 × (1/8)",
+        "- = 100 counts per minute",
+        "",
+        "c) Graph requirements (4 marks):",
+        "- Correct scale",
+        "- Correct points plotted",
+        "- Smooth curve",
+        "- Labeled axes",
+        "",
+        "d) Lower count rate factors (3 marks):",
+        "- Background radiation must be subtracted",
+        "- Detector efficiency not 100%",
+        "- Absorption by air/materials"
+      ],
+      "explanation": "This question tests mathematical skills, graphing ability, and understanding of radioactive decay."
+    }
+  ]
+} 

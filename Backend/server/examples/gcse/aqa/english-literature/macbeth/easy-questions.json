@@ -1,0 +1,25 @@
+{
+  "questions": [
+    {
+      "question": "Starting with this extract, how does Shakespeare present Macbeth's ambition?",
+      "extract": "Stars, hide your fires;\nLet not light see my black and deep desires.\nThe eye wink at the hand; yet let that be\nWhich the eye fears, when it is done, to see.",
+      "marks": 30,
+      "answer": "In this extract, Shakespeare presents Macbeth's ambition as dark and dangerous:\n1. Metaphor of darkness ('hide your fires', 'black and deep desires') suggests his ambition is evil\n2. The secrecy implied by 'hide' and 'eye wink at the hand' shows he knows his ambition is wrong\n3. The imagery of concealment reflects his desire to hide his ambitious thoughts\n\nIn the wider play:\n1. His ambition grows from the witches' prophecy\n2. Lady Macbeth fuels his ambition by questioning his manhood\n3. His 'vaulting ambition' eventually leads to his downfall",
+      "explanation": "This question requires analysis of both the extract and the wider play. Focus on language techniques in the extract and then link to key moments in the play that show Macbeth's ambition."
+    },
+    {
+      "question": "How does Shakespeare present the relationship between Macbeth and Lady Macbeth?",
+      "extract": "My dearest love,\nDuncan comes here tonight.\nLADY MACBETH: And when goes hence?\nMACBETH: Tomorrow, as he purposes.\nLADY MACBETH: O, never\nShall sun that morrow see!",
+      "marks": 30,
+      "answer": "Shakespeare presents their relationship as complex and changing:\n1. Term of endearment 'dearest love' shows their initial closeness\n2. Their short exchanges show their ability to understand each other without explicit words\n3. Lady Macbeth's immediate turn to murder shows her influence over Macbeth\n\nIn the wider play:\n1. Their relationship deteriorates after Duncan's murder\n2. They become increasingly distant and unable to communicate\n3. Lady Macbeth's death leaves Macbeth feeling empty and alone",
+      "explanation": "This question asks you to analyze how Shakespeare portrays the dynamic between the two characters. Consider how their relationship changes throughout the play."
+    },
+    {
+      "question": "How does Shakespeare present the theme of guilt in Macbeth?",
+      "extract": "Will all great Neptune's ocean wash this blood\nClean from my hand? No, this my hand will rather\nThe multitudinous seas incarnadine,\nMaking the green one red.",
+      "marks": 30,
+      "answer": "Shakespeare presents guilt as overwhelming and inescapable:\n1. Metaphor of washing hands shows guilt cannot be cleansed\n2. Hyperbole of turning the seas red emphasizes the magnitude of his guilt\n3. The imagery of blood represents both physical and psychological guilt\n\nIn the wider play:\n1. Lady Macbeth's sleepwalking scene shows guilt driving her mad\n2. The banquet scene with Banquo's ghost represents Macbeth's guilty conscience\n3. Both characters try but fail to suppress their guilt",
+      "explanation": "This question requires analysis of how Shakespeare uses language and imagery to show the psychological impact of guilt on the characters."
+    }
+  ]
+} 

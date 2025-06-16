@@ -1,0 +1,219 @@
+{
+  "exam_board": "Edexcel",
+  "subject": "French",
+  "qualification": "GCSE",
+  "specification_code": "1FR0",
+  "themes": [
+    {
+      "name": "Identity and culture",
+      "topics": [
+        {
+          "name": "Who am I?",
+          "subtopics": [
+            "Relationships with family and friends",
+            "Personal characteristics",
+            "Social media",
+            "Mobile technology",
+            "Music",
+            "Cinema and TV"
+          ]
+        },
+        {
+          "name": "Daily life",
+          "subtopics": [
+            "Food and eating habits",
+            "Shopping",
+            "Social activities",
+            "Sport and exercise",
+            "Fashion trends",
+            "Health issues"
+          ]
+        },
+        {
+          "name": "Cultural life",
+          "subtopics": [
+            "Festivals and celebrations",
+            "French traditions",
+            "Francophone customs",
+            "Regional identity",
+            "Literature and arts",
+            "French music"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Local area, holiday and travel",
+      "topics": [
+        {
+          "name": "Holidays",
+          "subtopics": [
+            "Holiday preferences",
+            "Travel and transport",
+            "Accommodation",
+            "Holiday activities",
+            "Weather",
+            "Tourist attractions"
+          ]
+        },
+        {
+          "name": "Town, region and country",
+          "subtopics": [
+            "Home and local area",
+            "Places in town",
+            "Shopping facilities",
+            "Public services",
+            "Local environment",
+            "Regional features"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "School",
+      "topics": [
+        {
+          "name": "What school is like",
+          "subtopics": [
+            "School types",
+            "School day",
+            "Subjects",
+            "Rules and pressures",
+            "Celebrating success",
+            "School activities"
+          ]
+        },
+        {
+          "name": "School activities",
+          "subtopics": [
+            "School trips",
+            "Events",
+            "Exchanges",
+            "Extra-curricular activities"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Future aspirations, study and work",
+      "topics": [
+        {
+          "name": "Using languages beyond the classroom",
+          "subtopics": [
+            "Travel",
+            "Employment",
+            "Further study",
+            "Volunteering",
+            "Training"
+          ]
+        },
+        {
+          "name": "Work",
+          "subtopics": [
+            "Career choices",
+            "Part-time jobs",
+            "Work experience",
+            "Future plans",
+            "Job applications"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "International and global dimension",
+      "topics": [
+        {
+          "name": "Environmental issues",
+          "subtopics": [
+            "Being 'green'",
+            "Environmental problems",
+            "Protecting the planet",
+            "Climate change",
+            "Natural disasters"
+          ]
+        },
+        {
+          "name": "Global issues",
+          "subtopics": [
+            "Bringing the world together",
+            "Social issues",
+            "Inequality",
+            "Rights and responsibilities",
+            "Global events"
+          ]
+        }
+      ]
+    }
+  ],
+  "assessment": {
+    "papers": [
+      {
+        "name": "Paper 1: Listening and understanding",
+        "duration": "45 minutes",
+        "marks": 50,
+        "weighting": "25%",
+        "content": [
+          "Multiple choice",
+          "Short answers",
+          "Gap-fill tasks",
+          "Questions in English and French"
+        ]
+      },
+      {
+        "name": "Paper 2: Speaking",
+        "duration": "10-12 minutes",
+        "marks": 70,
+        "weighting": "25%",
+        "content": [
+          "Role play",
+          "Picture-based task",
+          "Conversation",
+          "Preparation time included"
+        ]
+      },
+      {
+        "name": "Paper 3: Reading and understanding",
+        "duration": "1 hour 5 minutes",
+        "marks": 50,
+        "weighting": "25%",
+        "content": [
+          "Multiple choice",
+          "Short answers",
+          "Gap-fill tasks",
+          "Translation into English"
+        ]
+      },
+      {
+        "name": "Paper 4: Writing",
+        "duration": "1 hour 20 minutes",
+        "marks": 60,
+        "weighting": "25%",
+        "content": [
+          "Structured writing tasks",
+          "Open-ended writing tasks",
+          "Translation into French"
+        ]
+      }
+    ]
+  },
+  "grammar_and_structures": {
+    "tenses": [
+      "Present",
+      "Perfect",
+      "Imperfect",
+      "Future",
+      "Conditional",
+      "Present participle",
+      "Pluperfect"
+    ],
+    "key_structures": [
+      "Gender and number agreement",
+      "Pronouns",
+      "Prepositions",
+      "Question forms",
+      "Negatives",
+      "Reflexive verbs",
+      "Subjunctive mood"
+    ]
+  }
+} 

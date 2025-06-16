@@ -1,0 +1,65 @@
+{
+  "questions": [
+    {
+      "question": "Calculate the work done when a force of 20N moves an object 5m in the direction of the force.",
+      "marks": 3,
+      "topic": "Energy",
+      "answer": [
+        "1. Recall formula: work done = force × distance (1)",
+        "2. Substitute values: work done = 20 × 5 (1)",
+        "3. Calculate correctly: work done = 100 joules/J (1)"
+      ],
+      "explanation": "This calculation tests understanding of work done and the ability to use the correct formula with units."
+    },
+    {
+      "question": "Draw the circuit symbols for: a) a cell b) a resistor c) an LED d) an ammeter",
+      "marks": 4,
+      "topic": "Electricity",
+      "answer": [
+        "1. Cell: long line (positive) and short line (negative) (1)",
+        "2. Resistor: rectangular box or zigzag line (1)",
+        "3. LED: triangle with arrow pointing in direction of current (1)",
+        "4. Ammeter: circle with capital A inside (1)"
+      ],
+      "explanation": "This question tests knowledge of standard circuit symbols used in physics."
+    },
+    {
+      "question": "Describe the difference between alpha, beta and gamma radiation in terms of their penetrating power.",
+      "marks": 6,
+      "topic": "Atomic structure",
+      "answer": [
+        "Alpha radiation:",
+        "• Stopped by paper/few cm of air (1)",
+        "• Least penetrating (1)",
+        "Beta radiation:",
+        "• Stopped by thin aluminum/few mm of metal (1)",
+        "• Medium penetrating power (1)",
+        "Gamma radiation:",
+        "• Requires thick lead/concrete to stop (1)",
+        "• Most penetrating (1)"
+      ],
+      "explanation": "This question tests understanding of the properties of nuclear radiation types."
+    },
+    {
+      "question": "Calculate the speed of a wave with a frequency of 500 Hz and a wavelength of 0.6 m.",
+      "marks": 3,
+      "topic": "Waves",
+      "answer": [
+        "1. Recall wave equation: wave speed = frequency × wavelength (1)",
+        "2. Substitute values: speed = 500 × 0.6 (1)",
+        "3. Calculate correctly: speed = 300 m/s (1)"
+      ],
+      "explanation": "This calculation tests understanding of wave properties and the ability to use the wave equation."
+    },
+    {
+      "question": "State Newton's Third Law of Motion.",
+      "marks": 2,
+      "topic": "Forces",
+      "answer": [
+        "1. For every action (force) (1)",
+        "2. There is an equal and opposite reaction (force) (1)"
+      ],
+      "explanation": "This recall question tests knowledge of fundamental physics principles."
+    }
+  ]
+} 

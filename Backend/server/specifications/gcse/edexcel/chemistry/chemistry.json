@@ -1,0 +1,160 @@
+{
+  "exam_board": "Edexcel",
+  "subject": "Chemistry",
+  "qualification": "GCSE",
+  "specification_code": "1CH0",
+  "command_words": [
+    "Deduce",
+    "Describe",
+    "Determine",
+    "Evaluate",
+    "Explain",
+    "Give",
+    "Identify",
+    "Name",
+    "Plot",
+    "Predict",
+    "Show",
+    "State",
+    "Write"
+  ],
+  "topics": [
+    {
+      "id": "1",
+      "name": "Key concepts in chemistry",
+      "subtopics": [
+        "States of matter",
+        "Methods of separating and purifying substances",
+        "Atomic structure",
+        "The periodic table",
+        "Ionic bonding",
+        "Covalent bonding",
+        "Types of substance",
+        "Calculations involving masses"
+      ]
+    },
+    {
+      "id": "2",
+      "name": "States of matter and mixtures",
+      "subtopics": [
+        "States of matter",
+        "Methods of separating and purifying substances",
+        "Quantitative interpretation of chemical equations",
+        "Use of amount of substance in relation to masses of pure substances"
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Chemical changes",
+      "subtopics": [
+        "Acids and bases",
+        "Strong and weak acids",
+        "Electrolytic processes",
+        "Extraction of metals",
+        "Reversible reactions and equilibria"
+      ]
+    },
+    {
+      "id": "4",
+      "name": "Extracting metals and equilibria",
+      "subtopics": [
+        "Obtaining and using metals",
+        "Reversible reactions and equilibria",
+        "Transition metals, alloys and corrosion"
+      ]
+    },
+    {
+      "id": "5",
+      "name": "Separate chemistry 1",
+      "subtopics": [
+        "Quantitative analysis",
+        "Calculator methods",
+        "Dynamic equilibria calculations",
+        "Chemical cells and fuel cells"
+      ]
+    },
+    {
+      "id": "6",
+      "name": "Groups in the periodic table",
+      "subtopics": [
+        "Group 1",
+        "Group 7",
+        "Group 0",
+        "Rates of reaction",
+        "Heat energy changes in chemical reactions"
+      ]
+    },
+    {
+      "id": "7",
+      "name": "Rates of reaction and energy changes",
+      "subtopics": [
+        "Rates of reaction",
+        "Heat energy changes in chemical reactions",
+        "Calculations involving heat energy changes"
+      ]
+    },
+    {
+      "id": "8",
+      "name": "Fuels and Earth science",
+      "subtopics": [
+        "Fuels",
+        "Earth and atmospheric science",
+        "Climate change",
+        "Earth's resources"
+      ]
+    },
+    {
+      "id": "9",
+      "name": "Separate chemistry 2",
+      "subtopics": [
+        "Qualitative analysis: tests for ions",
+        "Hydrocarbons",
+        "Polymers",
+        "Alcohols and carboxylic acids",
+        "Bulk and surface properties of matter including nanoparticles"
+      ]
+    }
+  ],
+  "required_practicals": [
+    {
+      "id": "1",
+      "name": "Preparation of a pure, dry sample of a soluble salt",
+      "description": "Prepare a pure, dry sample of a soluble salt from an insoluble oxide or carbonate, using a Bunsen burner to heat dilute acid and a water bath or electric heater to evaporate the solution"
+    },
+    {
+      "id": "2",
+      "name": "Electrolysis investigation",
+      "description": "Investigate what happens when aqueous solutions are electrolysed using inert electrodes"
+    },
+    {
+      "id": "3",
+      "name": "Investigating temperature changes",
+      "description": "Investigate the variables that affect temperature changes in reacting solutions"
+    },
+    {
+      "id": "4",
+      "name": "Rates of reaction investigation",
+      "description": "Investigate the effect of changing the concentration of hydrochloric acid on the rate of reaction with calcium carbonate"
+    },
+    {
+      "id": "5",
+      "name": "Chromatography investigation",
+      "description": "Investigate how paper chromatography can be used to separate and tell the difference between coloured substances"
+    },
+    {
+      "id": "6",
+      "name": "Identifying ions",
+      "description": "Identify the ions in unknown salts using the tests for specified cations and anions"
+    },
+    {
+      "id": "7",
+      "name": "pH scale investigation",
+      "description": "Investigate the pH of different solutions and how acids and alkalis react"
+    },
+    {
+      "id": "8",
+      "name": "Temperature and rate investigation",
+      "description": "Investigate the effect of temperature on the rate of reaction"
+    }
+  ]
+} 

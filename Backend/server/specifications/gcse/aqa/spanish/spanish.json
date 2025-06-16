@@ -1,0 +1,248 @@
+{
+  "exam_board": "AQA",
+  "qualification": "GCSE",
+  "subject": "Spanish",
+  "specification_code": "8698",
+  "command_words": [
+    "describe", "explain", "compare", "discuss", "give",
+    "state", "list", "write", "translate", "respond"
+  ],
+  "topics": [
+    {
+      "name": "Theme 1: Identity and culture",
+      "subtopics": [
+        {
+          "code": "1.1",
+          "title": "Me, my family and friends",
+          "content": [
+            "Relationships with family and friends",
+            "Marriage and partnership",
+            "Social media",
+            "Mobile technology",
+            "Physical descriptions",
+            "Personality traits",
+            "Future relationships"
+          ],
+          "vocabulary": [
+            "Family members",
+            "Physical appearance",
+            "Character traits",
+            "Technology terms",
+            "Relationship vocabulary",
+            "Social media terms"
+          ],
+          "grammar": [
+            "Present tense",
+            "Future tense",
+            "Adjective agreement",
+            "Possessive adjectives",
+            "Reflexive verbs"
+          ]
+        },
+        {
+          "code": "1.2",
+          "title": "Free-time activities",
+          "content": [
+            "Music",
+            "Cinema and TV",
+            "Food and eating out",
+            "Sport",
+            "Hobbies",
+            "Fashion trends",
+            "Shopping habits"
+          ],
+          "vocabulary": [
+            "Sports and activities",
+            "Entertainment",
+            "Food and drink",
+            "Shopping terms",
+            "Fashion vocabulary",
+            "Time expressions"
+          ],
+          "grammar": [
+            "Preterite tense",
+            "Imperfect tense",
+            "Opinion phrases",
+            "Comparatives",
+            "Superlatives"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Theme 2: Local, national, international and global areas of interest",
+      "subtopics": [
+        {
+          "code": "2.1",
+          "title": "Home, town, neighborhood and region",
+          "content": [
+            "House and home",
+            "Local area facilities",
+            "Social issues",
+            "Volunteering",
+            "Healthy living",
+            "Environment",
+            "Travel and tourism"
+          ],
+          "vocabulary": [
+            "House and furniture",
+            "Town facilities",
+            "Directions",
+            "Environmental issues",
+            "Health terms",
+            "Travel vocabulary"
+          ],
+          "grammar": [
+            "Prepositions",
+            "Negative expressions",
+            "Hay que + infinitive",
+            "Conditional tense",
+            "Si clauses"
+          ]
+        },
+        {
+          "code": "2.2",
+          "title": "Global issues",
+          "content": [
+            "Environment",
+            "Poverty and homelessness",
+            "Charity and voluntary work",
+            "Healthy living",
+            "Global events",
+            "Social issues",
+            "Current affairs"
+          ],
+          "vocabulary": [
+            "Environmental terms",
+            "Social issues",
+            "Health and lifestyle",
+            "Global problems",
+            "Solutions vocabulary",
+            "Current affairs terms"
+          ],
+          "grammar": [
+            "Present subjunctive",
+            "Perfect tense",
+            "Modal verbs",
+            "Complex opinions",
+            "Passive voice"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Theme 3: Current and future study and employment",
+      "subtopics": [
+        {
+          "code": "3.1",
+          "title": "Studies and school life",
+          "content": [
+            "School subjects",
+            "School facilities",
+            "School rules",
+            "School activities",
+            "Study habits",
+            "Future plans",
+            "Career choices"
+          ],
+          "vocabulary": [
+            "School subjects",
+            "School facilities",
+            "Educational terms",
+            "Career vocabulary",
+            "Future aspirations",
+            "Work-related terms"
+          ],
+          "grammar": [
+            "Future tense",
+            "Conditional tense",
+            "Desde + present tense",
+            "Cuando clauses",
+            "Complex structures"
+          ]
+        }
+      ]
+    }
+  ],
+  "assessment_objectives": {
+    "AO1": "Listening – understand and respond to different types of spoken language",
+    "AO2": "Speaking – communicate and interact effectively in speech",
+    "AO3": "Reading – understand and respond to different types of written language",
+    "AO4": "Writing – communicate in writing"
+  },
+  "skills": {
+    "listening": [
+      "Understanding main points",
+      "Understanding detail",
+      "Drawing inferences",
+      "Dealing with unfamiliar language",
+      "Recognizing time frames"
+    ],
+    "speaking": [
+      "Role play",
+      "Photo card description",
+      "General conversation",
+      "Spontaneous speech",
+      "Pronunciation and intonation"
+    ],
+    "reading": [
+      "Understanding texts",
+      "Translation into English",
+      "Reading authentic materials",
+      "Understanding different registers",
+      "Identifying tenses"
+    ],
+    "writing": [
+      "Structured writing",
+      "Translation into Spanish",
+      "Extended writing",
+      "Using different tenses",
+      "Adapting language"
+    ]
+  },
+  "exam_structure": {
+    "paper_1": {
+      "title": "Listening",
+      "duration": "45 minutes",
+      "marks": 50,
+      "percentage": 25
+    },
+    "paper_2": {
+      "title": "Speaking",
+      "duration": "10-12 minutes",
+      "marks": 60,
+      "percentage": 25
+    },
+    "paper_3": {
+      "title": "Reading",
+      "duration": "1 hour",
+      "marks": 60,
+      "percentage": 25
+    },
+    "paper_4": {
+      "title": "Writing",
+      "duration": "1 hour 15 minutes",
+      "marks": 60,
+      "percentage": 25
+    }
+  },
+  "grammar_requirements": {
+    "tenses": [
+      "Present",
+      "Preterite",
+      "Imperfect",
+      "Future",
+      "Conditional",
+      "Perfect",
+      "Subjunctive"
+    ],
+    "structures": [
+      "Negatives",
+      "Questions",
+      "Adjective agreement",
+      "Pronouns",
+      "Modal verbs",
+      "Reflexive verbs"
+    ]
+  }
+} 

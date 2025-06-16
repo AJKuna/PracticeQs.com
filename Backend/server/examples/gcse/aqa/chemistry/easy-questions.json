@@ -1,0 +1,71 @@
+{
+  "difficulty": "easy",
+  "questions": [
+    {
+      "id": "E1",
+      "topic": "Atomic structure",
+      "question": "What are the three subatomic particles found in an atom?",
+      "answer": "Protons, neutrons, and electrons",
+      "explanation": "These are the fundamental particles that make up all atoms.",
+      "marks": 3
+    },
+    {
+      "id": "E2",
+      "topic": "Periodic table",
+      "question": "What is the name of Group 1 elements in the periodic table?",
+      "answer": "Alkali metals",
+      "explanation": "Group 1 elements are called alkali metals because they form alkaline solutions when they react with water.",
+      "marks": 1
+    },
+    {
+      "id": "E3",
+      "topic": "Chemical changes",
+      "question": "What color is universal indicator in a neutral solution?",
+      "answer": "Green",
+      "explanation": "Universal indicator shows green at pH 7 (neutral).",
+      "marks": 1
+    },
+    {
+      "id": "E4",
+      "topic": "Energy changes",
+      "question": "What type of reaction gives out heat energy to the surroundings?",
+      "answer": "Exothermic reaction",
+      "explanation": "Exothermic reactions release heat energy to the surroundings, making the surroundings feel warmer.",
+      "marks": 1
+    },
+    {
+      "id": "E5",
+      "topic": "Chemical analysis",
+      "question": "What gas is produced when hydrogen peroxide decomposes?",
+      "answer": "Oxygen",
+      "explanation": "Hydrogen peroxide (H₂O₂) decomposes to form water (H₂O) and oxygen (O₂).",
+      "marks": 1
+    },
+    {
+      "id": "E6",
+      "topic": "Bonding",
+      "question": "What type of bonding occurs between a metal and a non-metal?",
+      "answer": "Ionic bonding",
+      "explanation": "When a metal reacts with a non-metal, electrons are transferred to form ionic bonds.",
+      "marks": 1
+    },
+    {
+      "id": "E7",
+      "topic": "Atmosphere",
+      "question": "What is the most abundant gas in the Earth's atmosphere?",
+      "answer": "Nitrogen",
+      "explanation": "Nitrogen makes up approximately 78% of the Earth's atmosphere.",
+      "marks": 1
+    },
+    {
+      "id": "E8",
+      "topic": "Using resources",
+      "question": "What process is used to make sea water safe to drink?",
+      "answer": "Distillation",
+      "explanation": "Distillation removes dissolved salts from sea water to make it potable (safe to drink).",
+      "marks": 1
+    }
+  ],
+  "total_marks": 10,
+  "recommended_time": "12 minutes"
+} 

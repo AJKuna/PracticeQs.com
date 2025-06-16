@@ -1,0 +1,178 @@
+{
+  "exam_board": "AQA",
+  "qualification": "GCSE",
+  "subject": "History",
+  "specification_code": "8145",
+  "command_words": [
+    "describe", "explain", "analyse", "evaluate", "assess", "compare",
+    "contrast", "discuss", "justify", "argue", "examine", "to what extent"
+  ],
+  "topics": [
+    {
+      "name": "Understanding the modern world",
+      "subtopics": [
+        {
+          "code": "1A",
+          "title": "America, 1920–1973: Opportunity and inequality",
+          "content": [
+            "American people and the 'Boom'",
+            "Bust - Americans' experiences of the Depression and New Deal",
+            "Post-war America",
+            "McCarthyism and the Red Scare",
+            "Civil Rights movement",
+            "Feminist movements",
+            "Economic prosperity and social change"
+          ],
+          "required_skills": [
+            "Analyse causes and consequences",
+            "Evaluate significance of events",
+            "Use primary sources critically",
+            "Understand different interpretations",
+            "Make supported judgements"
+          ],
+          "key_events": [
+            "Wall Street Crash 1929",
+            "New Deal programs 1933-1939",
+            "Montgomery Bus Boycott 1955",
+            "Cuban Missile Crisis 1962",
+            "Civil Rights Act 1964"
+          ]
+        },
+        {
+          "code": "1B",
+          "title": "Conflict and tension, 1918–1939",
+          "content": [
+            "Peace-making after WWI",
+            "League of Nations and international peace",
+            "Origins of WWII",
+            "Treaty of Versailles",
+            "Rise of dictators",
+            "Appeasement",
+            "Failure of League of Nations"
+          ],
+          "required_skills": [
+            "Analyse causes of conflict",
+            "Evaluate peace treaties",
+            "Understand international relations",
+            "Assess significance of events",
+            "Use historical sources"
+          ],
+          "key_events": [
+            "Treaty of Versailles 1919",
+            "Munich Agreement 1938",
+            "Nazi-Soviet Pact 1939",
+            "Invasion of Poland 1939"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Shaping the nation",
+      "subtopics": [
+        {
+          "code": "2A",
+          "title": "Britain: Health and the people c1000 to present day",
+          "content": [
+            "Medicine in medieval England",
+            "Renaissance medicine",
+            "Industrial Revolution",
+            "Modern medicine",
+            "Public health reforms",
+            "Development of surgery",
+            "Fighting disease over time"
+          ],
+          "required_skills": [
+            "Analyse change and continuity",
+            "Evaluate significance of developments",
+            "Understand causation",
+            "Use evidence to support arguments",
+            "Make period comparisons"
+          ],
+          "key_developments": [
+            "Black Death 1348",
+            "Jenner's vaccination 1796",
+            "Cholera epidemics 1832",
+            "NHS creation 1948",
+            "DNA discovery 1953"
+          ]
+        },
+        {
+          "code": "2B",
+          "title": "Elizabethan England, c1568–1603",
+          "content": [
+            "Elizabeth and her court",
+            "Life in Elizabethan times",
+            "Troubles at home and abroad",
+            "Religious settlement",
+            "Spanish Armada",
+            "Golden Age",
+            "Historic environment study"
+          ],
+          "required_skills": [
+            "Analyse Elizabethan society",
+            "Evaluate Elizabeth's policies",
+            "Understand religious changes",
+            "Assess foreign policy",
+            "Study historic sites"
+          ],
+          "key_events": [
+            "Religious Settlement 1559",
+            "Mary Queen of Scots execution 1587",
+            "Spanish Armada 1588",
+            "Essex Rebellion 1601"
+          ]
+        }
+      ]
+    }
+  ],
+  "assessment_objectives": {
+    "AO1": "Demonstrate knowledge and understanding of the key features and characteristics of the periods studied",
+    "AO2": "Explain and analyse historical events and periods studied using second-order historical concepts",
+    "AO3": "Analyse, evaluate and use sources (contemporary to the period) to make substantiated judgements",
+    "AO4": "Analyse, evaluate and make substantiated judgements about interpretations in the context of historical events studied"
+  },
+  "historical_skills": {
+    "source_analysis": [
+      "Content analysis",
+      "Provenance evaluation",
+      "Utility assessment",
+      "Cross-referencing",
+      "Contextual knowledge"
+    ],
+    "interpretation": [
+      "Identifying viewpoints",
+      "Comparing interpretations",
+      "Evaluating reliability",
+      "Understanding context",
+      "Making judgements"
+    ],
+    "writing": [
+      "Structured arguments",
+      "Evidence-based conclusions",
+      "Historical terminology",
+      "Balanced analysis",
+      "Clear communication"
+    ]
+  },
+  "exam_structure": {
+    "paper_1": {
+      "title": "Understanding the modern world",
+      "duration": "2 hours",
+      "marks": 84,
+      "percentage": 50
+    },
+    "paper_2": {
+      "title": "Shaping the nation",
+      "duration": "2 hours",
+      "marks": 84,
+      "percentage": 50
+    }
+  },
+  "second_order_concepts": [
+    "Causation",
+    "Change and continuity",
+    "Similarity and difference",
+    "Significance",
+    "Evidence and interpretations"
+  ]
+} 

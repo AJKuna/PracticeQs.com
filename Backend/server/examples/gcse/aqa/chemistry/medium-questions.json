@@ -1,0 +1,55 @@
+{
+  "difficulty": "medium",
+  "questions": [
+    {
+      "id": "M1",
+      "topic": "Atomic structure",
+      "question": "Calculate the number of neutrons in an atom of magnesium-24 (atomic number 12).",
+      "answer": "12 neutrons",
+      "explanation": "Mass number (24) - Atomic number (12) = Number of neutrons (12)",
+      "marks": 2
+    },
+    {
+      "id": "M2",
+      "topic": "Bonding",
+      "question": "Draw the electronic structure of a chlorine molecule (Cl₂) showing the covalent bond. (Atomic number of Cl = 17)",
+      "answer": "Two chlorine atoms each with 2,8,7 electrons, sharing one pair of electrons between them",
+      "explanation": "Each chlorine atom shares one electron to achieve a full outer shell of 8 electrons (octet rule).",
+      "marks": 3
+    },
+    {
+      "id": "M3",
+      "topic": "Quantitative chemistry",
+      "question": "Calculate the relative formula mass of calcium hydroxide (Ca(OH)₂). (Ar: Ca=40, O=16, H=1)",
+      "answer": "74",
+      "explanation": "Ca(OH)₂ = 40 + (2 × (16 + 1)) = 40 + (2 × 17) = 40 + 34 = 74",
+      "marks": 2
+    },
+    {
+      "id": "M4",
+      "topic": "Chemical changes",
+      "question": "Write a balanced equation for the reaction between zinc and hydrochloric acid.",
+      "answer": "Zn + 2HCl → ZnCl₂ + H₂",
+      "explanation": "Zinc reacts with hydrochloric acid to form zinc chloride and hydrogen gas.",
+      "marks": 3
+    },
+    {
+      "id": "M5",
+      "topic": "Energy changes",
+      "question": "Draw and label an energy level diagram for an exothermic reaction.",
+      "answer": "Diagram showing: reactants energy level higher than products, arrow showing energy change, labels for reactants, products, and energy change",
+      "explanation": "The energy of the products is lower than the reactants, and the difference is released as heat energy to the surroundings.",
+      "marks": 3
+    },
+    {
+      "id": "M6",
+      "topic": "Rates of reaction",
+      "question": "Explain how increasing the surface area of a solid reactant increases the rate of reaction.",
+      "answer": "Increasing surface area provides more particles exposed to collisions, leading to more frequent successful collisions between reactants, therefore increasing the rate of reaction",
+      "explanation": "More exposed surface area means more particles available for collision at any one time.",
+      "marks": 3
+    }
+  ],
+  "total_marks": 16,
+  "recommended_time": "20 minutes"
+} 

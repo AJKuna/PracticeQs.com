@@ -1,0 +1,25 @@
+{
+  "questions": [
+    {
+      "question": "Starting with this extract, how does Shakespeare present the theme of love in Romeo and Juliet?",
+      "extract": "But soft! What light through yonder window breaks?\nIt is the east, and Juliet is the sun.\nArise, fair sun, and kill the envious moon,\nWho is already sick and pale with grief,\nThat thou her maid art far more fair than she.",
+      "marks": 30,
+      "answer": "Shakespeare presents love as powerful and transformative:\n1. Extended metaphor comparing Juliet to the sun shows Romeo's adoration\n2. Natural imagery ('light', 'sun', 'moon') elevates their love to cosmic significance\n3. Exclamatory opening shows Romeo's excitement and passion\n\nIn the wider play:\n1. Contrast between Romeo's superficial love for Rosaline and true love for Juliet\n2. The intensity of their love defying family hatred\n3. Their love leading to tragic consequences",
+      "explanation": "This question requires analysis of how Shakespeare uses language and imagery to present different aspects of love throughout the play."
+    },
+    {
+      "question": "How does Shakespeare present conflict between the younger and older generations?",
+      "extract": "My child is yet a stranger in the world,\nShe hath not seen the change of fourteen years;\nLet two more summers wither in their pride\nEre we may think her ripe to be a bride.",
+      "marks": 30,
+      "answer": "Shakespeare presents generational conflict through:\n1. Capulet's possessive language ('My child') showing his control\n2. Natural imagery ('summers wither') suggesting his traditional views about marriage\n3. His dismissal of Juliet's feelings by calling her a 'stranger in the world'\n\nIn the wider play:\n1. Juliet's defiance of her parents' marriage plans\n2. The young lovers challenging family traditions\n3. The tragic consequences of parental authority",
+      "explanation": "This question asks you to analyze how Shakespeare portrays the tension between young people's desires and parental authority."
+    },
+    {
+      "question": "How does Shakespeare present Mercutio as a significant character?",
+      "extract": "O, then I see Queen Mab hath been with you...\nShe is the fairies' midwife, and she comes\nIn shape no bigger than an agate stone\nOn the forefinger of an alderman,\nDrawn with a team of little atomies.",
+      "marks": 30,
+      "answer": "Shakespeare presents Mercutio as imaginative and complex:\n1. His elaborate Queen Mab speech shows his wit and creativity\n2. Detailed imagery reveals his intelligent, poetic nature\n3. The fantastical description contrasts with the play's reality\n\nIn the wider play:\n1. His cynical view of love contrasting with Romeo's romanticism\n2. His death as a turning point in the tragedy\n3. His role as a bridge between comedy and tragedy",
+      "explanation": "This question requires analysis of how Shakespeare uses Mercutio to explore different themes and drive the plot forward."
+    }
+  ]
+} 

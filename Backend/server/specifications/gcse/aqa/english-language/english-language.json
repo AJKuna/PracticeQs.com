@@ -1,0 +1,203 @@
+{
+  "exam_board": "AQA",
+  "qualification": "GCSE",
+  "subject": "English Language",
+  "specification_code": "8700",
+  "command_words": [
+    "analyse", "evaluate", "compare", "explain", "describe", "identify",
+    "summarise", "explore", "discuss", "comment", "justify", "examine"
+  ],
+  "topics": [
+    {
+      "name": "Paper 1: Explorations in Creative Reading and Writing",
+      "subtopics": [
+        {
+          "code": "1.1",
+          "title": "Reading literary fiction texts",
+          "content": [
+            "Critical reading and comprehension",
+            "Summary and synthesis",
+            "Evaluation of writers' methods",
+            "Analysis of language",
+            "Analysis of structure",
+            "Comparison of texts",
+            "Understanding of context"
+          ],
+          "required_skills": [
+            "Identify and interpret explicit and implicit information",
+            "Select and synthesise evidence from texts",
+            "Explain, comment on and analyse writers' use of language",
+            "Compare writers' ideas and perspectives",
+            "Evaluate texts critically",
+            "Support points with relevant textual references"
+          ],
+          "assessment_focus": [
+            "AO1: Identify and interpret explicit and implicit information",
+            "AO2: Explain, comment on and analyse writers' use of language and structure",
+            "AO3: Compare writers' ideas and perspectives",
+            "AO4: Evaluate texts critically and support with textual references"
+          ]
+        },
+        {
+          "code": "1.2",
+          "title": "Creative writing",
+          "content": [
+            "Descriptive writing",
+            "Narrative writing",
+            "Creating atmosphere",
+            "Developing characters",
+            "Structuring texts",
+            "Using vocabulary for effect",
+            "Using linguistic devices"
+          ],
+          "required_skills": [
+            "Communicate clearly, effectively and imaginatively",
+            "Select and adapt tone, style and register",
+            "Organise information and ideas",
+            "Use structural and grammatical features",
+            "Use a range of vocabulary and sentence structures",
+            "Maintain a consistent point of view",
+            "Achieve intended effects"
+          ],
+          "assessment_focus": [
+            "AO5: Communicate clearly, effectively and imaginatively",
+            "AO6: Use range of vocabulary and sentence structures with accurate spelling and punctuation"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Paper 2: Writers' Viewpoints and Perspectives",
+      "subtopics": [
+        {
+          "code": "2.1",
+          "title": "Reading non-fiction texts",
+          "content": [
+            "19th century texts",
+            "20th/21st century texts",
+            "Comparing viewpoints",
+            "Understanding perspectives",
+            "Analysing methods",
+            "Evaluating effectiveness",
+            "Understanding context"
+          ],
+          "required_skills": [
+            "Identify and interpret explicit and implicit information",
+            "Select and synthesise evidence",
+            "Analyse writers' use of methods",
+            "Compare different perspectives and viewpoints",
+            "Evaluate effectiveness of texts",
+            "Understand how context influences meaning"
+          ],
+          "assessment_focus": [
+            "AO1: Identify and interpret explicit and implicit information",
+            "AO2: Explain, comment on and analyse writers' use of language",
+            "AO3: Compare writers' ideas and perspectives",
+            "AO4: Evaluate texts critically"
+          ]
+        },
+        {
+          "code": "2.2",
+          "title": "Writing to present a viewpoint",
+          "content": [
+            "Writing to argue",
+            "Writing to persuade",
+            "Writing to explain",
+            "Writing to inform",
+            "Writing to advise",
+            "Writing to instruct",
+            "Writing for different audiences"
+          ],
+          "required_skills": [
+            "Communicate clearly, effectively and imaginatively",
+            "Select and adapt tone, style and register",
+            "Organise information and ideas",
+            "Use structural and grammatical features",
+            "Use rhetorical devices",
+            "Maintain a consistent viewpoint",
+            "Write for specific purposes and audiences"
+          ],
+          "assessment_focus": [
+            "AO5: Communicate clearly, effectively and imaginatively",
+            "AO6: Use range of vocabulary and sentence structures with accurate spelling and punctuation"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Spoken Language",
+      "subtopics": [
+        {
+          "code": "3.1",
+          "title": "Presenting and responding to questions and feedback",
+          "content": [
+            "Formal presentations",
+            "Responding to questions",
+            "Using Standard English",
+            "Speaking effectively",
+            "Listening skills",
+            "Non-verbal communication",
+            "Audience awareness"
+          ],
+          "required_skills": [
+            "Present information and ideas formally",
+            "Respond appropriately to questions",
+            "Use spoken Standard English effectively",
+            "Use appropriate register and language",
+            "Listen and respond appropriately",
+            "Express ideas with clarity and purpose",
+            "Adapt speech to different situations"
+          ],
+          "assessment_focus": [
+            "AO7: Demonstrate presentation skills",
+            "AO8: Listen and respond appropriately",
+            "AO9: Use spoken Standard English effectively"
+          ]
+        }
+      ]
+    }
+  ],
+  "assessment_objectives": {
+    "AO1": "Identify and interpret explicit and implicit information and ideas",
+    "AO2": "Explain, comment on and analyse how writers use language and structure",
+    "AO3": "Compare writers' ideas and perspectives across two or more texts",
+    "AO4": "Evaluate texts critically and support this with appropriate textual references",
+    "AO5": "Communicate clearly, effectively and imaginatively",
+    "AO6": "Use range of vocabulary and sentence structures with accurate spelling and punctuation",
+    "AO7": "Demonstrate presentation skills in a formal setting",
+    "AO8": "Listen and respond appropriately to spoken language",
+    "AO9": "Use spoken Standard English effectively in speeches and presentations"
+  },
+  "grade_descriptors": {
+    "9": "Exceptional understanding and analysis of texts, outstanding writing skills",
+    "8": "Excellent understanding and analysis, highly effective writing",
+    "7": "Detailed understanding and analysis, very effective writing",
+    "6": "Clear understanding and analysis, effective writing",
+    "5": "Generally sound understanding and analysis, competent writing",
+    "4": "Some understanding and analysis, basic writing skills",
+    "3": "Limited understanding and analysis, basic writing with errors",
+    "2": "Very limited understanding and analysis, weak writing",
+    "1": "Minimal understanding and analysis, very weak writing"
+  },
+  "required_skills": {
+    "reading": [
+      "Critical reading and comprehension",
+      "Summary and synthesis",
+      "Evaluation and analysis",
+      "Comparing texts",
+      "Understanding context"
+    ],
+    "writing": [
+      "Producing clear and coherent text",
+      "Writing for impact",
+      "Using Standard English",
+      "Accurate spelling, punctuation and grammar",
+      "Using varied vocabulary and structures"
+    ],
+    "spoken_language": [
+      "Speaking confidently and effectively",
+      "Using Standard English appropriately",
+      "Listening and responding appropriately"
+    ]
+  }
+} 

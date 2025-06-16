@@ -1,0 +1,191 @@
+{
+  "exam_board": "Edexcel",
+  "subject": "Geography",
+  "qualification": "GCSE",
+  "specification_code": "1GA0",
+  "components": [
+    {
+      "name": "Component 1: Global Geographical Issues",
+      "topics": [
+        {
+          "name": "Topic 1: Hazardous Earth",
+          "subtopics": [
+            "Global circulation system",
+            "Tropical cyclones",
+            "Tectonic processes and hazards",
+            "Climate change",
+            "Extreme weather events",
+            "Case studies of tectonic events"
+          ]
+        },
+        {
+          "name": "Topic 2: Development dynamics",
+          "subtopics": [
+            "Global inequality",
+            "Economic development theories",
+            "Emerging countries",
+            "Development challenges",
+            "Rapid economic development",
+            "Case study of an emerging country"
+          ]
+        },
+        {
+          "name": "Topic 3: Challenges of an urbanising world",
+          "subtopics": [
+            "Global urbanisation",
+            "Megacities",
+            "Urban growth challenges",
+            "Urban planning",
+            "Quality of life",
+            "Case study of a megacity"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Component 2: UK Geographical Issues",
+      "topics": [
+        {
+          "name": "Topic 4: The UK's evolving physical landscape",
+          "subtopics": [
+            "Geology and landscapes",
+            "Coastal processes",
+            "River processes",
+            "Glacial processes",
+            "Human interaction",
+            "Case studies of UK landscapes"
+          ]
+        },
+        {
+          "name": "Topic 5: The UK's evolving human landscape",
+          "subtopics": [
+            "Population distribution",
+            "Economic change",
+            "Urban change",
+            "Rural change",
+            "UK in the wider world",
+            "Case study of a UK city"
+          ]
+        },
+        {
+          "name": "Topic 6: Geographical investigations",
+          "subtopics": [
+            "Physical fieldwork investigation",
+            "Human fieldwork investigation",
+            "Data collection methods",
+            "Data presentation techniques",
+            "Analysis and evaluation",
+            "Fieldwork skills"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Component 3: People and Environment Issues",
+      "topics": [
+        {
+          "name": "Topic 7: People and the biosphere",
+          "subtopics": [
+            "Global ecosystems",
+            "Biomes",
+            "Environmental relationships",
+            "Ecosystem services",
+            "Human impacts",
+            "Sustainability"
+          ]
+        },
+        {
+          "name": "Topic 8: Forests under threat",
+          "subtopics": [
+            "Tropical rainforests",
+            "Taiga forests",
+            "Deforestation",
+            "Resource exploitation",
+            "Conservation",
+            "Sustainable management"
+          ]
+        },
+        {
+          "name": "Topic 9: Consuming energy resources",
+          "subtopics": [
+            "Global energy demand",
+            "Energy security",
+            "Renewable energy",
+            "Non-renewable energy",
+            "Future energy scenarios",
+            "Sustainable energy use"
+          ]
+        }
+      ]
+    }
+  ],
+  "assessment": {
+    "papers": [
+      {
+        "name": "Paper 1: Global Geographical Issues",
+        "duration": "1 hour 30 minutes",
+        "marks": 94,
+        "weighting": "37.5%",
+        "content": [
+          "Multiple-choice questions",
+          "Short open responses",
+          "Extended writing tasks",
+          "Calculations",
+          "Map skills"
+        ]
+      },
+      {
+        "name": "Paper 2: UK Geographical Issues",
+        "duration": "1 hour 30 minutes",
+        "marks": 94,
+        "weighting": "37.5%",
+        "content": [
+          "Fieldwork questions",
+          "UK challenges",
+          "Geographical skills",
+          "Data response",
+          "Case study questions"
+        ]
+      },
+      {
+        "name": "Paper 3: People and Environment Issues",
+        "duration": "1 hour 30 minutes",
+        "marks": 64,
+        "weighting": "25%",
+        "content": [
+          "Decision-making exercise",
+          "Resource booklet",
+          "Problem-solving",
+          "Extended writing",
+          "Synoptic assessment"
+        ]
+      }
+    ]
+  },
+  "geographical_skills": {
+    "cartographic": [
+      "Atlas maps",
+      "Topological maps",
+      "OS maps",
+      "Relief and gradient",
+      "Grid references",
+      "Scale and distance"
+    ],
+    "graphical": [
+      "Line graphs",
+      "Bar charts",
+      "Pie charts",
+      "Scatter graphs",
+      "Population pyramids",
+      "Climate graphs"
+    ],
+    "numerical": [
+      "Mean, median, mode",
+      "Percentages",
+      "Ratios",
+      "Population density",
+      "Statistical analysis",
+      "Data interpretation"
+    ]
+  }
+} 

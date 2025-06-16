@@ -1,0 +1,89 @@
+{
+  "questions": [
+    {
+      "question": "A student investigated the effect of temperature on enzyme activity using the following method:\n1. Set up water baths at different temperatures\n2. Add equal volumes of amylase solution to test tubes\n3. Add equal volumes of starch solution\n4. Time how long it takes for the starch to be broken down\n\na) Identify two variables that should be controlled in this investigation. (2 marks)\nb) Explain why the student should repeat the experiment at each temperature. (2 marks)\nc) The student's results showed an optimum temperature of 37°C. Explain in detail why enzyme activity decreases above this temperature. (6 marks)",
+      "topic": "Key concepts in biology",
+      "marks": 10,
+      "answer": [
+        "a) Control variables (2 marks):",
+        "- pH of solutions",
+        "- Concentration of enzyme/substrate",
+        "- Volume of solutions",
+        "- Same type/batch of enzyme",
+        "",
+        "b) Repeats explanation (2 marks):",
+        "- To identify anomalous results",
+        "- To calculate mean values",
+        "- To improve reliability of results",
+        "",
+        "c) Temperature effect explanation (6 marks):",
+        "- Above optimum temperature, kinetic energy increases",
+        "- Causes vibration of enzyme molecules",
+        "- Breaks hydrogen bonds",
+        "- Changes shape of active site",
+        "- Enzyme becomes denatured",
+        "- Substrate no longer fits active site"
+      ],
+      "explanation": "This question tests understanding of experimental design, variables, and enzyme function at molecular level."
+    },
+    {
+      "question": "The diagram shows a cross-section of a leaf.\n[Diagram of leaf structure]\n\na) Calculate the magnification of the image if the actual width of the leaf is 0.8mm. Show your working. (3 marks)\nb) Explain how the adaptations of the palisade mesophyll cells make them efficient at photosynthesis. (6 marks)\nc) Describe and explain how the rate of water loss from the leaf would change if it was moved from shade to direct sunlight. (6 marks)",
+      "topic": "Plant structures and their functions",
+      "marks": 15,
+      "answer": [
+        "a) Magnification calculation (3 marks):",
+        "- Measure image width in mm",
+        "- Magnification = image size ÷ actual size",
+        "- Show working and units",
+        "",
+        "b) Palisade cell adaptations (6 marks):",
+        "- Columnar shape allows many cells to fit",
+        "- Many chloroplasts present",
+        "- Position near upper surface",
+        "- Maximum light absorption",
+        "- Large vacuole pushes chloroplasts to edge",
+        "- Efficient CO2 absorption",
+        "",
+        "c) Water loss explanation (6 marks):",
+        "- Increased light intensity",
+        "- Higher temperature in leaves",
+        "- More kinetic energy in water molecules",
+        "- Faster diffusion",
+        "- Greater water potential gradient",
+        "- Stomata may close to prevent excess water loss"
+      ],
+      "explanation": "This question combines mathematical skills with biological knowledge and application to real situations."
+    },
+    {
+      "question": "Scientists investigated the effect of a new drug on blood glucose levels in diabetes patients.\n\na) Design a suitable investigation to test the effectiveness of this drug. Include appropriate controls and ethical considerations. (8 marks)\nb) The results showed that 15% of patients experienced side effects. In a sample of 400 patients, calculate the number who experienced side effects, showing your working. (2 marks)\nc) Evaluate the advantages and disadvantages of using this drug compared to insulin injections. (5 marks)",
+      "topic": "Health, disease and development of medicines",
+      "marks": 15,
+      "answer": [
+        "a) Investigation design (8 marks):",
+        "- Double blind trial",
+        "- Control group with placebo",
+        "- Large sample size",
+        "- Random allocation of patients",
+        "- Regular blood glucose monitoring",
+        "- Informed consent",
+        "- Medical supervision",
+        "- Control of diet/exercise",
+        "",
+        "b) Calculation (2 marks):",
+        "- 15% of 400 = (400 × 15) ÷ 100",
+        "- = 60 patients",
+        "",
+        "c) Evaluation (5 marks):",
+        "Advantages:",
+        "- Oral administration",
+        "- Less invasive",
+        "- May have longer effect",
+        "Disadvantages:",
+        "- Side effects",
+        "- May be less effective",
+        "- Cost implications"
+      ],
+      "explanation": "This question tests experimental design, mathematical skills, and evaluation of medical treatments."
+    }
+  ]
+} 

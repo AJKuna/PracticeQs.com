@@ -1,0 +1,219 @@
+{
+  "exam_board": "AQA",
+  "qualification": "GCSE",
+  "subject": "English Literature",
+  "specification_code": "8702",
+  "command_words": [
+    "analyse", "evaluate", "compare", "explain", "describe", "discuss",
+    "explore", "examine", "consider", "show", "illustrate", "argue"
+  ],
+  "topics": [
+    {
+      "name": "Shakespeare",
+      "subtopics": [
+        {
+          "code": "1.1",
+          "title": "Macbeth",
+          "content": [
+            "Plot and structure",
+            "Key characters and their development",
+            "Themes (ambition, power, guilt, supernatural)",
+            "Language and imagery",
+            "Context (Jacobean era, Divine Right of Kings)",
+            "Dramatic devices",
+            "Tragic conventions"
+          ],
+          "required_skills": [
+            "Analyse language, form and structure",
+            "Evaluate the effectiveness of Shakespeare's methods",
+            "Understand the play in its historical context",
+            "Analyse character development",
+            "Explore themes and motifs",
+            "Use relevant subject terminology",
+            "Support interpretations with apt textual references"
+          ],
+          "key_quotations": [
+            "Fair is foul, and foul is fair",
+            "Is this a dagger which I see before me?",
+            "Out, damned spot! Out, I say!",
+            "Life's but a walking shadow"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "19th Century Novel",
+      "subtopics": [
+        {
+          "code": "2.1",
+          "title": "A Christmas Carol",
+          "content": [
+            "Plot and structure",
+            "Character development (Scrooge's transformation)",
+            "Themes (redemption, social responsibility, poverty)",
+            "Victorian context",
+            "Dickens' methods",
+            "Symbolism and imagery",
+            "Social commentary"
+          ],
+          "required_skills": [
+            "Analyse language, form and structure",
+            "Evaluate the effectiveness of Dickens' methods",
+            "Understand the novel in its Victorian context",
+            "Analyse character development",
+            "Explore themes and motifs",
+            "Use relevant subject terminology",
+            "Support interpretations with apt textual references"
+          ],
+          "key_quotations": [
+            "Bah! Humbug!",
+            "I wear the chain I forged in life",
+            "God bless us, every one!",
+            "I will honour Christmas in my heart"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Modern Texts",
+      "subtopics": [
+        {
+          "code": "3.1",
+          "title": "An Inspector Calls",
+          "content": [
+            "Plot and dramatic structure",
+            "Characters and their development",
+            "Themes (responsibility, class, gender)",
+            "Social and historical context",
+            "Priestley's methods",
+            "Dramatic devices",
+            "Socialist message"
+          ],
+          "required_skills": [
+            "Analyse language, form and structure",
+            "Evaluate the effectiveness of dramatic devices",
+            "Understand the play in its historical context",
+            "Analyse character development",
+            "Explore themes and motifs",
+            "Use relevant subject terminology",
+            "Support interpretations with apt textual references"
+          ],
+          "key_quotations": [
+            "We don't live alone. We are members of one body",
+            "Fire and blood and anguish",
+            "We are responsible for each other",
+            "Girls of that class"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Poetry",
+      "subtopics": [
+        {
+          "code": "4.1",
+          "title": "Power and Conflict Poetry",
+          "content": [
+            "Analysis of 15 poems from anthology",
+            "Themes (power, conflict, nature, identity)",
+            "Poetic techniques",
+            "Structure and form",
+            "Context of poems",
+            "Comparison skills",
+            "Unseen poetry analysis"
+          ],
+          "required_skills": [
+            "Analyse language, form and structure",
+            "Compare poems effectively",
+            "Understand poems in their contexts",
+            "Analyse poets' methods",
+            "Explore themes and ideas",
+            "Use relevant subject terminology",
+            "Support interpretations with apt textual references"
+          ],
+          "poems": [
+            "Ozymandias",
+            "London",
+            "The Prelude",
+            "My Last Duchess",
+            "Charge of the Light Brigade",
+            "Exposure",
+            "Storm on the Island",
+            "Bayonet Charge",
+            "Remains",
+            "Poppies",
+            "War Photographer",
+            "Tissue",
+            "The Emigree",
+            "Checking Out Me History",
+            "Kamikaze"
+          ]
+        }
+      ]
+    }
+  ],
+  "assessment_objectives": {
+    "AO1": "Read, understand and respond to texts, maintain a critical style, use textual references",
+    "AO2": "Analyse language, form and structure used by writers to create meanings and effects",
+    "AO3": "Show understanding of relationships between texts and contexts in which they were written",
+    "AO4": "Use a range of vocabulary and sentence structures for clarity, purpose and effect"
+  },
+  "grade_descriptors": {
+    "9": "Perceptive, detailed analysis showing sophisticated understanding",
+    "8": "Critical, exploratory analysis showing detailed understanding",
+    "7": "Thoughtful, developed analysis showing clear understanding",
+    "6": "Clear, explained analysis showing good understanding",
+    "5": "Some analytical comments showing understanding",
+    "4": "Simple comments showing some understanding",
+    "3": "Basic comments showing limited understanding",
+    "2": "Limited engagement with text",
+    "1": "Minimal engagement with text"
+  },
+  "required_skills": {
+    "analysis": [
+      "Close reading of texts",
+      "Analysis of language and structure",
+      "Understanding of context",
+      "Comparison of texts",
+      "Critical evaluation"
+    ],
+    "writing": [
+      "Clear and coherent essays",
+      "Use of evidence and quotations",
+      "Subject terminology",
+      "Analytical style",
+      "Technical accuracy"
+    ]
+  },
+  "exam_structure": {
+    "paper_1": {
+      "title": "Shakespeare and the 19th-century novel",
+      "duration": "1 hour 45 minutes",
+      "marks": 64,
+      "percentage": 40
+    },
+    "paper_2": {
+      "title": "Modern texts and poetry",
+      "duration": "2 hours 15 minutes",
+      "marks": 96,
+      "percentage": 60
+    }
+  }
+} 
+
+{
+  "subject": "English Literature",
+  "exam_board": "AQA",
+  "qualification": "GCSE",
+  "topics": [
+    {
+      "name": "Macbeth",
+      "question_templates": [
+        "How does the writer present the theme of {theme} in the play Macbeth?",
+        "How does the writer present the character of {character} in the play Macbeth?",
+        "Starting with this extract, write about how Shakespeare presents {theme} in Macbeth."
+      ]
+    }
+    // ... other topics
+  ]
+}

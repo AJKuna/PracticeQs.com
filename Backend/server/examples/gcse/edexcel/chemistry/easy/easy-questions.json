@@ -1,0 +1,71 @@
+{
+  "difficulty": "easy",
+  "questions": [
+    {
+      "id": "E1",
+      "topic": "States of matter",
+      "question": "State the three states of matter and give one property of each.",
+      "answer": "1. Solid - fixed shape and volume\n2. Liquid - fixed volume but takes shape of container\n3. Gas - no fixed shape or volume",
+      "explanation": "The states of matter differ in their particle arrangement and movement, which gives them different properties.",
+      "marks": 3
+    },
+    {
+      "id": "E2",
+      "topic": "Atomic structure",
+      "question": "Name the three subatomic particles and state where they are found in an atom.",
+      "answer": "1. Protons - in nucleus\n2. Neutrons - in nucleus\n3. Electrons - in shells/energy levels around nucleus",
+      "explanation": "The nucleus contains protons and neutrons, while electrons orbit in shells around the nucleus.",
+      "marks": 3
+    },
+    {
+      "id": "E3",
+      "topic": "Periodic table",
+      "question": "What is the name given to elements in Group 1 of the periodic table?",
+      "answer": "Alkali metals",
+      "explanation": "Group 1 elements are called alkali metals because they form alkaline solutions when they react with water.",
+      "marks": 1
+    },
+    {
+      "id": "E4",
+      "topic": "Chemical changes",
+      "question": "State the color of universal indicator in an acidic solution.",
+      "answer": "Red",
+      "explanation": "Universal indicator turns red in acidic solutions (pH less than 7).",
+      "marks": 1
+    },
+    {
+      "id": "E5",
+      "topic": "Groups in the periodic table",
+      "question": "Name the elements in Group 0 of the periodic table.",
+      "answer": "Noble gases/Inert gases (helium, neon, argon, krypton, xenon, radon)",
+      "explanation": "Group 0 elements are called noble gases because they are unreactive due to their full outer shell of electrons.",
+      "marks": 2
+    },
+    {
+      "id": "E6",
+      "topic": "Separating mixtures",
+      "question": "What separation technique would you use to separate salt from rock salt?",
+      "answer": "Dissolve in water, filter to remove rock/sand, then evaporate the water",
+      "explanation": "This process uses solubility differences - salt dissolves in water while rock doesn't.",
+      "marks": 2
+    },
+    {
+      "id": "E7",
+      "topic": "Earth science",
+      "question": "State the main gas responsible for enhancing the greenhouse effect.",
+      "answer": "Carbon dioxide (CO₂)",
+      "explanation": "CO₂ is the main greenhouse gas produced by human activities, particularly burning fossil fuels.",
+      "marks": 1
+    },
+    {
+      "id": "E8",
+      "topic": "Bonding",
+      "question": "What type of bonding occurs in sodium chloride (table salt)?",
+      "answer": "Ionic bonding",
+      "explanation": "Ionic bonding occurs between metals (sodium) and non-metals (chlorine) where electrons are transferred.",
+      "marks": 1
+    }
+  ],
+  "total_marks": 14,
+  "recommended_time": "15 minutes"
+} 

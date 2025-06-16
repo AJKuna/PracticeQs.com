@@ -1,0 +1,121 @@
+{
+  "exam_board": "Edexcel",
+  "subject": "English Language",
+  "qualification": "GCSE",
+  "specification_code": "1EN0",
+  "components": [
+    {
+      "name": "Fiction and Imaginative Writing",
+      "paper": 1,
+      "skills": [
+        {
+          "name": "Reading",
+          "content": [
+            "Identify and interpret explicit and implicit information",
+            "Select and synthesise evidence",
+            "Explain, comment on and analyse writer's use of language",
+            "Compare writers' ideas and perspectives",
+            "Evaluate texts critically"
+          ]
+        },
+        {
+          "name": "Writing",
+          "content": [
+            "Write imaginative, creative and narrative texts",
+            "Communicate clearly and effectively",
+            "Organise information and ideas",
+            "Use range of vocabulary and sentence structures",
+            "Use accurate spelling and punctuation"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Non-fiction and Transactional Writing",
+      "paper": 2,
+      "skills": [
+        {
+          "name": "Reading",
+          "content": [
+            "Study 20th and 21st century non-fiction texts",
+            "Compare writers' ideas and perspectives",
+            "Analyse how writers achieve effects",
+            "Evaluate texts critically",
+            "Support interpretations with evidence"
+          ]
+        },
+        {
+          "name": "Writing",
+          "content": [
+            "Write for different purposes and audiences",
+            "Write formal and informal texts",
+            "Use appropriate tone and register",
+            "Structure texts for clarity and effect",
+            "Use accurate standard English"
+          ]
+        }
+      ]
+    }
+  ],
+  "assessment": {
+    "papers": [
+      {
+        "name": "Paper 1: Fiction and Imaginative Writing",
+        "duration": "1 hour 45 minutes",
+        "marks": 64,
+        "weighting": "40%",
+        "sections": [
+          {
+            "name": "Section A: Reading",
+            "content": "Study of unseen 19th century fiction text",
+            "marks": 24
+          },
+          {
+            "name": "Section B: Writing",
+            "content": "Choice of imaginative writing tasks",
+            "marks": 40
+          }
+        ]
+      },
+      {
+        "name": "Paper 2: Non-fiction and Transactional Writing",
+        "duration": "2 hours 5 minutes",
+        "marks": 96,
+        "weighting": "60%",
+        "sections": [
+          {
+            "name": "Section A: Reading",
+            "content": "Study of two linked unseen non-fiction texts",
+            "marks": 56
+          },
+          {
+            "name": "Section B: Writing",
+            "content": "Transactional writing task",
+            "marks": 40
+          }
+        ]
+      }
+    ],
+    "spoken_language": {
+      "name": "Spoken Language Endorsement",
+      "requirements": [
+        "Present information and ideas",
+        "Respond appropriately to questions",
+        "Use spoken Standard English",
+        "Listen and respond appropriately"
+      ],
+      "assessment": "Separately endorsed (Pass, Merit, Distinction)"
+    }
+  },
+  "assessment_objectives": {
+    "AO1": "Identify and interpret explicit and implicit information and ideas",
+    "AO2": "Explain, comment on and analyse how writers use language and structure",
+    "AO3": "Compare writers' ideas and perspectives across texts",
+    "AO4": "Evaluate texts critically and support with appropriate textual references",
+    "AO5": "Communicate clearly, effectively and imaginatively",
+    "AO6": "Use range of vocabulary and sentence structures for clarity, purpose and effect",
+    "AO7": "Demonstrate presentation skills in spoken language",
+    "AO8": "Listen and respond appropriately to spoken language",
+    "AO9": "Use spoken Standard English effectively"
+  }
+} 

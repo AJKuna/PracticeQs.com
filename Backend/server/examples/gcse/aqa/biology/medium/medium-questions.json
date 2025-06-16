@@ -1,0 +1,54 @@
+{
+  "questions": [
+    {
+      "question": "A student investigated the effect of temperature on the rate of photosynthesis in pondweed. The number of oxygen bubbles produced in one minute was counted at different temperatures.\n\nTemperature (°C): 10, 20, 30, 40, 50\nBubbles per minute: 12, 24, 36, 30, 8\n\na) Plot these results on a graph\nb) Explain the shape of the graph\nc) Suggest the optimum temperature for photosynthesis in this plant",
+      "marks": 6,
+      "topic": "Bioenergetics",
+      "answer": [
+        "a) Graph (2 marks):",
+        "• Correct axes with labels and units (1)",
+        "• Points plotted accurately with line of best fit (1)",
+        "",
+        "b) Shape explanation (3 marks):",
+        "• Rate increases from 10-30°C as enzymes work faster (1)",
+        "• Peak at 30°C shows optimum temperature (1)",
+        "• Rate decreases above 30°C as enzymes denature (1)",
+        "",
+        "c) Optimum temperature (1 mark):",
+        "• 30°C - shown by highest number of bubbles (1)"
+      ],
+      "explanation": "This question tests data handling skills and understanding of enzyme activity in photosynthesis."
+    },
+    {
+      "question": "Describe and explain how the body responds when blood glucose levels become too high.",
+      "marks": 6,
+      "topic": "Homeostasis and Response",
+      "answer": [
+        "Detection (2 marks):",
+        "• High blood glucose detected by pancreas (1)",
+        "• Beta cells respond (1)",
+        "",
+        "Response (2 marks):",
+        "• Insulin released into bloodstream (1)",
+        "• Insulin makes cells absorb more glucose (1)",
+        "",
+        "Effects (2 marks):",
+        "• Excess glucose converted to glycogen in liver (1)",
+        "• Blood glucose levels return to normal (1)"
+      ],
+      "explanation": "This question tests understanding of hormone action and negative feedback."
+    },
+    {
+      "question": "A student investigated osmosis using potato cylinders in different concentrations of sugar solution. Calculate the percentage change in mass for a potato cylinder that had:\nInitial mass = 4.2g\nFinal mass = 4.8g",
+      "marks": 4,
+      "topic": "Cell Biology",
+      "answer": [
+        "1. Recall formula: % change = (change in mass ÷ initial mass) × 100 (1)",
+        "2. Calculate change in mass: 4.8 - 4.2 = 0.6g (1)",
+        "3. Substitute into formula: (0.6 ÷ 4.2) × 100 (1)",
+        "4. Calculate correctly: 14.3% increase (1)"
+      ],
+      "explanation": "This question combines practical skills with mathematical calculations."
+    }
+  ]
+} 

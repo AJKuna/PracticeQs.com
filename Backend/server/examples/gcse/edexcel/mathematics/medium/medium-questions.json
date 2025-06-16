@@ -1,0 +1,55 @@
+{
+  "difficulty": "medium",
+  "questions": [
+    {
+      "id": "M1",
+      "topic": "Algebra",
+      "question": "Solve the quadratic equation: x² + 5x + 6 = 0",
+      "answer": "x = -2 or x = -3",
+      "explanation": "1. Factorize: x² + 5x + 6 = (x + 2)(x + 3)\n2. Set each bracket to zero: x + 2 = 0 or x + 3 = 0\n3. Solve: x = -2 or x = -3",
+      "marks": 3
+    },
+    {
+      "id": "M2",
+      "topic": "Geometry",
+      "question": "A triangle has sides of length 5cm and 12cm, and the included angle is 30°. Calculate the area of the triangle.",
+      "answer": "15 cm²",
+      "explanation": "Using the formula Area = ½ab sin C\nArea = ½ × 5 × 12 × sin 30°\n= ½ × 5 × 12 × 0.5\n= 15",
+      "marks": 3
+    },
+    {
+      "id": "M3",
+      "topic": "Number",
+      "question": "Calculate (2.4 × 10⁴) × (3 × 10⁻²), giving your answer in standard form.",
+      "answer": "7.2 × 10²",
+      "explanation": "1. Multiply numbers: 2.4 × 3 = 7.2\n2. Add powers: 10⁴ × 10⁻² = 10⁴⁻² = 10²\n3. Combine: 7.2 × 10²",
+      "marks": 3
+    },
+    {
+      "id": "M4",
+      "topic": "Statistics",
+      "question": "The table shows the number of pets owned by 50 students:\nPets: 0, 1, 2, 3, 4\nFrequency: 12, 15, 13, 8, 2\nCalculate the mean number of pets.",
+      "answer": "1.46 pets",
+      "explanation": "1. Multiply each value by its frequency:\n0×12 + 1×15 + 2×13 + 3×8 + 4×2 = 73\n2. Divide by total frequency:\n73 ÷ 50 = 1.46",
+      "marks": 4
+    },
+    {
+      "id": "M5",
+      "topic": "Probability",
+      "question": "A bag contains 3 red balls, 4 blue balls, and 5 green balls. Two balls are drawn without replacement. Find the probability of drawing two different colored balls.",
+      "answer": "0.7",
+      "explanation": "1. Total probability = (3×9 + 4×8 + 5×7) - (3×2 + 4×3 + 5×4)\n2. = 126 - 42 = 84\n3. Total possible outcomes = 12×11 = 132\n4. Probability = 84/120 = 0.7",
+      "marks": 4
+    },
+    {
+      "id": "M6",
+      "topic": "Algebra",
+      "question": "The nth term of a sequence is 3n² - 2n. Find the 10th term of the sequence.",
+      "answer": "280",
+      "explanation": "Substitute n = 10:\n3(10)² - 2(10)\n= 3(100) - 20\n= 300 - 20\n= 280",
+      "marks": 3
+    }
+  ],
+  "total_marks": 20,
+  "recommended_time": "25 minutes"
+} 

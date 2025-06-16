@@ -1,0 +1,145 @@
+{
+  "exam_board": "AQA",
+  "qualification": "GCSE",
+  "subject": "Biology",
+  "specification_code": "8461",
+  "command_words": [
+    "state", "describe", "explain", "compare", "evaluate", "calculate", "determine",
+    "predict", "justify", "analyse", "suggest", "deduce", "outline", "identify"
+  ],
+  "topics": [
+    {
+      "name": "4.1 Cell biology",
+      "subtopics": [
+        {
+          "code": "4.1.1",
+          "title": "Cell structure",
+          "content": [
+            "Eukaryotic cells (animal and plant) have a cell membrane, cytoplasm and genetic material enclosed in a nucleus",
+            "Plant and algal cells also have a cell wall, chloroplasts and vacuoles",
+            "Bacteria are prokaryotic cells, much smaller than eukaryotic cells",
+            "Bacterial cells have a cell wall, cell membrane, cytoplasm and circular DNA, but no nucleus",
+            "DNA is genetic material that determines cell function and characteristics",
+            "Mitochondria are sites of aerobic respiration",
+            "Chloroplasts are sites of photosynthesis",
+            "Cell wall is made of cellulose in plants",
+            "Vacuoles contain cell sap in plant cells"
+          ],
+          "required_skills": [
+            "Use microscopes to observe and draw cells",
+            "Calculate magnification and cell size",
+            "Label diagrams of animal and plant cells",
+            "Explain differences between animal and plant cells",
+            "Explain differences between eukaryotic and prokaryotic cells",
+            "(HT only) Explain how cell structures are related to their functions"
+          ],
+          "mathematical_skills": [
+            "Calculate magnification",
+            "Convert between units (mm, μm, nm)",
+            "Calculate actual size from magnified images"
+          ]
+        },
+        {
+          "code": "4.1.2",
+          "title": "Cell division",
+          "content": [
+            "Cells divide by mitosis during growth and repair",
+            "Mitosis produces two identical daughter cells",
+            "Before mitosis, DNA replicates and copies are made",
+            "During mitosis chromosomes line up and separate",
+            "Cell cycle includes growth, DNA synthesis, and mitosis",
+            "Stem cells are undifferentiated cells",
+            "Stem cells can differentiate into specialized cells",
+            "Therapeutic cloning uses stem cells to treat conditions"
+          ],
+          "required_skills": [
+            "Describe stages of mitosis",
+            "Explain importance of mitosis in growth and repair",
+            "Describe function of stem cells",
+            "Evaluate use of stem cells in medicine",
+            "(HT only) Explain process of cell differentiation"
+          ],
+          "mathematical_skills": [
+            "Calculate percentage change in cell numbers",
+            "Use standard form for very large/small numbers"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "4.2 Organisation",
+      "subtopics": [
+        {
+          "code": "4.2.1",
+          "title": "Principles of organisation",
+          "content": [
+            "Cells are the basic building blocks of all living organisms",
+            "Cells form tissues, tissues form organs, organs form organ systems",
+            "Digestive system is an example of an organ system",
+            "Heart and blood vessels form the circulatory system",
+            "Organisational hierarchy: cells → tissues → organs → organ systems → organism"
+          ],
+          "required_skills": [
+            "Explain levels of organisation in living things",
+            "Describe functions of major organ systems",
+            "Link cell types to tissue function",
+            "Explain how organ systems work together"
+          ],
+          "mathematical_skills": [
+            "Use ratios and percentages",
+            "Calculate surface area to volume ratios"
+          ]
+        },
+        {
+          "code": "4.2.2",
+          "title": "Animal tissues, organs and organ systems",
+          "content": [
+            "The heart is made of muscle tissue and pumps blood around body",
+            "Blood carries oxygen and nutrients to cells",
+            "Blood contains red blood cells, white blood cells, platelets and plasma",
+            "Blood vessels include arteries, veins and capillaries",
+            "Lungs are organs for gas exchange",
+            "Digestive system includes mouth, stomach, intestines, liver and pancreas",
+            "Enzymes help break down food molecules"
+          ],
+          "required_skills": [
+            "Identify different types of blood cells",
+            "Explain how enzymes work",
+            "Describe process of digestion",
+            "Calculate heart rate and stroke volume",
+            "(HT only) Calculate cardiac output"
+          ],
+          "mathematical_skills": [
+            "Plot graphs of enzyme activity",
+            "Calculate means and ranges",
+            "Interpret data about organ systems"
+          ]
+        }
+      ]
+    }
+  ],
+  "assessment_objectives": {
+    "AO1": "Demonstrate knowledge and understanding of scientific ideas, scientific techniques and procedures",
+    "AO2": "Apply knowledge and understanding of scientific ideas, scientific enquiry, techniques and procedures",
+    "AO3": "Analyse information and ideas to interpret and evaluate, make judgements and draw conclusions, develop and improve experimental procedures"
+  },
+  "mathematical_requirements": [
+    "Arithmetic and numerical computation",
+    "Handling data",
+    "Algebra",
+    "Graphs",
+    "Geometry and trigonometry"
+  ],
+  "practical_skills": [
+    "Following procedures",
+    "Using microscopes",
+    "Preparing slides",
+    "Making observations",
+    "Taking measurements",
+    "Recording results",
+    "Presenting data",
+    "Analysing results",
+    "Drawing conclusions",
+    "Evaluating methods"
+  ]
+} 

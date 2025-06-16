@@ -1,0 +1,28 @@
+{
+  "questions": [
+    {
+      "question": "List four things about the weather mentioned in this extract.",
+      "marks": 4,
+      "answer": [
+        "1. It was raining heavily",
+        "2. The wind was howling",
+        "3. Dark clouds covered the sky",
+        "4. Thunder could be heard in the distance"
+      ],
+      "explanation": "This question tests your ability to identify and retrieve explicit information from the text. You need to find four separate pieces of information about the weather."
+    },
+    {
+      "question": "How does the writer use language to describe the character's fear?",
+      "marks": 8,
+      "extract": "Sarah's heart pounded against her chest like a drum, her hands trembling as she reached for the door handle. The shadows seemed to dance around her, taunting her with every step she took.",
+      "answer": "The writer uses several language techniques to convey fear:\n1. Simile: 'heart pounded against her chest like a drum' shows the intensity of her fear through her physical reaction\n2. Physical description: 'hands trembling' demonstrates her nervous state\n3. Personification: 'shadows seemed to dance' and 'taunting her' brings the environment to life in a threatening way",
+      "explanation": "This question assesses your ability to analyze language techniques and their effects. Focus on identifying specific techniques and explaining how they create the feeling of fear."
+    },
+    {
+      "question": "You now need to think about the whole of the source. How has the writer structured the text to interest you as a reader?",
+      "marks": 8,
+      "answer": "The writer structures the text by:\n1. Opening with an attention-grabbing weather description\n2. Gradually building tension through shorter paragraphs\n3. Using flashbacks to reveal important background information\n4. Ending with a cliff-hanger to maintain reader interest",
+      "explanation": "This question tests your understanding of structural features. Look for how the text begins, develops, and ends, and how information is revealed to the reader."
+    }
+  ]
+} 

@@ -1,0 +1,165 @@
+{
+  "exam_board": "Edexcel",
+  "subject": "Religious Studies",
+  "qualification": "GCSE",
+  "specification_code": "1RB0",
+  "papers": [
+    {
+      "name": "Paper 1: Area of Study 1 – Religion and Ethics",
+      "topics": [
+        {
+          "name": "Christian Beliefs",
+          "subtopics": [
+            "Nature of God",
+            "Trinity",
+            "Creation",
+            "Incarnation",
+            "Last Days of Jesus",
+            "Salvation",
+            "Afterlife",
+            "Problem of evil"
+          ]
+        },
+        {
+          "name": "Marriage and the Family",
+          "subtopics": [
+            "Christian marriage",
+            "Sexual relationships",
+            "Family life",
+            "Support for families",
+            "Contraception",
+            "Divorce",
+            "Gender equality",
+            "Same-sex relationships"
+          ]
+        },
+        {
+          "name": "Living the Christian Life",
+          "subtopics": [
+            "Worship",
+            "Sacraments",
+            "Prayer",
+            "Pilgrimage",
+            "Christian celebrations",
+            "Church in community",
+            "Mission",
+            "Evangelism"
+          ]
+        },
+        {
+          "name": "Matters of Life and Death",
+          "subtopics": [
+            "Origins of universe",
+            "Value of human life",
+            "Abortion",
+            "Euthanasia",
+            "Death and afterlife",
+            "Environmental issues",
+            "Animal rights",
+            "Scientific advances"
+          ]
+        }
+      ],
+      "assessment": {
+        "duration": "1 hour 45 minutes",
+        "marks": 102,
+        "weighting": "50%"
+      }
+    },
+    {
+      "name": "Paper 2: Area of Study 2 – Religion, Peace and Conflict",
+      "topics": [
+        {
+          "name": "Muslim Beliefs",
+          "subtopics": [
+            "Six Beliefs",
+            "Five Roots of Usul ad-Din",
+            "Nature of Allah",
+            "Angels",
+            "Predestination",
+            "Life after death",
+            "Prophethood",
+            "Holy books"
+          ]
+        },
+        {
+          "name": "Crime and Punishment",
+          "subtopics": [
+            "Justice",
+            "Crime",
+            "Good and evil",
+            "Punishment",
+            "Aims of punishment",
+            "Forgiveness",
+            "Treatment of criminals",
+            "Death penalty"
+          ]
+        },
+        {
+          "name": "Living the Muslim Life",
+          "subtopics": [
+            "Ten Obligatory Acts",
+            "Five Pillars",
+            "Jihad",
+            "Festivals",
+            "Dietary laws",
+            "Dress",
+            "Family life",
+            "Muslim community"
+          ]
+        },
+        {
+          "name": "Peace and Conflict",
+          "subtopics": [
+            "Peace",
+            "Conflict",
+            "Pacifism",
+            "Just War Theory",
+            "Holy War",
+            "Weapons of mass destruction",
+            "Terrorism",
+            "Reconciliation"
+          ]
+        }
+      ],
+      "assessment": {
+        "duration": "1 hour 45 minutes",
+        "marks": 102,
+        "weighting": "50%"
+      }
+    }
+  ],
+  "assessment_objectives": {
+    "AO1": {
+      "description": "Demonstrate knowledge and understanding of religion and beliefs including beliefs, practices and sources of authority",
+      "weighting": "50%"
+    },
+    "AO2": {
+      "description": "Analyse and evaluate aspects of religion and belief, including their significance and influence",
+      "weighting": "50%"
+    }
+  },
+  "skills_required": {
+    "knowledge_and_understanding": [
+      "Religious beliefs",
+      "Religious practices",
+      "Sources of wisdom",
+      "Religious teachings",
+      "Theological terms"
+    ],
+    "analysis_and_evaluation": [
+      "Different perspectives",
+      "Ethical reasoning",
+      "Scriptural interpretation",
+      "Contemporary application",
+      "Justified arguments"
+    ],
+    "communication": [
+      "Clear expression",
+      "Religious vocabulary",
+      "Logical structure",
+      "Evidence use",
+      "Balanced discussion"
+    ]
+  }
+} 

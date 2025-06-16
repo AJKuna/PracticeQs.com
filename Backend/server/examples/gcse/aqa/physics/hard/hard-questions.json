@@ -1,0 +1,62 @@
+{
+  "questions": [
+    {
+      "question": "A ball is thrown horizontally from a cliff at 15 m/s. The cliff is 80m high.\na) Calculate the time taken for the ball to reach the ground\nb) Calculate the horizontal distance traveled\nc) Draw a velocity-time graph for both horizontal and vertical motion\nd) Calculate the final velocity of the ball when it hits the ground",
+      "marks": 8,
+      "topic": "Forces",
+      "answer": [
+        "a) Time to ground (2 marks):",
+        "1. Use s = ut + ½at², where s = 80m, u = 0 (vertical), a = 9.81 m/s² (1)",
+        "2. 80 = 0 + ½×9.81×t², so t = 4.04s (1)",
+        "",
+        "b) Horizontal distance (2 marks):",
+        "1. Use horizontal velocity × time (1)",
+        "2. 15 × 4.04 = 60.6m (1)",
+        "",
+        "c) Graphs (2 marks):",
+        "1. Horizontal: straight line at 15 m/s (1)",
+        "2. Vertical: straight line starting at 0, gradient = 9.81 m/s² (1)",
+        "",
+        "d) Final velocity (2 marks):",
+        "1. Use Pythagoras: v = √(15² + 39.6²) (1)",
+        "2. v = 42.3 m/s (1)"
+      ],
+      "explanation": "This question combines multiple physics concepts: projectile motion, graphs, vectors, and calculations."
+    },
+    {
+      "question": "A mass spectrometer contains these components:\n- Ionisation chamber\n- Electric field\n- Magnetic field\n- Detector\nExplain how these components work together to separate ions of different masses. Include relevant equations in your answer.",
+      "marks": 6,
+      "topic": "Atomic structure",
+      "answer": [
+        "1. Ionisation chamber creates positive ions by removing electrons (1)",
+        "2. Electric field accelerates ions, giving them kinetic energy (1)",
+        "3. Kinetic energy = work done by electric field: ½mv² = eV (1)",
+        "4. Magnetic field creates circular path: r = mv/BQ (1)",
+        "5. Ions with different masses follow different radius paths (1)",
+        "6. Detector measures position/radius to determine mass (1)"
+      ],
+      "explanation": "This question tests understanding of electric and magnetic fields, particle physics, and the ability to explain complex processes."
+    },
+    {
+      "question": "A nuclear power station produces 1.5 GW of power. The efficiency of the power station is 35%.\na) Calculate the rate of nuclear fission reactions needed to produce this power if each uranium-235 fission releases 3.2 × 10⁻¹¹ J\nb) Calculate the mass of uranium-235 needed per day\nc) Explain why the efficiency is so low and suggest two ways it could be improved",
+      "marks": 8,
+      "topic": "Atomic structure",
+      "answer": [
+        "a) Rate of fission (3 marks):",
+        "1. Total power needed = 1.5 × 10⁹/0.35 = 4.29 × 10⁹ W (1)",
+        "2. Rate = power/energy per fission (1)",
+        "3. Rate = 4.29 × 10⁹/3.2 × 10⁻¹¹ = 1.34 × 10²⁰ reactions/s (1)",
+        "",
+        "b) Mass per day (3 marks):",
+        "1. Number of atoms = rate × seconds in day (1)",
+        "2. Mass = (atoms × mass of U-235)/Avogadro's number (1)",
+        "3. = 5.4 kg per day (1)",
+        "",
+        "c) Efficiency explanation (2 marks):",
+        "1. Most energy lost as heat in cooling towers (1)",
+        "2. Improvements: better insulation, combined heat and power systems (1)"
+      ],
+      "explanation": "This question combines nuclear physics with real-world applications and requires handling of large numbers and unit conversions."
+    }
+  ]
+} 

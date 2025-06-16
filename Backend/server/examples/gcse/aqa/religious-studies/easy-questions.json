@@ -1,0 +1,54 @@
+{
+  "questions": [
+    {
+      "question": "Explain two Christian beliefs about the nature of God.",
+      "marks": 4,
+      "topic": "Christianity: Beliefs and teachings",
+      "answer": [
+        "First belief: God is omnipotent/all-powerful (1) which means He can do anything, as shown in the creation story (1)",
+        "Second belief: God is omnibenevolent/all-loving (1) which means He loves and cares for all His creation equally (1)"
+      ],
+      "explanation": "This question tests knowledge of Christian beliefs about God's nature. Each belief needs a description and development for full marks."
+    },
+    {
+      "question": "Explain two ways in which Muslims carry out Salah.",
+      "marks": 4,
+      "topic": "Islam: Practices",
+      "answer": [
+        "First way: Muslims perform ritual washing/wudu before prayer (1) to ensure they are physically and spiritually clean (1)",
+        "Second way: Muslims face the direction of the Kabah/qibla (1) to show unity with Muslims worldwide/following Prophet Muhammad's example (1)"
+      ],
+      "explanation": "This question tests knowledge of Islamic prayer practices. Each way needs a description and explanation for full marks."
+    },
+    {
+      "question": "'Divorce is always wrong.' Evaluate this statement.",
+      "marks": 12,
+      "topic": "Theme A: Relationships and families",
+      "answer": [
+        "Arguments supporting the statement:",
+        "• Some Christians believe marriage is a sacred bond that should not be broken",
+        "• Jesus taught that divorce was against God's original plan",
+        "• Breaking marriage vows can harm families and children",
+        "",
+        "Arguments against the statement:",
+        "• Some religious believers accept divorce in cases of adultery",
+        "• Modern interpretations recognize that some marriages become harmful",
+        "• Both Christianity and Islam allow divorce in certain circumstances",
+        "",
+        "Conclusion:",
+        "While religious teachings generally discourage divorce, most religions accept it may be necessary in some situations to prevent greater harm."
+      ],
+      "explanation": "This evaluation question requires consideration of different religious and moral viewpoints, supported by religious teachings and reaching a justified conclusion."
+    },
+    {
+      "question": "Explain two religious beliefs about environmental sustainability.",
+      "marks": 5,
+      "topic": "Theme B: Religion and life",
+      "answer": [
+        "First belief: Humans have a duty of stewardship/khilafah (1) which means they must protect and care for God's creation (2)",
+        "Second belief: The world is sacred as God created it (1) so humans should not exploit or damage it (1)"
+      ],
+      "explanation": "This question tests understanding of religious attitudes to environmental issues. Each belief needs explanation and religious teaching for full marks."
+    }
+  ]
+} 

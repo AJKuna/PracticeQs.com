@@ -1,0 +1,47 @@
+{
+  "difficulty": "hard",
+  "questions": [
+    {
+      "id": "H1",
+      "topic": "Quantitative chemistry",
+      "question": "A student reacts 2.76g of sodium hydroxide with excess sulfuric acid. The equation for the reaction is:\n2NaOH + H₂SO₄ → Na₂SO₄ + 2H₂O\nCalculate the theoretical yield of sodium sulfate in grams. (Ar: Na=23, O=16, H=1, S=32)",
+      "answer": "1. Mr NaOH = 23 + 16 + 1 = 40\n2. Mr Na₂SO₄ = (2 × 23) + 32 + (4 × 16) = 142\n3. Moles NaOH = 2.76/40 = 0.069 moles\n4. Ratio NaOH:Na₂SO₄ = 2:1, so moles Na₂SO₄ = 0.069/2 = 0.0345\n5. Mass Na₂SO₄ = 0.0345 × 142 = 4.90g",
+      "explanation": "This multi-step calculation requires understanding of moles, balanced equations, and stoichiometry.",
+      "marks": 6
+    },
+    {
+      "id": "H2",
+      "topic": "Dynamic equilibria",
+      "question": "The Haber process produces ammonia according to the equation:\nN₂(g) + 3H₂(g) ⇌ 2NH₃(g)     ΔH = -92kJ/mol\n\nExplain in detail how the following conditions affect both yield and rate, and why the industrial conditions (450°C, 200 atmospheres pressure, iron catalyst) are used:\na) Temperature\nb) Pressure\nc) Catalyst",
+      "answer": "Temperature:\n1. Reaction is exothermic, so lower temperature increases yield\n2. But lower temperature decreases rate\n3. 450°C is compromise between rate and yield\n\nPressure:\n1. High pressure increases yield (fewer gas molecules on right)\n2. High pressure increases rate (more frequent collisions)\n3. 200 atm is compromise due to cost of higher pressures\n\nCatalyst:\n1. Iron catalyst provides alternative reaction pathway\n2. Lower activation energy so increases rate\n3. No effect on position of equilibrium/yield\n4. Iron chosen as cheap and effective",
+      "explanation": "This tests understanding of Le Chatelier's Principle, kinetics, and industrial compromises.",
+      "marks": 9
+    },
+    {
+      "id": "H3",
+      "topic": "Organic chemistry",
+      "question": "Draw the displayed formulae for:\na) The first four members of the alkene homologous series\nb) The products when the second member (propene) undergoes addition polymerisation\nc) The products when the second member reacts with bromine\n\nName all products and explain the type of reaction in each case.",
+      "answer": "a) Alkenes:\n- Ethene: CH₂=CH₂\n- Propene: CH₃-CH=CH₂\n- Butene: CH₃-CH₂-CH=CH₂\n- Pentene: CH₃-CH₂-CH₂-CH=CH₂\n\nb) Polypropene: -(CH₂-CH(CH₃))n-\nAddition polymerisation - many molecules join through double bonds\n\nc) 1,2-dibromopropane: CH₃-CHBr-CH₂Br\nAddition reaction - Br₂ adds across double bond",
+      "explanation": "Tests understanding of organic chemistry, functional groups, and reaction types.",
+      "marks": 8
+    },
+    {
+      "id": "H4",
+      "topic": "Quantitative analysis",
+      "question": "25.0cm³ of sulfuric acid was neutralised by 35.0cm³ of 0.500M sodium hydroxide solution.\nCalculate:\na) The number of moles of NaOH used\nb) The number of moles of H₂SO₄ reacted\nc) The concentration of the H₂SO₄ in mol/dm³\n\n2NaOH + H₂SO₄ → Na₂SO₄ + 2H₂O",
+      "answer": "a) Moles NaOH = concentration × volume in dm³\n   = 0.500 × (35.0/1000) = 0.0175 moles\n\nb) From equation, 2 moles NaOH : 1 mole H₂SO₄\n   Moles H₂SO₄ = 0.0175/2 = 0.00875 moles\n\nc) Concentration = moles/volume in dm³\n   = 0.00875/(25.0/1000)\n   = 0.350 mol/dm³",
+      "explanation": "Tests understanding of titration calculations, concentration and moles.",
+      "marks": 6
+    },
+    {
+      "id": "H5",
+      "topic": "Energy changes",
+      "question": "Using bond energies, calculate the overall energy change for the complete combustion of methane:\nCH₄ + 2O₂ → CO₂ + 2H₂O\n\nBond energies (kJ/mol):\nC-H = 413\nO=O = 498\nC=O = 799\nO-H = 463",
+      "answer": "1. Energy to break bonds:\n   CH₄: 4 × C-H = 4 × 413 = 1652\n   O₂: 2 × O=O = 2 × 498 = 996\n   Total = 2648 kJ/mol\n\n2. Energy released forming bonds:\n   CO₂: 2 × C=O = 2 × 799 = 1598\n   H₂O: 4 × O-H = 4 × 463 = 1852\n   Total = 3450 kJ/mol\n\n3. Overall change = 2648 - 3450 = -802 kJ/mol\n   Negative sign means exothermic reaction",
+      "explanation": "Tests understanding of bond energy calculations and exothermic/endothermic reactions.",
+      "marks": 6
+    }
+  ],
+  "total_marks": 35,
+  "recommended_time": "45 minutes"
+} 

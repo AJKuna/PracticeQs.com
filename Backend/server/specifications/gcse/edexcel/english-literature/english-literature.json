@@ -1,0 +1,133 @@
+{
+  "exam_board": "Edexcel",
+  "subject": "English Literature",
+  "qualification": "GCSE",
+  "specification_code": "1ET0",
+  "components": [
+    {
+      "name": "Shakespeare and Post-1914 Literature",
+      "paper": 1,
+      "content": {
+        "shakespeare": {
+          "texts": [
+            "Macbeth",
+            "The Tempest",
+            "Romeo and Juliet",
+            "Much Ado About Nothing",
+            "Twelfth Night",
+            "The Merchant of Venice"
+          ],
+          "skills": [
+            "Character analysis",
+            "Theme exploration",
+            "Language analysis",
+            "Context understanding",
+            "Structure analysis"
+          ]
+        },
+        "post_1914": {
+          "texts": [
+            "An Inspector Calls",
+            "Animal Farm",
+            "Lord of the Flies",
+            "The Woman in Black",
+            "The Curious Incident of the Dog in the Night-time"
+          ],
+          "skills": [
+            "Modern prose/drama analysis",
+            "Contemporary themes",
+            "Writer's craft",
+            "Social/historical context"
+          ]
+        }
+      }
+    },
+    {
+      "name": "19th Century Novel and Poetry",
+      "paper": 2,
+      "content": {
+        "19th_century": {
+          "texts": [
+            "A Christmas Carol",
+            "Jane Eyre",
+            "Great Expectations",
+            "Dr Jekyll and Mr Hyde",
+            "Pride and Prejudice"
+          ],
+          "skills": [
+            "Victorian context",
+            "Gothic elements",
+            "Social commentary",
+            "Character development",
+            "Narrative techniques"
+          ]
+        },
+        "poetry": {
+          "collections": [
+            "Relationships",
+            "Conflict",
+            "Time and Place"
+          ],
+          "skills": [
+            "Poetic techniques",
+            "Comparative analysis",
+            "Theme exploration",
+            "Context understanding",
+            "Unseen poetry analysis"
+          ]
+        }
+      }
+    }
+  ],
+  "assessment": {
+    "papers": [
+      {
+        "name": "Paper 1: Shakespeare and Post-1914 Literature",
+        "duration": "1 hour 45 minutes",
+        "marks": 80,
+        "weighting": "50%",
+        "sections": [
+          {
+            "name": "Section A: Shakespeare",
+            "marks": 40,
+            "content": "One essay question on chosen play"
+          },
+          {
+            "name": "Section B: Post-1914 Literature",
+            "marks": 40,
+            "content": "One essay question on chosen text"
+          }
+        ]
+      },
+      {
+        "name": "Paper 2: 19th Century Novel and Poetry",
+        "duration": "2 hours 15 minutes",
+        "marks": 80,
+        "weighting": "50%",
+        "sections": [
+          {
+            "name": "Section A: 19th Century Novel",
+            "marks": 40,
+            "content": "One essay question on chosen novel"
+          },
+          {
+            "name": "Section B: Poetry",
+            "marks": 20,
+            "content": "Comparison of two poems"
+          },
+          {
+            "name": "Section C: Unseen Poetry",
+            "marks": 20,
+            "content": "Analysis of unseen poems"
+          }
+        ]
+      }
+    ]
+  },
+  "assessment_objectives": {
+    "AO1": "Read, understand and respond to texts, maintaining a critical style",
+    "AO2": "Analyse language, form and structure used by writers to create meanings",
+    "AO3": "Show understanding of relationships between texts and contexts",
+    "AO4": "Use range of vocabulary and sentence structures for clarity, purpose and effect"
+  }
+} 

@@ -1,0 +1,209 @@
+{
+  "exam_board": "AQA",
+  "qualification": "GCSE",
+  "subject": "Religious Studies",
+  "specification_code": "8062",
+  "command_words": [
+    "explain", "evaluate", "analyse", "discuss", "compare",
+    "contrast", "justify", "assess", "describe", "outline"
+  ],
+  "topics": [
+    {
+      "name": "Component 1: The study of religions: beliefs, teachings and practices",
+      "subtopics": [
+        {
+          "code": "1.1",
+          "title": "Christianity",
+          "content": [
+            "Beliefs and teachings",
+            "Nature of God",
+            "Creation",
+            "Jesus Christ",
+            "Salvation",
+            "Afterlife",
+            "Practices",
+            "Worship",
+            "Sacraments",
+            "Prayer",
+            "Pilgrimage",
+            "Festivals",
+            "Role of church",
+            "Mission and evangelism"
+          ],
+          "required_skills": [
+            "Explain religious beliefs",
+            "Analyse religious teachings",
+            "Evaluate religious practices",
+            "Use sacred texts",
+            "Make connections between beliefs and practices"
+          ],
+          "key_concepts": [
+            "Trinity",
+            "Incarnation",
+            "Atonement",
+            "Resurrection",
+            "Grace and salvation"
+          ]
+        },
+        {
+          "code": "1.2",
+          "title": "Islam",
+          "content": [
+            "Beliefs and teachings",
+            "Oneness of God (Tawhid)",
+            "Nature of Allah",
+            "Angels",
+            "Predestination",
+            "Life after death",
+            "Prophethood",
+            "Holy books",
+            "Practices",
+            "Five Pillars",
+            "Prayer (Salah)",
+            "Fasting (Sawm)",
+            "Charity (Zakah)",
+            "Pilgrimage (Hajj)"
+          ],
+          "required_skills": [
+            "Explain Islamic beliefs",
+            "Analyse Islamic teachings",
+            "Evaluate Islamic practices",
+            "Use Qur'anic references",
+            "Make connections between beliefs and practices"
+          ],
+          "key_concepts": [
+            "Submission",
+            "Ummah",
+            "Jihad",
+            "Shariah",
+            "Mosque"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Component 2: Thematic studies",
+      "subtopics": [
+        {
+          "code": "2.1",
+          "title": "Theme A: Relationships and families",
+          "content": [
+            "Sex, marriage and divorce",
+            "Families and gender equality",
+            "Sexual relationships",
+            "Contraception",
+            "Same-sex relationships",
+            "Gender roles",
+            "Religious attitudes"
+          ],
+          "required_skills": [
+            "Analyse religious views",
+            "Compare different perspectives",
+            "Evaluate ethical arguments",
+            "Apply religious teachings",
+            "Make reasoned judgements"
+          ]
+        },
+        {
+          "code": "2.2",
+          "title": "Theme B: Religion and life",
+          "content": [
+            "Origins of universe",
+            "Value of world",
+            "Environment",
+            "Animal rights",
+            "Origins of human life",
+            "Abortion",
+            "Euthanasia",
+            "Death and afterlife"
+          ],
+          "required_skills": [
+            "Evaluate ethical issues",
+            "Apply religious teachings",
+            "Analyse different viewpoints",
+            "Make moral judgements",
+            "Use religious arguments"
+          ]
+        },
+        {
+          "code": "2.3",
+          "title": "Theme D: Religion, peace and conflict",
+          "content": [
+            "Violence and conflict",
+            "Peace and justice",
+            "Forgiveness and reconciliation",
+            "Terrorism",
+            "War",
+            "Nuclear weapons",
+            "Pacifism",
+            "Just war theory"
+          ],
+          "required_skills": [
+            "Analyse causes of conflict",
+            "Evaluate peace-making",
+            "Apply religious teachings",
+            "Compare attitudes to war",
+            "Make ethical judgements"
+          ]
+        }
+      ]
+    }
+  ],
+  "assessment_objectives": {
+    "AO1": "Demonstrate knowledge and understanding of religions and beliefs, practices and sources of wisdom and authority",
+    "AO2": "Analyse and evaluate aspects of religion and belief, including their significance and influence"
+  },
+  "religious_skills": {
+    "knowledge_and_understanding": [
+      "Religious beliefs",
+      "Religious practices",
+      "Sources of wisdom",
+      "Religious teachings",
+      "Religious language"
+    ],
+    "analysis_and_evaluation": [
+      "Different perspectives",
+      "Religious arguments",
+      "Ethical reasoning",
+      "Critical thinking",
+      "Making judgements"
+    ],
+    "application": [
+      "Contemporary issues",
+      "Personal response",
+      "Religious teachings",
+      "Moral decisions",
+      "Ethical dilemmas"
+    ]
+  },
+  "exam_structure": {
+    "paper_1": {
+      "title": "The study of religions: beliefs, teachings and practices",
+      "duration": "1 hour 45 minutes",
+      "marks": 96,
+      "percentage": 50
+    },
+    "paper_2": {
+      "title": "Thematic studies",
+      "duration": "1 hour 45 minutes",
+      "marks": 96,
+      "percentage": 50
+    }
+  },
+  "sources_of_wisdom": {
+    "christianity": [
+      "Bible",
+      "Creeds",
+      "Church teachings",
+      "Religious leaders",
+      "Christian traditions"
+    ],
+    "islam": [
+      "Qur'an",
+      "Hadith",
+      "Sunnah",
+      "Shariah law",
+      "Islamic scholars"
+    ]
+  }
+} 

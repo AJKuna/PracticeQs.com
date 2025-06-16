@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "question": "Lee el siguiente texto sobre el cambio climático y responde a las preguntas en español:\n\n[Texto sobre iniciativas medioambientales en España]\n\n1. ¿Qué medidas específicas ha tomado el gobierno español para reducir las emisiones de carbono?\n2. Explica dos ventajas y dos desventajas de estas iniciativas para la economía local.\n3. ¿Hasta qué punto crees que estas medidas son efectivas? Justifica tu respuesta.",
+      "topic": "Global issues",
+      "marks": 15,
+      "answer": [
+        "1. Medidas gubernamentales (5 marks):",
+        "- Inversión en energías renovables",
+        "- Restricciones de tráfico en centros urbanos",
+        "- Incentivos para vehículos eléctricos",
+        "",
+        "2. Ventajas y desventajas (5 marks):",
+        "Ventajas:",
+        "- Creación de empleos verdes",
+        "- Mejora de la calidad del aire",
+        "Desventajas:",
+        "- Costos iniciales altos",
+        "- Impacto en negocios tradicionales",
+        "",
+        "3. Evaluación de efectividad (5 marks):",
+        "- Análisis de datos de reducción de emisiones",
+        "- Comparación con objetivos establecidos",
+        "- Consideración de alternativas"
+      ],
+      "explanation": "This question tests reading comprehension, analytical skills, and ability to express complex opinions in Spanish."
+    },
+    {
+      "question": "Traduce el siguiente párrafo al español:\n\n'If I had studied harder last year, I would have passed my exams with better grades. Next year, I'm going to create a study schedule and join a study group. My parents have told me that they will help me find a tutor if I need one.'",
+      "topic": "Grammar and translation",
+      "marks": 12,
+      "answer": "Si hubiera estudiado más el año pasado, habría aprobado mis exámenes con mejores notas. El año que viene, voy a crear un horario de estudio y unirme a un grupo de estudio. Mis padres me han dicho que me ayudarán a encontrar un tutor si lo necesito.",
+      "explanation": "Tests multiple complex grammar structures: pluperfect subjunctive, conditional perfect, future tense, present perfect, and 'if' clauses."
+    },
+    {
+      "question": "Escribe un artículo de 150 palabras para una revista juvenil sobre el impacto de las redes sociales en las relaciones personales. Incluye:\n- Ventajas y desventajas\n- Tu experiencia personal\n- Consejos para un uso saludable\n- Predicciones para el futuro",
+      "topic": "Technology in everyday life",
+      "marks": 16,
+      "answer": [
+        "Content (8 marks):",
+        "- Balanced discussion of advantages/disadvantages",
+        "- Relevant personal examples",
+        "- Well-reasoned advice",
+        "- Thoughtful predictions",
+        "",
+        "Language (8 marks):",
+        "- Range of tenses",
+        "- Complex structures",
+        "- Topic-specific vocabulary",
+        "- Coherent arguments",
+        "",
+        "Example opening:",
+        "\"En la era digital, las redes sociales han transformado fundamentalmente la manera en que nos relacionamos...\"",
+        "",
+        "Key phrases to include:",
+        "- Por un lado... por otro lado",
+        "- A mi modo de ver",
+        "- Es fundamental que",
+        "- De cara al futuro"
+      ],
+      "explanation": "This question tests extended writing skills, requiring complex language structures and well-developed arguments."
+    }
+  ]
+} 
