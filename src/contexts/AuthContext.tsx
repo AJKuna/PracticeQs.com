@@ -13,7 +13,8 @@ interface AuthContextType {
   signUp: (email: string, password: string, fullName: string) => Promise<void>;
   signInWithGoogle: () => Promise<void>;
   signOut: () => Promise<void>;
-  refreshProfile: () => Promise<void>;
+  resetPassword: (email: string) => Promise<void>;
+  refreshProfile: (userToUse?: User) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -35,7 +36,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
       if (fetchError && fetchError.code !== 'PGRST116') {
         // PGRST116 is "not found" error, which is expected for new users
-        console.error('Error fetching profile:', fetchError);
+        console.error('❌ Error fetching profile:', fetchError);
         return;
       }
 
@@ -51,9 +52,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             .eq('id', authUser.id);
 
           if (updateError) {
-            console.error('Error updating profile email:', updateError);
-          } else {
-            console.log('✅ Profile email updated:', authUser.email);
+            console.error('❌ Error updating profile email:', updateError);
           }
         }
       } else {
@@ -72,13 +71,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           });
 
         if (insertError) {
-          console.error('Error creating profile:', insertError);
-        } else {
-          console.log('✅ Profile created with email:', authUser.email);
+          console.error('❌ Error creating profile:', insertError);
         }
       }
     } catch (error) {
-      console.error('Error in createOrUpdateProfile:', error);
+      console.error('❌ Error in createOrUpdateProfile:', error);
     }
   };
 
@@ -88,7 +85,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setUser(session?.user ?? null);
       if (session?.user) {
         createOrUpdateProfile(session.user).then(() => {
-          refreshProfile();
+          refreshProfile(session.user);
         });
       }
     });
@@ -98,7 +95,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setUser(session?.user ?? null);
       if (session?.user) {
         createOrUpdateProfile(session.user).then(() => {
-          refreshProfile();
+          refreshProfile(session.user);
         });
       } else {
         setProfile(null);
@@ -109,14 +106,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return () => subscription.unsubscribe();
   }, []);
 
-  const refreshProfile = async () => {
-    if (!user) return;
-    const { data, error } = await getProfile(user.id);
-    if (error) {
-      console.error('Error fetching profile:', error);
+  const refreshProfile = async (userToUse?: User) => {
+    const currentUser = userToUse || user;
+    if (!currentUser) {
       return;
     }
-    setProfile(data);
+    
+    try {
+      const data = await getProfile(currentUser.id);
+      setProfile(data);
+    } catch (error) {
+      console.error('❌ Error fetching profile:', error);
+      return;
+    }
   };
 
   const signIn = async (email: string, password: string) => {
@@ -140,6 +142,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const signInWithGoogle = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
+      options: {
+        redirectTo: `${window.location.origin}/home`
+      }
+    });
+    if (error) throw error;
+  };
+
+  const resetPassword = async (email: string) => {
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/reset-password`
     });
     if (error) throw error;
   };
@@ -157,6 +169,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     signUp,
     signInWithGoogle,
     signOut,
+    resetPassword,
     refreshProfile,
   };
 

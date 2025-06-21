@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import { encoding_for_model } from 'tiktoken';
 import { supabase } from './supabaseClient.js';
 import Stripe from 'stripe';
+import nodemailer from 'nodemailer';
 
 // Load environment variables
 dotenv.config();
@@ -15,6 +16,63 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
 
 const app = express();
 const PORT = 5050;
+
+// Rate limiting store for API requests
+const rateLimitStore = new Map();
+const RATE_LIMIT_WINDOW = 60 * 1000; // 1 minute
+const MAX_REQUESTS_PER_MINUTE = 3; // Maximum 3 requests per minute per user
+const MIN_REQUEST_INTERVAL = 10 * 1000; // Minimum 10 seconds between requests
+
+// Rate limiting function
+const checkRateLimit = (userId) => {
+  const now = Date.now();
+  const userKey = `user_${userId}`;
+  
+  if (!rateLimitStore.has(userKey)) {
+    rateLimitStore.set(userKey, { requests: [], lastRequest: 0 });
+  }
+  
+  const userData = rateLimitStore.get(userKey);
+  
+  // Check minimum interval between requests (debounce)
+  if (now - userData.lastRequest < MIN_REQUEST_INTERVAL) {
+    return {
+      allowed: false,
+      reason: 'debounce',
+      retryAfter: Math.ceil((MIN_REQUEST_INTERVAL - (now - userData.lastRequest)) / 1000)
+    };
+  }
+  
+  // Clean old requests outside the window
+  userData.requests = userData.requests.filter(timestamp => now - timestamp < RATE_LIMIT_WINDOW);
+  
+  // Check if user has exceeded rate limit
+  if (userData.requests.length >= MAX_REQUESTS_PER_MINUTE) {
+    return {
+      allowed: false,
+      reason: 'rate_limit',
+      retryAfter: Math.ceil((RATE_LIMIT_WINDOW - (now - userData.requests[0])) / 1000)
+    };
+  }
+  
+  // Allow request and update tracking
+  userData.requests.push(now);
+  userData.lastRequest = now;
+  rateLimitStore.set(userKey, userData);
+  
+  return { allowed: true };
+};
+
+// Clean up rate limit store periodically
+setInterval(() => {
+  const now = Date.now();
+  for (const [key, userData] of rateLimitStore.entries()) {
+    // Remove entries older than the window and with no recent activity
+    if (now - userData.lastRequest > RATE_LIMIT_WINDOW * 2) {
+      rateLimitStore.delete(key);
+    }
+  }
+}, RATE_LIMIT_WINDOW);
 
 // Middleware
 app.use(cors());
@@ -383,6 +441,25 @@ app.post('/api/generate-questions', async (req, res) => {
         return res.status(400).json({ error: 'Invalid Exam Board - ' + examBoard });
       }
     }
+
+    // Check rate limiting (prevent spam requests)
+    console.log('🚦 Checking rate limits for user:', userId);
+    const rateLimitCheck = checkRateLimit(userId);
+    
+    if (!rateLimitCheck.allowed) {
+      const errorMessage = rateLimitCheck.reason === 'debounce' 
+        ? `Please wait ${rateLimitCheck.retryAfter} seconds before making another request. This prevents spam and ensures quality responses.`
+        : `Too many requests. You can make up to ${MAX_REQUESTS_PER_MINUTE} requests per minute. Please wait ${rateLimitCheck.retryAfter} seconds.`;
+      
+      console.log(`❌ Rate limit exceeded for user ${userId}: ${rateLimitCheck.reason}`);
+      return res.status(429).json({ 
+        error: errorMessage,
+        retryAfter: rateLimitCheck.retryAfter,
+        reason: rateLimitCheck.reason
+      });
+    }
+    
+    console.log('✅ Rate limit check passed for user:', userId);
 
     // Check daily usage limits
     console.log('🔍 Checking daily usage limits for user:', userId);
@@ -1105,6 +1182,87 @@ app.post('/api/cancel-subscription', async (req, res) => {
     console.error('❌ Error cancelling subscription:', error);
     res.status(500).json({ 
       error: 'Failed to cancel subscription',
+      details: error.message 
+    });
+  }
+});
+
+// Contact form endpoint
+app.post('/api/contact', async (req, res) => {
+  try {
+    const { name, email, message } = req.body;
+    
+    // Validate required fields
+    if (!name || !email || !message) {
+      return res.status(400).json({ error: 'Name, email, and message are required' });
+    }
+
+    // Create transporter - supports both Gmail and Microsoft email
+    let transporterConfig;
+    const emailUser = process.env.EMAIL_USER;
+    
+    if (emailUser && emailUser.includes('@gmail.com')) {
+      // Gmail configuration
+      transporterConfig = {
+        service: 'gmail',
+        auth: {
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIL_PASS
+        }
+      };
+    } else if (emailUser && (emailUser.includes('@outlook.com') || emailUser.includes('@hotmail.com') || emailUser.includes('@live.com'))) {
+      // Microsoft email configuration
+      transporterConfig = {
+        host: 'smtp-mail.outlook.com',
+        port: 587,
+        secure: false,
+        auth: {
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIL_PASS
+        }
+      };
+    } else {
+      // Default to Office 365 SMTP for non-Gmail addresses (includes business emails)
+      transporterConfig = {
+        host: 'smtp-mail.outlook.com',
+        port: 587,
+        secure: false,
+        auth: {
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIL_PASS
+        }
+      };
+    }
+
+    const transporter = nodemailer.createTransport(transporterConfig);
+
+    // Email content
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: 'aj@practiceqs.com',
+      subject: `Contact Form Message from ${name}`,
+      html: `
+        <h3>New Contact Form Submission</h3>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Message:</strong></p>
+        <p>${message.replace(/\n/g, '<br>')}</p>
+        <hr>
+        <p><em>This message was sent from the PracticeQs contact form.</em></p>
+      `,
+      replyTo: email
+    };
+
+    // Send email
+    await transporter.sendMail(mailOptions);
+    
+    console.log('✅ Contact form email sent successfully');
+    res.json({ success: true, message: 'Message sent successfully!' });
+    
+  } catch (error) {
+    console.error('❌ Error sending contact form email:', error);
+    res.status(500).json({ 
+      error: 'Failed to send message', 
       details: error.message 
     });
   }

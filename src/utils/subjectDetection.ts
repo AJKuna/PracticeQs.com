@@ -1,4 +1,4 @@
-import { Subject } from '../types';
+import type { Subject } from '../types';
 
 const subjectKeywords: Record<Subject, string[]> = {
   mathematics: [

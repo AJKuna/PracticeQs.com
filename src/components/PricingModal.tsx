@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { updateProfile } from '../lib/supabase';
+import { API_CONFIG } from '../config/api';
 
 interface PricingModalProps {
   isOpen: boolean;
@@ -63,7 +63,7 @@ const PricingModal: React.FC<PricingModalProps> = ({ isOpen, onClose }) => {
     successUrl: string;
     cancelUrl: string;
   }) => {
-    const response = await fetch('/api/create-checkout-session', {
+    const response = await fetch(API_CONFIG.ENDPOINTS.CREATE_CHECKOUT_SESSION, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -102,13 +102,13 @@ const PricingModal: React.FC<PricingModalProps> = ({ isOpen, onClose }) => {
 
         {/* Pricing Toggle */}
         <div className="flex justify-center p-6 pb-4">
-          <div className="bg-white dark:bg-white rounded-lg p-1 flex border border-gray-200 dark:border-gray-200">
+          <div className="bg-white rounded-lg p-1 flex border border-gray-200">
             <button
               onClick={() => setIsYearly(false)}
               className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
                 !isYearly
                   ? 'bg-gray-100 text-gray-900 shadow-sm'
-                  : 'text-gray-600 hover:text-gray-900'
+                  : 'bg-white text-gray-600 hover:text-gray-900'
               }`}
             >
               Monthly
@@ -118,7 +118,7 @@ const PricingModal: React.FC<PricingModalProps> = ({ isOpen, onClose }) => {
               className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
                 isYearly
                   ? 'bg-gray-100 text-gray-900 shadow-sm'
-                  : 'text-gray-600 hover:text-gray-900'
+                  : 'bg-white text-gray-600 hover:text-gray-900'
               }`}
             >
               Yearly
@@ -157,7 +157,7 @@ const PricingModal: React.FC<PricingModalProps> = ({ isOpen, onClose }) => {
                 <svg className="w-5 h-5 text-red-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
                 </svg>
-                <span className="text-gray-500">Ads included</span>
+                <span className="text-gray-500">Slower response times</span>
               </li>
               <li className="flex items-center">
                 <svg className="w-5 h-5 text-red-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
@@ -209,21 +209,25 @@ const PricingModal: React.FC<PricingModalProps> = ({ isOpen, onClose }) => {
                 <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
-                <span className="text-gray-700">Ad-free experience</span>
+                <span className="text-gray-700">No wait times between requests</span>
               </li>
               <li className="flex items-center">
                 <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
-                <span className="text-gray-700">Priority access to new features</span>
+                <span className="text-gray-700">Try beta features early</span>
               </li>
               <li className="flex items-center">
                 <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
-                <span className="text-gray-700">Advanced question types</span>
+                <span className="text-gray-700">Priority support</span>
               </li>
             </ul>
+
+            <div className="mb-4">
+              <p className="text-sm text-gray-600 text-center">Unlock faster, smarter question generation for teaching and learning.</p>
+            </div>
 
             <button
               onClick={handleUpgrade}
@@ -248,7 +252,7 @@ const PricingModal: React.FC<PricingModalProps> = ({ isOpen, onClose }) => {
         {/* Footer */}
         <div className="border-t border-gray-200 px-6 py-4">
           <p className="text-xs text-gray-500 text-center">
-            Have an existing plan? <a href="#" className="text-blue-600 hover:underline">See billing help</a>
+            Have an existing plan? <a href="/contact" className="text-blue-600 hover:underline">Get in touch with us</a>
           </p>
         </div>
       </div>

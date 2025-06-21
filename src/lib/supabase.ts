@@ -41,7 +41,12 @@ export const getProfile = async (userId: string) => {
     .select('*')
     .eq('id', userId)
     .single();
-  if (error) throw error;
+    
+  if (error) {
+    console.error('❌ getProfile error:', error);
+    throw error;
+  }
+  
   return data;
 };
 

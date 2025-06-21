@@ -9,10 +9,11 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react()],
     server: {
+      host: true,
       port: frontendPort,
       proxy: {
         '/api': {
-          target: 'http://localhost:5050',
+          target: process.env.VITE_API_URL || 'http://localhost:5050',
           changeOrigin: true,
           secure: false,
         }

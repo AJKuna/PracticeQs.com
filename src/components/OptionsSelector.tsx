@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExamType, Difficulty, GenerationOptions } from '../types';
+import type { ExamType, Difficulty, GenerationOptions } from '../types';
 
 interface OptionsSelectorProps {
   options: GenerationOptions;

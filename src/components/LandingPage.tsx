@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import PricingModal from './PricingModal';
+import { API_CONFIG } from '../config/api';
 
 interface SubjectCard {
   title: string;
@@ -18,10 +19,7 @@ const subjects: SubjectCard[] = [
   { title: 'History', icon: '🏛️', color: 'bg-orange-100 hover:bg-orange-200' },
   { title: 'Geography', icon: '🌍', color: 'bg-teal-100 hover:bg-teal-200' },
   { title: 'Religious Studies', icon: '🕊️', color: 'bg-indigo-100 hover:bg-indigo-200' },
-  { title: 'Physical Education', icon: '⚽', color: 'bg-emerald-100 hover:bg-emerald-200' },
-  { title: 'Computer Science', icon: '💻', color: 'bg-cyan-100 hover:bg-cyan-200' },
-  { title: 'French', icon: '🇫🇷', color: 'bg-rose-100 hover:bg-rose-200' },
-  { title: 'Spanish', icon: '🇪🇸', color: 'bg-amber-100 hover:bg-amber-200' }
+  { title: 'Computer Science', icon: '💻', color: 'bg-cyan-100 hover:bg-cyan-200' }
 ];
 
 const LandingPage: React.FC = () => {
@@ -44,6 +42,33 @@ const LandingPage: React.FC = () => {
     }
   };
 
+  const handleManageSubscription = async () => {
+    try {
+      const response = await fetch(API_CONFIG.ENDPOINTS.CREATE_PORTAL_SESSION, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId: user?.id,
+          returnUrl: window.location.origin + '/home'
+        })
+      });
+
+      if (response.ok) {
+        const { url } = await response.json();
+        window.location.href = url;
+      } else {
+        const errorData = await response.json();
+        console.error('Portal session error:', errorData);
+        alert(`Failed to create portal session: ${errorData.error || 'Unknown error'}`);
+      }
+    } catch (error) {
+      console.error('Error creating portal session:', error);
+      alert('Network error creating portal session');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 relative">
       {/* Logo in top left corner */}
@@ -62,12 +87,26 @@ const LandingPage: React.FC = () => {
           {profile && profile.subscription_tier === 'free' && (
             <button
               onClick={() => setShowPricingModal(true)}
-              className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 border border-blue-600 rounded-lg transition-colors duration-200 shadow-sm"
+              className="flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-700 hover:bg-blue-100 border border-blue-200 rounded-lg transition-colors duration-200 shadow-sm"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
               <span className="text-sm font-medium">Upgrade</span>
+            </button>
+          )}
+
+          {/* Manage Subscription button - only show for premium users */}
+          {profile && profile.subscription_tier === 'premium' && (
+            <button
+              onClick={handleManageSubscription}
+              className="flex items-center gap-2 px-4 py-2 bg-white text-gray-700 hover:text-gray-900 hover:bg-gray-50 border border-gray-300 rounded-lg transition-colors duration-200 shadow-sm"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              <span className="text-sm font-medium">Manage Subscription</span>
             </button>
           )}
           
@@ -111,25 +150,40 @@ const LandingPage: React.FC = () => {
 
 {/* Minimal Footer */}
 <div className="mt-16 pt-8 border-t border-gray-200">
-  <div className="flex justify-center space-x-6 text-sm text-gray-500">
-    <button
-      onClick={() => navigate('/privacy')}
-      className="bg-white text-gray-800 border border-gray-300 px-4 py-2 rounded-md hover:bg-gray-100 transition-colors"
-    >
-      Privacy Policy
-    </button>
-    <button
-      onClick={() => navigate('/terms')}
-      className="bg-white text-gray-800 border border-gray-300 px-4 py-2 rounded-md hover:bg-gray-100 transition-colors"
-    >
-      Terms & Conditions
-    </button>
-    <button
-      onClick={() => navigate('/contact')}
-      className="bg-white text-gray-800 border border-gray-300 px-4 py-2 rounded-md hover:bg-gray-100 transition-colors"
-    >
-      Contact
-    </button>
+  <div className="flex justify-between items-center">
+    {/* Copyright notice on the left */}
+    <div className="text-sm text-gray-500">
+      © Practice Qs
+    </div>
+    
+    {/* Existing buttons on the right */}
+    <div className="flex space-x-6 text-sm text-gray-500">
+      <button
+        onClick={() => navigate('/privacy')}
+        className="bg-white text-gray-800 border border-gray-300 px-4 py-2 rounded-md hover:bg-gray-100 transition-colors"
+      >
+        Privacy Policy
+      </button>
+      <button
+        onClick={() => navigate('/terms')}
+        className="bg-white text-gray-800 border border-gray-300 px-4 py-2 rounded-md hover:bg-gray-100 transition-colors"
+      >
+        Terms & Conditions
+      </button>
+      <button
+        onClick={() => navigate('/contact')}
+        className="bg-white text-gray-800 border border-gray-300 px-4 py-2 rounded-md hover:bg-gray-100 transition-colors"
+      >
+        Contact
+      </button>
+    </div>
+  </div>
+  
+  {/* Safeguarding Notice */}
+  <div className="mt-4 text-center">
+    <p className="text-xs text-gray-500">
+      We're committed to safeguarding and promoting the welfare of children. This site is designed for use by adults or with adult supervision.
+    </p>
   </div>
 </div>
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import { twMerge } from 'tailwind-merge';
-import { useAuth } from '../../contexts/AuthContext';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
@@ -33,8 +32,6 @@ export const Button: React.FC<ButtonProps> = ({
     md: 'h-10 px-4 text-sm',
     lg: 'h-12 px-6 text-base',
   };
-
-  const { user, profile, signOut } = useAuth();
 
   return (
     <button

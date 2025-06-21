@@ -21,7 +21,7 @@ const TermsAndConditions: React.FC = () => {
             Terms and Conditions
           </h1>
           <button
-            onClick={() => navigate('/')}
+            onClick={() => navigate('/home')}
             className="flex items-center gap-2 px-4 py-2 bg-white text-gray-600 hover:text-gray-800 hover:bg-gray-50 border border-gray-200 rounded-lg transition-colors duration-200 shadow-sm"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -33,43 +33,50 @@ const TermsAndConditions: React.FC = () => {
 
         <div className="bg-white shadow rounded-lg p-8 space-y-6" style={{backgroundColor: 'white'}}>
           <section>
-            <h2 className="text-xl font-semibold text-gray-900 mb-3">Use of Service</h2>
+            <h2 className="text-xl font-semibold text-gray-900 mb-3">1. Acceptance of Terms</h2>
             <p className="text-gray-700">
-              This practice question generator is provided for educational purposes. By using our service, you agree to use it responsibly and in accordance with these terms.
+              By using this site, you agree to comply with these Terms of Use. If you are under 18, you should use this service under the supervision of a parent, guardian, teacher, or tutor.
             </p>
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-gray-900 mb-3">Educational Content</h2>
+            <h2 className="text-xl font-semibold text-gray-900 mb-3">2. Educational Purpose</h2>
             <p className="text-gray-700">
-              The questions and answers generated are for practice purposes only. While we strive for accuracy, users should verify information with official educational sources and exam boards.
+              This practice question generator is intended for educational use only. While we strive for accuracy, we recommend cross-referencing with official curriculum materials and exam board specifications.
             </p>
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-gray-900 mb-3">Intellectual Property</h2>
+            <h2 className="text-xl font-semibold text-gray-900 mb-3">3. User Responsibility</h2>
             <p className="text-gray-700">
-              Generated content may be used for personal educational purposes. Commercial use or redistribution without permission is prohibited.
+              Users must not attempt to reverse engineer, abuse, or automate the use of the site beyond the limits provided (e.g., 30 questions per day for free users). Misuse may result in account restriction or removal.
             </p>
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-gray-900 mb-3">Limitation of Liability</h2>
+            <h2 className="text-xl font-semibold text-gray-900 mb-3">4. Intellectual Property</h2>
             <p className="text-gray-700">
-              We provide this service "as is" and cannot guarantee the accuracy of all generated content. Users are responsible for verifying information before use in examinations.
+              All generated content remains the intellectual property of the website. You may use it for personal, non-commercial educational purposes. Redistribution, resale, or commercial use requires prior written permission.
             </p>
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-gray-900 mb-3">Changes to Terms</h2>
+            <h2 className="text-xl font-semibold text-gray-900 mb-3">5. Limitation of Liability</h2>
             <p className="text-gray-700">
-              We reserve the right to modify these terms at any time. Continued use of the service constitutes acceptance of updated terms.
+              We provide this platform "as is." We do not guarantee the accuracy, completeness, or suitability of generated content for exam preparation. Use of this content is at your own discretion.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-semibold text-gray-900 mb-3">6. Changes to Terms</h2>
+            <p className="text-gray-700">
+              We may update these Terms at any time. Continued use of the site indicates your acceptance of any changes.
             </p>
           </section>
 
           <div className="border-t pt-6">
             <p className="text-sm text-gray-500">
-              Last updated: {new Date().toLocaleDateString()}
+              Last updated: June 10, 2025
             </p>
           </div>
         </div>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { API_CONFIG } from '../config/api';
 
 const Contact: React.FC = () => {
   const navigate = useNavigate();
@@ -10,15 +11,34 @@ const Contact: React.FC = () => {
   });
   const [alert, setAlert] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) {
       setAlert({ type: 'error', message: 'Please fill in all fields.' });
       return;
     }
 
-    setAlert({ type: 'success', message: 'Thank you for your message! We\'ll get back to you soon.' });
-    setFormData({ name: '', email: '', message: '' });
+    try {
+      const response = await fetch(API_CONFIG.ENDPOINTS.CONTACT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setAlert({ type: 'success', message: 'Thank you for your message! We\'ll get back to you soon.' });
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        setAlert({ type: 'error', message: result.error || 'Failed to send message. Please try again.' });
+      }
+    } catch (error) {
+      console.error('Error sending message:', error);
+      setAlert({ type: 'error', message: 'Failed to send message. Please check your connection and try again.' });
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -44,7 +64,7 @@ const Contact: React.FC = () => {
             Contact Us
           </h1>
           <button
-            onClick={() => navigate('/')}
+            onClick={() => navigate('/home')}
             className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700 rounded-lg transition-colors duration-200 shadow-sm"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -70,6 +90,20 @@ const Contact: React.FC = () => {
               Have questions, feedback, or need help with the practice question generator? 
               We'd love to hear from you! Send us a message and we'll get back to you as soon as possible.
             </p>
+            
+            <div className="mt-4 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
+              <p className="text-blue-800 dark:text-blue-200 text-sm mb-2">
+                <strong>Beta Feedback:</strong> Since we are in beta, we would love to hear about your experience! 
+                Please fill out our <a 
+                  href="https://forms.gle/u2S9TTptr5AJaoAx7" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline font-medium"
+                >
+                  feedback form
+                </a> to help us improve the platform.
+              </p>
+            </div>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">

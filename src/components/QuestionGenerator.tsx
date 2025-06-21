@@ -72,7 +72,22 @@ const QuestionGenerator: React.FC = () => {
     spanish: { bg: 'bg-amber-100', hover: 'hover:bg-amber-200', light: 'bg-amber-50' }
   };
   const subjectTheme = subjectThemes[normalizedSubject] || subjectThemes['mathematics'];
-  const placeholder = 'Enter a topic...';
+  
+  const subjectPlaceholders: any = {
+    mathematics: 'e.g. quadratic equations, trigonometry, calculus, algebra, geometry...',
+    physics: 'e.g. forces, energy, electricity, waves, particles, motion...',
+    chemistry: 'e.g. atomic structure, chemical bonding, acids and bases, organic chemistry...',
+    biology: 'e.g. cell biology, microscopes, osmosis, photosynthesis, genetics...',
+    english: 'e.g. Shakespeare, poetry analysis, creative writing, persuasive techniques...',
+    history: 'e.g. World War 2, Medieval England, Industrial Revolution, Cold War...',
+    geography: 'e.g. climate change, plate tectonics, rivers, population, urbanisation...',
+    'religious studies': 'e.g. Christianity, Islam, ethics, philosophy, world religions...',
+    'physical education': 'e.g. fitness training, sports psychology, anatomy, health and diet...',
+    'computer science': 'e.g. algorithms, programming, databases, networks, cybersecurity...',
+    french: 'e.g. family and relationships, school life, hobbies, travel, food...',
+    spanish: 'e.g. family and relationships, school life, hobbies, travel, food...'
+  };
+  const placeholder = subjectPlaceholders[normalizedSubject] || 'Enter a topic...';
 
   // Clean question string to format values
   const cleanQuestion = (question: string) => {
@@ -185,7 +200,6 @@ const QuestionGenerator: React.FC = () => {
       
       const data = await response.json();
       setGeneratedQuestions(data);
-      setAlert({ type: 'success', message: 'Questions generated successfully!' });
       
       // Refresh usage after successful generation
       await fetchUsage();
@@ -219,16 +233,17 @@ const QuestionGenerator: React.FC = () => {
       const data = await response.json();
 
       // Process the answers to ensure they are strings
-      const processedQuestions = data.map(question => {
+      const processedQuestions = data.map((question: any) => {
         if (typeof question.answer === 'object' && question.answer !== null) {
-          // Convert the object to a string (e.g., JSON stringify)
-          question.answer = JSON.stringify(question.answer);
+          // Convert to bullet points like in browser
+          question.answer = Object.entries(question.answer).map(([, value]) => 
+            `• ${value}`
+          ).join('\n');
         }
         return question;
       });
 
       setGeneratedSolutions(processedQuestions);
-      setAlert({ type: 'success', message: 'Solutions generated successfully!' });
     } catch (error: any) {
       setAlert({ type: 'error', message: error.message || 'Error generating solutions' });
     } finally {
@@ -318,7 +333,7 @@ if (showSolutions && question.answer) {
   let answerText = '';
   if (typeof question.answer === 'object' && question.answer !== null) {
     // Convert to bullet points like in browser
-    answerText = Object.entries(question.answer).map(([key, value]) => 
+    answerText = Object.entries(question.answer).map(([, value]) => 
       `• ${value}`
     ).join('\n');
   } else {
@@ -335,7 +350,6 @@ if (showSolutions && question.answer) {
 
     // Save the PDF
     doc.save(`${normalizedSubject}-${searchTopic.replace(/\s+/g, '-')}-questions.pdf`);
-    setAlert({ type: 'success', message: 'PDF exported successfully!' });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -354,6 +368,29 @@ if (showSolutions && question.answer) {
     setGeneratedQuestions([]);
     setGeneratedSolutions([]);
     setShowSolutions(false);
+  };
+
+  const handleManageSubscription = async () => {
+    try {
+      const response = await fetch('/api/create-portal-session', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId: user?.id
+        })
+      });
+
+      if (response.ok) {
+        const { url } = await response.json();
+        window.location.href = url;
+      } else {
+        console.error('Failed to create portal session');
+      }
+    } catch (error) {
+      console.error('Error creating portal session:', error);
+    }
   };
 
   return (
@@ -377,7 +414,7 @@ if (showSolutions && question.answer) {
             {profile && profile.subscription_tier === 'free' && (
               <button
                 onClick={() => setShowPricingModal(true)}
-                className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 border border-blue-600 rounded-lg transition-colors duration-200 shadow-sm"
+                className="flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-700 hover:bg-blue-100 border border-blue-200 rounded-lg transition-colors duration-200 shadow-sm"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -385,10 +422,24 @@ if (showSolutions && question.answer) {
                 <span className="text-sm font-medium">Upgrade</span>
               </button>
             )}
+
+            {/* Manage Subscription button - only show for premium users */}
+            {profile && profile.subscription_tier === 'premium' && (
+              <button
+                onClick={handleManageSubscription}
+                className="flex items-center gap-2 px-4 py-2 bg-white text-gray-700 hover:text-gray-900 hover:bg-gray-50 border border-gray-300 rounded-lg transition-colors duration-200 shadow-sm"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <span className="text-sm font-medium">Manage Subscription</span>
+              </button>
+            )}
             
             {/* Home Button */}
             <button
-              onClick={() => navigate('/')}
+              onClick={() => navigate('/home')}
               className="flex items-center gap-2 px-4 py-2 bg-white text-gray-600 hover:text-gray-800 hover:bg-gray-50 border border-gray-200 rounded-lg transition-colors duration-200 shadow-sm"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -418,7 +469,7 @@ if (showSolutions && question.answer) {
         )}
 
         {/* Usage Counter */}
-        {usage &&
+        {usage && !usage.isPremium &&
           <div className="mb-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
             <div className="flex items-center justify-between">
               <div>
@@ -435,60 +486,35 @@ if (showSolutions && question.answer) {
                 </p>
               </div>
               <div className="text-right">
-                {usage.isPremium ? (
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400">
-                    Premium
-                  </span>
-                ) : (
-                  <button
-                    onClick={() => setShowPricingModal(true)}
-                    className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 hover:bg-blue-200 transition-colors cursor-pointer"
-                  >
-                    Upgrade to Premium
-                  </button>
-                )}
+                <button
+                  onClick={() => setShowPricingModal(true)}
+                  className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 hover:bg-blue-200 transition-colors cursor-pointer"
+                >
+                  Upgrade to Premium
+                </button>
               </div>
             </div>
-            {!usage.isPremium && (
-              <div className="mt-2">
-                <div className="w-full bg-gray-200 rounded-full h-2 dark:bg-gray-700">
-                  <div 
-                    className="bg-blue-600 h-2 rounded-full" 
-                    style={{ width: `${Math.min((usage.usage / usage.limit) * 100, 100)}%` }}
-                  ></div>
-                </div>
-                <div className="flex justify-between items-center mt-1">
-                  <p className="text-xs text-gray-600 dark:text-gray-400">
-                    {(() => {
-                      const remaining = usage.limit - usage.usage;
-                      if (isNaN(remaining) || remaining <= 0) {
-                        return "Zero questions remaining today.";
-                      }
-                      return `${remaining} questions remaining today`;
-                    })()}
-                  </p>
-                </div>
+            <div className="mt-2">
+              <div className="w-full bg-gray-200 rounded-full h-2 dark:bg-gray-700">
+                <div 
+                  className="bg-blue-600 h-2 rounded-full" 
+                  style={{ width: `${Math.min((usage.usage / usage.limit) * 100, 100)}%` }}
+                ></div>
               </div>
-            )}
+              <div className="flex justify-between items-center mt-1">
+                <p className="text-xs text-gray-600 dark:text-gray-400">
+                  {(() => {
+                    const remaining = usage.limit - usage.usage;
+                    if (isNaN(remaining) || remaining <= 0) {
+                      return "Zero questions remaining today.";
+                    }
+                    return `${remaining} questions remaining today`;
+                  })()}
+                </p>
+              </div>
+            </div>
           </div>
         }
-
-        {/* Test button - Remove this after testing */}
-        {profile && profile.subscription_tier === 'free' && (
-          <div className="mb-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
-            <button
-              onClick={() => {
-                console.log('Test button clicked, showPricingModal state:', showPricingModal);
-                setShowPricingModal(true);
-                console.log('Set showPricingModal to true');
-              }}
-              className="bg-yellow-600 text-white px-4 py-2 rounded font-medium hover:bg-yellow-700"
-            >
-              🧪 Test Pricing Modal (Remove this button after testing)
-            </button>
-            <p className="text-xs text-yellow-800 mt-1">Debug: Modal state is {showPricingModal ? 'OPEN' : 'CLOSED'}</p>
-          </div>
-        )}
 
         <form onSubmit={handleSubmit} className="space-y-8">
           {/* Search Topic Input */}
@@ -502,7 +528,7 @@ if (showSolutions && question.answer) {
               value={searchTopic}
               onChange={(e) => setSearchTopic(e.target.value)}
               placeholder={placeholder}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 !text-black !bg-white focus:!bg-white focus:!text-black placeholder-gray-500"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 !text-black !bg-white focus:!bg-white focus:!text-black placeholder-gray-300"
             />
           </div>
 
@@ -518,10 +544,9 @@ if (showSolutions && question.answer) {
                 onChange={(e) => setOptions({ ...options, examLevel: e.target.value, examBoard: '' })}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               >
-                <option value="ks3">KS3</option>
                 <option value="gcse">GCSE</option>
+                <option value="ks3" disabled>KS3 (Coming Soon)</option>
                 <option value="alevel" disabled>A Level (Coming Soon)</option>
-                <option value="university" disabled>University (Coming Soon)</option>
               </select>
             </div>
 
@@ -570,11 +595,19 @@ if (showSolutions && question.answer) {
                 type="number"
                 id="questionCount"
                 min="1"
-                max="30"
-                value={options.questionCount === "" ? "" : options.questionCount}
+                max="15"
+                value={options.questionCount}
                 onChange={(e) => {
                   const val = e.target.value;
-                  setOptions({ ...options, questionCount: val === "" ? "" : parseInt(val) });
+                  const numVal = val === "" ? 1 : parseInt(val);
+                  setOptions({ ...options, questionCount: numVal });
+                  
+                  // Custom validation message
+                  if (numVal > 15) {
+                    e.target.setCustomValidity("Value must be less than or equal to 15. Smaller batches = better questions. Try a lower number for best results 👌");
+                  } else {
+                    e.target.setCustomValidity("");
+                  }
                 }}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               />
@@ -650,10 +683,15 @@ if (showSolutions && question.answer) {
                         <h4 className="font-medium text-gray-900 mb-2">Model Answer:</h4>
                         {Array.isArray(question.answer) ? (
                           <ol className="list-decimal list-inside">
-                            {question.answer.map((stepObj, idx) => (
+                            {question.answer.map((stepObj: any, idx: number) => (
                               <li key={idx} className="mb-2">
-                                <span className="font-semibold">{stepObj.step}:</span> {stepObj.explanation || stepObj.marks}
-                                {stepObj.marks && <span className="text-blue-600"> [{stepObj.marks} marks]</span>}
+                                <div className="flex items-start space-x-2">
+                                  <span className="text-sm text-gray-500 mt-1">{idx + 1}.</span>
+                                  <div>
+                                    <p className="font-medium text-gray-800">{stepObj.step}</p>
+                                    <p className="text-gray-900">{String(stepObj.explanation)}</p>
+                                  </div>
+                                </div>
                               </li>
                             ))}
                           </ol>
@@ -664,11 +702,11 @@ if (showSolutions && question.answer) {
 <div key={key} className="mb-3">
   <div className="flex items-start">
     <span className="text-gray-900 mr-2">•</span>
-    <p className="text-gray-900">{value}</p>
+    <p className="text-gray-900">{String(value)}</p>
   </div>
 </div>
     )) : 
-    <p>{question.answer}</p>
+    <p>{String(question.answer)}</p>
   }
 </div>
                         )}
