@@ -14,6 +14,7 @@
     "express": "^5.1.0",
     "nodemailer": "^7.0.3",
     "openai": "^4.103.0",
-    "stripe": "^14.15.0"
+    "stripe": "^14.15.0",
+    "tiktoken": "^1.0.21"
   }
 }
