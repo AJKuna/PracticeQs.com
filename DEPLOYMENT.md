@@ -1,4 +1,4 @@
-# Deployment Guide
+# Deployment Guide - PracticeQs.com
 
 ## 🚀 Production Deployment Checklist
 
@@ -21,66 +21,42 @@
 
 ---
 
-## 🔧 Frontend Deployment Steps
+## 🔧 Frontend Deployment Steps (Vercel)
 
 ### 1. Environment Variables Setup
-Create a `.env` file in your production environment with:
+Set these environment variables in your Vercel dashboard:
 
 ```env
 # Production Frontend Environment Variables
-VITE_API_URL=https://your-backend-domain.com
-VITE_PORT=3000
+VITE_API_URL=https://api.practiceqs.com
 
 # Supabase (already configured in code)
 VITE_SUPABASE_URL=https://cboijvvxucdlrpxekfwf.supabase.co
 VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNib2lqdnZ4dWNkbHJweGVrZndmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDk4NDE0NjgsImV4cCI6MjA2NTQxNzQ2OH0.1rjCBQCz8zTEDQlJe1UYBUWZWGZHk3kznPRnxqU_3xg
 ```
 
-### 2. Build Commands
-```bash
-# Install dependencies
-npm install
+### 2. Vercel Deployment Steps
 
-# Build for production
-npm run build
+1. **Connect GitHub Repository**
+   ```bash
+   # Repository: https://github.com/AJKuna/PracticeQs.com
+   # Branch: main
+   ```
 
-# Serve built files (if needed)
-npm run preview
-```
+2. **Vercel Configuration**
+   - **Build Command**: `npm run build`
+   - **Output Directory**: `dist`
+   - **Install Command**: `npm install`
 
-### 3. Deployment Platforms
+3. **Custom Domain Setup**
+   - Add `practiceqs.com` as custom domain in Vercel
+   - Add `www.practiceqs.com` (redirect to main domain)
+   - Vercel will automatically handle SSL certificates
 
-#### **Vercel** (Recommended)
-```bash
-# Install Vercel CLI
-npm i -g vercel
-
-# Deploy
-vercel
-
-# Set environment variables in Vercel dashboard
-# VITE_API_URL=https://your-backend-domain.com
-```
-
-#### **Netlify**
-```bash
-# Build command: npm run build
-# Publish directory: dist
-# Set environment variables in Netlify dashboard
-```
-
-#### **Railway**
-```bash
-# railway.json
-{
-  "build": {
-    "command": "npm run build"
-  },
-  "deploy": {
-    "startCommand": "npm run preview"
-  }
-}
-```
+4. **Environment Variables in Vercel Dashboard**
+   ```
+   VITE_API_URL = https://api.practiceqs.com
+   ```
 
 ---
 
@@ -111,14 +87,15 @@ FROM_EMAIL=your_from_email
 FROM_NAME=your_from_name
 ```
 
-### 2. Deploy Backend
-Choose your platform:
+### 2. Recommended Backend Deployment
+Deploy your backend to `api.practiceqs.com` using:
 
-#### **Railway**
+#### **Railway** (Recommended)
 ```bash
 # Connect GitHub repo to Railway
 # Set environment variables in dashboard
 # Deploy automatically on push
+# Custom domain: api.practiceqs.com
 ```
 
 #### **Render**
@@ -126,16 +103,7 @@ Choose your platform:
 # Build command: npm install
 # Start command: node server.js
 # Set environment variables in dashboard
-```
-
-#### **Heroku**
-```bash
-# Create Procfile
-echo "web: node server.js" > Backend/Procfile
-
-# Deploy
-heroku create your-app-name
-git subtree push --prefix=Backend heroku main
+# Custom domain: api.practiceqs.com
 ```
 
 ---
@@ -148,7 +116,7 @@ git subtree push --prefix=Backend heroku main
 2. Navigate to **Developers** → **Webhooks**
 3. **Update** your webhook endpoint URL to:
    ```
-   https://your-backend-domain.com/api/stripe-webhook
+   https://api.practiceqs.com/api/stripe-webhook
    ```
 4. **Events to listen for**:
    - `checkout.session.completed`
@@ -156,45 +124,41 @@ git subtree push --prefix=Backend heroku main
    - `customer.subscription.updated`
    - `customer.subscription.deleted`
 
-### Testing Webhook
-```bash
-# Test webhook with Stripe CLI
-stripe listen --forward-to https://your-backend-domain.com/api/stripe-webhook
-```
-
 ---
 
-## 🗄️ Database Status
+## 🌐 Domain Configuration
 
-### ✅ **READY** - Supabase Configuration
-- **Database**: Already configured and ready
-- **Tables**: All tables exist and properly configured
-- **RLS Policies**: Security policies in place
-- **API Keys**: Configured for both client and server access
+### Frontend (Vercel)
+- **Primary Domain**: `practiceqs.com`
+- **Redirect**: `www.practiceqs.com` → `practiceqs.com`
+
+### Backend (Railway/Render)
+- **API Domain**: `api.practiceqs.com`
+- **CORS Origins**: `https://practiceqs.com`, `https://www.practiceqs.com`
 
 ---
 
 ## 🔍 Post-Deployment Verification
 
 ### Frontend Checklist
-- [ ] Website loads without errors
+- [ ] `https://practiceqs.com` loads without errors
 - [ ] User registration/login works
 - [ ] Subject selection works
 - [ ] Question generation works
 - [ ] Pricing modal functions correctly
-- [ ] All API calls work with new backend URL
+- [ ] All API calls work with backend at `api.practiceqs.com`
 
 ### Backend Checklist
-- [ ] Server responds to health checks
+- [ ] `https://api.practiceqs.com` responds to health checks
 - [ ] API endpoints return correct responses
 - [ ] Database connections work
-- [ ] Stripe webhook receives events
+- [ ] Stripe webhook receives events at `api.practiceqs.com/api/stripe-webhook`
 - [ ] Email sending works
 - [ ] OpenAI integration functions
 
 ### Integration Testing
 - [ ] Complete user signup flow
-- [ ] Premium upgrade process
+- [ ] Premium upgrade process works
 - [ ] Question generation for free/premium users
 - [ ] Subscription management works
 - [ ] Payment confirmations update user status
@@ -203,45 +167,17 @@ stripe listen --forward-to https://your-backend-domain.com/api/stripe-webhook
 
 ## 🚨 Important Notes
 
-1. **Webhook Timing**: After payment, it may take a few seconds for the webhook to update the user's subscription status in Supabase.
-
-2. **CORS Configuration**: Ensure your backend accepts requests from your frontend domain.
-
-3. **SSL Required**: Both frontend and backend must use HTTPS in production.
-
-4. **Rate Limiting**: Consider implementing rate limiting on your API endpoints.
-
-5. **Monitoring**: Set up monitoring and logging for production issues.
+1. **Domain Setup**: Ensure both `practiceqs.com` and `api.practiceqs.com` are properly configured
+2. **CORS Configuration**: Backend must accept requests from `practiceqs.com`
+3. **SSL Required**: Both domains must use HTTPS
+4. **Webhook Timing**: After payment, webhook updates may take a few seconds
 
 ---
 
-## 🔧 Environment-Specific Configurations
+## 📞 Production URLs
 
-### Development
-```env
-VITE_API_URL=http://localhost:5050
-```
+- **Frontend**: https://practiceqs.com
+- **Backend API**: https://api.practiceqs.com
+- **Stripe Webhook**: https://api.practiceqs.com/api/stripe-webhook
 
-### Staging  
-```env
-VITE_API_URL=https://staging-api.yourdomain.com
-```
-
-### Production
-```env
-VITE_API_URL=https://api.yourdomain.com
-```
-
----
-
-## 📞 Support
-
-If you encounter issues during deployment:
-
-1. Check the browser console for frontend errors
-2. Check server logs for backend errors  
-3. Verify all environment variables are set correctly
-4. Test Stripe webhook with ngrok locally first
-5. Ensure database connections are working
-
-**Your application is now ready for production deployment!** 🎉 
+**Your PracticeQs.com application is ready for production deployment!** 🎉 
