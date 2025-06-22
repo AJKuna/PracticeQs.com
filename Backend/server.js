@@ -94,70 +94,6 @@ app.use(cors());
 app.use('/api/stripe-webhook', express.raw({ type: 'application/json' }));
 app.use(express.json());
 
-// Staging Mode Middleware
-const stagingModeCheck = async (req, res, next) => {
-  // Skip staging check for health endpoints and webhooks
-  const skipPaths = ['/api/health', '/api/stripe-webhook', '/api/webhook-diagnostics'];
-  if (skipPaths.some(path => req.path === path)) {
-    return next();
-  }
-
-  // Check if site is live to public
-  const isLivePublic = process.env.IS_LIVE_PUBLIC === 'true';
-  
-  // If site is live to public, allow all requests
-  if (isLivePublic) {
-    return next();
-  }
-  
-  // In staging mode, check if user is authorized
-  const testEmail = 'aj@practiceqs.com';
-  const { userId } = req.body || {};
-  
-  // If no userId provided, reject (except for contact form which doesn't require auth)
-  if (!userId && !req.path.includes('/contact')) {
-    return res.status(403).json({
-      error: 'Site is currently in testing mode',
-      isStaging: true,
-      message: 'Access is restricted to authorized users only'
-    });
-  }
-  
-  // If userId provided, check if it belongs to test user
-  if (userId) {
-    try {
-      // Check user profile in database
-      const { data: profile, error } = await supabase
-        .from('profiles')
-        .select('email')
-        .eq('id', userId)
-        .single();
-      
-      if (error || !profile || profile.email !== testEmail) {
-        console.log(`🚫 Staging mode: Blocked access for user ${userId} (email: ${profile?.email || 'unknown'})`);
-        return res.status(403).json({
-          error: 'Site is currently in testing mode',
-          isStaging: true,
-          message: 'This site is being tested and will be available to the public soon'
-        });
-      }
-      
-      console.log(`✅ Staging mode: Allowed access for test user ${testEmail}`);
-    } catch (dbError) {
-      console.error('❌ Error checking user in staging mode:', dbError);
-      return res.status(403).json({
-        error: 'Site is currently in testing mode',
-        isStaging: true
-      });
-    }
-  }
-  
-  next();
-};
-
-// Apply staging mode check to all API routes
-app.use('/api', stagingModeCheck);
-
 // Usage tracking functions
 const getTodaysDate = () => {
   return new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
@@ -1576,98 +1512,97 @@ app.post('/api/contact', async (req, res) => {
   }
 });
 
-// Health check endpoint for monitoring webhook system
+// Health check endpoint
 app.get('/api/health', async (req, res) => {
-  const health = {
-    status: 'healthy',
-    timestamp: new Date().toISOString(),
-    checks: {
-      environment: {
-        status: 'unknown',
-        details: {}
-      },
-      supabase: {
-        status: 'unknown',
-        details: {}
-      },
-      stripe: {
-        status: 'unknown',
-        details: {}
-      }
-    }
-  };
-
-  // Check environment variables
   try {
-    const requiredEnvVars = [
-      'STRIPE_SECRET_KEY',
-      'STRIPE_WEBHOOK_SECRET',
-      'SUPABASE_SERVICE_ROLE_KEY'
-    ];
-    
-    const missingVars = requiredEnvVars.filter(varName => !process.env[varName]);
-    
-    health.checks.environment = {
-      status: missingVars.length === 0 ? 'healthy' : 'unhealthy',
-      details: {
-        missingVariables: missingVars,
-        hasStripeKey: !!process.env.STRIPE_SECRET_KEY,
-        hasWebhookSecret: !!process.env.STRIPE_WEBHOOK_SECRET,
-        hasSupabaseKey: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
-        supabaseUrl: process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL
-      }
-    };
-  } catch (error) {
-    health.checks.environment = {
-      status: 'error',
-      details: { error: error.message }
-    };
-  }
-
-  // Check Supabase connection
-  try {
-    const { data, error } = await supabase
+    // Test database connection
+    const { data: dbTest, error: dbError } = await supabase
       .from('profiles')
       .select('count')
       .limit(1);
-    
-    health.checks.supabase = {
-      status: error ? 'unhealthy' : 'healthy',
-      details: error ? { error: error.message } : { connected: true }
-    };
-  } catch (error) {
-    health.checks.supabase = {
-      status: 'error',
-      details: { error: error.message }
-    };
-  }
 
-  // Check Stripe connection
-  try {
-    const account = await stripe.accounts.retrieve();
-    health.checks.stripe = {
+    const health = {
       status: 'healthy',
-      details: { 
-        accountId: account.id,
-        email: account.email || 'N/A',
-        liveMode: !account.livemode ? false : true
-      }
+      timestamp: new Date().toISOString(),
+      database: dbError ? 'error' : 'connected',
+      environment: process.env.NODE_ENV || 'development',
+      isStaging: process.env.IS_LIVE_PUBLIC !== 'true'
     };
+
+    res.json(health);
   } catch (error) {
-    health.checks.stripe = {
-      status: 'error',
-      details: { error: error.message }
-    };
+    console.error('Health check failed:', error);
+    res.status(500).json({
+      status: 'unhealthy',
+      timestamp: new Date().toISOString(),
+      error: error.message
+    });
+  }
+});
+
+// Staging Mode Middleware (applied after health endpoint)
+const stagingModeCheck = async (req, res, next) => {
+  // Skip staging check for health endpoints and webhooks
+  const skipPaths = ['/api/health', '/api/stripe-webhook', '/api/webhook-diagnostics'];
+  if (skipPaths.some(path => req.path === path)) {
+    return next();
   }
 
-  // Determine overall health
-  const allHealthy = Object.values(health.checks).every(check => check.status === 'healthy');
-  health.status = allHealthy ? 'healthy' : 'degraded';
+  // Check if site is live to public
+  const isLivePublic = process.env.IS_LIVE_PUBLIC === 'true';
+  
+  // If site is live to public, allow all requests
+  if (isLivePublic) {
+    return next();
+  }
+  
+  // In staging mode, check if user is authorized
+  const testEmail = 'aj@practiceqs.com';
+  const { userId } = req.body || {};
+  
+  // If no userId provided, reject (except for contact form which doesn't require auth)
+  if (!userId && !req.path.includes('/contact')) {
+    return res.status(403).json({
+      error: 'Site is currently in testing mode',
+      isStaging: true,
+      message: 'Access is restricted to authorized users only'
+    });
+  }
+  
+  // If userId provided, check if it belongs to test user
+  if (userId) {
+    try {
+      // Check user profile in database
+      const { data: profile, error } = await supabase
+        .from('profiles')
+        .select('email')
+        .eq('id', userId)
+        .single();
+      
+      if (error || !profile || profile.email !== testEmail) {
+        console.log(`🚫 Staging mode: Blocked access for user ${userId} (email: ${profile?.email || 'unknown'})`);
+        return res.status(403).json({
+          error: 'Site is currently in testing mode',
+          isStaging: true,
+          message: 'This site is being tested and will be available to the public soon'
+        });
+      }
+      
+      console.log(`✅ Staging mode: Allowed access for test user ${testEmail}`);
+    } catch (dbError) {
+      console.error('❌ Error checking user in staging mode:', dbError);
+      return res.status(403).json({
+        error: 'Site is currently in testing mode',
+        isStaging: true
+      });
+    }
+  }
+  
+  next();
+};
 
-  // Return appropriate status code
-  const statusCode = allHealthy ? 200 : 503;
-  res.status(statusCode).json(health);
-});
+// Apply staging mode check to remaining API routes (after health)
+app.use('/api', stagingModeCheck);
 
 // Webhook diagnostics endpoint (for debugging)
 app.get('/api/webhook-diagnostics', async (req, res) => {
