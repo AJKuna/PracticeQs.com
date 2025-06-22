@@ -9,6 +9,33 @@ import nodemailer from 'nodemailer';
 // Load environment variables
 dotenv.config();
 
+// Validate critical environment variables
+console.log('🔍 Environment Variable Check:');
+console.log('NODE_ENV:', process.env.NODE_ENV);
+console.log('PORT:', process.env.PORT || 5050);
+console.log('IS_LIVE_PUBLIC:', process.env.IS_LIVE_PUBLIC);
+
+// Stripe configuration
+console.log('\n🔑 Stripe Configuration:');
+console.log('STRIPE_SECRET_KEY exists:', !!process.env.STRIPE_SECRET_KEY);
+console.log('STRIPE_SECRET_KEY length:', process.env.STRIPE_SECRET_KEY?.length || 0);
+console.log('STRIPE_WEBHOOK_SECRET exists:', !!process.env.STRIPE_WEBHOOK_SECRET);
+console.log('STRIPE_WEBHOOK_SECRET length:', process.env.STRIPE_WEBHOOK_SECRET?.length || 0);
+console.log('STRIPE_MONTHLY_PRICE_ID exists:', !!process.env.STRIPE_MONTHLY_PRICE_ID);
+console.log('STRIPE_YEARLY_PRICE_ID exists:', !!process.env.STRIPE_YEARLY_PRICE_ID);
+
+// Supabase configuration
+console.log('\n🗄️ Supabase Configuration:');
+console.log('SUPABASE_URL exists:', !!process.env.SUPABASE_URL);
+console.log('SUPABASE_SERVICE_ROLE_KEY exists:', !!process.env.SUPABASE_SERVICE_ROLE_KEY);
+console.log('SUPABASE_SERVICE_ROLE_KEY length:', process.env.SUPABASE_SERVICE_ROLE_KEY?.length || 0);
+
+// OpenAI configuration
+console.log('\n🤖 OpenAI Configuration:');
+console.log('OPENAI_API_KEY exists:', !!process.env.OPENAI_API_KEY);
+console.log('OPENAI_API_KEY length:', process.env.OPENAI_API_KEY?.length || 0);
+console.log('');
+
 // Initialize Stripe
 console.log('🔑 Checking Stripe configuration...');
 console.log('STRIPE_SECRET_KEY exists:', !!process.env.STRIPE_SECRET_KEY);
@@ -852,22 +879,34 @@ app.post('/api/create-checkout-session', async (req, res) => {
 
 // Stripe webhook endpoint (for handling successful payments)
 app.post('/api/stripe-webhook', async (req, res) => {
-  console.log('🎯 Webhook received');
-  console.log('📊 Headers:', req.headers);
+  const timestamp = new Date().toISOString();
+  console.log(`\n🎯 ===========================================`);
+  console.log(`🎯 WEBHOOK RECEIVED AT ${timestamp}`);
+  console.log(`🎯 ===========================================`);
+  console.log('📊 Headers:', JSON.stringify(req.headers, null, 2));
   console.log('📦 Body type:', typeof req.body);
   console.log('📏 Body length:', req.body?.length);
+  console.log('🌐 Request method:', req.method);
+  console.log('🛣️  Request path:', req.path);
+  console.log('🔗 Request URL:', req.url);
   
   const sig = req.headers['stripe-signature'];
   
   if (!sig) {
     console.error('❌ No stripe-signature header found');
+    console.error('🔍 Available headers:', Object.keys(req.headers));
     return res.status(400).send('Webhook Error: No signature header');
   }
   
+  console.log('🔐 Stripe signature found:', sig.substring(0, 50) + '...');
+  
   if (!process.env.STRIPE_WEBHOOK_SECRET) {
     console.error('❌ STRIPE_WEBHOOK_SECRET not configured');
+    console.error('🔍 Available env vars:', Object.keys(process.env).filter(key => key.includes('STRIPE')));
     return res.status(500).send('Webhook Error: Server configuration error');
   }
+  
+  console.log('🔑 Webhook secret configured, length:', process.env.STRIPE_WEBHOOK_SECRET.length);
   
   let event;
 
@@ -875,21 +914,25 @@ app.post('/api/stripe-webhook', async (req, res) => {
     console.log('🔐 Attempting to verify webhook signature...');
     event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
     console.log('✅ Webhook signature verified successfully');
+    console.log('🎣 Event type:', event.type);
+    console.log('🆔 Event ID:', event.id);
+    console.log('📋 Event data preview:', JSON.stringify(event.data.object, null, 2).substring(0, 500) + '...');
   } catch (err) {
     console.error('❌ Webhook signature verification failed:', err.message);
     console.error('🔍 Signature header:', sig);
     console.error('🔍 Webhook secret exists:', !!process.env.STRIPE_WEBHOOK_SECRET);
     console.error('🔍 Webhook secret length:', process.env.STRIPE_WEBHOOK_SECRET?.length);
+    console.error('🔍 Error stack:', err.stack);
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
 
   console.log('🎣 Processing Stripe webhook:', event.type);
-  console.log('🆔 Event ID:', event.id);
 
   try {
     switch (event.type) {
       case 'checkout.session.completed':
         console.log('💳 Processing checkout completion...');
+        console.log('📋 Session object:', JSON.stringify(event.data.object, null, 2));
         await handleCheckoutSessionCompleted(event.data.object);
         break;
       
@@ -918,10 +961,13 @@ app.post('/api/stripe-webhook', async (req, res) => {
     }
 
     console.log('✅ Webhook processed successfully');
-    res.json({ received: true });
+    console.log(`🎯 ===========================================\n`);
+    res.json({ received: true, eventType: event.type, eventId: event.id });
   } catch (error) {
     console.error('❌ Webhook processing error:', error);
-    res.status(500).json({ error: 'Webhook processing failed' });
+    console.error('❌ Error stack:', error.stack);
+    console.log(`🎯 ===========================================\n`);
+    res.status(500).json({ error: 'Webhook processing failed', details: error.message });
   }
 });
 
@@ -1639,6 +1685,75 @@ app.get('/api/webhook-diagnostics', async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
+});
+
+// Webhook test endpoint (for manual testing)
+app.post('/api/webhook-test', async (req, res) => {
+  console.log('\n🧪 ===========================================');
+  console.log('🧪 WEBHOOK TEST ENDPOINT HIT');
+  console.log('🧪 ===========================================');
+  console.log('📋 Request body:', JSON.stringify(req.body, null, 2));
+  console.log('📊 Headers:', JSON.stringify(req.headers, null, 2));
+  
+  try {
+    const { userId, testType } = req.body;
+    
+    if (testType === 'database-update' && userId) {
+      console.log('🔄 Testing database update for user:', userId);
+      
+      // Test database update
+      const { data: beforeUpdate, error: beforeError } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', userId)
+        .single();
+      
+      console.log('📋 User before update:', beforeUpdate);
+      console.log('❌ Before update error:', beforeError);
+      
+      if (!beforeError && beforeUpdate) {
+        const { data: afterUpdate, error: updateError } = await supabase
+          .from('profiles')
+          .update({
+            subscription_tier: 'premium',
+            subscription_status: 'active',
+            updated_at: new Date().toISOString()
+          })
+          .eq('id', userId)
+          .select();
+        
+        console.log('📋 Update result:', afterUpdate);
+        console.log('❌ Update error:', updateError);
+        
+        res.json({
+          success: true,
+          beforeUpdate,
+          afterUpdate,
+          updateError
+        });
+      } else {
+        res.json({
+          success: false,
+          error: 'User not found',
+          beforeError
+        });
+      }
+    } else {
+      res.json({
+        success: true,
+        message: 'Webhook test endpoint working',
+        receivedData: req.body
+      });
+    }
+  } catch (error) {
+    console.error('❌ Webhook test error:', error);
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+  
+  console.log('🧪 ===========================================\n');
 });
 
 // Start the server
