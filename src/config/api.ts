@@ -1,9 +1,5 @@
 // API Configuration
-const API_BASE_URL = import.meta.env.VITE_API_URL || (
-  import.meta.env.MODE === 'production' 
-    ? window.location.origin 
-    : 'http://localhost:5050'
-);
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://practiceqscom-production.up.railway.app';
 
 export const API_CONFIG = {
   BASE_URL: API_BASE_URL,
