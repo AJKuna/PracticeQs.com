@@ -10,7 +10,6 @@ import LandingPage from './components/LandingPage';
 import QuestionGenerator from './components/QuestionGenerator';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsAndConditions from './components/TermsAndConditions';
-import Contact from './components/Contact';
 
 function App() {
   return (
@@ -19,6 +18,7 @@ function App() {
         <Routes>
           {/* Public routes */}
           <Route path="/" element={<BetaLanding />} />
+          <Route path="/lander" element={<Navigate to="/home" replace />} />
           <Route path="/home" element={<LandingPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
@@ -26,7 +26,6 @@ function App() {
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/terms" element={<TermsAndConditions />} />
-          <Route path="/contact" element={<Contact />} />
 
           {/* Protected routes */}
           <Route

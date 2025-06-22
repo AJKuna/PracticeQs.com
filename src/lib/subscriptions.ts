@@ -1,4 +1,5 @@
 import { supabase } from './supabase';
+import { API_CONFIG } from '../config/api';
 
 export interface SubscriptionInfo {
   tier: 'free' | 'premium' | 'enterprise';
@@ -75,7 +76,7 @@ export const getSubscriptionHistory = async (userId: string) => {
  */
 export const cancelSubscription = async (userId: string): Promise<boolean> => {
   try {
-    const response = await fetch('/api/cancel-subscription', {
+    const response = await fetch(`${API_CONFIG.BASE_URL}/api/cancel-subscription`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -99,7 +100,7 @@ export const cancelSubscription = async (userId: string): Promise<boolean> => {
  */
 export const createCustomerPortalSession = async (userId: string): Promise<string | null> => {
   try {
-    const response = await fetch('/api/create-portal-session', {
+    const response = await fetch(API_CONFIG.ENDPOINTS.CREATE_PORTAL_SESSION, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

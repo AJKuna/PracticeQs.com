@@ -11,13 +11,15 @@ export default defineConfig(({ mode }) => {
     server: {
       host: true,
       port: frontendPort,
-      proxy: {
-        '/api': {
-          target: process.env.VITE_API_URL || 'http://localhost:5050',
-          changeOrigin: true,
-          secure: false,
+      ...(mode === 'development' && {
+        proxy: {
+          '/api': {
+            target: process.env.VITE_API_URL || 'http://localhost:5050',
+            changeOrigin: true,
+            secure: false,
+          }
         }
-      }
+      })
     },
     resolve: {
       alias: {

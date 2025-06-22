@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import jsPDF from 'jspdf';
 import PricingModal from './PricingModal';
+import { API_CONFIG } from '../config/api';
 
 // ... (interfaces and constants unchanged)
 
@@ -30,31 +31,28 @@ const QuestionGenerator: React.FC = () => {
   const [usage, setUsage] = useState<any>(null);
   const [showPricingModal, setShowPricingModal] = useState(false);
 
-  // Fetch user's current usage on component mount
+  // Fetch user usage on component mount and when user changes
   useEffect(() => {
-    if (user?.id) {
+    if (user) {
+      const fetchUsage = async () => {
+        try {
+          const response = await fetch(API_CONFIG.ENDPOINTS.USAGE(user.id));
+          if (response.ok) {
+            const data = await response.json();
+            setUsage(data);
+            
+            // Show pricing modal immediately if user hits their limit and is not premium
+            if (!data.isPremium && data.usage >= data.limit) {
+              setShowPricingModal(true);
+            }
+          }
+        } catch (error) {
+          console.error('Error fetching usage:', error);
+        }
+      };
       fetchUsage();
     }
-  }, [user?.id]);
-
-  const fetchUsage = async () => {
-    if (!user?.id) return;
-    
-    try {
-      const response = await fetch(`/api/usage/${user.id}`);
-      if (response.ok) {
-        const usageData = await response.json();
-        setUsage(usageData);
-        
-        // Show pricing modal immediately if user hits their limit and is not premium
-        if (!usageData.isPremium && usageData.usage >= usageData.limit) {
-          setShowPricingModal(true);
-        }
-      }
-    } catch (error) {
-      console.error('Error fetching usage:', error);
-    }
-  };
+  }, [user]);
 
   // Subject themes and placeholder
   const subjectThemes: any = {
@@ -146,6 +144,8 @@ const QuestionGenerator: React.FC = () => {
 
   // Fetch questions from backend
   const generateQuestions = async () => {
+    if (!user) return;
+
     setIsGenerating(true);
     setAlert(null);
     
@@ -156,23 +156,19 @@ const QuestionGenerator: React.FC = () => {
       return;
     }
 
-    if (!user?.id) {
-      setAlert({ type: 'error', message: 'Please log in to generate questions' });
-      setIsGenerating(false);
-      return;
-    }
-    
     try {
-      const response = await fetch('/api/generate-questions', {
+      const response = await fetch(API_CONFIG.ENDPOINTS.GENERATE_QUESTIONS, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify({
           subject: normalizedSubject,
           topic: searchTopic,
-          numQuestions: options.questionCount,
-          difficulty: options.difficulty,
           examLevel: options.examLevel,
           examBoard: options.examBoard,
+          difficulty: options.difficulty,
+          numQuestions: options.questionCount,
           userId: user.id
         }),
       });
@@ -200,9 +196,16 @@ const QuestionGenerator: React.FC = () => {
       
       const data = await response.json();
       setGeneratedQuestions(data);
+      setAlert({ type: 'success', message: `Generated ${data.length} questions successfully!` });
       
-      // Refresh usage after successful generation
-      await fetchUsage();
+      // Refresh usage after generating questions
+      if (user) {
+        const response = await fetch(API_CONFIG.ENDPOINTS.USAGE(user.id));
+        if (response.ok) {
+          const data = await response.json();
+          setUsage(data);
+        }
+      }
     } catch (error: any) {
       setAlert({ type: 'error', message: error.message || 'Error generating questions' });
     } finally {
@@ -213,18 +216,20 @@ const QuestionGenerator: React.FC = () => {
   const toggleSolutions = () => setShowSolutions((prev) => !prev);
   // Replace the existing generateSolutions function with this:
   const generateSolutions = async () => {
+    if (!generatedQuestions.length || !user) return;
+
     setIsGeneratingSolutions(true);
     setAlert(null);
+    
     try {
-      const response = await fetch('/api/generate-solutions', {
+      const response = await fetch(API_CONFIG.ENDPOINTS.GENERATE_SOLUTIONS, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify({
           questions: generatedQuestions,
-          subject: normalizedSubject,
-          topic: searchTopic,
-          examLevel: options.examLevel,
-          examBoard: options.examBoard
+          userId: user.id
         }),
       });
 
@@ -372,13 +377,14 @@ if (showSolutions && question.answer) {
 
   const handleManageSubscription = async () => {
     try {
-      const response = await fetch('/api/create-portal-session', {
+      const response = await fetch(API_CONFIG.ENDPOINTS.CREATE_PORTAL_SESSION, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          userId: user?.id
+          userId: user?.id,
+          returnUrl: window.location.origin + '/generator/' + subject
         })
       });
 
@@ -386,10 +392,13 @@ if (showSolutions && question.answer) {
         const { url } = await response.json();
         window.location.href = url;
       } else {
-        console.error('Failed to create portal session');
+        const errorData = await response.json();
+        console.error('Portal session error:', errorData);
+        alert(`Failed to create portal session: ${errorData.error || 'Unknown error'}`);
       }
     } catch (error) {
       console.error('Error creating portal session:', error);
+      alert('Network error creating portal session');
     }
   };
 

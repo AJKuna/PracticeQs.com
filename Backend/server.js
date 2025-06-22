@@ -14,27 +14,17 @@ console.log('🔑 Checking Stripe configuration...');
 console.log('STRIPE_SECRET_KEY exists:', !!process.env.STRIPE_SECRET_KEY);
 console.log('STRIPE_SECRET_KEY length:', process.env.STRIPE_SECRET_KEY?.length || 0);
 console.log('STRIPE_SECRET_KEY first 10 chars:', process.env.STRIPE_SECRET_KEY?.substring(0, 10) || 'undefined');
-console.log('STRIPE_SECRET_KEY last 10 chars:', process.env.STRIPE_SECRET_KEY?.substring(-10) || 'undefined');
 
-// Check for common invalid characters
-if (process.env.STRIPE_SECRET_KEY) {
-  const key = process.env.STRIPE_SECRET_KEY;
-  const hasNewlines = key.includes('\n');
-  const hasCarriageReturns = key.includes('\r');
-  const hasLeadingSpaces = key.startsWith(' ');
-  const hasTrailingSpaces = key.endsWith(' ');
-  const hasTabs = key.includes('\t');
-  
-  console.log('🔍 Key validation:');
-  console.log('- Has newlines:', hasNewlines);
-  console.log('- Has carriage returns:', hasCarriageReturns);
-  console.log('- Has leading spaces:', hasLeadingSpaces);
-  console.log('- Has trailing spaces:', hasTrailingSpaces);
-  console.log('- Has tabs:', hasTabs);
-  console.log('- Starts with sk_:', key.startsWith('sk_'));
+// Clean the Stripe key of any potential invisible characters
+let cleanStripeKey = process.env.STRIPE_SECRET_KEY;
+if (cleanStripeKey) {
+  // Remove any non-printable characters and trim
+  cleanStripeKey = cleanStripeKey.replace(/[^\x20-\x7E]/g, '').trim();
+  console.log('🧹 Cleaned key length:', cleanStripeKey.length);
+  console.log('🧹 Cleaned key first 10 chars:', cleanStripeKey.substring(0, 10));
 }
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+const stripe = new Stripe(cleanStripeKey, {
   apiVersion: '2023-10-16',
 });
 
