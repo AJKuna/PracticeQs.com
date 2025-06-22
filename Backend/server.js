@@ -98,7 +98,7 @@ app.use(express.json());
 const stagingModeCheck = async (req, res, next) => {
   // Skip staging check for health endpoints and webhooks
   const skipPaths = ['/api/health', '/api/stripe-webhook', '/api/webhook-diagnostics'];
-  if (skipPaths.some(path => req.path.includes(path))) {
+  if (skipPaths.some(path => req.path === path)) {
     return next();
   }
 
