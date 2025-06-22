@@ -10,6 +10,30 @@ import nodemailer from 'nodemailer';
 dotenv.config();
 
 // Initialize Stripe
+console.log('🔑 Checking Stripe configuration...');
+console.log('STRIPE_SECRET_KEY exists:', !!process.env.STRIPE_SECRET_KEY);
+console.log('STRIPE_SECRET_KEY length:', process.env.STRIPE_SECRET_KEY?.length || 0);
+console.log('STRIPE_SECRET_KEY first 10 chars:', process.env.STRIPE_SECRET_KEY?.substring(0, 10) || 'undefined');
+console.log('STRIPE_SECRET_KEY last 10 chars:', process.env.STRIPE_SECRET_KEY?.substring(-10) || 'undefined');
+
+// Check for common invalid characters
+if (process.env.STRIPE_SECRET_KEY) {
+  const key = process.env.STRIPE_SECRET_KEY;
+  const hasNewlines = key.includes('\n');
+  const hasCarriageReturns = key.includes('\r');
+  const hasLeadingSpaces = key.startsWith(' ');
+  const hasTrailingSpaces = key.endsWith(' ');
+  const hasTabs = key.includes('\t');
+  
+  console.log('🔍 Key validation:');
+  console.log('- Has newlines:', hasNewlines);
+  console.log('- Has carriage returns:', hasCarriageReturns);
+  console.log('- Has leading spaces:', hasLeadingSpaces);
+  console.log('- Has trailing spaces:', hasTrailingSpaces);
+  console.log('- Has tabs:', hasTabs);
+  console.log('- Starts with sk_:', key.startsWith('sk_'));
+}
+
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: '2023-10-16',
 });
@@ -1039,13 +1063,22 @@ app.post('/api/create-portal-session', async (req, res) => {
   try {
     const { userId, returnUrl } = req.body;
     
+    console.log('🏪 Creating customer portal session for user:', userId);
+    console.log('📍 Return URL:', returnUrl);
+    
     if (!userId || !returnUrl) {
+      console.log('❌ Missing required parameters:', { userId: !!userId, returnUrl: !!returnUrl });
       return res.status(400).json({ error: 'Missing required parameters' });
     }
 
-    console.log('🏪 Creating customer portal session for user:', userId);
+    // Check if Stripe is configured
+    if (!stripe) {
+      console.log('❌ Stripe not configured');
+      return res.status(500).json({ error: 'Stripe not configured' });
+    }
 
-    // Get user profile to find their Stripe customer ID
+    // Get user profile to find their email
+    console.log('🔍 Looking up user profile in Supabase...');
     const { data: profile, error: profileError } = await supabase
       .from('profiles')
       .select('email')
@@ -1053,12 +1086,21 @@ app.post('/api/create-portal-session', async (req, res) => {
       .single();
 
     if (profileError) {
+      console.log('❌ Profile error:', profileError);
       return res.status(400).json({ error: 'User not found' });
     }
+
+    if (!profile || !profile.email) {
+      console.log('❌ No email found for user:', profile);
+      return res.status(400).json({ error: 'User email not found' });
+    }
+
+    console.log('✅ Found user email:', profile.email);
 
     // Find or create Stripe customer
     let customer;
     try {
+      console.log('🔍 Searching for existing Stripe customer...');
       // Try to find existing customer by email
       const customers = await stripe.customers.list({
         email: profile.email,
@@ -1067,7 +1109,9 @@ app.post('/api/create-portal-session', async (req, res) => {
       
       if (customers.data.length > 0) {
         customer = customers.data[0];
+        console.log('✅ Found existing Stripe customer:', customer.id);
       } else {
+        console.log('👤 Creating new Stripe customer...');
         // Create new customer if none exists
         customer = await stripe.customers.create({
           email: profile.email,
@@ -1075,25 +1119,35 @@ app.post('/api/create-portal-session', async (req, res) => {
             userId: userId,
           },
         });
+        console.log('✅ Created new Stripe customer:', customer.id);
       }
-    } catch (error) {
-      console.error('Error finding/creating customer:', error);
-      return res.status(500).json({ error: 'Failed to process customer data' });
+    } catch (stripeCustomerError) {
+      console.error('❌ Error finding/creating customer:', stripeCustomerError);
+      return res.status(500).json({ error: 'Failed to process customer data', details: stripeCustomerError.message });
     }
 
     // Create portal session
-    const session = await stripe.billingPortal.sessions.create({
-      customer: customer.id,
-      return_url: returnUrl,
-    });
+    try {
+      console.log('🚪 Creating Stripe billing portal session...');
+      const session = await stripe.billingPortal.sessions.create({
+        customer: customer.id,
+        return_url: returnUrl,
+      });
 
-    console.log('✅ Customer portal session created');
-    
-    res.json({
-      url: session.url
-    });
+      console.log('✅ Customer portal session created successfully:', session.id);
+      
+      res.json({
+        url: session.url
+      });
+    } catch (portalError) {
+      console.error('❌ Error creating portal session:', portalError);
+      return res.status(500).json({ 
+        error: 'Failed to create portal session', 
+        details: portalError.message 
+      });
+    }
   } catch (error) {
-    console.error('❌ Error creating portal session:', error);
+    console.error('❌ Unexpected error creating portal session:', error);
     res.status(500).json({ 
       error: 'Failed to create portal session',
       details: error.message 
