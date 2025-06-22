@@ -1557,7 +1557,7 @@ const stagingModeCheck = async (req, res, next) => {
   }
   
   // In staging mode, check if user is authorized
-  const testEmail = 'aj@practiceqs.com';
+  const authorizedEmails = ['aj@practiceqs.com', 'aj-k121@outlook.com'];
   const { userId } = req.body || {};
   
   // If no userId provided, reject (except for contact form which doesn't require auth)
@@ -1569,7 +1569,7 @@ const stagingModeCheck = async (req, res, next) => {
     });
   }
   
-  // If userId provided, check if it belongs to test user
+  // If userId provided, check if it belongs to an authorized user
   if (userId) {
     try {
       // Check user profile in database
@@ -1579,7 +1579,7 @@ const stagingModeCheck = async (req, res, next) => {
         .eq('id', userId)
         .single();
       
-      if (error || !profile || profile.email !== testEmail) {
+      if (error || !profile || !authorizedEmails.includes(profile.email)) {
         console.log(`🚫 Staging mode: Blocked access for user ${userId} (email: ${profile?.email || 'unknown'})`);
         return res.status(403).json({
           error: 'Site is currently in testing mode',
@@ -1588,7 +1588,7 @@ const stagingModeCheck = async (req, res, next) => {
         });
       }
       
-      console.log(`✅ Staging mode: Allowed access for test user ${testEmail}`);
+      console.log(`✅ Staging mode: Allowed access for authorized user ${profile.email}`);
     } catch (dbError) {
       console.error('❌ Error checking user in staging mode:', dbError);
       return res.status(403).json({

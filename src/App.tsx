@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { ProtectedRoute } from './components/auth/ProtectedRoute';
 import { Login } from './components/auth/Login';
@@ -16,14 +16,36 @@ import Contact from './components/Contact';
 // Staging Mode Component
 const StagingGate: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user, profile, loading } = useAuth();
+  const location = useLocation();
   
   // Check if site is live to public
   const isLivePublic = import.meta.env.VITE_IS_LIVE_PUBLIC === 'true';
-  const testEmail = 'aj@practiceqs.com';
+  const authorizedEmails = ['aj@practiceqs.com', 'aj-k121@outlook.com'];
+  
+  // Allow access to authentication pages even in staging mode
+  const authPages = ['/login', '/signup', '/forgot-password', '/reset-password'];
+  const isAuthPage = authPages.includes(location.pathname);
   
   // If site is live to public, always show content
   if (isLivePublic) {
     return <>{children}</>;
+  }
+  
+  // If on an auth page, allow access even in staging mode
+  if (isAuthPage) {
+    return (
+      <>
+        {/* Staging Banner for auth pages */}
+        <div className="bg-orange-100 border-b border-orange-200 px-4 py-2">
+          <div className="max-w-7xl mx-auto">
+            <p className="text-orange-800 text-sm font-medium text-center">
+              🧪 <strong>STAGING MODE:</strong> Site is in testing. Authorized emails: {authorizedEmails.join(', ')}
+            </p>
+          </div>
+        </div>
+        {children}
+      </>
+    );
   }
   
   // If still loading auth state, show loading
@@ -38,11 +60,11 @@ const StagingGate: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     );
   }
   
-  // If user is logged in and is the test user, allow access
-  if (user && (user.email === testEmail || profile?.email === testEmail)) {
+  // If user is logged in and is an authorized user, allow access
+  if (user && (authorizedEmails.includes(user.email || '') || authorizedEmails.includes(profile?.email || ''))) {
     return (
       <>
-        {/* Staging Banner for test user */}
+        {/* Staging Banner for authorized users */}
         <div className="bg-orange-100 border-b border-orange-200 px-4 py-2">
           <div className="max-w-7xl mx-auto">
             <p className="text-orange-800 text-sm font-medium text-center">
