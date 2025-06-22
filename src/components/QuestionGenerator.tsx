@@ -11,7 +11,7 @@ import { API_CONFIG } from '../config/api';
 const QuestionGenerator: React.FC = () => {
   const { subject } = useParams<{ subject: string }>();
   const navigate = useNavigate();
-  const { user, profile } = useAuth();
+  const { user, profile, refreshProfile } = useAuth();
   const normalizedSubject = subject?.replace(/-/g, ' ') || 'mathematics';
 
   // State
@@ -50,9 +50,25 @@ const QuestionGenerator: React.FC = () => {
           console.error('Error fetching usage:', error);
         }
       };
-      fetchUsage();
+      
+      // Refresh user profile to ensure we have the latest subscription status
+      // This is especially important after returning from payment flow
+      const refreshUserProfile = async () => {
+        try {
+          console.log('🔄 Refreshing user profile on component mount...');
+          await refreshProfile();
+        } catch (error) {
+          console.error('❌ Error refreshing profile:', error);
+        }
+      };
+      
+      // Execute both functions
+      Promise.all([
+        fetchUsage(),
+        refreshUserProfile()
+      ]);
     }
-  }, [user]);
+  }, [user, refreshProfile]);
 
   // Subject themes and placeholder
   const subjectThemes: any = {

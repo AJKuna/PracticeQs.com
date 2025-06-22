@@ -16,13 +16,57 @@ const PricingModal: React.FC<PricingModalProps> = ({ isOpen, onClose }) => {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('upgrade') === 'success') {
-      // Payment was successful, refresh profile and close modal
-      refreshProfile();
-      onClose();
-      // Clean up URL
+      // Payment was successful, wait a moment then refresh profile multiple times
+      // to ensure we get the updated data from the webhook
+      console.log('🎉 Payment successful, refreshing profile...');
+      
+      const refreshWithRetry = async (attemptCount = 0) => {
+        const maxAttempts = 5;
+        const delay = Math.min(1000 * Math.pow(2, attemptCount), 10000); // Exponential backoff up to 10s
+        
+        console.log(`🔄 Profile refresh attempt ${attemptCount + 1}/${maxAttempts}`);
+        
+        // Wait before attempting refresh
+        await new Promise(resolve => setTimeout(resolve, delay));
+        
+        try {
+          await refreshProfile();
+          
+          // Check if profile was updated to premium
+          // Note: We need to check the profile state after refresh
+          // Since refreshProfile is async, we'll check in the next render cycle
+          setTimeout(() => {
+            // Get the updated profile from context
+            const updatedProfile = profile;
+            if (updatedProfile?.subscription_tier === 'premium') {
+              console.log('✅ Profile successfully updated to premium');
+              onClose();
+            } else if (attemptCount < maxAttempts - 1) {
+              console.log('⏳ Profile not yet updated, retrying...');
+              refreshWithRetry(attemptCount + 1);
+            } else {
+              console.log('⚠️ Profile update verification failed after max attempts');
+              // Still close modal but could show a message
+              onClose();
+            }
+          }, 500);
+          
+        } catch (error) {
+          console.error('❌ Error refreshing profile:', error);
+          if (attemptCount < maxAttempts - 1) {
+            refreshWithRetry(attemptCount + 1);
+          } else {
+            onClose(); // Close anyway after max attempts
+          }
+        }
+      };
+      
+      refreshWithRetry();
+      
+      // Clean up URL immediately
       window.history.replaceState({}, document.title, window.location.pathname);
     }
-  }, [refreshProfile, onClose]);
+  }, [refreshProfile, onClose, profile]);
 
   if (!isOpen) return null;
 

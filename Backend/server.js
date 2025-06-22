@@ -94,6 +94,70 @@ app.use(cors());
 app.use('/api/stripe-webhook', express.raw({ type: 'application/json' }));
 app.use(express.json());
 
+// Staging Mode Middleware
+const stagingModeCheck = async (req, res, next) => {
+  // Skip staging check for health endpoints and webhooks
+  const skipPaths = ['/api/health', '/api/stripe-webhook', '/api/webhook-diagnostics'];
+  if (skipPaths.some(path => req.path.includes(path))) {
+    return next();
+  }
+
+  // Check if site is live to public
+  const isLivePublic = process.env.IS_LIVE_PUBLIC === 'true';
+  
+  // If site is live to public, allow all requests
+  if (isLivePublic) {
+    return next();
+  }
+  
+  // In staging mode, check if user is authorized
+  const testEmail = 'aj@practiceqs.com';
+  const { userId } = req.body || {};
+  
+  // If no userId provided, reject (except for contact form which doesn't require auth)
+  if (!userId && !req.path.includes('/contact')) {
+    return res.status(403).json({
+      error: 'Site is currently in testing mode',
+      isStaging: true,
+      message: 'Access is restricted to authorized users only'
+    });
+  }
+  
+  // If userId provided, check if it belongs to test user
+  if (userId) {
+    try {
+      // Check user profile in database
+      const { data: profile, error } = await supabase
+        .from('profiles')
+        .select('email')
+        .eq('id', userId)
+        .single();
+      
+      if (error || !profile || profile.email !== testEmail) {
+        console.log(`🚫 Staging mode: Blocked access for user ${userId} (email: ${profile?.email || 'unknown'})`);
+        return res.status(403).json({
+          error: 'Site is currently in testing mode',
+          isStaging: true,
+          message: 'This site is being tested and will be available to the public soon'
+        });
+      }
+      
+      console.log(`✅ Staging mode: Allowed access for test user ${testEmail}`);
+    } catch (dbError) {
+      console.error('❌ Error checking user in staging mode:', dbError);
+      return res.status(403).json({
+        error: 'Site is currently in testing mode',
+        isStaging: true
+      });
+    }
+  }
+  
+  next();
+};
+
+// Apply staging mode check to all API routes
+app.use('/api', stagingModeCheck);
+
 // Usage tracking functions
 const getTodaysDate = () => {
   return new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
@@ -947,6 +1011,28 @@ async function handleCheckoutSessionCompleted(session) {
   console.log('👤 Processing upgrade for user:', userId);
 
   try {
+    // Verify user exists in our database first
+    console.log('🔍 Verifying user exists in profiles table...');
+    const { data: userProfile, error: userProfileError } = await supabase
+      .from('profiles')
+      .select('id, email, subscription_tier, subscription_status')
+      .eq('id', userId)
+      .single();
+    
+    if (userProfileError) {
+      console.error('❌ Error finding user profile:', userProfileError);
+      if (userProfileError.code === 'PGRST116') {
+        console.error('❌ User profile does not exist for userId:', userId);
+        return;
+      }
+    }
+    
+    console.log('✅ User profile found:', {
+      id: userProfile?.id,
+      email: userProfile?.email,
+      current_tier: userProfile?.subscription_tier
+    });
+
     // Get subscription details from Stripe
     console.log('🔍 Retrieving subscription from Stripe:', subscriptionId);
     const subscription = await stripe.subscriptions.retrieve(subscriptionId);
@@ -999,11 +1085,12 @@ async function handleCheckoutSessionCompleted(session) {
 
     console.log('📅 Subscription dates:', { startDate, endDate });
 
-    // Update user profile in Supabase
+    // Update user profile in Supabase with retry logic
     const updateData = {
       subscription_tier: tier,
       subscription_status: 'active',
-      daily_question_limit: null // Remove daily limit for premium users
+      daily_question_limit: null, // Remove daily limit for premium users
+      updated_at: new Date().toISOString()
     };
     
     if (startDate) updateData.subscription_start_date = startDate;
@@ -1011,21 +1098,59 @@ async function handleCheckoutSessionCompleted(session) {
     
     console.log('💾 Updating Supabase with:', updateData);
     
-    const { error } = await supabase
-      .from('profiles')
-      .update(updateData)
-      .eq('id', userId);
+    // Implement retry logic for database update
+    let updateSuccess = false;
+    let retryCount = 0;
+    const maxRetries = 3;
+    
+    while (!updateSuccess && retryCount < maxRetries) {
+      retryCount++;
+      console.log(`🔄 Database update attempt ${retryCount}/${maxRetries}`);
+      
+      try {
+        const { data: updateResult, error: updateError } = await supabase
+          .from('profiles')
+          .update(updateData)
+          .eq('id', userId)
+          .select();
 
-    if (error) {
-      console.error('❌ Error updating user subscription in Supabase:', error);
-      return;
+        if (updateError) {
+          console.error(`❌ Database update attempt ${retryCount} failed:`, updateError);
+          if (retryCount === maxRetries) {
+            throw updateError;
+          }
+          // Wait before retrying
+          await new Promise(resolve => setTimeout(resolve, 1000 * retryCount));
+        } else {
+          console.log('✅ Database update successful:', updateResult);
+          updateSuccess = true;
+        }
+      } catch (retryError) {
+        console.error(`❌ Exception during update attempt ${retryCount}:`, retryError);
+        if (retryCount === maxRetries) {
+          throw retryError;
+        }
+        await new Promise(resolve => setTimeout(resolve, 1000 * retryCount));
+      }
     }
 
-    console.log('✅ Successfully updated user profile in Supabase');
+    // Verify the update worked by re-fetching the user
+    console.log('🔍 Verifying database update...');
+    const { data: updatedProfile, error: verifyError } = await supabase
+      .from('profiles')
+      .select('id, email, subscription_tier, subscription_status, subscription_start_date, subscription_end_date')
+      .eq('id', userId)
+      .single();
+    
+    if (verifyError) {
+      console.error('❌ Error verifying update:', verifyError);
+    } else {
+      console.log('✅ Verified updated profile:', updatedProfile);
+    }
 
     // Log subscription history
     try {
-      await supabase
+      const { error: historyError } = await supabase
         .from('subscription_history')
         .insert({
           user_id: userId,
@@ -1035,15 +1160,27 @@ async function handleCheckoutSessionCompleted(session) {
           new_status: 'active',
           reason: `Stripe subscription created: ${subscriptionId}`
         });
-      console.log('📝 Subscription history logged');
+      
+      if (historyError) {
+        console.error('⚠️ Failed to log subscription history:', historyError);
+      } else {
+        console.log('📝 Subscription history logged successfully');
+      }
     } catch (historyError) {
-      console.error('⚠️ Failed to log subscription history (non-critical):', historyError);
+      console.error('⚠️ Exception logging subscription history:', historyError);
     }
 
     console.log('🎉 User upgraded to premium successfully:', userId);
     
   } catch (error) {
     console.error('❌ Error processing checkout session:', error);
+    console.error('❌ Error details:', {
+      message: error.message,
+      stack: error.stack,
+      userId: userId,
+      sessionId: session.id
+    });
+    throw error; // Re-throw to ensure webhook fails and Stripe retries
   }
 }
 
@@ -1436,6 +1573,136 @@ app.post('/api/contact', async (req, res) => {
       error: 'Failed to send message', 
       details: error.message 
     });
+  }
+});
+
+// Health check endpoint for monitoring webhook system
+app.get('/api/health', async (req, res) => {
+  const health = {
+    status: 'healthy',
+    timestamp: new Date().toISOString(),
+    checks: {
+      environment: {
+        status: 'unknown',
+        details: {}
+      },
+      supabase: {
+        status: 'unknown',
+        details: {}
+      },
+      stripe: {
+        status: 'unknown',
+        details: {}
+      }
+    }
+  };
+
+  // Check environment variables
+  try {
+    const requiredEnvVars = [
+      'STRIPE_SECRET_KEY',
+      'STRIPE_WEBHOOK_SECRET',
+      'SUPABASE_SERVICE_ROLE_KEY'
+    ];
+    
+    const missingVars = requiredEnvVars.filter(varName => !process.env[varName]);
+    
+    health.checks.environment = {
+      status: missingVars.length === 0 ? 'healthy' : 'unhealthy',
+      details: {
+        missingVariables: missingVars,
+        hasStripeKey: !!process.env.STRIPE_SECRET_KEY,
+        hasWebhookSecret: !!process.env.STRIPE_WEBHOOK_SECRET,
+        hasSupabaseKey: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
+        supabaseUrl: process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL
+      }
+    };
+  } catch (error) {
+    health.checks.environment = {
+      status: 'error',
+      details: { error: error.message }
+    };
+  }
+
+  // Check Supabase connection
+  try {
+    const { data, error } = await supabase
+      .from('profiles')
+      .select('count')
+      .limit(1);
+    
+    health.checks.supabase = {
+      status: error ? 'unhealthy' : 'healthy',
+      details: error ? { error: error.message } : { connected: true }
+    };
+  } catch (error) {
+    health.checks.supabase = {
+      status: 'error',
+      details: { error: error.message }
+    };
+  }
+
+  // Check Stripe connection
+  try {
+    const account = await stripe.accounts.retrieve();
+    health.checks.stripe = {
+      status: 'healthy',
+      details: { 
+        accountId: account.id,
+        email: account.email || 'N/A',
+        liveMode: !account.livemode ? false : true
+      }
+    };
+  } catch (error) {
+    health.checks.stripe = {
+      status: 'error',
+      details: { error: error.message }
+    };
+  }
+
+  // Determine overall health
+  const allHealthy = Object.values(health.checks).every(check => check.status === 'healthy');
+  health.status = allHealthy ? 'healthy' : 'degraded';
+
+  // Return appropriate status code
+  const statusCode = allHealthy ? 200 : 503;
+  res.status(statusCode).json(health);
+});
+
+// Webhook diagnostics endpoint (for debugging)
+app.get('/api/webhook-diagnostics', async (req, res) => {
+  if (!req.query.admin_key || req.query.admin_key !== process.env.ADMIN_KEY) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+
+  try {
+    // Get recent webhook events from Stripe
+    const events = await stripe.events.list({
+      limit: 10,
+      types: ['checkout.session.completed']
+    });
+
+    // Get recent subscription updates from database
+    const { data: recentSubscriptions, error } = await supabase
+      .from('subscription_history')
+      .select('*')
+      .order('changed_at', { ascending: false })
+      .limit(10);
+
+    res.json({
+      recentWebhookEvents: events.data.map(event => ({
+        id: event.id,
+        type: event.type,
+        created: new Date(event.created * 1000).toISOString(),
+        sessionId: event.data.object.id,
+        userId: event.data.object.client_reference_id,
+        paymentStatus: event.data.object.payment_status
+      })),
+      recentSubscriptionUpdates: recentSubscriptions || [],
+      error: error?.message
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 });
 
