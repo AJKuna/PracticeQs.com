@@ -852,44 +852,72 @@ app.post('/api/create-checkout-session', async (req, res) => {
 
 // Stripe webhook endpoint (for handling successful payments)
 app.post('/api/stripe-webhook', async (req, res) => {
+  console.log('🎯 Webhook received');
+  console.log('📊 Headers:', req.headers);
+  console.log('📦 Body type:', typeof req.body);
+  console.log('📏 Body length:', req.body?.length);
+  
   const sig = req.headers['stripe-signature'];
+  
+  if (!sig) {
+    console.error('❌ No stripe-signature header found');
+    return res.status(400).send('Webhook Error: No signature header');
+  }
+  
+  if (!process.env.STRIPE_WEBHOOK_SECRET) {
+    console.error('❌ STRIPE_WEBHOOK_SECRET not configured');
+    return res.status(500).send('Webhook Error: Server configuration error');
+  }
+  
   let event;
 
   try {
+    console.log('🔐 Attempting to verify webhook signature...');
     event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
+    console.log('✅ Webhook signature verified successfully');
   } catch (err) {
     console.error('❌ Webhook signature verification failed:', err.message);
+    console.error('🔍 Signature header:', sig);
+    console.error('🔍 Webhook secret exists:', !!process.env.STRIPE_WEBHOOK_SECRET);
+    console.error('🔍 Webhook secret length:', process.env.STRIPE_WEBHOOK_SECRET?.length);
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
 
-  console.log('🎣 Received Stripe webhook:', event.type);
+  console.log('🎣 Processing Stripe webhook:', event.type);
+  console.log('🆔 Event ID:', event.id);
 
   try {
     switch (event.type) {
       case 'checkout.session.completed':
+        console.log('💳 Processing checkout completion...');
         await handleCheckoutSessionCompleted(event.data.object);
         break;
       
       case 'customer.subscription.updated':
+        console.log('🔄 Processing subscription update...');
         await handleSubscriptionUpdated(event.data.object);
         break;
       
       case 'customer.subscription.deleted':
+        console.log('❌ Processing subscription deletion...');
         await handleSubscriptionDeleted(event.data.object);
         break;
       
       case 'invoice.payment_succeeded':
+        console.log('💰 Processing successful payment...');
         await handlePaymentSucceeded(event.data.object);
         break;
       
       case 'invoice.payment_failed':
+        console.log('💸 Processing failed payment...');
         await handlePaymentFailed(event.data.object);
         break;
       
       default:
-        console.log(`Unhandled event type: ${event.type}`);
+        console.log(`ℹ️ Unhandled event type: ${event.type}`);
     }
 
+    console.log('✅ Webhook processed successfully');
     res.json({ received: true });
   } catch (error) {
     console.error('❌ Webhook processing error:', error);
@@ -900,18 +928,52 @@ app.post('/api/stripe-webhook', async (req, res) => {
 // Webhook handler functions
 async function handleCheckoutSessionCompleted(session) {
   console.log('✅ Processing checkout session completed:', session.id);
+  console.log('📋 Session data:', JSON.stringify(session, null, 2));
   
   const userId = session.client_reference_id;
   const subscriptionId = session.subscription;
   
   if (!userId) {
-    console.error('No userId found in session metadata');
+    console.error('❌ No userId found in session client_reference_id');
+    console.error('📋 Available session data:', {
+      id: session.id,
+      client_reference_id: session.client_reference_id,
+      customer: session.customer,
+      metadata: session.metadata
+    });
     return;
   }
 
+  console.log('👤 Processing upgrade for user:', userId);
+
   try {
     // Get subscription details from Stripe
+    console.log('🔍 Retrieving subscription from Stripe:', subscriptionId);
     const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+    console.log('📊 Subscription details:', {
+      id: subscription.id,
+      status: subscription.status,
+      current_period_start: subscription.current_period_start,
+      current_period_end: subscription.current_period_end,
+      metadata: subscription.metadata
+    });
+    
+    // Ensure subscription has userId in metadata for future webhooks
+    if (!subscription.metadata.userId) {
+      console.log('🔧 Adding userId to subscription metadata...');
+      try {
+        await stripe.subscriptions.update(subscriptionId, {
+          metadata: {
+            ...subscription.metadata,
+            userId: userId
+          }
+        });
+        console.log('✅ Updated subscription metadata with userId');
+      } catch (metadataError) {
+        console.error('⚠️ Failed to update subscription metadata (non-critical):', metadataError);
+      }
+    }
+    
     const priceId = subscription.items.data[0].price.id;
     
     // Determine subscription tier based on price
@@ -922,76 +984,137 @@ async function handleCheckoutSessionCompleted(session) {
       billingPeriod = 'yearly';
     }
 
+    console.log('💎 Upgrading user to:', tier, '(' + billingPeriod + ')');
+
+    // Safely handle timestamps
+    let startDate = null;
+    let endDate = null;
+    
+    if (subscription.current_period_start && !isNaN(subscription.current_period_start)) {
+      startDate = new Date(subscription.current_period_start * 1000).toISOString();
+    }
+    if (subscription.current_period_end && !isNaN(subscription.current_period_end)) {
+      endDate = new Date(subscription.current_period_end * 1000).toISOString();
+    }
+
+    console.log('📅 Subscription dates:', { startDate, endDate });
+
     // Update user profile in Supabase
+    const updateData = {
+      subscription_tier: tier,
+      subscription_status: 'active',
+      daily_question_limit: null // Remove daily limit for premium users
+    };
+    
+    if (startDate) updateData.subscription_start_date = startDate;
+    if (endDate) updateData.subscription_end_date = endDate;
+    
+    console.log('💾 Updating Supabase with:', updateData);
+    
     const { error } = await supabase
       .from('profiles')
-      .update({
-        subscription_tier: tier,
-        subscription_status: 'active',
-        subscription_start_date: new Date(subscription.current_period_start * 1000).toISOString(),
-        subscription_end_date: new Date(subscription.current_period_end * 1000).toISOString(),
-        daily_question_limit: null // Remove daily limit for premium users
-      })
+      .update(updateData)
       .eq('id', userId);
 
     if (error) {
-      console.error('Error updating user subscription:', error);
+      console.error('❌ Error updating user subscription in Supabase:', error);
       return;
     }
 
-    // Log subscription history
-    await supabase
-      .from('subscription_history')
-      .insert({
-        user_id: userId,
-        previous_tier: 'free',
-        new_tier: tier,
-        previous_status: 'active',
-        new_status: 'active',
-        reason: `Stripe subscription created: ${subscriptionId}`
-      });
+    console.log('✅ Successfully updated user profile in Supabase');
 
-    console.log('✅ User upgraded to premium:', userId);
+    // Log subscription history
+    try {
+      await supabase
+        .from('subscription_history')
+        .insert({
+          user_id: userId,
+          previous_tier: 'free',
+          new_tier: tier,
+          previous_status: 'active',
+          new_status: 'active',
+          reason: `Stripe subscription created: ${subscriptionId}`
+        });
+      console.log('📝 Subscription history logged');
+    } catch (historyError) {
+      console.error('⚠️ Failed to log subscription history (non-critical):', historyError);
+    }
+
+    console.log('🎉 User upgraded to premium successfully:', userId);
     
   } catch (error) {
-    console.error('Error processing checkout session:', error);
+    console.error('❌ Error processing checkout session:', error);
   }
 }
 
 async function handleSubscriptionUpdated(subscription) {
   console.log('🔄 Processing subscription updated:', subscription.id);
+  console.log('📊 Subscription status:', subscription.status);
+  console.log('📋 Subscription metadata:', subscription.metadata);
   
-  const userId = subscription.metadata.userId;
-  if (!userId) return;
+  const userId = subscription.metadata?.userId;
+  if (!userId) {
+    console.error('❌ No userId found in subscription metadata');
+    console.error('📋 Available metadata:', subscription.metadata);
+    return;
+  }
+
+  console.log('👤 Processing subscription update for user:', userId);
 
   try {
     const status = subscription.status === 'active' ? 'active' : 'cancelled';
     
+    // Safely handle timestamps
+    let startDate = null;
+    let endDate = null;
+    
+    if (subscription.current_period_start && !isNaN(subscription.current_period_start)) {
+      startDate = new Date(subscription.current_period_start * 1000).toISOString();
+      console.log('📅 Valid start date:', startDate);
+    } else {
+      console.log('⚠️ Invalid or missing current_period_start:', subscription.current_period_start);
+    }
+    
+    if (subscription.current_period_end && !isNaN(subscription.current_period_end)) {
+      endDate = new Date(subscription.current_period_end * 1000).toISOString();
+      console.log('📅 Valid end date:', endDate);
+    } else {
+      console.log('⚠️ Invalid or missing current_period_end:', subscription.current_period_end);
+    }
+
+    const updateData = {
+      subscription_status: status,
+    };
+    
+    if (startDate) updateData.subscription_start_date = startDate;
+    if (endDate) updateData.subscription_end_date = endDate;
+    
+    console.log('💾 Updating Supabase with:', updateData);
+    
     const { error } = await supabase
       .from('profiles')
-      .update({
-        subscription_status: status,
-        subscription_start_date: new Date(subscription.current_period_start * 1000).toISOString(),
-        subscription_end_date: new Date(subscription.current_period_end * 1000).toISOString(),
-      })
+      .update(updateData)
       .eq('id', userId);
 
     if (error) {
-      console.error('Error updating subscription:', error);
+      console.error('❌ Error updating subscription in Supabase:', error);
       return;
     }
 
-    console.log('✅ Subscription updated for user:', userId);
+    console.log('✅ Subscription updated successfully for user:', userId);
   } catch (error) {
-    console.error('Error processing subscription update:', error);
+    console.error('❌ Error processing subscription update:', error);
   }
 }
 
 async function handleSubscriptionDeleted(subscription) {
   console.log('❌ Processing subscription deleted:', subscription.id);
   
-  const userId = subscription.metadata.userId;
-  if (!userId) return;
+  const userId = subscription.metadata?.userId;
+  if (!userId) {
+    console.error('❌ No userId found in subscription metadata');
+    return;
+  }
 
   try {
     // Downgrade user to free tier
@@ -1006,25 +1129,29 @@ async function handleSubscriptionDeleted(subscription) {
       .eq('id', userId);
 
     if (error) {
-      console.error('Error downgrading user:', error);
+      console.error('❌ Error downgrading user:', error);
       return;
     }
 
     // Log subscription history
-    await supabase
-      .from('subscription_history')
-      .insert({
-        user_id: userId,
-        previous_tier: 'premium',
-        new_tier: 'free',
-        previous_status: 'active',
-        new_status: 'cancelled',
-        reason: `Stripe subscription cancelled: ${subscription.id}`
-      });
+    try {
+      await supabase
+        .from('subscription_history')
+        .insert({
+          user_id: userId,
+          previous_tier: 'premium',
+          new_tier: 'free',
+          previous_status: 'active',
+          new_status: 'cancelled',
+          reason: `Stripe subscription cancelled: ${subscription.id}`
+        });
+    } catch (historyError) {
+      console.error('⚠️ Failed to log subscription history:', historyError);
+    }
 
     console.log('✅ User downgraded to free:', userId);
   } catch (error) {
-    console.error('Error processing subscription deletion:', error);
+    console.error('❌ Error processing subscription deletion:', error);
   }
 }
 
