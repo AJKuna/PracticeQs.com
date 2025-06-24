@@ -494,7 +494,7 @@ if (showSolutions && question.answer) {
         )}
 
         {/* Usage Counter */}
-        {usage && !usage.isPremium &&
+        {((usage && !usage.isPremium) || true) &&
           <div className="mb-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
             <div className="flex items-center justify-between">
               <div>
@@ -504,8 +504,8 @@ if (showSolutions && question.answer) {
                 <p className="text-lg font-semibold text-blue-900 dark:text-blue-100">
                   {(() => {
                     // Handle invalid data from database errors
-                    const currentUsage = isNaN(usage.usage) ? 30 : usage.usage;
-                    const currentLimit = usage.limit === 'unlimited' ? '∞' : (isNaN(usage.limit) ? 30 : usage.limit);
+                    const currentUsage = isNaN(usage?.usage) ? 30 : usage.usage;
+                    const currentLimit = usage?.limit === 'unlimited' ? '∞' : (isNaN(usage?.limit) ? 30 : usage?.limit);
                     return `${currentUsage}/${currentLimit} questions`;
                   })()}
                 </p>
@@ -523,13 +523,13 @@ if (showSolutions && question.answer) {
               <div className="w-full bg-gray-200 rounded-full h-2 dark:bg-gray-700">
                 <div 
                   className="bg-blue-600 h-2 rounded-full" 
-                  style={{ width: `${Math.min((usage.usage / usage.limit) * 100, 100)}%` }}
+                  style={{ width: `${Math.min(((usage?.usage || 0) / (usage?.limit || 1)) * 100, 100)}%` }}
                 ></div>
               </div>
               <div className="flex justify-between items-center mt-1">
                 <p className="text-xs text-gray-600 dark:text-gray-400">
                   {(() => {
-                    const remaining = usage.limit - usage.usage;
+                    const remaining = (usage?.limit || 0) - (usage?.usage || 0);
                     if (isNaN(remaining) || remaining <= 0) {
                       return "Zero questions remaining today.";
                     }
