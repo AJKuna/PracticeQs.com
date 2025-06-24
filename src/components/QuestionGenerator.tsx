@@ -507,7 +507,7 @@ if (showSolutions && question.answer) {
 
 {/* Usage Counter */}
 {usage && !usage.isPremium && (
-  <div className="mb-6 p-4 bg-red-500 text-white border-4 border-black" style={{ minHeight: '100px', fontSize: '20px' }}>
+  <div className="z-20 relative bg-red-500 text-white p-4 border-4 border-black" style={{ minHeight: '100px', fontSize: '20px' }}>
     <h3>USAGE BAR TEST - YOU SHOULD SEE THIS!</h3>
     <div className="flex items-center justify-between">
       <div>
