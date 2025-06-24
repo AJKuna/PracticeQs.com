@@ -493,10 +493,17 @@ if (showSolutions && question.answer) {
           </div>
         )}
 
-{/* Debugging - check console */}
-{usage && console.log('Usage data:', usage)}
-{usage && console.log('isPremium:', usage?.isPremium)}
-{usage && console.log('Should show usage bar:', usage && !usage.isPremium)}
+{/* Enhanced Debugging - check console */}
+{usage && console.log('=== USAGE DEBUG START ===')}
+{usage && console.log('Usage object:', JSON.stringify(usage, null, 2))}
+{usage && console.log('isPremium value:', usage?.isPremium)}
+{usage && console.log('isPremium type:', typeof usage?.isPremium)}
+{usage && console.log('isPremium === false:', usage?.isPremium === false)}
+{usage && console.log('isPremium == false:', usage?.isPremium == false)}
+{usage && console.log('!usage.isPremium:', !usage?.isPremium)}
+{usage && console.log('Condition (usage && !usage.isPremium):', usage && !usage?.isPremium)}
+{usage && console.log('=== USAGE DEBUG END ===')}
+
 
         {/* Usage Counter */}
         {(usage && !usage.isPremium) &&
