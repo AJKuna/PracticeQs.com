@@ -493,6 +493,10 @@ if (showSolutions && question.answer) {
           </div>
         )}
 
+console.log('Usage data:', usage);
+console.log('isPremium:', usage?.isPremium);
+console.log('Should show usage bar:', usage && !usage.isPremium);
+
         {/* Usage Counter */}
         {((usage && !usage.isPremium) || true) &&
           <div className="mb-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
