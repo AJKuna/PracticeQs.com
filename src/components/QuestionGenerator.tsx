@@ -505,54 +505,66 @@ if (showSolutions && question.answer) {
 {usage && console.log('=== USAGE DEBUG END ===')}
 
 
-        {/* Usage Counter */}
-{(usage && !usage.isPremium) &&
-  <div className="mb-6 p-4 bg-red-500 text-white border-4 border-black" style={{minHeight: '100px', fontSize: '20px'}}>
+{/* Usage Counter */}
+{usage && !usage.isPremium && (
+  <div className="mb-6 p-4 bg-red-500 text-white border-4 border-black" style={{ minHeight: '100px', fontSize: '20px' }}>
     <h3>USAGE BAR TEST - YOU SHOULD SEE THIS!</h3>
-            <div className="flex items-center justify-between">
-              <div>
-                <h3 className="text-sm font-medium text-blue-900 dark:text-blue-100">
-                  Daily Usage
-                </h3>
-                <p className="text-lg font-semibold text-blue-900 dark:text-blue-100">
-                  {(() => {
-                    // Handle invalid data from database errors
-                    const currentUsage = isNaN(usage?.usage) ? 30 : usage.usage;
-                    const currentLimit = usage?.limit === 'unlimited' ? '∞' : (isNaN(usage?.limit) ? 30 : usage?.limit);
-                    return `${currentUsage}/${currentLimit} questions`;
-                  })()}
-                </p>
-              </div>
-              <div className="text-right">
-                <button
-                  onClick={() => setShowPricingModal(true)}
-                  className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 hover:bg-blue-200 transition-colors cursor-pointer"
-                >
-                  Upgrade to Premium
-                </button>
-              </div>
-            </div>
-            <div className="mt-2">
-              <div className="w-full bg-gray-200 rounded-full h-2 dark:bg-gray-700">
-                <div 
-                  className="bg-blue-600 h-2 rounded-full" 
-                  style={{ width: `${Math.min(((usage?.usage || 0) / (usage?.limit || 1)) * 100, 100)}%` }}
-                ></div>
-              </div>
-              <div className="flex justify-between items-center mt-1">
-                <p className="text-xs text-gray-600 dark:text-gray-400">
-                  {(() => {
-                    const remaining = (usage?.limit || 0) - (usage?.usage || 0);
-                    if (isNaN(remaining) || remaining <= 0) {
-                      return "Zero questions remaining today.";
-                    }
-                    return `${remaining} questions remaining today`;
-                  })()}
-                </p>
-              </div>
-            </div>
-          </div>
-        }
+    <div className="flex items-center justify-between">
+      <div>
+        <h3 className="text-sm font-medium text-blue-900 dark:text-blue-100">
+          Daily Usage
+        </h3>
+        <p className="text-lg font-semibold text-blue-900 dark:text-blue-100">
+          {(() => {
+            // Handle invalid data from database errors
+            const currentUsage = isNaN(usage?.usage) ? 30 : usage.usage;
+            const currentLimit =
+              usage?.limit === 'unlimited'
+                ? '∞'
+                : isNaN(usage?.limit)
+                ? 30
+                : usage.limit;
+            return `${currentUsage}/${currentLimit} questions`;
+          })()}
+        </p>
+      </div>
+      <div className="text-right">
+        <button
+          onClick={() => setShowPricingModal(true)}
+          className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 hover:bg-blue-200 transition-colors cursor-pointer"
+        >
+          Upgrade to Premium
+        </button>
+      </div>
+    </div>
+
+    <div className="mt-2">
+      <div className="w-full bg-gray-200 rounded-full h-2 dark:bg-gray-700">
+        <div
+          className="bg-blue-600 h-2 rounded-full"
+          style={{
+            width: `${Math.min(
+              ((usage?.usage || 0) / (usage?.limit || 1)) * 100,
+              100
+            )}%`,
+          }}
+        ></div>
+      </div>
+      <div className="flex justify-between items-center mt-1">
+        <p className="text-xs text-gray-600 dark:text-gray-400">
+          {(() => {
+            const remaining = (usage?.limit || 0) - (usage?.usage || 0);
+            if (isNaN(remaining) || remaining <= 0) {
+              return "Zero questions remaining today.";
+            }
+            return `${remaining} questions remaining today`;
+          })()}
+        </p>
+      </div>
+    </div>
+  </div>
+)}
+
 
         <form onSubmit={handleSubmit} className="space-y-8">
           {/* Search Topic Input */}
