@@ -493,9 +493,10 @@ if (showSolutions && question.answer) {
           </div>
         )}
 
-console.log('Usage data:', usage);
-console.log('isPremium:', usage?.isPremium);
-console.log('Should show usage bar:', usage && !usage.isPremium);
+{/* Debugging - check console */}
+{usage && console.log('Usage data:', usage)}
+{usage && console.log('isPremium:', usage?.isPremium)}
+{usage && console.log('Should show usage bar:', usage && !usage.isPremium)}
 
         {/* Usage Counter */}
         {((usage && !usage.isPremium) || true) &&
