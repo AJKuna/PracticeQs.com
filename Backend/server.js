@@ -877,6 +877,8 @@ app.post('/api/create-checkout-session', async (req, res) => {
   }
 });
 
+app.use('/api/stripe-webhook', express.raw({ type: 'application/json' }));
+
 // Stripe webhook endpoint (for handling successful payments)
 app.post('/api/stripe-webhook', async (req, res) => {
   const timestamp = new Date().toISOString();
@@ -1274,12 +1276,61 @@ async function handleSubscriptionDeleted(subscription) {
   }
 }
 
+// REPLACE your existing handlePaymentSucceeded function with this:
+
 async function handlePaymentSucceeded(invoice) {
-  console.log('💰 Payment succeeded for subscription:', invoice.subscription);
+  console.log('💰 Payment succeeded for invoice:', invoice.id);
+  console.log('💰 Payment details:', {
+    amount: invoice.amount_paid / 100,
+    currency: invoice.currency.toUpperCase(),
+    customer: invoice.customer_email,
+    invoice_number: invoice.number
+  });
   
-  // Could add additional logic here for successful recurring payments
-  // For now, subscription.updated webhook handles the main logic
+  try {
+    // Get user details if this is a subscription payment
+    let userId = null;
+    
+    if (invoice.subscription) {
+      console.log('🔍 Getting subscription details:', invoice.subscription);
+      const subscription = await stripe.subscriptions.retrieve(invoice.subscription);
+      userId = subscription.metadata?.userId;
+      console.log('👤 Found userId from subscription:', userId);
+    }
+    
+    // Optional: Log payment to your database for record keeping
+    if (userId) {
+      try {
+        console.log('💾 Logging payment to database...');
+        
+        // Update user's last payment date (optional)
+        await supabase
+          .from('profiles')
+          .update({ 
+            last_payment_date: new Date().toISOString(),
+            subscription_status: 'active' // Ensure status is active after successful payment
+          })
+          .eq('id', userId);
+        
+        console.log('✅ Payment logged to database for user:', userId);
+        
+      } catch (dbError) {
+        console.error('⚠️ Failed to update database (non-critical):', dbError);
+        // Don't throw error - payment was successful, DB logging is optional
+      }
+    }
+    
+    // Stripe will automatically send the invoice email based on your dashboard settings
+    console.log('📧 Stripe will send invoice payment email to:', invoice.customer_email);
+    console.log('✅ Payment processing completed successfully');
+    
+  } catch (error) {
+    console.error('❌ Error handling payment success:', error);
+    console.error('❌ Error stack:', error.stack);
+    // Don't throw error unless it's critical - payment was successful
+  }
 }
+
 
 async function handlePaymentFailed(invoice) {
   console.log('💸 Payment failed for subscription:', invoice.subscription);
