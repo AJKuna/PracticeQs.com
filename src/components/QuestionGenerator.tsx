@@ -5,6 +5,7 @@ import { useAuth } from '../contexts/AuthContext';
 import jsPDF from 'jspdf';
 import PricingModal from './PricingModal';
 import { API_CONFIG } from '../config/api';
+import { trackQuestionGeneration, trackPDFExport, trackButtonClick, trackError, trackSubscription } from '../utils/analytics';
 
 // ... (interfaces and constants unchanged)
 
@@ -221,6 +222,9 @@ const QuestionGenerator: React.FC = () => {
       setGeneratedQuestions(data);
       setAlert({ type: 'success', message: `Generated ${data.length} questions successfully!` });
       
+      // Track successful question generation
+      trackQuestionGeneration(normalizedSubject, searchTopic, data.length, options.difficulty);
+      
       // Refresh usage after generating questions
       if (user) {
         const response = await fetch(API_CONFIG.ENDPOINTS.USAGE(user.id));
@@ -231,6 +235,8 @@ const QuestionGenerator: React.FC = () => {
       }
     } catch (error: any) {
       setAlert({ type: 'error', message: error.message || 'Error generating questions' });
+      // Track generation errors
+      trackError('question_generation', error.message || 'Unknown error', 'QuestionGenerator');
     } finally {
       setIsGenerating(false);
     }
@@ -378,6 +384,9 @@ if (showSolutions && question.answer) {
 
     // Save the PDF
     doc.save(`${normalizedSubject}-${searchTopic.replace(/\s+/g, '-')}-questions.pdf`);
+    
+    // Track PDF export
+    trackPDFExport(normalizedSubject, searchTopic, generatedQuestions.length);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -445,7 +454,11 @@ if (showSolutions && question.answer) {
             {/* Upgrade button - only show for non-premium users */}
             {profile && profile.subscription_tier === 'free' && (
               <button
-                onClick={() => setShowPricingModal(true)}
+                onClick={() => {
+                  trackSubscription('upgrade_clicked');
+                  trackButtonClick('Upgrade', 'QuestionGenerator');
+                  setShowPricingModal(true);
+                }}
                 className="flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-700 hover:bg-blue-100 border border-blue-200 rounded-lg transition-colors duration-200 shadow-sm"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -536,7 +549,11 @@ if (showSolutions && question.answer) {
       </div>
       <div className="text-right">
         <button
-          onClick={() => setShowPricingModal(true)}
+          onClick={() => {
+            trackSubscription('upgrade_clicked');
+            trackButtonClick('Upgrade to Premium', 'UsageCounter');
+            setShowPricingModal(true);
+          }}
           className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 hover:bg-blue-200 transition-colors cursor-pointer"
         >
           Upgrade to Premium

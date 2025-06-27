@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { Button } from '../ui/Button';
 import { Input } from '../ui/Input';
+import { trackAuth, trackButtonClick } from '../../utils/analytics';
 
 export const SignUp: React.FC = () => {
   const navigate = useNavigate();
@@ -47,6 +48,8 @@ export const SignUp: React.FC = () => {
       await signUp(formData.email, formData.password, formData.fullName);
       setUserEmail(formData.email);
       setSignupSuccess(true);
+      // Track successful sign up
+      trackAuth('sign_up', 'email');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred during sign up');
     } finally {
@@ -57,9 +60,14 @@ export const SignUp: React.FC = () => {
   const handleGoogleSignIn = async () => {
     setError(null);
     setIsGoogleLoading(true);
+    
+    // Track Google sign-in attempt
+    trackButtonClick('Google Sign In', 'SignUp');
 
     try {
       await signInWithGoogle();
+      // Track successful Google sign in
+      trackAuth('sign_up', 'google');
       // Note: OAuth redirects automatically, so navigation is handled by OAuth flow in real app
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred during Google sign in');
