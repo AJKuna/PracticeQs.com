@@ -165,6 +165,13 @@ const QuestionGenerator: React.FC = () => {
     setIsGenerating(true);
     setAlert(null);
     
+    // Validate topic is entered
+    if (!searchTopic.trim()) {
+      setAlert({ type: 'error', message: 'Please enter a topic' });
+      setIsGenerating(false);
+      return;
+    }
+    
     // Validate exam board for GCSE
     if (options.examLevel === 'gcse' && !options.examBoard) {
       setAlert({ type: 'error', message: 'Please choose an exam board' });
