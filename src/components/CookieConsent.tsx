@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { trackEvent } from '../utils/analytics';
 
 interface CookieConsentProps {
   onAccept: (preferences: CookiePreferences) => void;
