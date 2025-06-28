@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { ProtectedRoute } from './components/auth/ProtectedRoute';
@@ -12,6 +12,44 @@ import QuestionGenerator from './components/QuestionGenerator';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsAndConditions from './components/TermsAndConditions';
 import Contact from './components/Contact';
+import CookiePolicy from './components/CookiePolicy';
+import CookieConsent from './components/CookieConsent';
+import { consentManager, updateConsent, type CookiePreferences } from './utils/consentManager';
+import { initializeGoogleAnalytics, trackConsentEvent } from './utils/analytics';
+
+// GDPR Consent Wrapper Component
+const GDPRWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  useEffect(() => {
+    // Initialize Google Analytics with consent mode
+    initializeGoogleAnalytics();
+    
+    // Apply existing consent if available
+    if (consentManager.hasConsent()) {
+      consentManager.applyConsent();
+    }
+  }, []);
+
+  const handleConsentUpdate = (preferences: CookiePreferences) => {
+    updateConsent(preferences);
+    
+    // Track consent event
+    const consentTypes = [];
+    if (preferences.analytics) consentTypes.push('analytics');
+    if (preferences.marketing) consentTypes.push('marketing');
+    
+    trackConsentEvent(
+      consentTypes.length > 0 ? 'consent_given' : 'consent_denied', 
+      consentTypes.join(', ') || 'none'
+    );
+  };
+
+  return (
+    <>
+      {children}
+      <CookieConsent onAccept={handleConsentUpdate} />
+    </>
+  );
+};
 
 // Staging Mode Component
 const StagingGate: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -81,50 +119,33 @@ const StagingGate: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   // For everyone else, show the staging message
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
-      <div className="max-w-md w-full bg-white rounded-lg shadow-md p-8 text-center">
-        {/* Logo */}
+      <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-8 text-center">
         <div className="mb-6">
-          <img 
-            src="/logo.svg" 
-            alt="PracticeQs Logo" 
-            className="h-16 w-auto mx-auto"
+          <img
+            className="mx-auto h-16 w-auto"
+            src="/logo.svg"
+            alt="Practice Qs"
           />
         </div>
         
-        {/* Main message */}
-        <div className="mb-6">
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">
-            Coming Soon!
-          </h1>
-          <p className="text-gray-600 mb-4">
-            We're currently testing PracticeQs to ensure the best experience for our users.
-          </p>
-          <p className="text-gray-500 text-sm">
-            The site will be available to the public very soon. Thank you for your patience!
-          </p>
-        </div>
+        <h1 className="text-2xl font-bold text-gray-900 mb-4">
+          🚧 Coming Soon
+        </h1>
         
-        {/* Features preview */}
-        <div className="bg-blue-50 rounded-lg p-4 mb-6">
-          <h3 className="text-sm font-semibold text-blue-900 mb-2">What's Coming:</h3>
-          <ul className="text-xs text-blue-800 space-y-1 text-left">
-            <li>• AI-powered GCSE exam questions</li>
-            <li>• Multiple subjects and exam boards</li>
-            <li>• Detailed marking schemes</li>
-            <li>• PDF export functionality</li>
-          </ul>
-        </div>
+        <p className="text-gray-600 mb-6">
+          Practice Qs is currently in development. We're working hard to bring you the best 
+          question generation experience for educational purposes.
+        </p>
         
-        {/* Contact info */}
-        <div className="border-t pt-4">
-          <p className="text-xs text-gray-500 mb-2">
-            Want to be notified when we launch?
-          </p>
-          <a 
-            href="mailto:aj@practiceqs.com" 
-            className="text-blue-600 hover:text-blue-700 text-sm font-medium"
+        <div className="space-y-4">
+          <div className="text-sm text-gray-500">
+            Want early access? Contact us:
+          </div>
+          <a
+            href="mailto:aj@practiceqs.com"
+            className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors"
           >
-            Contact us
+            Get in Touch
           </a>
         </div>
       </div>
@@ -136,34 +157,37 @@ function App() {
   return (
     <AuthProvider>
       <Router>
-        <StagingGate>
-          <Routes>
-            {/* Public routes */}
-            <Route path="/" element={<BetaLanding />} />
-            <Route path="/lander" element={<Navigate to="/home" replace />} />
-            <Route path="/home" element={<LandingPage />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/forgot-password" element={<ForgotPassword />} />
-            <Route path="/reset-password" element={<ResetPassword />} />
-            <Route path="/privacy" element={<PrivacyPolicy />} />
-            <Route path="/terms" element={<TermsAndConditions />} />
-            <Route path="/contact" element={<Contact />} />
+        <GDPRWrapper>
+          <StagingGate>
+            <Routes>
+              {/* Public routes */}
+              <Route path="/" element={<BetaLanding />} />
+              <Route path="/lander" element={<Navigate to="/home" replace />} />
+              <Route path="/home" element={<LandingPage />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/reset-password" element={<ResetPassword />} />
+              <Route path="/privacy" element={<PrivacyPolicy />} />
+              <Route path="/terms" element={<TermsAndConditions />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/cookies" element={<CookiePolicy />} />
 
-            {/* Protected routes */}
-            <Route
-              path="/generator/:subject"
-              element={
-                <ProtectedRoute>
-                  <QuestionGenerator />
-                </ProtectedRoute>
-              }
-            />
+              {/* Protected routes */}
+              <Route
+                path="/generator/:subject"
+                element={
+                  <ProtectedRoute>
+                    <QuestionGenerator />
+                  </ProtectedRoute>
+                }
+              />
 
-            {/* Catch all route */}
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </StagingGate>
+              {/* Catch all route */}
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </StagingGate>
+        </GDPRWrapper>
       </Router>
     </AuthProvider>
   );

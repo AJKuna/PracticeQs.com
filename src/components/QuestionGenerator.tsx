@@ -220,7 +220,6 @@ const QuestionGenerator: React.FC = () => {
       
       const data = await response.json();
       setGeneratedQuestions(data);
-      setAlert({ type: 'success', message: `Generated ${data.length} questions successfully!` });
       
       // Track successful question generation
       trackQuestionGeneration(normalizedSubject, searchTopic, data.length, options.difficulty);

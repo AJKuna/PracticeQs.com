@@ -165,6 +165,12 @@ const LandingPage: React.FC = () => {
         Privacy Policy
       </button>
       <button
+        onClick={() => navigate('/cookies')}
+        className="bg-white text-gray-800 border border-gray-300 px-4 py-2 rounded-md hover:bg-gray-100 transition-colors"
+      >
+        Cookie Policy
+      </button>
+      <button
         onClick={() => navigate('/terms')}
         className="bg-white text-gray-800 border border-gray-300 px-4 py-2 rounded-md hover:bg-gray-100 transition-colors"
       >
