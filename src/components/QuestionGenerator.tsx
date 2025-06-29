@@ -315,18 +315,44 @@ const QuestionGenerator: React.FC = () => {
       }
     };
 
-    // Add background pattern to first page
+    // Function to add logo to top right corner
+    const addLogoToPage = () => {
+      try {
+        // Add "Practice Qs" logo to top right corner matching the SVG design
+        doc.setFont('times', 'normal'); // Using Times as closest approximation to Georgia
+        doc.setFontSize(16);
+        doc.setTextColor(0, 0, 0);
+        
+        // Position "Practice" centered at top right
+        const practiceText = 'Practice';
+        const qsText = 'Qs';
+        const practiceWidth = doc.getTextWidth(practiceText);
+        const qsWidth = doc.getTextWidth(qsText);
+        
+        // Position Practice
+        const practiceX = pageWidth - 20 - (practiceWidth / 2);
+        doc.text(practiceText, practiceX, 12);
+        
+        // Position Qs centered underneath Practice  
+        const qsX = pageWidth - 20 - (qsWidth / 2);
+        doc.text(qsText, qsX, 22); // Reduced gap to 10px
+        
+        doc.setFont('helvetica', 'normal'); // Reset to default font
+        doc.setTextColor(0, 0, 0); // Reset to black
+      } catch (error) {
+        console.log('Could not add logo to PDF');
+      }
+    };
+
+    // Add background pattern and logo to first page
     addBackgroundPattern();
+    addLogoToPage();
 
-    // Add title
-    doc.setFontSize(16);
-    doc.text(`${normalizedSubject.charAt(0).toUpperCase() + normalizedSubject.slice(1)} Practice Questions`, 20, yPosition);
-    yPosition += 10;
-
-    doc.setFontSize(12);
-    doc.text(`Topic: ${searchTopic}`, 20, yPosition);
-    yPosition += 10;
-    doc.text(`Difficulty: ${options.difficulty} | Level: ${options.examLevel.toUpperCase()}`, 20, yPosition);
+    // Add title - only topic name, bold and larger
+    doc.setFontSize(20);
+    doc.setFont('helvetica', 'bold');
+    doc.text(searchTopic, 20, yPosition);
+    doc.setFont('helvetica', 'normal'); // Reset to normal font
     yPosition += 20;
 
     // Add questions
@@ -335,6 +361,7 @@ const QuestionGenerator: React.FC = () => {
       if (yPosition > pageHeight - 40) {
         doc.addPage();
         addBackgroundPattern(); // Add pattern to new page
+        addLogoToPage(); // Add logo to new page
         yPosition = 20;
       }
 
