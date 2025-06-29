@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CheckCircle, Users, ArrowRight, TrendingUp, Star, X, ChevronDown } from 'lucide-react';
+import { CheckCircle, Users, ArrowRight, TrendingUp, Star, X, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const NewLandingPage: React.FC = () => {
   const navigate = useNavigate();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  const screenshots = ['/step1-screenshot.png', '/step2-screenshot.png', '/step3-screenshot.png'];
+  const currentImageIndex = selectedImage ? screenshots.indexOf(selectedImage) : -1;
 
   const handleGetStarted = () => {
     navigate('/home');
@@ -16,6 +19,18 @@ const NewLandingPage: React.FC = () => {
 
   const closeImageModal = () => {
     setSelectedImage(null);
+  };
+
+  const goToPreviousImage = () => {
+    if (currentImageIndex > 0) {
+      setSelectedImage(screenshots[currentImageIndex - 1]);
+    }
+  };
+
+  const goToNextImage = () => {
+    if (currentImageIndex < screenshots.length - 1) {
+      setSelectedImage(screenshots[currentImageIndex + 1]);
+    }
   };
 
   return (
@@ -33,6 +48,33 @@ const NewLandingPage: React.FC = () => {
             >
               <X className="h-8 w-8" />
             </button>
+            
+            {/* Previous Image Arrow */}
+            {currentImageIndex > 0 && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  goToPreviousImage();
+                }}
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 transition-colors bg-black bg-opacity-50 rounded-full p-2"
+              >
+                <ChevronLeft className="h-6 w-6" />
+              </button>
+            )}
+            
+            {/* Next Image Arrow */}
+            {currentImageIndex < screenshots.length - 1 && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  goToNextImage();
+                }}
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 transition-colors bg-black bg-opacity-50 rounded-full p-2"
+              >
+                <ChevronRight className="h-6 w-6" />
+              </button>
+            )}
+            
             <img 
               src={selectedImage} 
               alt="Enlarged screenshot"
