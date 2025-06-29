@@ -8,6 +8,7 @@ import { ForgotPassword } from './components/auth/ForgotPassword';
 import { ResetPassword } from './components/auth/ResetPassword';
 import BetaLanding from './components/BetaLanding';
 import LandingPage from './components/LandingPage';
+import NewLandingPage from './components/NewLandingPage';
 import QuestionGenerator from './components/QuestionGenerator';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsAndConditions from './components/TermsAndConditions';
@@ -161,7 +162,8 @@ function App() {
           <StagingGate>
             <Routes>
               {/* Public routes */}
-              <Route path="/" element={<BetaLanding />} />
+              <Route path="/" element={<NewLandingPage />} />
+              <Route path="/beta" element={<BetaLanding />} />
               <Route path="/lander" element={<Navigate to="/home" replace />} />
               <Route path="/home" element={<LandingPage />} />
               <Route path="/login" element={<Login />} />
