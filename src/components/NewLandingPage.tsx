@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CheckCircle, Users, Zap, Download, DollarSign, ArrowRight, BookOpen, TrendingUp, Star, X, ChevronDown } from 'lucide-react';
+import { CheckCircle, Users, ArrowRight, TrendingUp, Star, X, ChevronDown } from 'lucide-react';
 
 const NewLandingPage: React.FC = () => {
   const navigate = useNavigate();
