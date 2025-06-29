@@ -84,8 +84,9 @@ const NewLandingPage: React.FC = () => {
         </div>
         
         {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+        <div className="absolute bottom-8 right-8 flex flex-col items-center">
           <ChevronDown className="h-6 w-6 text-gray-400 animate-bounce" />
+          <p className="text-xs text-gray-400 mt-1">scroll down</p>
         </div>
       </section>
 
