@@ -21,7 +21,8 @@ const QuestionGenerator: React.FC = () => {
     examLevel: 'gcse',
     examBoard: '',
     difficulty: 'easy',
-    questionCount: 10
+    questionCount: 10,
+    englishExamType: '' // New field for English Language vs Literature
   });
   const [generatedQuestions, setGeneratedQuestions] = useState<any[]>([]);
   const [generatedSolutions, setGeneratedSolutions] = useState<any[]>([]);
@@ -69,7 +70,7 @@ const QuestionGenerator: React.FC = () => {
         refreshUserProfile()
       ]);
     }
-  }, [user, refreshProfile]);
+  }, [user]);
 
   // Subject themes and placeholder
   const subjectThemes: any = {
@@ -94,6 +95,8 @@ const QuestionGenerator: React.FC = () => {
     chemistry: 'e.g. atomic structure, chemical bonding, acids and bases, organic chemistry...',
     biology: 'e.g. cell biology, microscopes, osmosis, photosynthesis, genetics...',
     english: 'e.g. Shakespeare, poetry analysis, creative writing, persuasive techniques...',
+    'english-language': 'e.g. language analysis, creative writing, non-fiction texts, persuasive techniques...',
+    'english-literature': 'e.g. Shakespeare, poetry analysis, character development, themes in novels...',
     history: 'e.g. World War 2, Medieval England, Industrial Revolution, Cold War...',
     geography: 'e.g. climate change, plate tectonics, rivers, population, urbanisation...',
     'religious studies': 'e.g. Christianity, Islam, ethics, philosophy, world religions...',
@@ -102,7 +105,13 @@ const QuestionGenerator: React.FC = () => {
     french: 'e.g. family and relationships, school life, hobbies, travel, food...',
     spanish: 'e.g. family and relationships, school life, hobbies, travel, food...'
   };
-  const placeholder = subjectPlaceholders[normalizedSubject] || 'Enter a topic...';
+  
+  // Determine which placeholder to use
+  let placeholderKey = normalizedSubject;
+  if (normalizedSubject === 'english' && options.englishExamType) {
+    placeholderKey = options.englishExamType;
+  }
+  const placeholder = subjectPlaceholders[placeholderKey] || 'Enter a topic...';
 
   // Clean question string to format values
   const cleanQuestion = (question: string) => {
@@ -180,14 +189,27 @@ const QuestionGenerator: React.FC = () => {
       return;
     }
 
+    // Validate English exam type for English + GCSE
+    if (normalizedSubject === 'english' && options.examLevel === 'gcse' && !options.englishExamType) {
+      setAlert({ type: 'error', message: 'Please choose between English Language and English Literature' });
+      setIsGenerating(false);
+      return;
+    }
+
     try {
+      // Determine the correct subject to send to backend
+      let subjectToSend = normalizedSubject;
+      if (normalizedSubject === 'english' && options.englishExamType) {
+        subjectToSend = options.englishExamType; // 'english-language' or 'english-literature'
+      }
+
       const response = await fetch(API_CONFIG.ENDPOINTS.GENERATE_QUESTIONS, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          subject: normalizedSubject,
+          subject: subjectToSend,
           topic: searchTopic,
           examLevel: options.examLevel,
           examBoard: options.examBoard,
@@ -426,7 +448,8 @@ if (showSolutions && question.answer) {
       examLevel: 'gcse',
       examBoard: '',
       difficulty: 'easy',
-      questionCount: 10
+      questionCount: 10,
+      englishExamType: ''
     });
     setGeneratedQuestions([]);
     setGeneratedSolutions([]);
@@ -641,7 +664,7 @@ if (showSolutions && question.answer) {
               <select
                 id="examLevel"
                 value={options.examLevel}
-                onChange={(e) => setOptions({ ...options, examLevel: e.target.value, examBoard: '' })}
+                onChange={(e) => setOptions({ ...options, examLevel: e.target.value, examBoard: '', englishExamType: '' })}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               >
                 <option value="gcse">GCSE</option>
@@ -650,24 +673,46 @@ if (showSolutions && question.answer) {
               </select>
             </div>
 
-            {options.examLevel === 'gcse' && (
+            {/* English Exam Type Selection - only for English + GCSE */}
+            {normalizedSubject === 'english' && options.examLevel === 'gcse' && (
               <div>
-                <label htmlFor="examBoard" className="block text-base font-semibold text-gray-800 mb-2">
-                  Exam Board
+                <label htmlFor="englishExamType" className="block text-base font-semibold text-gray-800 mb-2">
+                  English Exam
                 </label>
                 <select
-                  id="examBoard"
-                  value={options.examBoard}
-                  onChange={(e) => setOptions({ ...options, examBoard: e.target.value })}
+                  id="englishExamType"
+                  value={options.englishExamType}
+                  onChange={(e) => setOptions({ ...options, englishExamType: e.target.value, examBoard: '' })}
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 >
-                  <option value="">Select an exam board</option>
-                  <option value="aqa">AQA</option>
-                  <option value="edexcel">Edexcel</option>
-                  <option value="ocr" disabled>OCR (Coming Soon)</option>
-                  <option value="wjec" disabled>WJEC (Coming Soon)</option>
+                  <option value="">Choose English exam type</option>
+                  <option value="english-language">English Language</option>
+                  <option value="english-literature">English Literature</option>
                 </select>
               </div>
+            )}
+
+            {/* Exam Board Selection - for GCSE, and for English only after exam type is selected */}
+            {options.examLevel === 'gcse' && (
+              (normalizedSubject !== 'english' || options.englishExamType) && (
+                <div>
+                  <label htmlFor="examBoard" className="block text-base font-semibold text-gray-800 mb-2">
+                    Exam Board
+                  </label>
+                  <select
+                    id="examBoard"
+                    value={options.examBoard}
+                    onChange={(e) => setOptions({ ...options, examBoard: e.target.value })}
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  >
+                    <option value="">Select an exam board</option>
+                    <option value="aqa">AQA</option>
+                    <option value="edexcel">Edexcel</option>
+                    <option value="ocr" disabled>OCR (Coming Soon)</option>
+                    <option value="wjec" disabled>WJEC (Coming Soon)</option>
+                  </select>
+                </div>
+              )
             )}
 
             <div>

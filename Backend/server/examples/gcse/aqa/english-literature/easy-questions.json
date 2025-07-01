@@ -1,0 +1,22 @@
+{
+  "questions": [
+    {
+      "question": "How does the writer present the character of [character name] in this extract?",
+      "marks": 8,
+      "answer": "The writer presents [character name] as:\n1. [Character trait 1]: Evidence from text with explanation (2 marks)\n2. [Character trait 2]: Evidence from text with explanation (2 marks)\n3. Language technique used to show character (2 marks)\n4. Effect on reader/audience (2 marks)",
+      "explanation": "This question tests your ability to analyze character presentation using evidence from the text."
+    },
+    {
+      "question": "How does the writer explore the theme of [theme] in this extract?",
+      "marks": 8,
+      "answer": "The writer explores [theme] through:\n1. Character actions and dialogue (2 marks)\n2. Imagery and symbolism (2 marks)\n3. Language choices and their effects (2 marks)\n4. Context and setting (2 marks)",
+      "explanation": "This question focuses on thematic analysis and how writers develop themes through various literary techniques."
+    },
+    {
+      "question": "What is the importance of this extract in the text as a whole?",
+      "marks": 8,
+      "answer": "This extract is important because:\n1. It reveals key information about [character/plot] (2 marks)\n2. It develops the theme of [theme] (2 marks)\n3. It shows [character development/conflict] (2 marks)\n4. It connects to [other parts of the text/ending] (2 marks)",
+      "explanation": "This question tests your understanding of how individual extracts contribute to the overall meaning and structure of the text."
+    }
+  ]
+} 

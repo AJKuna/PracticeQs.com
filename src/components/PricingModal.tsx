@@ -66,7 +66,7 @@ const PricingModal: React.FC<PricingModalProps> = ({ isOpen, onClose }) => {
       // Clean up URL immediately
       window.history.replaceState({}, document.title, window.location.pathname);
     }
-  }, [refreshProfile, onClose, profile]);
+  }, [onClose, profile]);
 
   if (!isOpen) return null;
 

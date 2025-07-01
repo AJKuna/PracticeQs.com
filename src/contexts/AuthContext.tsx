@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
 import type { User } from '@supabase/supabase-js';
 import { supabase, getProfile } from '../lib/supabase';
 import type { Database } from '../lib/database.types.js';
@@ -79,6 +79,22 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  // ✅ FIX: Wrap refreshProfile in useCallback to prevent infinite re-renders
+  const refreshProfile = useCallback(async (userToUse?: User) => {
+    const currentUser = userToUse || user;
+    if (!currentUser) {
+      return;
+    }
+    
+    try {
+      const data = await getProfile(currentUser.id);
+      setProfile(data);
+    } catch (error) {
+      console.error('❌ Error fetching profile:', error);
+      return;
+    }
+  }, [user]); // Only recreate when user changes
+
   useEffect(() => {
     // Check active sessions and sets the user
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -104,22 +120,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     });
 
     return () => subscription.unsubscribe();
-  }, []);
-
-  const refreshProfile = async (userToUse?: User) => {
-    const currentUser = userToUse || user;
-    if (!currentUser) {
-      return;
-    }
-    
-    try {
-      const data = await getProfile(currentUser.id);
-      setProfile(data);
-    } catch (error) {
-      console.error('❌ Error fetching profile:', error);
-      return;
-    }
-  };
+  }, [refreshProfile]); // Now refreshProfile has a stable reference
 
   const signIn = async (email: string, password: string) => {
     const { error } = await supabase.auth.signInWithPassword({ email, password });

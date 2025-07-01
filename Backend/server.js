@@ -521,10 +521,21 @@ app.post('/api/generate-questions', async (req, res) => {
     // Get the specification and example questions
     let exampleQuestions = null;
     try {
+      // Try the standard pattern first
       exampleQuestions = await import(`./server/examples/${examLevel}/${examBoard ? "${examBoard}/" : ""}${subject}/${subject}.json`, {type: 'json'});
       console.log("Example questions:", exampleQuestions)
     } catch (error) {
-      console.log('⚠️ Warning: Examples questions not found, using fallback');
+      // For English subjects, try the difficulty-specific pattern
+      if (subject.startsWith('english-')) {
+        try {
+          exampleQuestions = await import(`./server/examples/${examLevel}/${examBoard ? "${examBoard}/" : ""}${subject}/${difficulty}-questions.json`, {type: 'json'});
+          console.log("Example questions (difficulty-specific):", exampleQuestions)
+        } catch (difficultyError) {
+          console.log('⚠️ Warning: Examples questions not found, using fallback');
+        }
+      } else {
+        console.log('⚠️ Warning: Examples questions not found, using fallback');
+      }
     }
     
     let specData = null;
@@ -545,7 +556,7 @@ app.post('/api/generate-questions', async (req, res) => {
       ).join('\n') : '';
       
       prompt = `
-You are an expert ${examLevel} ${subject} exam question writer${examBoard ? ` for the ${examBoard.toUpperCase()} board` : ""}.
+You are an expert ${examLevel} ${subject.replace('-', ' ')} exam question writer${examBoard ? ` for the ${examBoard.toUpperCase()} board` : ""}.
 
 CRITICAL INSTRUCTION: You MUST create questions specifically about "${topic}". Do NOT use generic examples.
 
@@ -593,7 +604,7 @@ Return as a JSON object with a "questions" array. Each question object must have
         `- ${t.name}: ${t.subtopics ? t.subtopics.join(', ') : ''}`
       ).join('\n') : '';
       prompt = `
-      You are an expert ${examLevel} ${subject} exam question writer${examBoard ? ` for ${examBoard.toUpperCase()} board` : ""}.
+      You are an expert ${examLevel} ${subject.replace('-', ' ')} exam question writer${examBoard ? ` for ${examBoard.toUpperCase()} board` : ""}.
       
       Create ${numQuestions} ${difficulty} questions about "${topic}".
 
@@ -624,7 +635,7 @@ Return JSON format:
       // Fallback prompt
       console.log("Falling back to basic prompt")
       prompt = `
-    Generate ${numQuestions} ${difficulty} exam-style questions about ${topic} in ${subject} for ${examLevel} level.
+    Generate ${numQuestions} ${difficulty} exam-style questions about ${topic} in ${subject.replace('-', ' ')} for ${examLevel} level.
 
     RULES:
     - Do NOT include marks like [4 marks] in question text
@@ -644,7 +655,7 @@ Return JSON format:
           `;
     }
 
-    console.log(`✨ Generating ${numQuestions} ${difficulty} questions about ${topic} in ${subject} (${examLevel} ${examBoard})`);
+    console.log(`✨ Generating ${numQuestions} ${difficulty} questions about ${topic} in ${subject.replace('-', ' ')} (${examLevel} ${examBoard})`);
     const questions = await generateQuestions(prompt);
     
     // Validate response structure
