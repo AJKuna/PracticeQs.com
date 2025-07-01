@@ -36,18 +36,23 @@ export const signOut = async () => {
 
 // Profile helpers
 export const getProfile = async (userId: string) => {
-  const { data, error } = await supabase
-    .from('profiles')
-    .select('*')
-    .eq('id', userId)
-    .single();
+  try {
+    const { data, error } = await supabase
+      .from('profiles')
+      .select('*')
+      .eq('id', userId)
+      .single();
+      
+    if (error) {
+      console.error('❌ getProfile error:', error);
+      return null;
+    }
     
-  if (error) {
-    console.error('❌ getProfile error:', error);
-    throw error;
+    return data;
+  } catch (error) {
+    console.error('❌ getProfile network error:', error);
+    return null;
   }
-  
-  return data;
 };
 
 export const updateProfile = async (userId: string, updates: Partial<Database['public']['Tables']['profiles']['Update']>) => {

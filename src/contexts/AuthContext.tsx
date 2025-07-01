@@ -88,9 +88,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     
     try {
       const data = await getProfile(currentUser.id);
-      setProfile(data);
+      // ✅ FIX: Handle null return from getProfile (when it fails gracefully)
+      if (data) {
+        setProfile(data);
+      } else {
+        console.warn('⚠️ Profile data not available, keeping existing profile state');
+        // Don't update profile state if getProfile failed
+        // This prevents clearing the profile on temporary failures
+      }
     } catch (error) {
       console.error('❌ Error fetching profile:', error);
+      // Don't clear profile on error to maintain user experience
       return;
     }
   }, [user]); // Only recreate when user changes
