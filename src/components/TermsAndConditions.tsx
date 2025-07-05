@@ -49,7 +49,7 @@ const TermsAndConditions: React.FC = () => {
           <section>
             <h2 className="text-xl font-semibold text-gray-900 mb-3">3. User Responsibility</h2>
             <p className="text-gray-700">
-              Users must not attempt to reverse engineer, abuse, or automate the use of the site beyond the limits provided (e.g., 30 questions per day for free users). Misuse may result in account restriction or removal.
+              Users must not attempt to reverse engineer, abuse, or automate the use of the site beyond the limits provided (e.g., 15 questions per day for free users). Misuse may result in account restriction or removal.
             </p>
           </section>
 

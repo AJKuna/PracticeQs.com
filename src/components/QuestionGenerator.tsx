@@ -12,7 +12,7 @@ import { trackQuestionGeneration, trackPDFExport, trackButtonClick, trackError, 
 const QuestionGenerator: React.FC = () => {
   const { subject } = useParams<{ subject: string }>();
   const navigate = useNavigate();
-  const { user, profile, refreshProfile } = useAuth();
+  const { user, profile } = useAuth();
   const normalizedSubject = subject?.replace(/-/g, ' ') || 'mathematics';
 
   // State
@@ -53,24 +53,10 @@ const QuestionGenerator: React.FC = () => {
         }
       };
       
-      // Refresh user profile to ensure we have the latest subscription status
-      // This is especially important after returning from payment flow
-      const refreshUserProfile = async () => {
-        try {
-          console.log('🔄 Refreshing user profile on component mount...');
-          await refreshProfile();
-        } catch (error) {
-          console.error('❌ Error refreshing profile:', error);
-        }
-      };
-      
-      // Execute both functions
-      Promise.all([
-        fetchUsage(),
-        refreshUserProfile()
-      ]);
+      // Only fetch usage data - profile is managed by AuthContext
+      fetchUsage();
     }
-  }, [user]);
+  }, [user, profile?.subscription_tier]); // Include profile tier to refresh usage when subscription changes
 
   // Subject themes and placeholder
   const subjectThemes: any = {
@@ -403,31 +389,42 @@ const QuestionGenerator: React.FC = () => {
       doc.text(questionLines, 20, yPosition);
       yPosition += questionLines.length * 5 + 25; // Increased spacing for writing space
 
-// Add solutions if they're visible
-if (showSolutions && question.answer) {
-  doc.setFontSize(12);
-  doc.text('Answer:', 20, yPosition);
-  yPosition += 7;
+      // Display passage if it exists (for questions with passages)
+      if (question.passage) {
+        doc.setFontSize(10);
+        doc.text('Extract:', 20, yPosition);
+        yPosition += 7;
+        doc.setFontSize(9);
+        const passageLines = doc.splitTextToSize(question.passage, 170);
+        doc.text(passageLines, 20, yPosition);
+        yPosition += passageLines.length * 4 + 15; // Spacing after passage
+      }
 
-  doc.setFontSize(10);
-  
-  // Format answer exactly like the browser display with bullet points
-  let answerText = '';
-  if (typeof question.answer === 'object' && question.answer !== null) {
-    // Convert to bullet points like in browser
-    answerText = Object.entries(question.answer).map(([, value]) => 
-      `• ${value}`
-    ).join('\n');
-  } else {
-    answerText = String(question.answer);
-  }
-  
-  const answerLines = doc.splitTextToSize(answerText, 170);
-  doc.text(answerLines, 20, yPosition);
-  yPosition += answerLines.length * 4 + 25; // Increased spacing
-} else {
-  yPosition += 25; // Increased spacing between questions
-}
+      // Add solutions if they're visible
+      if (showSolutions && question.answer) {
+        doc.setFontSize(12);
+        doc.text('Answer:', 20, yPosition);
+        yPosition += 7;
+
+        doc.setFontSize(10);
+        
+        // Format answer exactly like the browser display with bullet points
+        let answerText = '';
+        if (typeof question.answer === 'object' && question.answer !== null) {
+          // Convert to bullet points like in browser
+          answerText = Object.entries(question.answer).map(([, value]) => 
+            `• ${value}`
+          ).join('\n');
+        } else {
+          answerText = String(question.answer);
+        }
+        
+        const answerLines = doc.splitTextToSize(answerText, 170);
+        doc.text(answerLines, 20, yPosition);
+        yPosition += answerLines.length * 4 + 25; // Increased spacing
+      } else {
+        yPosition += 25; // Increased spacing between questions
+      }
     });
 
     // Save the PDF
@@ -586,12 +583,12 @@ if (showSolutions && question.answer) {
         <p className="text-lg font-semibold text-blue-900 dark:text-blue-100">
           {(() => {
             // Handle invalid data from database errors
-            const currentUsage = isNaN(usage?.usage) ? 30 : usage.usage;
+            const currentUsage = isNaN(usage?.usage) ? 15 : usage.usage;
             const currentLimit =
               usage?.limit === 'unlimited'
                 ? '∞'
                 : isNaN(usage?.limit)
-                ? 30
+                ? 15
                 : usage.limit;
             return `${currentUsage}/${currentLimit} questions`;
           })()}
@@ -822,6 +819,15 @@ if (showSolutions && question.answer) {
                     )}
                   </div>
                   <p className="text-gray-800 mb-4">{cleanQuestion(question.question)}</p>
+                  
+                  {/* Display passage if it exists (for questions with passages) */}
+                  {question.passage && (
+                    <div className="mb-4 p-4 bg-gray-50 border-l-4 border-blue-500 rounded-md">
+                      <h4 className="font-medium text-gray-900 mb-2">Extract:</h4>
+                      <p className="text-gray-800 italic whitespace-pre-wrap">{question.passage}</p>
+                    </div>
+                  )}
+                  
                   {showSolutions && (
                     <div className={`mt-4 space-y-4 ${subjectTheme.light} p-4 rounded-md`}>
                       <div>

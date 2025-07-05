@@ -1,3 +1,5 @@
+console.log("🚀 Server is starting...");
+
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -156,7 +158,7 @@ const checkDailyUsage = async (userId) => {
       .single();
 
     const currentUsage = usageLog ? usageLog.questions_generated : 0;
-    const dailyLimit = profile.daily_question_limit || 30;
+    const dailyLimit = profile.daily_question_limit || 15;
 
     return {
       canGenerate: currentUsage < dailyLimit,
@@ -402,6 +404,7 @@ const generateQuestions = async (prompt) => {
             content: prompt
           }
         ],
+        response_format: { type: "json_object" },
         temperature: 0.7,
         max_tokens: 2000
       })
@@ -418,10 +421,30 @@ const generateQuestions = async (prompt) => {
     
     console.log('🤖 OpenAI Response received:', content.substring(0, 200) + '...');
     
+    // 🔍 DIAGNOSTIC LOGGING - OpenAI Response Analysis
+    console.log('\n🎯 DIAGNOSTIC - OpenAI Response Analysis:');
+    console.log('- Full content length:', content.length);
+    console.log('- Content includes "passage":', content.includes('passage'));
+    console.log('- Content includes "questions":', content.includes('questions'));
+    console.log('- Full content (first 500 chars):', content.substring(0, 500) + '...');
+    
     // Parse the JSON response
     let parsedResponse;
     try {
       parsedResponse = JSON.parse(content);
+      
+      // 🔍 DIAGNOSTIC LOGGING - Parsed Response Structure  
+      console.log('\n🎯 DIAGNOSTIC - Parsed Response Structure:');
+      console.log('- Parsed response type:', typeof parsedResponse);
+      console.log('- Has questions array:', Array.isArray(parsedResponse.questions));
+      console.log('- Questions count:', parsedResponse.questions?.length || 0);
+      
+      if (parsedResponse.questions && parsedResponse.questions.length > 0) {
+        console.log('- First question keys:', Object.keys(parsedResponse.questions[0]));
+        console.log('- First question has passage:', !!parsedResponse.questions[0].passage);
+        console.log('- First question passage preview:', parsedResponse.questions[0].passage?.substring(0, 100) + '...');
+      }
+      
     } catch (parseError) {
       console.error('❌ Failed to parse OpenAI response as JSON:', content);
       console.error('❌ Parse error:', parseError.message);
@@ -448,6 +471,14 @@ app.post('/api/generate-questions', async (req, res) => {
     
     const { subject, topic, numQuestions = 5, difficulty, examLevel, examBoard, userId } = req.body;
     
+    // 🔍 DIAGNOSTIC LOGGING - Subject Detection
+    console.log('\n🎯 DIAGNOSTIC - Subject Detection:');
+    console.log('- Raw subject from request:', subject);
+    console.log('- Subject type:', typeof subject);
+    console.log('- Subject === "english-language":', subject === 'english-language');
+    console.log('- Subject length:', subject?.length);
+    console.log('- Subject charCodes:', subject?.split('').map(c => c.charCodeAt(0)));
+    
     // Validate input
     if (!subject) {
       console.log('❌ Error: Subject is required');
@@ -461,9 +492,9 @@ app.post('/api/generate-questions', async (req, res) => {
       console.log('❌ Error: User ID is required');
       return res.status(401).json({ error: 'User authentication required' });
     }
-    if (numQuestions > 30) {
+    if (numQuestions > 15) {
       console.log('❌ Error: Too many questions requested');
-      return res.status(400).json({ error: 'Max 30 questions allowed' });
+      return res.status(400).json({ error: 'Max 15 questions allowed' });
     }
 
     if (!['easy', 'medium', 'hard', 'mixed'].includes(difficulty)) {
@@ -549,7 +580,52 @@ app.post('/api/generate-questions', async (req, res) => {
     // Construct the prompt
     let prompt = '';
 
-    if (exampleQuestions) {
+    // Special case for English Language - always include passages
+    if (subject === 'english-language') {
+      console.log('\n🎯 DIAGNOSTIC - Using English Language Prompt Branch');
+      prompt = `
+You are an expert ${examLevel} English Language exam question writer${examBoard ? ` for the ${examBoard} exam board` : ""}.
+
+Your task is to generate ${numQuestions} ${difficulty} English Language exam-style questions about "${topic}".for gcse.
+
+⚠️ MANDATORY RULES — DO NOT BREAK:
+- EVERY question MUST include a "passage" field.
+- Each "passage" must be ORIGINAL and tailored to the question.
+- DO NOT use real copyrighted texts.
+- DO NOT skip or omit the passage under any circumstance.
+- RETURN ONLY questions that include a passage — no exceptions.
+
+📚 PASSAGE REQUIREMENTS:
+- Easy: 50–100 words — simple vocabulary and structure.
+- Medium: 100–200 words — some figurative language, moderate complexity.
+- Hard: 200–300 words — complex sentence structure, sophisticated language.
+
+✏️ QUESTION GUIDELINES:
+- Each question must require analysis of the passage.
+- Use language relevant to the "${topic}" (e.g. imagery, tone, structure, etc).
+- Do NOT include marks like [4 marks] in the question itself.
+- The question must instruct the student to refer to the passage.
+
+✅ ANSWER FORMAT:
+- Break answers into clear steps, with (X marks) per step.
+- Reference specific lines or phrases from the passage in the answer.
+
+🧾 RETURN JSON FORMAT:
+{
+  "questions": [
+    {
+      "question": "Question referring to the passage",
+      "passage": "Original passage text (required)",
+      "answer": "Step-by-step answer with mark allocations",
+      "marks": X
+    }
+  ]
+}
+
+Do not include any commentary, notes, or explanations — return only the JSON.
+`;
+    } else if (exampleQuestions) {
+      console.log('\n🎯 DIAGNOSTIC - Using Example Questions Prompt Branch');
       // Pick a random template for variety
       const topicsText = specData.topics ? specData.topics.map(t => 
         `- ${t.name}: ${t.subtopics ? t.subtopics.join(', ') : ''}`
@@ -599,6 +675,7 @@ Return as a JSON object with a "questions" array. Each question object must have
       `;
     } else if (specData) {
       console.log("Falling back to spec data")
+      console.log('\n🎯 DIAGNOSTIC - Using Spec Data Prompt Branch');
       // Use specification data for non-template subjects
       const topicsText = specData.topics ? specData.topics.map(t => 
         `- ${t.name}: ${t.subtopics ? t.subtopics.join(', ') : ''}`
@@ -634,6 +711,7 @@ Return JSON format:
     } else {
       // Fallback prompt
       console.log("Falling back to basic prompt")
+      console.log('\n🎯 DIAGNOSTIC - Using Basic Fallback Prompt Branch');
       prompt = `
     Generate ${numQuestions} ${difficulty} exam-style questions about ${topic} in ${subject.replace('-', ' ')} for ${examLevel} level.
 
@@ -655,9 +733,44 @@ Return JSON format:
           `;
     }
 
+    // 🔍 DIAGNOSTIC LOGGING - Final Prompt Analysis
+    console.log('\n🎯 DIAGNOSTIC - Final Prompt Analysis:');
+    console.log('- Prompt length:', prompt.length);
+    console.log('- Prompt includes "passage":', prompt.includes('passage'));
+    console.log('- Prompt includes "MANDATORY":', prompt.includes('MANDATORY'));
+    console.log('- First 300 chars:', prompt.substring(0, 300) + '...');
+    console.log('- Last 300 chars:', '...' + prompt.substring(prompt.length - 300));
+
     console.log(`✨ Generating ${numQuestions} ${difficulty} questions about ${topic} in ${subject.replace('-', ' ')} (${examLevel} ${examBoard})`);
     const questions = await generateQuestions(prompt);
-    
+    // Add this right after the line: const questions = await generateQuestions(prompt);
+
+// 🔍 DIAGNOSTIC LOGGING - Questions from OpenAI
+console.log('\n🎯 DIAGNOSTIC - Questions Returned from OpenAI:');
+console.log('- Questions array length:', questions.length);
+console.log('- Questions array type:', Array.isArray(questions));
+
+if (questions.length > 0) {
+  console.log('- First question full structure:', JSON.stringify(questions[0], null, 2));
+  console.log('- First question keys:', Object.keys(questions[0]));
+  
+  if (subject === 'english-language') {
+    console.log('- First question passage exists:', !!questions[0].passage);
+    console.log('- First question passage length:', questions[0].passage?.length || 0);
+    console.log('- First question passage preview:', questions[0].passage?.substring(0, 100) + '...');
+  }
+}
+
+// Check all questions for passages if English Language
+if (subject === 'english-language') {
+  questions.forEach((q, i) => {
+    console.log(`- Question ${i + 1} has passage:`, !!q.passage);
+    if (q.passage) {
+      console.log(`  - Length: ${q.passage.length} chars`);
+      console.log(`  - Preview: ${q.passage.substring(0, 50)}...`);
+    }
+  });
+}
     // Validate response structure
     if (!Array.isArray(questions)) {
       console.log('❌ Error: Invalid question format returned');
@@ -670,6 +783,16 @@ Return JSON format:
         console.log(`❌ Error: Question ${i + 1} missing question field:`, questions[i]);
         throw new Error(`Question ${i + 1} is missing question field`);
       }
+      
+      // Special validation for English Language - ensure passage exists
+      if (subject === 'english-language') {
+        if (!questions[i].passage) {
+          console.log(`❌ Error: Question ${i + 1} missing passage field for English Language:`, questions[i]);
+          throw new Error(`Question ${i + 1} is missing required passage field for English Language`);
+        }
+        console.log(`✅ Question ${i + 1} has passage (${questions[i].passage.length} chars)`);
+      }
+      
       // Ensure marks field exists
       if (!questions[i].marks && questions[i].question) {
         // Try to extract marks from question text
@@ -680,6 +803,7 @@ Return JSON format:
           questions[i].marks = 1; // default
         }
       }
+      
       // Post-process to remove any mark scheme that might have leaked through
       questions[i].question = removeMarkScheme(questions[i].question);
 
@@ -693,6 +817,28 @@ Return JSON format:
         
       // Normalize the answer field
       questions[i].answer = normalizeAnswer(questions[i].answer);
+    }
+
+    // 🔍 DIAGNOSTIC LOGGING - Final Questions Structure
+    console.log('\n🎯 DIAGNOSTIC - Final Questions Structure:');
+    questions.forEach((q, i) => {
+      console.log(`Question ${i + 1}:`, {
+        hasQuestion: !!q.question,
+        hasAnswer: !!q.answer,
+        hasMarks: !!q.marks,
+        hasPassage: !!q.passage,
+        passageLength: q.passage?.length || 0
+      });
+    });
+
+    // For English Language, double-check all questions have passages
+    if (subject === 'english-language') {
+      const questionsWithoutPassage = questions.filter(q => !q.passage);
+      if (questionsWithoutPassage.length > 0) {
+        console.log(`❌ ERROR: ${questionsWithoutPassage.length} questions missing passages`);
+        throw new Error(`${questionsWithoutPassage.length} questions are missing required passages`);
+      }
+      console.log('✅ All English Language questions have passages confirmed');
     }
 
     // Log the usage after successful generation
@@ -1256,7 +1402,7 @@ async function handleSubscriptionDeleted(subscription) {
         subscription_tier: 'free',
         subscription_status: 'cancelled',
         subscription_end_date: new Date().toISOString(),
-        daily_question_limit: 30 // Restore daily limit
+        daily_question_limit: 15 // Restore daily limit
       })
       .eq('id', userId);
 

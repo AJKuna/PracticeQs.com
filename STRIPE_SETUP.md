@@ -84,7 +84,7 @@ npm install stripe
 
 1. Start your backend server: `npm run dev`
 2. Open your frontend application
-3. Navigate to a subject and try to generate more than 30 questions
+3. Navigate to a subject and try to generate more than 15 questions
 4. The pricing modal should appear
 5. Click "Upgrade to Premium"
 6. You should be redirected to Stripe Checkout

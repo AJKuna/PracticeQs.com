@@ -8,6 +8,7 @@ interface SubjectCard {
   title: string;
   icon: string;
   color: string;
+  disabled?: boolean;
 }
 
 const subjects: SubjectCard[] = [
@@ -15,11 +16,11 @@ const subjects: SubjectCard[] = [
   { title: 'Physics', icon: '⚡', color: 'bg-purple-100 hover:bg-purple-200' },
   { title: 'Chemistry', icon: '🧪', color: 'bg-green-100 hover:bg-green-200' },
   { title: 'Biology', icon: '🧬', color: 'bg-red-100 hover:bg-red-200' },
-  { title: 'English', icon: '📚', color: 'bg-yellow-100 hover:bg-yellow-200' },
   { title: 'History', icon: '🏛️', color: 'bg-orange-100 hover:bg-orange-200' },
   { title: 'Geography', icon: '🌍', color: 'bg-teal-100 hover:bg-teal-200' },
   { title: 'Religious Studies', icon: '🕊️', color: 'bg-indigo-100 hover:bg-indigo-200' },
-  { title: 'Computer Science', icon: '💻', color: 'bg-cyan-100 hover:bg-cyan-200' }
+  { title: 'Computer Science', icon: '💻', color: 'bg-cyan-100 hover:bg-cyan-200' },
+  { title: 'English', icon: '📚', color: 'bg-yellow-100 hover:bg-yellow-200', disabled: true }
 ];
 
 const LandingPage: React.FC = () => {
@@ -27,7 +28,9 @@ const LandingPage: React.FC = () => {
   const { user, profile, signOut } = useAuth();
   const [showPricingModal, setShowPricingModal] = useState(false);
 
-  const handleSubjectClick = (subject: string) => {
+  const handleSubjectClick = (subject: string, disabled?: boolean) => {
+    if (disabled) return; // Prevent navigation for disabled subjects
+    
     // Convert spaces to hyphens and make lowercase for URL-friendly format
     const urlSubject = subject.toLowerCase().replace(/ /g, '-');
     navigate(`/generator/${urlSubject}`);
@@ -138,13 +141,27 @@ const LandingPage: React.FC = () => {
           {subjects.map((subject) => (
             <button
               key={subject.title}
-              onClick={() => handleSubjectClick(subject.title)}
-              className={`${subject.color} p-8 rounded-lg shadow-sm transition-all duration-200 transform hover:scale-105 text-center`}
+              onClick={() => handleSubjectClick(subject.title, subject.disabled)}
+              disabled={subject.disabled}
+              className={`${
+                subject.disabled 
+                  ? 'bg-gray-100 cursor-not-allowed opacity-75' 
+                  : subject.color
+              } p-8 rounded-lg shadow-sm transition-all duration-200 ${
+                subject.disabled 
+                  ? '' 
+                  : 'transform hover:scale-105'
+              } text-center relative`}
             >
               <div className="text-4xl mb-4">{subject.icon}</div>
               <h2 className="text-xl font-semibold text-gray-900">
                 {subject.title}
               </h2>
+              {subject.disabled && (
+                <div className="absolute top-2 right-2 bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full font-medium">
+                  Coming Soon
+                </div>
+              )}
             </button>
           ))}
         </div>

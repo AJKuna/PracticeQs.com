@@ -44,7 +44,7 @@ const NewLandingPage: React.FC = () => {
           <div className="relative max-w-5xl max-h-full">
             <button
               onClick={closeImageModal}
-              className="absolute -top-10 right-0 text-white hover:text-gray-300 transition-colors"
+              className="absolute -top-10 right-0 text-gray-600 hover:text-gray-800 transition-colors"
             >
               <X className="h-8 w-8" />
             </button>
@@ -265,7 +265,7 @@ const NewLandingPage: React.FC = () => {
               <div className="flex items-start">
                 <CheckCircle className="h-6 w-6 text-green-500 mt-1 mr-4 flex-shrink-0" />
                 <div>
-                  <h3 className="text-xl font-semibold mb-2">30 Free Questions a Day</h3>
+                  <h3 className="text-xl font-semibold mb-2">15 Free Questions a Day</h3>
                   <p className="text-gray-600">
                     Get started instantly with no commitment. Upgrade anytime.
                   </p>
@@ -362,47 +362,6 @@ const NewLandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Social Proof */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              What Students & Teachers Say
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-white p-8 rounded-xl shadow-lg">
-              <div className="flex items-center mb-4">
-                <div className="flex text-yellow-400">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 fill-current" />
-                  ))}
-                </div>
-              </div>
-              <p className="text-gray-700 mb-4 italic">
-                "This is exactly what I needed — proper exam-style questions on just the topics I struggle with."
-              </p>
-              <p className="text-sm text-gray-500">— Year 11 student</p>
-            </div>
-
-            <div className="bg-white p-8 rounded-xl shadow-lg">
-              <div className="flex items-center mb-4">
-                <div className="flex text-yellow-400">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 fill-current" />
-                  ))}
-                </div>
-              </div>
-              <p className="text-gray-700 mb-4 italic">
-                "Great for homework — I used the printable feature to make worksheets for my class."
-              </p>
-              <p className="text-sm text-gray-500">— Secondary school teacher</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* FAQ */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
@@ -437,7 +396,7 @@ const NewLandingPage: React.FC = () => {
             <div className="bg-white p-6 rounded-lg border border-gray-200">
               <h3 className="text-lg font-semibold text-gray-900 mb-3">Is it free?</h3>
               <p className="text-gray-700">
-                You get 30 questions a day for free. If you want unlimited questions, it's just £5/month.
+                You get 15 questions a day for free. If you want unlimited questions, it's just £5/month.
               </p>
             </div>
 
@@ -458,7 +417,7 @@ const NewLandingPage: React.FC = () => {
             🎯 Don't fall behind this summer. Get generating.
           </h2>
           <p className="text-xl text-blue-100 mb-8">
-            Start now — 30 free questions every day.
+            Start now — 15 free questions every day.
           </p>
           <button
             onClick={handleGetStarted}
@@ -510,7 +469,7 @@ const NewLandingPage: React.FC = () => {
           </div>
           
           <div className="border-t border-gray-300 mt-8 pt-8 text-center text-gray-500">
-            <p>© 2024 Practice Qs. All rights reserved.</p>
+            <p>© 2025 Practice Qs. All rights reserved.</p>
             <p className="mt-2 text-xs">
               We're committed to safeguarding and promoting the welfare of children. This site is designed for use by adults or with adult supervision.
             </p>
