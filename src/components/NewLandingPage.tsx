@@ -54,7 +54,6 @@ const NewLandingPage: React.FC = () => {
     { emoji: '🎭', size: '42px', left: '90%', top: '80%', delay: '3.5s', zIndex: 2 },
     
     // Additional spacing emoji
-    { emoji: '🏃‍♂️', size: '48px', left: '50%', top: '84%', delay: '4.5s', zIndex: 1 },
   ];
 
   return (
