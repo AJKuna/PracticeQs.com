@@ -249,7 +249,6 @@ const QuestionGenerator: React.FC = () => {
     }
   };
 
-  const toggleSolutions = () => setShowSolutions((prev) => !prev);
   // Replace the existing generateSolutions function with this:
   const generateSolutions = async () => {
     if (!generatedQuestions.length || !user) return;
