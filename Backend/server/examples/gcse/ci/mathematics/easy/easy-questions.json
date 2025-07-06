@@ -1,0 +1,101 @@
+{
+  "difficulty": "easy",
+  "questions": [
+    {
+      "id": "E1",
+      "topic": "Number - The Four Operations",
+      "question": "Calculate 25 + 17 × 3",
+      "answer": "76",
+      "explanation": "Using order of operations (BODMAS):\n1. First multiply: 17 × 3 = 51\n2. Then add: 25 + 51 = 76",
+      "marks": 2
+    },
+    {
+      "id": "E2",
+      "topic": "Number - Fractions, Decimals and Percentages",
+      "question": "Express 0.75 as a fraction in its simplest form",
+      "answer": "3/4",
+      "explanation": "0.75 = 75/100 = 3/4 (dividing both numerator and denominator by 25)",
+      "marks": 2
+    },
+    {
+      "id": "E3",
+      "topic": "Number - Powers and Roots",
+      "question": "Calculate 5²",
+      "answer": "25",
+      "explanation": "5² = 5 × 5 = 25",
+      "marks": 1
+    },
+    {
+      "id": "E4",
+      "topic": "Number - Percentages",
+      "question": "Calculate 30% of 80",
+      "answer": "24",
+      "explanation": "30% of 80 = 30/100 × 80 = 0.3 × 80 = 24",
+      "marks": 2
+    },
+    {
+      "id": "E5",
+      "topic": "Algebra and Graphs - Introduction to Algebra",
+      "question": "Simplify 3x + 2x",
+      "answer": "5x",
+      "explanation": "Collecting like terms: 3x + 2x = (3 + 2)x = 5x",
+      "marks": 1
+    },
+    {
+      "id": "E6",
+      "topic": "Geometry - Angles",
+      "question": "Find the missing angle in a triangle where two angles are 40° and 60°",
+      "answer": "80°",
+      "explanation": "Angles in a triangle sum to 180°\n180° - 40° - 60° = 80°",
+      "marks": 2
+    },
+    {
+      "id": "E7",
+      "topic": "Mensuration - Area and Perimeter",
+      "question": "Calculate the area of a rectangle with length 8 cm and width 5 cm",
+      "answer": "40 cm²",
+      "explanation": "Area of rectangle = length × width = 8 × 5 = 40 cm²",
+      "marks": 2
+    },
+    {
+      "id": "E8",
+      "topic": "Number - Ratio and Proportion",
+      "question": "Share £120 in the ratio 2:3",
+      "answer": "£48 and £72",
+      "explanation": "Total parts = 2 + 3 = 5\nFirst part: (2/5) × £120 = £48\nSecond part: (3/5) × £120 = £72",
+      "marks": 3
+    },
+    {
+      "id": "E9",
+      "topic": "Coordinate Geometry - Coordinates",
+      "question": "What is the distance between points (2, 3) and (2, 7)?",
+      "answer": "4 units",
+      "explanation": "The points have the same x-coordinate (2), so the distance is the difference in y-coordinates: 7 - 3 = 4 units",
+      "marks": 2
+    },
+    {
+      "id": "E10",
+      "topic": "Statistics - Averages and Range",
+      "question": "Find the mean of 4, 6, 8, 10, 12",
+      "answer": "8",
+      "explanation": "Mean = (4 + 6 + 8 + 10 + 12) ÷ 5 = 40 ÷ 5 = 8",
+      "marks": 2
+    },
+    {
+      "id": "E11",
+      "topic": "Probability - Introduction to Probability",
+      "question": "A bag contains 3 red balls and 2 blue balls. What is the probability of picking a red ball?",
+      "answer": "3/5",
+      "explanation": "Total balls = 3 + 2 = 5\nProbability = Number of red balls / Total balls = 3/5",
+      "marks": 2
+    },
+    {
+      "id": "E12",
+      "topic": "Mensuration - Circles, Arcs and Sectors",
+      "question": "Calculate the circumference of a circle with radius 5 cm. Give your answer in terms of π",
+      "answer": "10π cm",
+      "explanation": "Circumference = 2πr = 2 × π × 5 = 10π cm",
+      "marks": 2
+    }
+  ]
+} 

@@ -1,0 +1,185 @@
+{
+  "exam_board": "Cambridge",
+  "subject": "Mathematics",
+  "qualification": "IGCSE",
+  "specification_code": "0580/0980",
+  "command_words": [
+    "Calculate",
+    "Solve",
+    "Find",
+    "Work out",
+    "Show that",
+    "Prove",
+    "Draw",
+    "Sketch",
+    "Complete",
+    "Describe",
+    "Explain",
+    "Give",
+    "Write down",
+    "State",
+    "Simplify",
+    "Express",
+    "Estimate",
+    "Round",
+    "Evaluate",
+    "Construct",
+    "Interpret",
+    "Use",
+    "Apply"
+  ],
+  "topics": [
+    {
+      "id": "1",
+      "name": "Number",
+      "subtopics": [
+        "Types of Number (natural, integers, primes, squares, cubes)",
+        "Sets (language, notation, Venn diagrams)",
+        "Powers and Roots",
+        "Fractions, Decimals and Percentages",
+        "Ordering",
+        "The Four Operations",
+        "Indices",
+        "Standard Form",
+        "Estimation",
+        "Limits of Accuracy",
+        "Ratio and Proportion",
+        "Rates",
+        "Percentages",
+        "Using a Calculator",
+        "Time",
+        "Money",
+        "Exponential Growth and Decay (Extended)",
+        "Surds (Extended)"
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Algebra and Graphs",
+      "subtopics": [
+        "Introduction to Algebra",
+        "Algebraic Manipulation",
+        "Indices",
+        "Equations",
+        "Inequalities",
+        "Sequences",
+        "Graphs in Practical Situations",
+        "Graphs of Functions",
+        "Sketching Curves",
+        "Algebraic Fractions (Extended)",
+        "Proportion (Extended)",
+        "Differentiation (Extended)",
+        "Functions (Extended)"
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Coordinate Geometry",
+      "subtopics": [
+        "Coordinates",
+        "Drawing Linear Graphs",
+        "Gradient of Linear Graphs",
+        "Equations of Linear Graphs",
+        "Parallel Lines",
+        "Length and Midpoint (Extended)",
+        "Perpendicular Lines (Extended)"
+      ]
+    },
+    {
+      "id": "4",
+      "name": "Geometry",
+      "subtopics": [
+        "Geometrical Terms",
+        "Geometrical Constructions",
+        "Scale Drawings",
+        "Similarity",
+        "Symmetry",
+        "Angles",
+        "Circle Theorems",
+        "Advanced Circle Theorems (Extended)"
+      ]
+    },
+    {
+      "id": "5",
+      "name": "Mensuration",
+      "subtopics": [
+        "Units of Measure",
+        "Area and Perimeter",
+        "Circles, Arcs and Sectors",
+        "Surface Area and Volume",
+        "Compound Shapes and Parts of Shapes"
+      ]
+    },
+    {
+      "id": "6",
+      "name": "Trigonometry",
+      "subtopics": [
+        "Pythagoras' Theorem",
+        "Right-Angled Triangles",
+        "Exact Trigonometric Values (Extended)",
+        "Trigonometric Functions (Extended)",
+        "Non-Right-Angled Triangles (Extended)",
+        "3D Trigonometry (Extended)"
+      ]
+    },
+    {
+      "id": "7",
+      "name": "Transformations and Vectors",
+      "subtopics": [
+        "Transformations",
+        "Vectors in Two Dimensions (Extended)",
+        "Magnitude of a Vector (Extended)",
+        "Vector Geometry (Extended)"
+      ]
+    },
+    {
+      "id": "8",
+      "name": "Probability",
+      "subtopics": [
+        "Introduction to Probability",
+        "Relative and Expected Frequencies",
+        "Probability of Combined Events",
+        "Conditional Probability (Extended)"
+      ]
+    },
+    {
+      "id": "9",
+      "name": "Statistics",
+      "subtopics": [
+        "Classifying Statistical Data",
+        "Interpreting Statistical Data",
+        "Averages and Range",
+        "Statistical Charts and Diagrams",
+        "Scatter Diagrams",
+        "Cumulative Frequency Diagrams (Extended)",
+        "Histograms (Extended)"
+      ]
+    }
+  ],
+  "assessment": {
+    "papers": [
+      {
+        "name": "Paper 1 (Core/Extended - Non-Calculator)",
+        "duration": "1 hour 30 minutes",
+        "marks": 80,
+        "weighting": "40%"
+      },
+      {
+        "name": "Paper 2 (Core/Extended - Calculator)",
+        "duration": "1 hour 30 minutes",
+        "marks": 80,
+        "weighting": "40%"
+      },
+      {
+        "name": "Paper 3 (Core/Extended - Calculator)",
+        "duration": "2 hours",
+        "marks": 100,
+        "weighting": "20%"
+      }
+    ],
+    "tiers": {
+      "core": "Grades C-G",
+      "extended": "Grades A*-E"
+    }
+  }
+} 

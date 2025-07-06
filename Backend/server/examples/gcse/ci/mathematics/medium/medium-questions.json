@@ -1,0 +1,101 @@
+{
+  "difficulty": "medium",
+  "questions": [
+    {
+      "id": "M1",
+      "topic": "Algebra and Graphs - Equations",
+      "question": "Solve the equation: 3x + 7 = 2x + 15",
+      "answer": "x = 8",
+      "explanation": "3x + 7 = 2x + 15\n3x - 2x = 15 - 7\nx = 8",
+      "marks": 3
+    },
+    {
+      "id": "M2",
+      "topic": "Number - Standard Form",
+      "question": "Express 0.000045 in standard form",
+      "answer": "4.5 × 10⁻⁵",
+      "explanation": "Move the decimal point 5 places to the right to get 4.5\nSince we moved right, the power is negative: 4.5 × 10⁻⁵",
+      "marks": 2
+    },
+    {
+      "id": "M3",
+      "topic": "Geometry - Similarity",
+      "question": "Two similar triangles have corresponding sides in the ratio 3:5. If the area of the smaller triangle is 18 cm², find the area of the larger triangle",
+      "answer": "50 cm²",
+      "explanation": "If linear scale factor = 5/3, then area scale factor = (5/3)² = 25/9\nArea of larger triangle = 18 × (25/9) = 50 cm²",
+      "marks": 4
+    },
+    {
+      "id": "M4",
+      "topic": "Trigonometry - Right-Angled Triangles",
+      "question": "In a right-angled triangle, the hypotenuse is 10 cm and one angle is 30°. Find the length of the side opposite to the 30° angle",
+      "answer": "5 cm",
+      "explanation": "Using sine: sin(30°) = opposite/hypotenuse\nsin(30°) = opposite/10\n0.5 = opposite/10\nopposite = 5 cm",
+      "marks": 3
+    },
+    {
+      "id": "M5",
+      "topic": "Algebra and Graphs - Inequalities",
+      "question": "Solve the inequality: 2x - 5 > 3x + 1",
+      "answer": "x < -6",
+      "explanation": "2x - 5 > 3x + 1\n2x - 3x > 1 + 5\n-x > 6\nx < -6 (multiply by -1 and flip the inequality)",
+      "marks": 3
+    },
+    {
+      "id": "M6",
+      "topic": "Number - Compound Interest",
+      "question": "£500 is invested at 4% compound interest per year. Calculate the amount after 2 years",
+      "answer": "£540.80",
+      "explanation": "Amount = P(1 + r)ⁿ\n= 500(1 + 0.04)²\n= 500(1.04)²\n= 500 × 1.0816\n= £540.80",
+      "marks": 4
+    },
+    {
+      "id": "M7",
+      "topic": "Coordinate Geometry - Gradient of Linear Graphs",
+      "question": "Find the gradient of the line passing through points (2, 5) and (8, 11)",
+      "answer": "1",
+      "explanation": "Gradient = (y₂ - y₁)/(x₂ - x₁)\n= (11 - 5)/(8 - 2)\n= 6/6\n= 1",
+      "marks": 3
+    },
+    {
+      "id": "M8",
+      "topic": "Mensuration - Surface Area and Volume",
+      "question": "Calculate the volume of a cylinder with radius 3 cm and height 8 cm. Give your answer in terms of π",
+      "answer": "72π cm³",
+      "explanation": "Volume of cylinder = πr²h\n= π × 3² × 8\n= π × 9 × 8\n= 72π cm³",
+      "marks": 3
+    },
+    {
+      "id": "M9",
+      "topic": "Probability - Probability of Combined Events",
+      "question": "Two fair coins are tossed. What is the probability of getting exactly one head?",
+      "answer": "1/2",
+      "explanation": "Possible outcomes: HH, HT, TH, TT\nFavorable outcomes (exactly one head): HT, TH\nProbability = 2/4 = 1/2",
+      "marks": 3
+    },
+    {
+      "id": "M10",
+      "topic": "Algebra and Graphs - Sequences",
+      "question": "Find the nth term of the sequence: 5, 8, 11, 14, ...",
+      "answer": "3n + 2",
+      "explanation": "First term = 5, common difference = 3\nGeneral term = first term + (n-1) × common difference\n= 5 + (n-1) × 3\n= 5 + 3n - 3\n= 3n + 2",
+      "marks": 3
+    },
+    {
+      "id": "M11",
+      "topic": "Statistics - Statistical Charts and Diagrams",
+      "question": "The table shows the frequency of different colors of cars. If 60 cars were surveyed and red cars made up 25% of the total, how many red cars were there?",
+      "answer": "15",
+      "explanation": "25% of 60 = 0.25 × 60 = 15 red cars",
+      "marks": 2
+    },
+    {
+      "id": "M12",
+      "topic": "Geometry - Circle Theorems",
+      "question": "In a circle, if the angle at the center is 80°, what is the angle at the circumference subtended by the same arc?",
+      "answer": "40°",
+      "explanation": "The angle at the center is twice the angle at the circumference\nAngle at circumference = 80° ÷ 2 = 40°",
+      "marks": 2
+    }
+  ]
+} 
