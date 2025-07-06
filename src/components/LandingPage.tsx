@@ -76,11 +76,16 @@ const LandingPage: React.FC = () => {
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 relative">
       {/* Logo in top left corner - responsive sizing */}
       <div className="absolute top-2 left-2 sm:top-4 sm:left-4 z-10">
-        <img 
-          src="/logo.svg" 
-          alt="Logo" 
-          className="h-12 w-auto sm:h-16 lg:h-24"
-        />
+        <button
+          onClick={() => navigate('/')}
+          className="cursor-pointer hover:opacity-75 transition-opacity focus:outline-none border-none focus:ring-0 focus:border-none"
+        >
+          <img 
+            src="/logo.svg" 
+            alt="Logo" 
+            className="h-12 w-auto sm:h-16 lg:h-24"
+          />
+        </button>
       </div>
 
       {/* Top right buttons - only show if user is logged in */}

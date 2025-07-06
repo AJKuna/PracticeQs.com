@@ -121,7 +121,7 @@ const NewLandingPage: React.FC = () => {
             <ArrowRight className="ml-2 h-5 w-5" />
           </button>
           <div className="mt-6">
-            <p className="text-sm text-gray-500">✅ Start free.</p>
+            <p className="text-sm text-green-600">✓ Start free.</p>
           </div>
         </div>
         

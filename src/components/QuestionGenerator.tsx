@@ -292,11 +292,47 @@ const QuestionGenerator: React.FC = () => {
     }
   };
 
+  // New function to handle show/hide solutions with automatic generation
+  const handleShowSolutions = async () => {
+    if (showSolutions) {
+      // If solutions are currently shown, just hide them
+      setShowSolutions(false);
+    } else {
+      // If solutions are not shown, generate them if needed and then show them
+      if (generatedSolutions.length === 0) {
+        await generateSolutions();
+      }
+      setShowSolutions(true);
+    }
+  };
+
   const exportToPDF = () => {
     const doc = new jsPDF();
     const pageHeight = doc.internal.pageSize.height;
     const pageWidth = doc.internal.pageSize.width;
-    let yPosition = 20;
+    
+    // Configuration for both grid and lined subjects
+    const lineSpacing = 8; // Distance between lines for lined subjects
+    const gridSpacing = 5; // Distance between grid lines for mathematics
+    const firstLineY = 30; // Y position of first line/grid reference
+    const leftMargin = 20;
+    const rightMargin = 20;
+    const lineLength = pageWidth - leftMargin - rightMargin;
+    
+    // Calculate positions for text alignment
+    const getNextLinePosition = (currentY: number) => {
+      if (normalizedSubject === 'mathematics') {
+        // For grid subjects, align to grid positions (every 5px)
+        const gridNumber = Math.ceil((currentY - firstLineY) / gridSpacing);
+        return firstLineY + (gridNumber * gridSpacing);
+      } else {
+        // For lined subjects, align to line positions (every 8px)
+        const lineNumber = Math.ceil((currentY - firstLineY) / lineSpacing);
+        return firstLineY + (lineNumber * lineSpacing);
+      }
+    };
+    
+    let yPosition = firstLineY; // Start at first line/grid position
 
     // Function to add background pattern
     const addBackgroundPattern = () => {
@@ -316,9 +352,8 @@ const QuestionGenerator: React.FC = () => {
         }
       } else {
         // Add lined pattern for other subjects
-        const lineSpacing = 8;
-        for (let y = 30; y <= pageHeight - 20; y += lineSpacing) {
-          doc.line(20, y, pageWidth - 20, y);
+        for (let y = firstLineY; y <= pageHeight - 20; y += lineSpacing) {
+          doc.line(leftMargin, y, pageWidth - rightMargin, y);
         }
       }
     };
@@ -356,57 +391,82 @@ const QuestionGenerator: React.FC = () => {
     addBackgroundPattern();
     addLogoToPage();
 
-    // Add title - only topic name, bold and larger
-    doc.setFontSize(20);
-    doc.setFont('helvetica', 'bold');
-    doc.text(searchTopic, 20, yPosition);
-    doc.setFont('helvetica', 'normal'); // Reset to normal font
-    yPosition += 20;
+    // Add title - positioned consistently for both subjects
+    if (normalizedSubject === 'mathematics') {
+      doc.setFontSize(20);
+      doc.setFont('helvetica', 'bold');
+      doc.text(searchTopic, leftMargin, 20); // Move closer to top
+      doc.setFont('helvetica', 'normal');
+      yPosition = getNextLinePosition(firstLineY + gridSpacing * 4); // Start questions after grid spacing
+    } else {
+      // For lined subjects, align with lines
+      doc.setFontSize(18); // Bigger font size
+      doc.setFont('helvetica', 'bold');
+      doc.text(searchTopic, leftMargin, 20); // Move closer to top
+      doc.setFont('helvetica', 'normal');
+      yPosition = getNextLinePosition(firstLineY + lineSpacing); // Start questions after first line
+    }
 
     // Add questions
     generatedQuestions.forEach((question, index) => {
-      // Check if we need a new page
-      if (yPosition > pageHeight - 40) {
+      // Check if we need a new page (leave space for at least 6 lines/grid units)
+      const spacingUnit = normalizedSubject === 'mathematics' ? gridSpacing : lineSpacing;
+      if (yPosition > pageHeight - (spacingUnit * 6)) {
         doc.addPage();
         addBackgroundPattern(); // Add pattern to new page
         addLogoToPage(); // Add logo to new page
-        yPosition = 20;
+        yPosition = firstLineY;
       }
 
-      // Question header
-      doc.setFontSize(14);
-      doc.text(`Question ${index + 1}`, 20, yPosition);
+      // Question header - align with grid/lines
+      doc.setFontSize(11); // Consistent font size for headers
+      doc.setFont('helvetica', 'bold');
+      let questionHeader = `Question ${index + 1}`;
       if (question.marks) {
-        doc.setFontSize(10);
-        doc.text(`[${question.marks} marks]`, 150, yPosition);
-        doc.setFontSize(14);
+        questionHeader += ` [${question.marks} marks]`;
       }
-      yPosition += 10;
+      doc.text(questionHeader, leftMargin, yPosition);
+      doc.setFont('helvetica', 'normal');
+      yPosition = getNextLinePosition(yPosition + spacingUnit);
 
-      // Question text
-      doc.setFontSize(11);
-      const questionLines = doc.splitTextToSize(question.question, 170);
-      doc.text(questionLines, 20, yPosition);
-      yPosition += questionLines.length * 5 + 25; // Increased spacing for writing space
+      // Question text - align with grid/lines
+      doc.setFontSize(10); // Consistent font size for question text
+      const questionLines = doc.splitTextToSize(question.question, lineLength);
+      
+      // Place each line on grid/lines
+      questionLines.forEach((line: string) => {
+        doc.text(line, leftMargin, yPosition);
+        yPosition = getNextLinePosition(yPosition + spacingUnit);
+      });
+      // Add extra space for writing
+      yPosition = getNextLinePosition(yPosition + spacingUnit * 3);
 
       // Display passage if it exists (for questions with passages)
       if (question.passage) {
-        doc.setFontSize(10);
-        doc.text('Extract:', 20, yPosition);
-        yPosition += 7;
         doc.setFontSize(9);
-        const passageLines = doc.splitTextToSize(question.passage, 170);
-        doc.text(passageLines, 20, yPosition);
-        yPosition += passageLines.length * 4 + 15; // Spacing after passage
+        doc.setFont('helvetica', 'bold');
+        doc.text('Extract:', leftMargin, yPosition);
+        doc.setFont('helvetica', 'normal');
+        yPosition = getNextLinePosition(yPosition + spacingUnit);
+        
+        doc.setFontSize(8); // Smaller font for passages
+        const passageLines = doc.splitTextToSize(question.passage, lineLength);
+        passageLines.forEach((line: string) => {
+          doc.text(line, leftMargin, yPosition);
+          yPosition = getNextLinePosition(yPosition + spacingUnit);
+        });
+        yPosition = getNextLinePosition(yPosition + spacingUnit);
       }
 
       // Add solutions if they're visible
       if (showSolutions && question.answer) {
-        doc.setFontSize(12);
-        doc.text('Answer:', 20, yPosition);
-        yPosition += 7;
-
         doc.setFontSize(10);
+        doc.setFont('helvetica', 'bold');
+        doc.text('Answer:', leftMargin, yPosition);
+        doc.setFont('helvetica', 'normal');
+        yPosition = getNextLinePosition(yPosition + spacingUnit);
+
+        doc.setFontSize(9);
         
         // Format answer exactly like the browser display with bullet points
         let answerText = '';
@@ -419,11 +479,15 @@ const QuestionGenerator: React.FC = () => {
           answerText = String(question.answer);
         }
         
-        const answerLines = doc.splitTextToSize(answerText, 170);
-        doc.text(answerLines, 20, yPosition);
-        yPosition += answerLines.length * 4 + 25; // Increased spacing
+        const answerLines = doc.splitTextToSize(answerText, lineLength);
+        answerLines.forEach((line: string) => {
+          doc.text(line, leftMargin, yPosition);
+          yPosition = getNextLinePosition(yPosition + spacingUnit);
+        });
+        yPosition = getNextLinePosition(yPosition + spacingUnit * 2);
       } else {
-        yPosition += 25; // Increased spacing between questions
+        // Add extra space for writing answers
+        yPosition = getNextLinePosition(yPosition + spacingUnit * 3);
       }
     });
 
@@ -484,11 +548,16 @@ const QuestionGenerator: React.FC = () => {
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 relative">
       {/* Logo in top left corner - responsive sizing */}
       <div className="absolute top-2 left-2 sm:top-4 sm:left-4 z-10">
-        <img 
-          src="/logo.svg" 
-          alt="Logo" 
-          className="h-12 w-auto sm:h-16 lg:h-24"
-        />
+        <button
+          onClick={() => navigate('/home')}
+          className="cursor-pointer hover:opacity-75 transition-opacity focus:outline-none border-none focus:ring-0 focus:border-none"
+        >
+          <img 
+            src="/logo.svg" 
+            alt="Logo" 
+            className="h-12 w-auto sm:h-16 lg:h-24"
+          />
+        </button>
       </div>
       
       <div className="max-w-3xl mx-auto pt-16 sm:pt-20 lg:pt-0">
@@ -648,7 +717,7 @@ const QuestionGenerator: React.FC = () => {
               value={searchTopic}
               onChange={(e) => setSearchTopic(e.target.value)}
               placeholder={placeholder}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 !text-black !bg-white focus:!bg-white focus:!text-black placeholder-gray-300"
+              className="topic-search-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 !text-black !bg-white focus:!bg-white focus:!text-black"
             />
           </div>
 
@@ -788,22 +857,13 @@ const QuestionGenerator: React.FC = () => {
                 >
                   Save as PDF
                 </button>
-                {generatedSolutions.length > 0 ? (
-                  <button
-                    onClick={toggleSolutions}
-                    className={`py-2 px-4 rounded-md shadow-sm text-sm font-medium text-gray-900 ${subjectTheme.bg} ${subjectTheme.hover} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${subjectTheme.bg.replace('bg-', '')}`}
-                  >
-                    {showSolutions ? 'Hide Solutions' : 'Show Solutions'}
-                  </button>
-                ) : (
-                  <button
-                    onClick={generateSolutions}
-                    disabled={isGeneratingSolutions}
-                    className={`py-2 px-4 rounded-md shadow-sm text-sm font-medium text-gray-900 ${subjectTheme.bg} ${subjectTheme.hover} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${subjectTheme.bg.replace('bg-', '')}`}
-                  >
-                    {isGeneratingSolutions ? 'Generating...' : 'Generate Solutions'}
-                  </button>
-                )}
+                <button
+                  onClick={handleShowSolutions}
+                  disabled={isGeneratingSolutions}
+                  className={`py-2 px-4 rounded-md shadow-sm text-sm font-medium text-gray-900 ${subjectTheme.bg} ${subjectTheme.hover} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${subjectTheme.bg.replace('bg-', '')}`}
+                >
+                  {isGeneratingSolutions ? 'Generating...' : (showSolutions ? 'Hide Solutions' : 'Show Solutions')}
+                </button>
               </div>
             </div>
 

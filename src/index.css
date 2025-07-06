@@ -28,9 +28,27 @@ select {
   color: #111827 !important; /* text-gray-900 */
 }
 
-input::placeholder {
-  @apply text-gray-500 !important;
-  color: #6B7280 !important; /* text-gray-500 */
+input::placeholder,
+input::-webkit-input-placeholder,
+input::-moz-placeholder,
+input:-ms-input-placeholder {
+  @apply text-gray-300 !important;
+  color: #D1D5DB !important; /* text-gray-300 */
+  opacity: 1 !important;
+}
+
+/* More specific override to ensure it works */
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder {
+  color: #D1D5DB !important; /* text-gray-300 */
+  opacity: 1 !important;
+}
+
+/* Specific styling for the topic search input */
+.topic-search-input::placeholder {
+  color: #D1D5DB !important; /* text-gray-300 */
+  opacity: 1 !important;
 }
 
 :root {
