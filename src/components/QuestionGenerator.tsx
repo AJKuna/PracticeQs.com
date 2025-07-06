@@ -773,7 +773,7 @@ const QuestionGenerator: React.FC = () => {
                     <option value="">Select an exam board</option>
                     <option value="aqa">AQA</option>
                     <option value="edexcel">Edexcel</option>
-                    <option value="ocr" disabled>OCR (Coming Soon)</option>
+                    <option value="ocr">OCR</option>
                     <option value="wjec" disabled>WJEC (Coming Soon)</option>
                   </select>
                 </div>

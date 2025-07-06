@@ -1,0 +1,87 @@
+{
+  "difficulty": "easy",
+  "questions": [
+    {
+      "id": "E1",
+      "topic": "Number operations and integers",
+      "question": "Calculate 15 + 23 × 4",
+      "answer": "107",
+      "explanation": "Using order of operations (BODMAS/PEMDAS):\n1. First multiply: 23 × 4 = 92\n2. Then add: 15 + 92 = 107",
+      "marks": 2
+    },
+    {
+      "id": "E2",
+      "topic": "Fractions, decimals and percentages",
+      "question": "Calculate 25% of 80",
+      "answer": "20",
+      "explanation": "Method 1: 25% = 25/100 = 0.25, then 0.25 × 80 = 20\nMethod 2: 25% = 1/4, so 80 ÷ 4 = 20",
+      "marks": 2
+    },
+    {
+      "id": "E3",
+      "topic": "Indices and surds",
+      "question": "Write 0.0043 in standard form",
+      "answer": "4.3 × 10⁻³",
+      "explanation": "Move the decimal point 3 places to the right to get 4.3\nSince we moved right, the power is negative: 4.3 × 10⁻³",
+      "marks": 2
+    },
+    {
+      "id": "E4",
+      "topic": "Approximation and estimation",
+      "question": "Round 5.647 to 2 decimal places",
+      "answer": "5.65",
+      "explanation": "Look at the third decimal place (7). Since 7 ≥ 5, round up.\n5.647 rounds to 5.65",
+      "marks": 1
+    },
+    {
+      "id": "E5",
+      "topic": "Ratio, proportion and rates of change",
+      "question": "Simplify the ratio 12:18",
+      "answer": "2:3",
+      "explanation": "Find the highest common factor of 12 and 18:\nHCF(12, 18) = 6\nDivide both parts by 6: 12÷6 : 18÷6 = 2:3",
+      "marks": 2
+    },
+    {
+      "id": "E6",
+      "topic": "Algebra",
+      "question": "Simplify 3x + 5x - 2x",
+      "answer": "6x",
+      "explanation": "Collect like terms: 3x + 5x - 2x = (3 + 5 - 2)x = 6x",
+      "marks": 1
+    },
+    {
+      "id": "E7",
+      "topic": "Basic geometry",
+      "question": "What is the sum of interior angles in a triangle?",
+      "answer": "180°",
+      "explanation": "The sum of interior angles in any triangle is always 180°",
+      "marks": 1
+    },
+    {
+      "id": "E8",
+      "topic": "Mensuration",
+      "question": "Calculate the area of a rectangle with length 8 cm and width 5 cm",
+      "answer": "40 cm²",
+      "explanation": "Area of rectangle = length × width\nArea = 8 × 5 = 40 cm²",
+      "marks": 2
+    },
+    {
+      "id": "E9",
+      "topic": "Probability",
+      "question": "What is the probability of rolling a 4 on a fair six-sided die?",
+      "answer": "1/6",
+      "explanation": "Number of favorable outcomes = 1 (rolling a 4)\nTotal number of possible outcomes = 6\nProbability = 1/6",
+      "marks": 1
+    },
+    {
+      "id": "E10",
+      "topic": "Statistics",
+      "question": "Find the mean of: 2, 5, 8, 3, 7",
+      "answer": "5",
+      "explanation": "Sum = 2 + 5 + 8 + 3 + 7 = 25\nNumber of values = 5\nMean = 25 ÷ 5 = 5",
+      "marks": 2
+    }
+  ],
+  "total_marks": 16,
+  "recommended_time": "20 minutes"
+} 

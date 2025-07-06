@@ -1,0 +1,87 @@
+{
+  "difficulty": "medium",
+  "questions": [
+    {
+      "id": "M1",
+      "topic": "Algebraic equations",
+      "question": "Solve the equation: 3x + 7 = 22",
+      "answer": "x = 5",
+      "explanation": "1. Subtract 7 from both sides: 3x = 22 - 7 = 15\n2. Divide both sides by 3: x = 15 ÷ 3 = 5",
+      "marks": 3
+    },
+    {
+      "id": "M2",
+      "topic": "Indices and surds",
+      "question": "Simplify: 2³ × 2⁵",
+      "answer": "2⁸ or 256",
+      "explanation": "Using the rule: aᵐ × aⁿ = aᵐ⁺ⁿ\n2³ × 2⁵ = 2³⁺⁵ = 2⁸ = 256",
+      "marks": 2
+    },
+    {
+      "id": "M3",
+      "topic": "Ratio, proportion and rates of change",
+      "question": "If 3 apples cost £1.50, how much do 8 apples cost?",
+      "answer": "£4.00",
+      "explanation": "Cost per apple = £1.50 ÷ 3 = £0.50\nCost of 8 apples = 8 × £0.50 = £4.00",
+      "marks": 3
+    },
+    {
+      "id": "M4",
+      "topic": "Straight line graphs",
+      "question": "Find the gradient of the line passing through points (2, 5) and (6, 13)",
+      "answer": "2",
+      "explanation": "Gradient = (y₂ - y₁)/(x₂ - x₁)\nGradient = (13 - 5)/(6 - 2) = 8/4 = 2",
+      "marks": 3
+    },
+    {
+      "id": "M5",
+      "topic": "Area calculations",
+      "question": "Calculate the area of a triangle with base 12 cm and height 8 cm",
+      "answer": "48 cm²",
+      "explanation": "Area of triangle = ½ × base × height\nArea = ½ × 12 × 8 = 48 cm²",
+      "marks": 2
+    },
+    {
+      "id": "M6",
+      "topic": "Combined events and probability diagrams",
+      "question": "Two coins are tossed. What is the probability of getting at least one head?",
+      "answer": "3/4",
+      "explanation": "Possible outcomes: HH, HT, TH, TT\nFavorable outcomes (at least one head): HH, HT, TH\nProbability = 3/4",
+      "marks": 3
+    },
+    {
+      "id": "M7",
+      "topic": "Sequences",
+      "question": "Find the nth term of the sequence: 5, 8, 11, 14, ...",
+      "answer": "3n + 2",
+      "explanation": "First difference = 3 (arithmetic sequence)\nFirst term when n = 1: 5\nGeneral term = 3n + c\nWhen n = 1: 3(1) + c = 5, so c = 2\nTherefore nth term = 3n + 2",
+      "marks": 3
+    },
+    {
+      "id": "M8",
+      "topic": "Angles",
+      "question": "In triangle ABC, angle A = 65° and angle B = 70°. Find angle C.",
+      "answer": "45°",
+      "explanation": "Sum of angles in a triangle = 180°\nAngle C = 180° - 65° - 70° = 45°",
+      "marks": 2
+    },
+    {
+      "id": "M9",
+      "topic": "Fractions",
+      "question": "Calculate: 2/3 + 1/4",
+      "answer": "11/12",
+      "explanation": "Find common denominator: LCM(3,4) = 12\n2/3 = 8/12, 1/4 = 3/12\n8/12 + 3/12 = 11/12",
+      "marks": 3
+    },
+    {
+      "id": "M10",
+      "topic": "Interpreting and representing data",
+      "question": "The frequency table shows test scores:\nScore: 1-10, 11-20, 21-30, 31-40\nFrequency: 4, 12, 18, 6\nFind the modal class.",
+      "answer": "21-30",
+      "explanation": "The modal class is the class with the highest frequency.\nHighest frequency is 18, which corresponds to the class 21-30.",
+      "marks": 2
+    }
+  ],
+  "total_marks": 26,
+  "recommended_time": "35 minutes"
+} 

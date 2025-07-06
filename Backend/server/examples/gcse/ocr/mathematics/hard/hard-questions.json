@@ -1,0 +1,87 @@
+{
+  "difficulty": "hard",
+  "questions": [
+    {
+      "id": "H1",
+      "topic": "Algebraic inequalities",
+      "question": "Solve the inequality: 3x - 5 ≤ 2x + 7",
+      "answer": "x ≤ 12",
+      "explanation": "1. Subtract 2x from both sides: 3x - 2x - 5 ≤ 7\n2. Simplify: x - 5 ≤ 7\n3. Add 5 to both sides: x ≤ 12",
+      "marks": 4
+    },
+    {
+      "id": "H2",
+      "topic": "Transformations of curves and their equations",
+      "question": "The graph of y = x² is transformed to y = (x - 3)² + 2. Describe the transformations.",
+      "answer": "Translation 3 units right and 2 units up",
+      "explanation": "y = (x - 3)² + 2 compared to y = x²:\n• (x - 3) represents a translation 3 units to the right\n• +2 represents a translation 2 units up",
+      "marks": 4
+    },
+    {
+      "id": "H3",
+      "topic": "Direct and inverse proportion",
+      "question": "If y is inversely proportional to x², and y = 8 when x = 3, find y when x = 6.",
+      "answer": "y = 2",
+      "explanation": "1. y ∝ 1/x², so y = k/x²\n2. When x = 3, y = 8: 8 = k/9, so k = 72\n3. Therefore y = 72/x²\n4. When x = 6: y = 72/36 = 2",
+      "marks": 5
+    },
+    {
+      "id": "H4",
+      "topic": "Circle theorems",
+      "question": "In a circle, a chord AB subtends an angle of 70° at the center. What angle does the same chord subtend at a point C on the circumference?",
+      "answer": "35°",
+      "explanation": "By the theorem: 'The angle at the circumference is half the angle at the center when subtended by the same arc.'\nAngle at circumference = 70° ÷ 2 = 35°",
+      "marks": 3
+    },
+    {
+      "id": "H5",
+      "topic": "Triangle mensuration",
+      "question": "A triangle has sides 5 cm, 12 cm, and 13 cm. Calculate its area using Heron's formula.",
+      "answer": "30 cm²",
+      "explanation": "1. Check if right triangle: 5² + 12² = 25 + 144 = 169 = 13² ✓\n2. For right triangle: Area = ½ × base × height = ½ × 5 × 12 = 30 cm²\nAlternatively using Heron's: s = (5+12+13)/2 = 15\nArea = √[15(15-5)(15-12)(15-13)] = √[15×10×3×2] = √900 = 30 cm²",
+      "marks": 5
+    },
+    {
+      "id": "H6",
+      "topic": "Discrete growth and decay",
+      "question": "A population of bacteria increases by 15% each hour. If there are initially 800 bacteria, how many will there be after 3 hours?",
+      "answer": "1218 bacteria (to nearest whole number)",
+      "explanation": "Growth formula: N = N₀(1 + r)ᵗ\nWhere: N₀ = 800, r = 0.15, t = 3\nN = 800(1.15)³ = 800 × 1.520875 = 1216.7 ≈ 1217 bacteria",
+      "marks": 4
+    },
+    {
+      "id": "H7",
+      "topic": "Plane vector geometry",
+      "question": "Given vectors a = (3, 4) and b = (-2, 1), find |2a - b|.",
+      "answer": "√85",
+      "explanation": "1. Calculate 2a = 2(3, 4) = (6, 8)\n2. Calculate 2a - b = (6, 8) - (-2, 1) = (6+2, 8-1) = (8, 7)\n3. |2a - b| = √(8² + 7²) = √(64 + 49) = √113",
+      "marks": 4
+    },
+    {
+      "id": "H8",
+      "topic": "Language of functions",
+      "question": "If f(x) = 2x + 3 and g(x) = x² - 1, find fg(2).",
+      "answer": "9",
+      "explanation": "1. First find g(2): g(2) = 2² - 1 = 4 - 1 = 3\n2. Then find f(g(2)) = f(3): f(3) = 2(3) + 3 = 6 + 3 = 9\nTherefore fg(2) = 9",
+      "marks": 3
+    },
+    {
+      "id": "H9",
+      "topic": "Volume and surface area calculations",
+      "question": "A cylinder has radius 4 cm and height 10 cm. Calculate its total surface area.",
+      "answer": "112π cm² (or 352 cm² to 3 s.f.)",
+      "explanation": "Total surface area = 2πr² + 2πrh\n= 2π(4)² + 2π(4)(10)\n= 32π + 80π\n= 112π cm²\n≈ 352 cm² (3 s.f.)",
+      "marks": 4
+    },
+    {
+      "id": "H10",
+      "topic": "Exact calculations",
+      "question": "Rationalize the denominator: 12/(3 + √5)",
+      "answer": "6(3 - √5)/2 or 9 - 3√5",
+      "explanation": "Multiply numerator and denominator by (3 - √5):\n12/(3 + √5) × (3 - √5)/(3 - √5)\n= 12(3 - √5)/[(3 + √5)(3 - √5)]\n= 12(3 - √5)/(9 - 5)\n= 12(3 - √5)/4\n= 3(3 - √5)\n= 9 - 3√5",
+      "marks": 4
+    }
+  ],
+  "total_marks": 40,
+  "recommended_time": "50 minutes"
+} 

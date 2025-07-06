@@ -1,0 +1,172 @@
+{
+  "exam_board": "OCR",
+  "subject": "Mathematics",
+  "qualification": "GCSE",
+  "specification_code": "J560",
+  "command_words": [
+    "Calculate",
+    "Solve",
+    "Find",
+    "Work out",
+    "Show that",
+    "Prove",
+    "Draw",
+    "Sketch",
+    "Complete",
+    "Describe",
+    "Explain",
+    "Give",
+    "Write down",
+    "State",
+    "Simplify",
+    "Express",
+    "Estimate",
+    "Round",
+    "Evaluate"
+  ],
+  "topics": [
+    {
+      "id": "1",
+      "name": "Number operations and integers",
+      "subtopics": [
+        "Calculations with integers",
+        "Whole number theory",
+        "Combining arithmetic operations",
+        "Inverse operations"
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Fractions, decimals and percentages",
+      "subtopics": [
+        "Fractions",
+        "Decimal fractions",
+        "Percentages",
+        "Ordering fractions, decimals and percentages"
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Indices and surds",
+      "subtopics": [
+        "Powers and roots",
+        "Standard form",
+        "Exact calculations"
+      ]
+    },
+    {
+      "id": "4",
+      "name": "Approximation and estimation",
+      "subtopics": [
+        "Approximation and estimation"
+      ]
+    },
+    {
+      "id": "5",
+      "name": "Ratio, proportion and rates of change",
+      "subtopics": [
+        "Calculations with ratio",
+        "Direct and inverse proportion",
+        "Discrete growth and decay"
+      ]
+    },
+    {
+      "id": "6",
+      "name": "Algebra",
+      "subtopics": [
+        "Algebraic expressions",
+        "Algebraic formulae",
+        "Algebraic equations",
+        "Algebraic inequalities",
+        "Language of functions",
+        "Sequences"
+      ]
+    },
+    {
+      "id": "7",
+      "name": "Graphs of equations and functions",
+      "subtopics": [
+        "Graphs of equations and functions",
+        "Straight line graphs",
+        "Transformations of curves and their equations",
+        "Interpreting graphs"
+      ]
+    },
+    {
+      "id": "8",
+      "name": "Basic geometry",
+      "subtopics": [
+        "Conventions, notation and terms",
+        "Ruler and compass constructions",
+        "Angles",
+        "Properties of polygons",
+        "Circles",
+        "Three-dimensional shapes"
+      ]
+    },
+    {
+      "id": "9",
+      "name": "Congruence and similarity",
+      "subtopics": [
+        "Plane isometric transformations",
+        "Congruence",
+        "Plane vector geometry",
+        "Similarity"
+      ]
+    },
+    {
+      "id": "10",
+      "name": "Mensuration",
+      "subtopics": [
+        "Units and measurement",
+        "Perimeter calculations",
+        "Area calculations",
+        "Volume and surface area calculations",
+        "Triangle mensuration"
+      ]
+    },
+    {
+      "id": "11",
+      "name": "Probability",
+      "subtopics": [
+        "Basic probability and experiments",
+        "Combined events and probability diagrams"
+      ]
+    },
+    {
+      "id": "12",
+      "name": "Statistics",
+      "subtopics": [
+        "Sampling",
+        "Interpreting and representing data",
+        "Analysing data"
+      ]
+    }
+  ],
+  "assessment": {
+    "papers": [
+      {
+        "name": "Paper 1 (Non-Calculator)",
+        "duration": "1 hour 30 minutes",
+        "marks": 80,
+        "weighting": "33.33%"
+      },
+      {
+        "name": "Paper 2 (Calculator)",
+        "duration": "1 hour 30 minutes",
+        "marks": 80,
+        "weighting": "33.33%"
+      },
+      {
+        "name": "Paper 3 (Calculator)",
+        "duration": "1 hour 30 minutes",
+        "marks": 80,
+        "weighting": "33.33%"
+      }
+    ],
+    "tiers": {
+      "foundation": "Grades 1-5",
+      "higher": "Grades 4-9"
+    }
+  }
+} 
