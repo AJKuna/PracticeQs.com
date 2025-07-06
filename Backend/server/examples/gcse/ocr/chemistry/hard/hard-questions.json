@@ -1,0 +1,113 @@
+[
+  {
+    "id": 1,
+    "question": "Chlorine has two main isotopes: ³⁵Cl (75% abundance) and ³⁷Cl (25% abundance). Calculate the relative atomic mass of chlorine to 1 decimal place.",
+    "answer": "Relative atomic mass = (35 × 75/100) + (37 × 25/100) = 26.25 + 9.25 = 35.5",
+    "marks": 3,
+    "topic": "C1: Particles",
+    "subtopic": "Isotopes"
+  },
+  {
+    "id": 2,
+    "question": "A student investigates the separation of ink using chromatography. The solvent front moves 8.0 cm and a blue dye spot moves 6.4 cm. Calculate the Rf value and explain what this tells us about the dye's properties.",
+    "answer": "Rf = 6.4 ÷ 8.0 = 0.80. This high Rf value indicates the blue dye is quite soluble in the solvent used, as it travels most of the way up the chromatography paper. Substances with higher Rf values are more soluble in the mobile phase.",
+    "marks": 4,
+    "topic": "C2: Elements, Compounds and Mixtures",
+    "subtopic": "Chromatography separation technique"
+  },
+  {
+    "id": 3,
+    "question": "In the reaction 2Mg + O₂ → 2MgO, 4.8 g of magnesium reacts completely. Calculate the mass of oxygen consumed and the mass of magnesium oxide produced. (Ar: Mg = 24, O = 16)",
+    "answer": "Moles of Mg = 4.8 ÷ 24 = 0.2 mol. From equation: 2 mol Mg needs 1 mol O₂, so 0.2 mol Mg needs 0.1 mol O₂. Mass of O₂ = 0.1 × 32 = 3.2 g. 2 mol Mg produces 2 mol MgO, so 0.2 mol Mg produces 0.2 mol MgO. Mass of MgO = 0.2 × 40 = 8.0 g",
+    "marks": 6,
+    "topic": "C3: Chemical Reactions",
+    "subtopic": "Balancing chemical equations"
+  },
+  {
+    "id": 4,
+    "question": "Design an experiment to investigate the effect of temperature on the rate of reaction between sodium thiosulfate and hydrochloric acid. Include method, variables, and safety considerations.",
+    "answer": {
+      "Method": "1. Mix sodium thiosulfate solution with hydrochloric acid in a conical flask. 2. Place flask over a cross drawn on paper. 3. Time how long it takes for the cross to disappear due to sulfur precipitate. 4. Repeat at different temperatures (20°C, 30°C, 40°C, 50°C, 60°C). 5. Plot graph of 1/time vs temperature",
+      "Variables": "Independent: temperature. Dependent: time for cross to disappear. Control: concentration of reactants, volume of reactants, observer position",
+      "Safety": "Wear safety goggles, use fume cupboard for SO₂ gas, handle hot water carefully, wash hands after experiment"
+    },
+    "marks": 8,
+    "topic": "C5: Monitoring and Controlling Chemical Reactions",
+    "subtopic": "Rate of reaction factors - temperature"
+  },
+  {
+    "id": 5,
+    "question": "A student performs electrolysis of copper sulfate solution using copper electrodes. Explain what happens at each electrode and write the ionic equations for the reactions.",
+    "answer": "At the cathode (negative electrode): Cu²⁺ + 2e⁻ → Cu (copper ions gain electrons and are reduced to copper metal). At the anode (positive electrode): Cu → Cu²⁺ + 2e⁻ (copper atoms lose electrons and are oxidised to copper ions). The copper anode dissolves while copper is deposited on the cathode.",
+    "marks": 5,
+    "topic": "C4: Predicting and Identifying Reactions and Products",
+    "subtopic": "Electrolysis reactions"
+  },
+  {
+    "id": 6,
+    "question": "Explain why bromine is less reactive than chlorine but more reactive than iodine. Include electron configuration and bonding in your answer.",
+    "answer": "Reactivity in Group 7 decreases down the group. Chlorine (2,8,7) is more reactive than bromine (2,8,18,7) because chlorine atoms are smaller, so the outer electron shell is closer to the nucleus. This means chlorine atoms attract electrons more strongly when forming bonds. Bromine is more reactive than iodine (2,8,18,18,7) for the same reason - bromine atoms are smaller than iodine atoms, so they can attract electrons more easily.",
+    "marks": 6,
+    "topic": "C4: Predicting and Identifying Reactions and Products",
+    "subtopic": "Group 7 reactivity trends"
+  },
+  {
+    "id": 7,
+    "question": "A student carries out a titration using 25.0 cm³ of 0.100 M NaOH and finds that 23.5 cm³ of HCl is needed for neutralization. Calculate the concentration of the HCl.",
+    "answer": "Moles of NaOH = 0.100 × 25.0/1000 = 0.00250 mol. Equation: HCl + NaOH → NaCl + H₂O (1:1 ratio). Therefore moles of HCl = 0.00250 mol. Concentration of HCl = 0.00250 × 1000/23.5 = 0.106 M",
+    "marks": 4,
+    "topic": "C3: Chemical Reactions",
+    "subtopic": "Neutralisation reactions"
+  },
+  {
+    "id": 8,
+    "question": "For the Haber process (N₂ + 3H₂ ⇌ 2NH₃), explain why a compromise temperature of 450°C is used rather than a lower temperature, despite the reaction being exothermic.",
+    "answer": "Although lower temperatures would favor the forward reaction (Le Chatelier's principle for exothermic reactions), they would make the reaction rate extremely slow. At 450°C, there is a reasonable compromise between having a good reaction rate and still achieving acceptable yield. Industrial processes need to balance yield with reaction rate to be economically viable.",
+    "marks": 5,
+    "topic": "C5: Monitoring and Controlling Chemical Reactions",
+    "subtopic": "Effects of changing conditions on equilibrium"
+  },
+  {
+    "id": 9,
+    "question": "Evaluate the advantages and disadvantages of using hydrogen as a fuel compared to fossil fuels, considering environmental, economic, and practical factors.",
+    "answer": {
+      "Advantages": "Renewable if produced from water electrolysis using renewable energy, only produces water when burned (no CO₂), high energy density per unit mass",
+      "Disadvantages": "Expensive to produce, requires significant energy input, difficult to store safely (highly flammable), limited infrastructure, currently mainly produced from fossil fuels",
+      "Environmental": "Clean burning but production methods may not be environmentally friendly",
+      "Economic": "High production costs, expensive infrastructure needed",
+      "Practical": "Storage difficulties, safety concerns, limited refueling stations"
+    },
+    "marks": 8,
+    "topic": "C6: Global Challenges",
+    "subtopic": "Sustainable development principles"
+  },
+  {
+    "id": 10,
+    "question": "A student investigates the thermal decomposition of copper carbonate. They heat 12.4 g of CuCO₃ and collect the CO₂ gas produced. Calculate the maximum volume of CO₂ that could be produced at RTP. (Ar: Cu = 64, C = 12, O = 16. 1 mole of gas = 24 dm³ at RTP)",
+    "answer": "CuCO₃ → CuO + CO₂. Mr of CuCO₃ = 64 + 12 + 48 = 124. Moles of CuCO₃ = 12.4 ÷ 124 = 0.10 mol. From equation: 1 mol CuCO₃ produces 1 mol CO₂. So 0.10 mol CuCO₃ produces 0.10 mol CO₂. Volume of CO₂ = 0.10 × 24 = 2.4 dm³",
+    "marks": 5,
+    "topic": "C3: Chemical Reactions",
+    "subtopic": "Thermal decomposition reactions"
+  },
+  {
+    "id": 11,
+    "question": "Explain how catalysts work at the molecular level and why they are important in industrial processes. Give one specific example.",
+    "answer": "Catalysts work by providing an alternative reaction pathway with lower activation energy. They do this by forming temporary bonds with reactant molecules, weakening existing bonds and making it easier for new bonds to form. Catalysts are not consumed in the reaction. Industrial importance: They increase reaction rates, allowing lower temperatures and pressures, saving energy and costs. Example: Iron catalyst in Haber process for ammonia production.",
+    "marks": 6,
+    "topic": "C5: Monitoring and Controlling Chemical Reactions",
+    "subtopic": "Rate of reaction factors"
+  },
+  {
+    "id": 12,
+    "question": "Analyze the environmental impact of plastic production and disposal. Suggest and evaluate two methods for reducing plastic waste.",
+    "answer": {
+      "Environmental_impact": "Plastic production uses fossil fuels, releases CO₂. Disposal creates microplastics in oceans, harms wildlife, takes hundreds of years to decompose, releases toxic chemicals",
+      "Method_1": "Biodegradable plastics - break down naturally, reduce landfill waste, but may be more expensive and require specific conditions to decompose",
+      "Method_2": "Plastic recycling - reduces need for new plastic production, saves resources, but requires energy and some plastics can't be recycled indefinitely",
+      "Evaluation": "Both methods help but need widespread adoption and infrastructure development to be effective"
+    },
+    "marks": 8,
+    "topic": "C6: Global Challenges",
+    "subtopic": "Polymer production, Pollution monitoring"
+  }
+] 

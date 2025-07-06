@@ -773,13 +773,14 @@ const QuestionGenerator: React.FC = () => {
                     <option value="">Select an exam board</option>
                     <option value="aqa">AQA</option>
                     <option value="edexcel">Edexcel</option>
-                    {normalizedSubject === 'mathematics' && (
-                      <>
-                        <option value="ocr">OCR</option>
-                        <option value="ci">Cambridge (IGCSE)</option>
-                      </>
+                    {(normalizedSubject === 'mathematics' || normalizedSubject === 'physics' || normalizedSubject === 'chemistry') && (
+                      <option value="ocr">
+                        {normalizedSubject === 'chemistry' ? 'OCR A' : 'OCR'}
+                      </option>
                     )}
-                    <option value="wjec" disabled>WJEC (Coming Soon)</option>
+                    {normalizedSubject === 'mathematics' && (
+                      <option value="ci">Cambridge (IGCSE)</option>
+                    )}
                   </select>
                 </div>
               )

@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "question": "Name the three states of matter and describe the arrangement of particles in each state.",
+    "answer": "The three states of matter are solid, liquid, and gas. In solids, particles are closely packed in a regular arrangement. In liquids, particles are close together but can move past each other. In gases, particles are far apart and move freely.",
+    "marks": 3,
+    "topic": "C1: Particles",
+    "subtopic": "States of matter using particle model"
+  },
+  {
+    "id": 2,
+    "question": "Define the terms 'atomic number' and 'mass number'.",
+    "answer": "Atomic number is the number of protons in the nucleus of an atom. Mass number is the total number of protons and neutrons in the nucleus.",
+    "marks": 2,
+    "topic": "C1: Particles",
+    "subtopic": "Mass number and atomic number"
+  },
+  {
+    "id": 3,
+    "question": "Explain the difference between an element and a compound.",
+    "answer": "An element is a substance made up of only one type of atom. A compound is a substance made up of two or more different types of atoms that are chemically bonded together.",
+    "marks": 2,
+    "topic": "C2: Elements, Compounds and Mixtures",
+    "subtopic": "Elements, compounds and mixtures definitions"
+  },
+  {
+    "id": 4,
+    "question": "Name two methods that can be used to separate mixtures.",
+    "answer": "Two methods to separate mixtures are filtration (to separate insoluble solids from liquids) and distillation (to separate liquids with different boiling points).",
+    "marks": 2,
+    "topic": "C2: Elements, Compounds and Mixtures",
+    "subtopic": "Filtration separation technique, Distillation separation technique"
+  },
+  {
+    "id": 5,
+    "question": "State what happens in a combustion reaction and give one example.",
+    "answer": "In a combustion reaction, a substance reacts with oxygen to produce heat and light. Example: methane + oxygen → carbon dioxide + water (CH₄ + 2O₂ → CO₂ + 2H₂O)",
+    "marks": 3,
+    "topic": "C3: Chemical Reactions",
+    "subtopic": "Combustion reactions"
+  },
+  {
+    "id": 6,
+    "question": "Explain the difference between exothermic and endothermic reactions.",
+    "answer": "Exothermic reactions release energy to the surroundings, causing the temperature to increase. Endothermic reactions absorb energy from the surroundings, causing the temperature to decrease.",
+    "marks": 2,
+    "topic": "C3: Chemical Reactions",
+    "subtopic": "Exothermic reactions, Endothermic reactions"
+  },
+  {
+    "id": 7,
+    "question": "Describe what happens when lithium reacts with water.",
+    "answer": "When lithium reacts with water, it produces lithium hydroxide and hydrogen gas. The reaction is: 2Li + 2H₂O → 2LiOH + H₂. Lithium floats on the water surface and fizzes as hydrogen gas is produced.",
+    "marks": 3,
+    "topic": "C4: Predicting and Identifying Reactions and Products",
+    "subtopic": "Group 1 reactivity trends"
+  },
+  {
+    "id": 8,
+    "question": "State the flame test color for sodium ions.",
+    "answer": "Sodium ions produce a yellow/orange flame in a flame test.",
+    "marks": 1,
+    "topic": "C4: Predicting and Identifying Reactions and Products",
+    "subtopic": "Flame tests for cations"
+  },
+  {
+    "id": 9,
+    "question": "List two factors that affect the rate of chemical reactions.",
+    "answer": "Two factors that affect the rate of chemical reactions are temperature and concentration. Higher temperature and higher concentration both increase the rate of reaction.",
+    "marks": 2,
+    "topic": "C5: Monitoring and Controlling Chemical Reactions",
+    "subtopic": "Rate of reaction factors - temperature, Rate of reaction factors - concentration"
+  },
+  {
+    "id": 10,
+    "question": "Explain what is meant by a 'reversible reaction'.",
+    "answer": "A reversible reaction is a reaction where the products can react together to form the original reactants. The reaction can proceed in both directions, shown by the symbol ⇌.",
+    "marks": 2,
+    "topic": "C5: Monitoring and Controlling Chemical Reactions",
+    "subtopic": "Reversible reactions"
+  },
+  {
+    "id": 11,
+    "question": "State one way that corrosion can be prevented.",
+    "answer": "Corrosion can be prevented by galvanising (coating with zinc), painting, or using sacrificial protection.",
+    "marks": 1,
+    "topic": "C6: Global Challenges",
+    "subtopic": "Corrosion processes"
+  },
+  {
+    "id": 12,
+    "question": "Name one greenhouse gas and explain how it contributes to global warming.",
+    "answer": "Carbon dioxide is a greenhouse gas. It traps heat in the Earth's atmosphere by absorbing infrared radiation emitted from the Earth's surface, preventing it from escaping to space and causing global warming.",
+    "marks": 3,
+    "topic": "C6: Global Challenges",
+    "subtopic": "Greenhouse effect"
+  }
+] 

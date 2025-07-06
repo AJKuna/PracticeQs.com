@@ -1,0 +1,202 @@
+{
+  "exam_board": "OCR",
+  "subject": "Physics",
+  "qualification": "GCSE",
+  "specification_code": "J267",
+  "command_words": [
+    "Calculate",
+    "Describe",
+    "Explain",
+    "State",
+    "Compare",
+    "Evaluate",
+    "Apply",
+    "Analyse",
+    "Interpret",
+    "Use",
+    "Draw",
+    "Plot",
+    "Show",
+    "Determine",
+    "Predict"
+  ],
+  "topics": [
+    {
+      "id": "P1",
+      "name": "Matter",
+      "subtopics": [
+        "Particle model - structure of solids, liquids, gases",
+        "Brownian motion",
+        "Internal energy",
+        "Changes of state - melting, freezing, boiling, condensation",
+        "Heating and cooling curves",
+        "Gas pressure and particle collisions",
+        "Pressure and volume relationship (p × V = constant)"
+      ]
+    },
+    {
+      "id": "P2",
+      "name": "Forces",
+      "subtopics": [
+        "Motion - speed, distance, time calculations",
+        "Distance-time and velocity-time graphs",
+        "Newton's First Law",
+        "Newton's Second Law",
+        "Newton's Third Law",
+        "Force, mass and acceleration calculations",
+        "Work done and energy transfer",
+        "Power calculations",
+        "Gravitational potential energy",
+        "Kinetic energy"
+      ]
+    },
+    {
+      "id": "P3",
+      "name": "Electricity",
+      "subtopics": [
+        "Static electricity and charging by friction",
+        "Attraction and repulsion of charges",
+        "Circuit diagrams and symbols",
+        "Current, voltage and resistance",
+        "Ohm's law calculations",
+        "Series and parallel circuits"
+      ]
+    },
+    {
+      "id": "P4",
+      "name": "Magnetism and Magnetic Fields",
+      "subtopics": [
+        "Magnetic fields around bar magnets",
+        "Magnetic fields around electromagnets",
+        "Uses of electromagnets in devices",
+        "Electric bells and relays"
+      ]
+    },
+    {
+      "id": "P5",
+      "name": "Waves in Matter",
+      "subtopics": [
+        "Transverse and longitudinal waves",
+        "Wave equation (v = fλ)",
+        "Wavefront diagrams",
+        "Electromagnetic spectrum",
+        "Order of waves in EM spectrum",
+        "Uses and dangers of EM waves",
+        "UV radiation and X-rays",
+        "Frequency and energy relationship",
+        "Reflection of waves",
+        "Refraction of waves",
+        "Diffraction of waves"
+      ]
+    },
+    {
+      "id": "P6",
+      "name": "Radioactivity",
+      "subtopics": [
+        "Alpha radiation",
+        "Beta radiation",
+        "Gamma radiation",
+        "Radioactive decay equations",
+        "Half-life calculations",
+        "Medical uses of radioactivity",
+        "Industrial uses of radioactivity",
+        "Radioactive tracers",
+        "Radiotherapy",
+        "Risks and benefits evaluation"
+      ]
+    },
+    {
+      "id": "P7",
+      "name": "Energy",
+      "subtopics": [
+        "Work done calculations",
+        "Force, distance and energy transfer",
+        "Energy in everyday applications",
+        "Power formulas",
+        "Energy and efficiency calculations",
+        "Sankey diagrams"
+      ]
+    },
+    {
+      "id": "P8",
+      "name": "Global Challenges",
+      "subtopics": [
+        "Physics on the move - motion in everyday contexts",
+        "Transport and terminal velocity",
+        "Renewable energy sources",
+        "Non-renewable energy sources",
+        "Energy demand and storage",
+        "Orbits and satellites",
+        "Redshift",
+        "Big Bang theory",
+        "Space data interpretation"
+      ]
+    }
+  ],
+  "practical_activities": [
+    {
+      "id": "P1",
+      "title": "Materials",
+      "description": "Measure density of solids and liquids",
+      "apparatus": ["Length measuring equipment", "Mass balance", "Volume measuring equipment", "Thermometer"]
+    },
+    {
+      "id": "P2", 
+      "title": "Forces",
+      "description": "Investigate how force affects spring extension",
+      "apparatus": ["Newton meters", "Rulers", "Springs", "Masses"]
+    },
+    {
+      "id": "P3",
+      "title": "Motion", 
+      "description": "Investigate acceleration using a trolley on a ramp",
+      "apparatus": ["Trolley", "Ramp", "Timers", "Light gates"]
+    },
+    {
+      "id": "P4",
+      "title": "Measuring Waves",
+      "description": "Use a ripple tank to measure wave speed, frequency, and wavelength", 
+      "apparatus": ["Ripple tank", "Ruler", "Stopwatch"]
+    },
+    {
+      "id": "P5",
+      "title": "Energy",
+      "description": "Determine specific heat capacity of a metal",
+      "apparatus": ["Heater", "Thermometer", "Timer", "Metal block"]
+    },
+    {
+      "id": "P6",
+      "title": "Circuit Components", 
+      "description": "Investigate I-V characteristics of different circuit elements",
+      "apparatus": ["Ammeters", "Voltmeters", "Variable resistors", "Power supply"]
+    },
+    {
+      "id": "P7",
+      "title": "Series & Parallel Circuits",
+      "description": "Compare brightness or current in series and parallel circuits",
+      "apparatus": ["Circuit boards", "Lamps", "Batteries", "Connecting wires"]
+    },
+    {
+      "id": "P8",
+      "title": "Interactions of Waves",
+      "description": "Investigate reflection/refraction using mirrors and prisms", 
+      "apparatus": ["Ray box", "Prisms", "Mirrors", "Protractor"]
+    }
+  ],
+  "assessment": {
+    "papers": [
+      {
+        "name": "Paper 1: Exploring Physics",
+        "duration": "1 hour 45 minutes",
+        "marks": 90,
+        "weighting": "50%"
+      },
+      {
+        "name": "Paper 2: Understanding Processes, Experimentation and Data Handling",
+        "duration": "1 hour 45 minutes", 
+        "marks": 90,
+        "weighting": "50%"
+      }
+    ]
+  }
+} 

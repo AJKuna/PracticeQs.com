@@ -1,0 +1,113 @@
+[
+  {
+    "id": 1,
+    "question": "A sealed container holds 0.5 m³ of gas at 20°C and 150 kPa. The gas is heated to 100°C while keeping the volume constant. Calculate the new pressure and explain the particle theory behind this change.",
+    "answer": "Using Gay-Lussac's law: P₁/T₁ = P₂/T₂. Convert to Kelvin: T₁ = 20 + 273 = 293 K, T₂ = 100 + 273 = 373 K. P₂ = P₁ × T₂/T₁ = 150 × 373/293 = 191 kPa. Explanation: As temperature increases, particles move faster and collide with container walls more frequently and with greater force, increasing pressure.",
+    "marks": 6,
+    "topic": "P1: Matter",
+    "subtopic": "Gas pressure and particle collisions"
+  },
+  {
+    "id": 2,
+    "question": "A car of mass 1200 kg is traveling at 30 m/s when the driver applies the brakes. The car comes to a complete stop over a distance of 90 m. Calculate the deceleration, the braking force, and the time taken to stop.",
+    "answer": "Using v² = u² + 2as: 0² = 30² + 2a(90), so a = -900/180 = -5 m/s². Braking force = ma = 1200 × 5 = 6000 N. Using v = u + at: 0 = 30 + (-5)t, so t = 6 s",
+    "marks": 6,
+    "topic": "P2: Forces",
+    "subtopic": "Newton's Second Law and motion calculations"
+  },
+  {
+    "id": 3,
+    "question": "A circuit contains a 12 V battery, a 6 Ω resistor in series with two parallel branches. One branch has a 4 Ω resistor, the other has an 8 Ω resistor. Calculate the total current from the battery and the current through each resistor.",
+    "answer": "Parallel combination: 1/R_parallel = 1/4 + 1/8 = 3/8, so R_parallel = 8/3 Ω. Total resistance = 6 + 8/3 = 26/3 Ω. Total current = 12 ÷ (26/3) = 36/26 = 1.38 A. Voltage across parallel section = 12 - (1.38 × 6) = 3.72 V. Current through 4 Ω = 3.72/4 = 0.93 A. Current through 8 Ω = 3.72/8 = 0.47 A",
+    "marks": 7,
+    "topic": "P3: Electricity",
+    "subtopic": "Series and parallel circuits"
+  },
+  {
+    "id": 4,
+    "question": "Design an experiment to investigate the relationship between the number of turns in a coil and the strength of an electromagnet. Include apparatus, method, safety considerations, and how you would ensure reliable results.",
+    "answer": {
+      "Apparatus": "Iron core, insulated wire, ammeter, power supply, iron filings or small iron objects, balance",
+      "Method": "1. Wrap wire around iron core with different numbers of turns (10, 20, 30, 40, 50). 2. Connect to power supply with ammeter. 3. Keep current constant throughout. 4. Test strength by counting iron filings attracted or measuring maximum mass lifted. 5. Repeat each measurement 3 times and calculate average",
+      "Safety": "Low voltage supply, avoid overheating, switch off between readings",
+      "Reliability": "Repeat measurements, control variables (current, core material, wire gauge), use same test method each time"
+    },
+    "marks": 8,
+    "topic": "P4: Magnetism and Magnetic Fields",
+    "subtopic": "Uses of electromagnets in devices"
+  },
+  {
+    "id": 5,
+    "question": "Light travels from air into glass at an angle of incidence of 45°. The refractive index of glass is 1.5. Calculate the angle of refraction and explain why the light ray bends toward the normal.",
+    "answer": "Using Snell's law: n₁sin θ₁ = n₂sin θ₂. 1.0 × sin 45° = 1.5 × sin θ₂. sin θ₂ = sin 45°/1.5 = 0.707/1.5 = 0.471. θ₂ = arcsin(0.471) = 28.1°. The light bends toward the normal because it's entering a denser medium where it travels slower, causing the wavefronts to bunch up and change direction.",
+    "marks": 6,
+    "topic": "P5: Waves in Matter",
+    "subtopic": "Refraction of waves"
+  },
+  {
+    "id": 6,
+    "question": "A hospital uses a radioactive tracer with a half-life of 6 hours. If the initial activity is 800 MBq, calculate the activity after 18 hours. Explain why tracers with short half-lives are preferred in medical applications.",
+    "answer": "18 hours = 3 half-lives (18 ÷ 6 = 3). After 1 half-life: 800 ÷ 2 = 400 MBq. After 2 half-lives: 400 ÷ 2 = 200 MBq. After 3 half-lives: 200 ÷ 2 = 100 MBq. Short half-lives are preferred because they reduce the patient's exposure to radiation, minimizing health risks while providing sufficient time for the medical procedure.",
+    "marks": 6,
+    "topic": "P6: Radioactivity",
+    "subtopic": "Half-life calculations and medical uses"
+  },
+  {
+    "id": 7,
+    "question": "A hydroelectric power station converts gravitational potential energy to electrical energy. Water falls through a height of 50 m at a rate of 1000 kg/s. If the overall efficiency is 80%, calculate the electrical power output.",
+    "answer": "Gravitational potential energy per second = mgh = 1000 × 9.8 × 50 = 490,000 J/s = 490 kW. Electrical power output = efficiency × input power = 0.80 × 490 = 392 kW",
+    "marks": 5,
+    "topic": "P7: Energy",
+    "subtopic": "Energy and efficiency calculations"
+  },
+  {
+    "id": 8,
+    "question": "Evaluate the advantages and disadvantages of using nuclear power as an energy source, considering environmental, economic, and safety factors.",
+    "answer": {
+      "Advantages": "Low carbon emissions, high energy density, reliable baseload power, fuel lasts long time, relatively low running costs",
+      "Disadvantages": "High initial construction costs, radioactive waste disposal problems, risk of accidents, long decommissioning time, security concerns, public opposition",
+      "Environmental": "No greenhouse gases during operation but thermal pollution and radioactive waste",
+      "Economic": "High capital costs but low fuel costs over lifetime",
+      "Safety": "Generally safe but catastrophic consequences if accidents occur"
+    },
+    "marks": 8,
+    "topic": "P8: Global Challenges",
+    "subtopic": "Energy demand and storage"
+  },
+  {
+    "id": 9,
+    "question": "Explain how the evidence from cosmic microwave background radiation supports the Big Bang theory and describe what this radiation tells us about the early universe.",
+    "answer": "The cosmic microwave background (CMB) is electromagnetic radiation left over from the Big Bang, detected uniformly across the universe. It supports the Big Bang theory because: 1) It shows the universe was once much hotter and denser, 2) Its temperature (2.7 K) matches theoretical predictions, 3) Small temperature variations explain how galaxies formed. The CMB tells us the universe began in a hot, dense state and has been expanding and cooling for ~13.8 billion years.",
+    "marks": 6,
+    "topic": "P8: Global Challenges",
+    "subtopic": "Big Bang theory and space data interpretation"
+  },
+  {
+    "id": 10,
+    "question": "A cyclist traveling at 15 m/s applies the brakes and decelerates at 3 m/s². Calculate the kinetic energy lost in the first 2 seconds of braking if the cyclist's mass is 70 kg.",
+    "answer": "Initial velocity = 15 m/s. After 2 s: v = u + at = 15 + (-3)(2) = 9 m/s. Initial KE = ½mv² = ½ × 70 × 15² = 7875 J. Final KE = ½mv² = ½ × 70 × 9² = 2835 J. KE lost = 7875 - 2835 = 5040 J",
+    "marks": 5,
+    "topic": "P2: Forces",
+    "subtopic": "Kinetic energy calculations"
+  },
+  {
+    "id": 11,
+    "question": "A ripple tank is used to demonstrate wave properties. Water waves with a frequency of 2 Hz and wavelength of 3 cm approach a barrier with a 1 cm gap. Describe and explain what happens to the waves.",
+    "answer": "The waves will undergo diffraction as they pass through the gap. Since the gap (1 cm) is smaller than the wavelength (3 cm), significant diffraction occurs. The waves spread out in semicircular patterns after passing through the gap. This demonstrates that waves can bend around obstacles and through gaps, with maximum diffraction occurring when the gap size is similar to or smaller than the wavelength.",
+    "marks": 5,
+    "topic": "P5: Waves in Matter",
+    "subtopic": "Diffraction of waves"
+  },
+  {
+    "id": 12,
+    "question": "Analyze the energy transfers in a power station that burns coal to generate electricity. Include a Sankey diagram showing typical efficiency values and explain why the overall efficiency is relatively low.",
+    "answer": {
+      "Energy_transfers": "Chemical energy in coal → Heat energy (combustion) → Kinetic energy (steam turbine) → Electrical energy (generator)",
+      "Sankey_diagram": "Input: 100 units chemical energy. Combustion: 40 units to heat, 60 units waste heat. Turbine: 25 units to KE, 15 units waste heat. Generator: 20 units electrical, 5 units waste heat. Overall efficiency = 20%",
+      "Low_efficiency_reasons": "Heat losses to surroundings, incomplete combustion, friction in turbines, electrical resistance in generators, thermodynamic limits (not all heat can be converted to work)"
+    },
+    "marks": 7,
+    "topic": "P7: Energy",
+    "subtopic": "Sankey diagrams and efficiency"
+  }
+] 

@@ -1,0 +1,187 @@
+{
+  "exam_board": "OCR A",
+  "subject": "Chemistry",
+  "qualification": "GCSE",
+  "specification_code": "J248",
+  "command_words": [
+    "Calculate",
+    "Describe",
+    "Explain",
+    "State",
+    "Compare",
+    "Evaluate",
+    "Apply",
+    "Analyse",
+    "Interpret",
+    "Use",
+    "Draw",
+    "Plot",
+    "Show",
+    "Determine",
+    "Predict",
+    "Deduce",
+    "Suggest",
+    "Distinguish"
+  ],
+  "topics": [
+    {
+      "id": "C1",
+      "name": "Particles",
+      "subtopics": [
+        "States of matter using particle model",
+        "Changes of state using particle model",
+        "Heating and cooling curves",
+        "Atomic structure - nucleus and electrons",
+        "Protons, neutrons and electrons",
+        "Mass number and atomic number",
+        "Isotopes",
+        "Evolution of atomic models - Dalton to Bohr",
+        "Trends in group properties",
+        "Trends in period properties"
+      ]
+    },
+    {
+      "id": "C2",
+      "name": "Elements, Compounds and Mixtures",
+      "subtopics": [
+        "Elements, compounds and mixtures definitions",
+        "Chemical formulae interpretation",
+        "Chemical formulae construction",
+        "Filtration separation technique",
+        "Distillation separation technique",
+        "Chromatography separation technique",
+        "Crystallisation separation technique",
+        "Particle model explanation of separation"
+      ]
+    },
+    {
+      "id": "C3",
+      "name": "Chemical Reactions",
+      "subtopics": [
+        "Combustion reactions",
+        "Thermal decomposition reactions",
+        "Oxidation reactions",
+        "Neutralisation reactions",
+        "Writing chemical equations",
+        "Balancing chemical equations",
+        "Exothermic reactions",
+        "Endothermic reactions",
+        "Energy level diagrams"
+      ]
+    },
+    {
+      "id": "C4",
+      "name": "Predicting and Identifying Reactions and Products",
+      "subtopics": [
+        "Group 1 reactivity trends",
+        "Group 7 reactivity trends",
+        "Transition metals reactivity",
+        "Flame tests for cations",
+        "Gas tests for products",
+        "Chemical tests for anions",
+        "Precipitation reactions for identification"
+      ]
+    },
+    {
+      "id": "C5",
+      "name": "Monitoring and Controlling Chemical Reactions",
+      "subtopics": [
+        "Rate of reaction factors - temperature",
+        "Rate of reaction factors - concentration",
+        "Rate of reaction factors - pressure",
+        "Rate of reaction factors - surface area",
+        "Rate graphs interpretation",
+        "Reversible reactions",
+        "Dynamic equilibrium",
+        "Effects of changing conditions on equilibrium"
+      ]
+    },
+    {
+      "id": "C6",
+      "name": "Global Challenges",
+      "subtopics": [
+        "Sustainable development principles",
+        "Corrosion processes",
+        "Alloy production",
+        "Polymer production",
+        "Greenhouse effect",
+        "Pollution monitoring",
+        "Potable water methods"
+      ]
+    }
+  ],
+  "practical_activities": [
+    {
+      "id": "PAG1",
+      "title": "Reactivity trend",
+      "description": "Mixing reagents and observing changes",
+      "apparatus": ["Various metals", "Salt solutions", "Test tubes", "Measuring cylinders"],
+      "skills": ["Displacement reactions", "Group 7 halogens", "Observation recording"]
+    },
+    {
+      "id": "PAG2", 
+      "title": "Electrolysis",
+      "description": "Setting up electrochemical cells",
+      "apparatus": ["Electrodes", "Power supply", "Electrolyte solutions", "Gas collection tubes"],
+      "skills": ["Electrolysis of NaCl", "Electrolysis of CuSO₄", "Gas testing"]
+    },
+    {
+      "id": "PAG3",
+      "title": "Separation techniques",
+      "description": "Filtration, evaporation, chromatography, distillation",
+      "apparatus": ["Filter paper", "Conical flasks", "Chromatography paper", "Solvents"],
+      "skills": ["Chromatography of ink dyes", "Separation of mixtures"]
+    },
+    {
+      "id": "PAG4",
+      "title": "Distillation",
+      "description": "Distilling liquids safely",
+      "apparatus": ["Distillation apparatus", "Thermometer", "Condenser", "Collection flask"],
+      "skills": ["Distillation of soft drinks", "Distillation of ink", "Temperature monitoring"]
+    },
+    {
+      "id": "PAG5",
+      "title": "Identification of species",
+      "description": "Flame tests, gas tests, precipitation reactions",
+      "apparatus": ["Bunsen burner", "Flame test wires", "Test tubes", "Various reagents"],
+      "skills": ["Cation identification", "Anion identification", "Precipitation tests"]
+    },
+    {
+      "id": "PAG6",
+      "title": "Titration",
+      "description": "Titration and pH monitoring",
+      "apparatus": ["Burette", "Pipette", "Conical flask", "Indicator", "pH meter"],
+      "skills": ["Strong acid + strong base titration", "Accurate measurements"]
+    },
+    {
+      "id": "PAG7",
+      "title": "Production of salts",
+      "description": "Heating, filtration, crystallisation",
+      "apparatus": ["Bunsen burner", "Evaporating basin", "Filter funnel", "Crystallising dish"],
+      "skills": ["Making pure dry salt sample", "Crystallisation technique"]
+    },
+    {
+      "id": "PAG8",
+      "title": "Rates of reaction",
+      "description": "Measuring volume, timing, temperature",
+      "apparatus": ["Gas syringe", "Stopwatch", "Thermometer", "Measuring cylinder"],
+      "skills": ["Acid + carbonate reactions", "Rate vs surface area", "Data collection"]
+    }
+  ],
+  "assessment": {
+    "papers": [
+      {
+        "name": "Paper 1: Chemical Reactions",
+        "duration": "1 hour 45 minutes",
+        "marks": 90,
+        "weighting": "50%"
+      },
+      {
+        "name": "Paper 2: Chemical Ideas",
+        "duration": "1 hour 45 minutes", 
+        "marks": 90,
+        "weighting": "50%"
+      }
+    ]
+  }
+} 

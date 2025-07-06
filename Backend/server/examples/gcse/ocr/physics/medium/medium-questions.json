@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "question": "A gas has a volume of 2.0 m³ at a pressure of 100 kPa. If the temperature remains constant, calculate the new pressure when the volume is compressed to 0.5 m³.",
+    "answer": "Using p₁V₁ = p₂V₂: 100 kPa × 2.0 m³ = p₂ × 0.5 m³. Therefore p₂ = (100 × 2.0) ÷ 0.5 = 400 kPa",
+    "marks": 4,
+    "topic": "P1: Matter",
+    "subtopic": "Pressure and volume relationship (p × V = constant)"
+  },
+  {
+    "id": 2,
+    "question": "A car accelerates from rest to 25 m/s in 10 seconds. Calculate the acceleration and the distance traveled during this time.",
+    "answer": "Acceleration = (v - u) ÷ t = (25 - 0) ÷ 10 = 2.5 m/s². Distance = ut + ½at² = 0 + ½ × 2.5 × 10² = 125 m",
+    "marks": 5,
+    "topic": "P2: Forces",
+    "subtopic": "Force, mass and acceleration calculations"
+  },
+  {
+    "id": 3,
+    "question": "A 6 V battery is connected to two 3 Ω resistors in parallel. Calculate the total resistance and the current drawn from the battery.",
+    "answer": "For parallel resistors: 1/R_total = 1/3 + 1/3 = 2/3, so R_total = 1.5 Ω. Current = V ÷ R = 6 V ÷ 1.5 Ω = 4 A",
+    "marks": 4,
+    "topic": "P3: Electricity",
+    "subtopic": "Series and parallel circuits"
+  },
+  {
+    "id": 4,
+    "question": "Explain how an electromagnet works and give one practical application.",
+    "answer": "An electromagnet works by passing electric current through a coil of wire wrapped around an iron core. The current creates a magnetic field, and the iron core becomes magnetized, strengthening the field. When the current is switched off, the magnetism disappears. Application: Electric bells, MRI machines, or scrapyard cranes.",
+    "marks": 4,
+    "topic": "P4: Magnetism and Magnetic Fields",
+    "subtopic": "Uses of electromagnets in devices"
+  },
+  {
+    "id": 5,
+    "question": "A wave has a frequency of 50 Hz and a wavelength of 6 m. Calculate the wave speed and state what type of wave this could be.",
+    "answer": "Wave speed = frequency × wavelength = 50 Hz × 6 m = 300 m/s. This could be a sound wave in air (speed approximately 340 m/s) or electromagnetic waves in certain media.",
+    "marks": 4,
+    "topic": "P5: Waves in Matter",
+    "subtopic": "Wave equation (v = fλ)"
+  },
+  {
+    "id": 6,
+    "question": "The half-life of a radioactive isotope is 8 hours. If you start with 800 g of the isotope, how much will remain after 24 hours?",
+    "answer": "24 hours = 3 half-lives (24 ÷ 8 = 3). After 1 half-life: 800 ÷ 2 = 400 g. After 2 half-lives: 400 ÷ 2 = 200 g. After 3 half-lives: 200 ÷ 2 = 100 g",
+    "marks": 4,
+    "topic": "P6: Radioactivity",
+    "subtopic": "Half-life calculations"
+  },
+  {
+    "id": 7,
+    "question": "A motor does 1500 J of work in 30 seconds. Calculate the power of the motor and explain the difference between power and energy.",
+    "answer": "Power = Work done ÷ Time = 1500 J ÷ 30 s = 50 W. Energy is the ability to do work (measured in joules), while power is the rate at which energy is transferred or work is done (measured in watts).",
+    "marks": 4,
+    "topic": "P7: Energy",
+    "subtopic": "Power formulas"
+  },
+  {
+    "id": 8,
+    "question": "Explain what causes redshift in light from distant galaxies and what this tells us about the universe.",
+    "answer": "Redshift occurs when distant galaxies are moving away from us, stretching the wavelength of light and making it appear redder. This provides evidence that the universe is expanding, supporting the Big Bang theory. The greater the redshift, the faster the galaxy is moving away.",
+    "marks": 5,
+    "topic": "P8: Global Challenges",
+    "subtopic": "Redshift and Big Bang theory"
+  },
+  {
+    "id": 9,
+    "question": "Describe the process of Brownian motion and explain what it tells us about particles in fluids.",
+    "answer": "Brownian motion is the random, erratic movement of small particles suspended in a fluid. It occurs because the particles are constantly being hit by moving molecules of the fluid. This provides evidence that particles in fluids are in constant random motion and that temperature is related to the kinetic energy of particles.",
+    "marks": 4,
+    "topic": "P1: Matter",
+    "subtopic": "Brownian motion"
+  },
+  {
+    "id": 10,
+    "question": "A spring extends by 0.1 m when a force of 5 N is applied. Calculate the spring constant and the extension when a force of 12 N is applied.",
+    "answer": "Spring constant k = F ÷ x = 5 N ÷ 0.1 m = 50 N/m. When F = 12 N: x = F ÷ k = 12 N ÷ 50 N/m = 0.24 m",
+    "marks": 4,
+    "topic": "P2: Forces",
+    "subtopic": "Work done and energy transfer"
+  },
+  {
+    "id": 11,
+    "question": "Compare the penetrating power of alpha, beta, and gamma radiation, and state what can stop each type.",
+    "answer": "Alpha radiation has the lowest penetrating power and can be stopped by paper or skin. Beta radiation has medium penetrating power and can be stopped by thin aluminum. Gamma radiation has the highest penetrating power and requires thick lead or concrete to stop it.",
+    "marks": 4,
+    "topic": "P6: Radioactivity",
+    "subtopic": "Alpha radiation, Beta radiation, Gamma radiation"
+  },
+  {
+    "id": 12,
+    "question": "Explain why ultraviolet radiation can be harmful to humans and state one beneficial use of UV radiation.",
+    "answer": "UV radiation can damage DNA in skin cells, leading to sunburn, premature aging, and increased risk of skin cancer. It can also damage the eyes. Beneficial use: UV radiation is used to sterilize medical equipment or water treatment because it kills bacteria and viruses.",
+    "marks": 4,
+    "topic": "P5: Waves in Matter",
+    "subtopic": "Uses and dangers of EM waves"
+  }
+] 

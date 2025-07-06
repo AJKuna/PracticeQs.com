@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "question": "State the three states of matter.",
+    "answer": "The three states of matter are solid, liquid, and gas.",
+    "marks": 3,
+    "topic": "P1: Matter",
+    "subtopic": "Particle model - structure of solids, liquids, gases"
+  },
+  {
+    "id": 2,
+    "question": "Calculate the speed of a car that travels 120 m in 8 seconds.",
+    "answer": "Speed = distance ÷ time = 120 m ÷ 8 s = 15 m/s",
+    "marks": 2,
+    "topic": "P2: Forces",
+    "subtopic": "Motion - speed, distance, time calculations"
+  },
+  {
+    "id": 3,
+    "question": "State Ohm's law.",
+    "answer": "Ohm's law states that the current through a conductor is directly proportional to the voltage across it, provided the temperature remains constant. V = I × R",
+    "marks": 2,
+    "topic": "P3: Electricity",
+    "subtopic": "Ohm's law calculations"
+  },
+  {
+    "id": 4,
+    "question": "Name two materials that are attracted to magnets.",
+    "answer": "Two materials that are attracted to magnets are iron and nickel.",
+    "marks": 2,
+    "topic": "P4: Magnetism and Magnetic Fields",
+    "subtopic": "Magnetic fields around bar magnets"
+  },
+  {
+    "id": 5,
+    "question": "State the difference between transverse and longitudinal waves.",
+    "answer": "In transverse waves, the oscillations are perpendicular to the direction of energy transfer. In longitudinal waves, the oscillations are parallel to the direction of energy transfer.",
+    "marks": 2,
+    "topic": "P5: Waves in Matter",
+    "subtopic": "Transverse and longitudinal waves"
+  },
+  {
+    "id": 6,
+    "question": "Name the three types of ionizing radiation.",
+    "answer": "The three types of ionizing radiation are alpha, beta, and gamma radiation.",
+    "marks": 3,
+    "topic": "P6: Radioactivity",
+    "subtopic": "Alpha radiation, Beta radiation, Gamma radiation"
+  },
+  {
+    "id": 7,
+    "question": "Calculate the work done when a force of 20 N moves an object 5 m in the direction of the force.",
+    "answer": "Work done = Force × Distance = 20 N × 5 m = 100 J",
+    "marks": 2,
+    "topic": "P7: Energy",
+    "subtopic": "Work done calculations"
+  },
+  {
+    "id": 8,
+    "question": "State one renewable energy source and one non-renewable energy source.",
+    "answer": "Renewable energy source: Solar power (or wind, hydroelectric, geothermal). Non-renewable energy source: Coal (or oil, natural gas, nuclear).",
+    "marks": 2,
+    "topic": "P8: Global Challenges",
+    "subtopic": "Renewable and non-renewable energy sources"
+  },
+  {
+    "id": 9,
+    "question": "Explain what happens to particles when a solid melts.",
+    "answer": "When a solid melts, the particles gain energy and vibrate more vigorously. The forces between particles weaken, allowing them to move past each other and flow as a liquid.",
+    "marks": 3,
+    "topic": "P1: Matter",
+    "subtopic": "Changes of state - melting, freezing, boiling, condensation"
+  },
+  {
+    "id": 10,
+    "question": "State Newton's First Law of Motion.",
+    "answer": "Newton's First Law states that an object will remain at rest or continue moving at constant velocity unless acted upon by an unbalanced force.",
+    "marks": 2,
+    "topic": "P2: Forces",
+    "subtopic": "Newton's First Law"
+  },
+  {
+    "id": 11,
+    "question": "Calculate the current in a circuit when the voltage is 12 V and the resistance is 4 Ω.",
+    "answer": "Current = Voltage ÷ Resistance = 12 V ÷ 4 Ω = 3 A",
+    "marks": 2,
+    "topic": "P3: Electricity",
+    "subtopic": "Current, voltage and resistance"
+  },
+  {
+    "id": 12,
+    "question": "List the electromagnetic spectrum in order of increasing frequency.",
+    "answer": "Radio waves, microwaves, infrared, visible light, ultraviolet, X-rays, gamma rays",
+    "marks": 3,
+    "topic": "P5: Waves in Matter",
+    "subtopic": "Order of waves in EM spectrum"
+  }
+] 

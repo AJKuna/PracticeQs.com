@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "question": "An atom has 17 protons, 18 neutrons and 17 electrons. State the atomic number, mass number, and identify the element.",
+    "answer": "Atomic number = 17 (number of protons). Mass number = 35 (17 protons + 18 neutrons). The element is chlorine (Cl) as it has 17 protons.",
+    "marks": 3,
+    "topic": "C1: Particles",
+    "subtopic": "Mass number and atomic number"
+  },
+  {
+    "id": 2,
+    "question": "Explain how the atomic model changed from Dalton's model to Bohr's model.",
+    "answer": "Dalton's model described atoms as indivisible solid spheres. Thomson discovered electrons and proposed the 'plum pudding' model with electrons embedded in positive material. Rutherford's experiments showed atoms have a small, dense nucleus. Bohr then proposed that electrons orbit the nucleus in fixed energy levels or shells.",
+    "marks": 4,
+    "topic": "C1: Particles",
+    "subtopic": "Evolution of atomic models - Dalton to Bohr"
+  },
+  {
+    "id": 3,
+    "question": "A student wants to separate a mixture of salt and sand. Describe the method they should use and explain why it works.",
+    "answer": "Method: 1) Add water to dissolve the salt. 2) Filter to separate the sand (insoluble). 3) Evaporate the water from the filtrate to obtain pure salt crystals. This works because salt is soluble in water while sand is insoluble, allowing physical separation based on solubility differences.",
+    "marks": 4,
+    "topic": "C2: Elements, Compounds and Mixtures",
+    "subtopic": "Filtration separation technique, Crystallisation separation technique"
+  },
+  {
+    "id": 4,
+    "question": "Balance the following equation and identify the type of reaction: CaCO₃ → CaO + CO₂",
+    "answer": "The equation is already balanced: CaCO₃ → CaO + CO₂. This is a thermal decomposition reaction because one compound (calcium carbonate) breaks down into two simpler compounds when heated.",
+    "marks": 3,
+    "topic": "C3: Chemical Reactions",
+    "subtopic": "Thermal decomposition reactions, Balancing chemical equations"
+  },
+  {
+    "id": 5,
+    "question": "In a neutralisation reaction, 25 cm³ of 0.1 M hydrochloric acid reacts with 25 cm³ of 0.1 M sodium hydroxide. Write the balanced equation and calculate the number of moles of each reactant.",
+    "answer": "Balanced equation: HCl + NaOH → NaCl + H₂O. Moles of HCl = 0.1 × 25/1000 = 0.0025 mol. Moles of NaOH = 0.1 × 25/1000 = 0.0025 mol. The reaction is 1:1 stoichiometry, so reactants are in exact proportions.",
+    "marks": 5,
+    "topic": "C3: Chemical Reactions",
+    "subtopic": "Neutralisation reactions, Balancing chemical equations"
+  },
+  {
+    "id": 6,
+    "question": "Explain the trend in reactivity down Group 1 of the periodic table and predict what would happen if cesium reacted with water.",
+    "answer": "Reactivity increases down Group 1 because atoms get larger, so the outer electron is further from the nucleus and easier to lose. Cesium would react very vigorously with water, producing cesium hydroxide and hydrogen gas, with a violent reaction that might cause explosion: 2Cs + 2H₂O → 2CsOH + H₂",
+    "marks": 4,
+    "topic": "C4: Predicting and Identifying Reactions and Products",
+    "subtopic": "Group 1 reactivity trends"
+  },
+  {
+    "id": 7,
+    "question": "A student performs flame tests on three unknown compounds and observes: Sample A - red flame, Sample B - green flame, Sample C - lilac flame. Identify the metal ions present.",
+    "answer": "Sample A contains lithium ions (Li⁺) - red flame. Sample B contains copper ions (Cu²⁺) - green flame. Sample C contains potassium ions (K⁺) - lilac flame.",
+    "marks": 3,
+    "topic": "C4: Predicting and Identifying Reactions and Products",
+    "subtopic": "Flame tests for cations"
+  },
+  {
+    "id": 8,
+    "question": "Explain why increasing the surface area of a solid reactant increases the rate of reaction.",
+    "answer": "Increasing surface area increases the rate of reaction because more particles are exposed on the surface. This means there are more collision opportunities between reactant particles per unit time. More collisions lead to more successful reactions, increasing the overall rate of reaction.",
+    "marks": 3,
+    "topic": "C5: Monitoring and Controlling Chemical Reactions",
+    "subtopic": "Rate of reaction factors - surface area"
+  },
+  {
+    "id": 9,
+    "question": "For the reversible reaction N₂ + 3H₂ ⇌ 2NH₃, predict what happens to the equilibrium position when the pressure is increased.",
+    "answer": "When pressure is increased, the equilibrium position shifts to the right (towards products). This is because there are 4 gas molecules on the left (1 N₂ + 3 H₂) and only 2 gas molecules on the right (2 NH₃). The equilibrium shifts to the side with fewer gas molecules to reduce pressure.",
+    "marks": 4,
+    "topic": "C5: Monitoring and Controlling Chemical Reactions",
+    "subtopic": "Effects of changing conditions on equilibrium"
+  },
+  {
+    "id": 10,
+    "question": "Explain how chromatography works and how you would calculate the Rf value for a spot.",
+    "answer": "Chromatography works by separating substances based on their different solubilities in a solvent. More soluble substances travel further up the paper. Rf value = distance moved by substance ÷ distance moved by solvent front. Rf values are between 0 and 1.",
+    "marks": 4,
+    "topic": "C2: Elements, Compounds and Mixtures",
+    "subtopic": "Chromatography separation technique"
+  },
+  {
+    "id": 11,
+    "question": "Describe the process of making pure, dry crystals of copper sulfate from copper oxide and sulfuric acid.",
+    "answer": "1) Add excess copper oxide to warm dilute sulfuric acid and stir until no more dissolves. 2) Filter to remove unreacted copper oxide. 3) Heat the filtrate gently to evaporate some water until crystals start to form. 4) Leave to cool and crystallise. 5) Filter and wash crystals with distilled water, then dry.",
+    "marks": 5,
+    "topic": "C3: Chemical Reactions",
+    "subtopic": "Neutralisation reactions"
+  },
+  {
+    "id": 12,
+    "question": "Explain why sustainable development is important in the chemical industry and give one example of a sustainable practice.",
+    "answer": "Sustainable development is important because it meets current needs without compromising future generations' ability to meet their needs. It reduces environmental impact and conserves resources. Example: Using renewable energy sources in chemical plants, recycling waste products, or developing biodegradable plastics.",
+    "marks": 4,
+    "topic": "C6: Global Challenges",
+    "subtopic": "Sustainable development principles"
+  }
+] 
