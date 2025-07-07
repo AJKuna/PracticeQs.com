@@ -715,7 +715,7 @@ const QuestionGenerator: React.FC = () => {
           {(() => {
             const remaining = (usage?.limit || 0) - (usage?.usage || 0);
             if (isNaN(remaining) || remaining <= 0) {
-              return "Zero questions remaining today.";
+              return "Zero questions remaining today. Upgrade now to unlock unlimited questions, or come back tomorrow.";
             }
             return `${remaining} questions remaining today`;
           })()}
@@ -749,6 +749,7 @@ const QuestionGenerator: React.FC = () => {
                 isVisible={showDropdown}
                 subject={normalizedSubject}
                 examLevel={options.examLevel}
+                examBoard={options.examBoard}
               />
             </div>
           </div>

@@ -9,21 +9,16 @@
   ],
   "topics": [
     {
-      "name": "4.1 Cell biology",
+      "name": "1. Cell Biology",
       "subtopics": [
         {
-          "code": "4.1.1",
-          "title": "Cell structure",
+          "code": "1.1",
+          "title": "Cell Structure",
           "content": [
-            "Eukaryotic cells (animal and plant) have a cell membrane, cytoplasm and genetic material enclosed in a nucleus",
-            "Plant and algal cells also have a cell wall, chloroplasts and vacuoles",
-            "Bacteria are prokaryotic cells, much smaller than eukaryotic cells",
-            "Bacterial cells have a cell wall, cell membrane, cytoplasm and circular DNA, but no nucleus",
-            "DNA is genetic material that determines cell function and characteristics",
-            "Mitochondria are sites of aerobic respiration",
-            "Chloroplasts are sites of photosynthesis",
-            "Cell wall is made of cellulose in plants",
-            "Vacuoles contain cell sap in plant cells"
+            "Difference between prokaryotic and eukaryotic cells",
+            "Structure and functions of key organelles (nucleus, mitochondria, ribosomes, chloroplasts, etc.)",
+            "Specialised cells and cell differentiation",
+            "Use of light microscopes and understanding of magnification"
           ],
           "required_skills": [
             "Use microscopes to observe and draw cells",
@@ -31,7 +26,7 @@
             "Label diagrams of animal and plant cells",
             "Explain differences between animal and plant cells",
             "Explain differences between eukaryotic and prokaryotic cells",
-            "(HT only) Explain how cell structures are related to their functions"
+            "Describe how specialised cells are adapted to their function"
           ],
           "mathematical_skills": [
             "Calculate magnification",
@@ -40,50 +35,60 @@
           ]
         },
         {
-          "code": "4.1.2",
-          "title": "Cell division",
+          "code": "1.2",
+          "title": "Cell Division",
           "content": [
-            "Cells divide by mitosis during growth and repair",
-            "Mitosis produces two identical daughter cells",
-            "Before mitosis, DNA replicates and copies are made",
-            "During mitosis chromosomes line up and separate",
-            "Cell cycle includes growth, DNA synthesis, and mitosis",
-            "Stem cells are undifferentiated cells",
-            "Stem cells can differentiate into specialized cells",
-            "Therapeutic cloning uses stem cells to treat conditions"
+            "Structure of chromosomes and the cell cycle",
+            "Process and role of mitosis",
+            "Stem cells and their uses, including ethical issues"
           ],
           "required_skills": [
             "Describe stages of mitosis",
             "Explain importance of mitosis in growth and repair",
             "Describe function of stem cells",
             "Evaluate use of stem cells in medicine",
-            "(HT only) Explain process of cell differentiation"
+            "Discuss ethical issues surrounding stem cell use"
           ],
           "mathematical_skills": [
             "Calculate percentage change in cell numbers",
             "Use standard form for very large/small numbers"
           ]
+        },
+        {
+          "code": "1.3",
+          "title": "Transport in Cells",
+          "content": [
+            "Diffusion, osmosis and active transport",
+            "Factors affecting the rate of diffusion",
+            "Surface area to volume ratio and its biological importance"
+          ],
+          "required_skills": [
+            "Explain how substances move in and out of cells",
+            "Describe factors affecting diffusion rate",
+            "Calculate surface area to volume ratios",
+            "Explain why surface area to volume ratio is important"
+          ],
+          "mathematical_skills": [
+            "Calculate surface area to volume ratios",
+            "Use ratios and percentages",
+            "Plot and interpret graphs of diffusion rates"
+          ]
         }
       ]
     },
     {
-      "name": "4.2 Organisation",
+      "name": "2. Organisation",
       "subtopics": [
         {
-          "code": "4.2.1",
-          "title": "Principles of organisation",
+          "code": "2.1",
+          "title": "Principles of Organisation",
           "content": [
-            "Cells are the basic building blocks of all living organisms",
-            "Cells form tissues, tissues form organs, organs form organ systems",
-            "Digestive system is an example of an organ system",
-            "Heart and blood vessels form the circulatory system",
-            "Organisational hierarchy: cells → tissues → organs → organ systems → organism"
+            "Levels of biological organisation from cells to organ systems"
           ],
           "required_skills": [
             "Explain levels of organisation in living things",
             "Describe functions of major organ systems",
-            "Link cell types to tissue function",
-            "Explain how organ systems work together"
+            "Link cell types to tissue function"
           ],
           "mathematical_skills": [
             "Use ratios and percentages",
@@ -91,28 +96,344 @@
           ]
         },
         {
-          "code": "4.2.2",
-          "title": "Animal tissues, organs and organ systems",
+          "code": "2.2",
+          "title": "Animal Tissues, Organs and Digestive System",
           "content": [
-            "The heart is made of muscle tissue and pumps blood around body",
-            "Blood carries oxygen and nutrients to cells",
-            "Blood contains red blood cells, white blood cells, platelets and plasma",
-            "Blood vessels include arteries, veins and capillaries",
-            "Lungs are organs for gas exchange",
-            "Digestive system includes mouth, stomach, intestines, liver and pancreas",
-            "Enzymes help break down food molecules"
+            "Structure and function of the human digestive system",
+            "Enzyme action (lock and key model)",
+            "Effect of temperature and pH on enzymes",
+            "Required practical: Effect of pH on enzyme activity"
           ],
           "required_skills": [
-            "Identify different types of blood cells",
-            "Explain how enzymes work",
+            "Explain how enzymes work using lock and key model",
             "Describe process of digestion",
-            "Calculate heart rate and stroke volume",
-            "(HT only) Calculate cardiac output"
+            "Explain effects of temperature and pH on enzymes",
+            "Plan and carry out enzyme practical investigations"
           ],
           "mathematical_skills": [
             "Plot graphs of enzyme activity",
             "Calculate means and ranges",
-            "Interpret data about organ systems"
+            "Interpret data about enzyme activity"
+          ]
+        },
+        {
+          "code": "2.3",
+          "title": "Circulatory System and the Heart",
+          "content": [
+            "Heart structure and blood vessels",
+            "Blood components and their functions",
+            "Coronary heart disease and treatments (statins, stents, etc.)"
+          ],
+          "required_skills": [
+            "Identify different types of blood cells",
+            "Explain structure and function of the heart",
+            "Describe causes and treatments of coronary heart disease",
+            "Calculate heart rate and stroke volume"
+          ],
+          "mathematical_skills": [
+            "Calculate cardiac output",
+            "Interpret data about heart disease",
+            "Use percentages and ratios"
+          ]
+        },
+        {
+          "code": "2.4",
+          "title": "Health Issues",
+          "content": [
+            "Risk factors for non-communicable diseases (e.g., lifestyle, diet, smoking)",
+            "Interaction of different diseases (e.g., HIV and TB)"
+          ],
+          "required_skills": [
+            "Identify risk factors for non-communicable diseases",
+            "Explain how lifestyle affects health",
+            "Describe how different diseases can interact"
+          ],
+          "mathematical_skills": [
+            "Interpret statistical data about health",
+            "Calculate percentages and ratios",
+            "Analyse correlation data"
+          ]
+        },
+        {
+          "code": "2.5",
+          "title": "Plant Tissues and Transport",
+          "content": [
+            "Structure and function of xylem, phloem, stomata, guard cells",
+            "Transpiration and translocation",
+            "Required practical: Effect of light/humidity/wind on transpiration"
+          ],
+          "required_skills": [
+            "Explain structure and function of plant transport systems",
+            "Describe transpiration and translocation",
+            "Plan and carry out transpiration practical investigations"
+          ],
+          "mathematical_skills": [
+            "Calculate transpiration rates",
+            "Plot and interpret graphs",
+            "Use ratios and percentages"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "3. Infection and Response",
+      "subtopics": [
+        {
+          "code": "3.1",
+          "title": "Communicable Diseases",
+          "content": [
+            "Types of pathogens: bacteria, viruses, fungi, protists",
+            "Spread, symptoms, and prevention of diseases like measles, salmonella, malaria"
+          ],
+          "required_skills": [
+            "Identify different types of pathogens",
+            "Explain how diseases spread",
+            "Describe symptoms and prevention of specific diseases"
+          ],
+          "mathematical_skills": [
+            "Interpret data about disease spread",
+            "Calculate percentages and rates",
+            "Analyse epidemiological data"
+          ]
+        },
+        {
+          "code": "3.2",
+          "title": "Human Defence Systems",
+          "content": [
+            "Skin, mucus, stomach acid, white blood cells (phagocytosis, antibodies)"
+          ],
+          "required_skills": [
+            "Explain how the body defends against pathogens",
+            "Describe the role of white blood cells",
+            "Explain phagocytosis and antibody production"
+          ],
+          "mathematical_skills": [
+            "Interpret data about immune responses",
+            "Calculate percentages and ratios"
+          ]
+        },
+        {
+          "code": "3.3",
+          "title": "Vaccination",
+          "content": [
+            "How vaccines work",
+            "Herd immunity"
+          ],
+          "required_skills": [
+            "Explain how vaccines work",
+            "Describe the concept of herd immunity",
+            "Evaluate benefits and risks of vaccination"
+          ],
+          "mathematical_skills": [
+            "Calculate vaccination rates",
+            "Interpret data about vaccination effectiveness"
+          ]
+        },
+        {
+          "code": "3.4",
+          "title": "Antibiotics and Painkillers",
+          "content": [
+            "Use of antibiotics and issue of resistance",
+            "Drug development and testing"
+          ],
+          "required_skills": [
+            "Explain how antibiotics work",
+            "Describe antibiotic resistance",
+            "Explain drug development and testing processes"
+          ],
+          "mathematical_skills": [
+            "Interpret data about antibiotic resistance",
+            "Calculate percentages and rates"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "4. Bioenergetics",
+      "subtopics": [
+        {
+          "code": "4.1",
+          "title": "Photosynthesis",
+          "content": [
+            "Equation for photosynthesis",
+            "Limiting factors",
+            "Uses of glucose produced",
+            "Required practical: Effect of light on photosynthesis (pondweed)"
+          ],
+          "required_skills": [
+            "Write the equation for photosynthesis",
+            "Explain limiting factors in photosynthesis",
+            "Describe uses of glucose in plants",
+            "Plan and carry out photosynthesis practical investigations"
+          ],
+          "mathematical_skills": [
+            "Calculate rates of photosynthesis",
+            "Plot and interpret graphs",
+            "Use ratios and percentages"
+          ]
+        },
+        {
+          "code": "4.2",
+          "title": "Respiration",
+          "content": [
+            "Aerobic vs anaerobic respiration (in animals and yeast)",
+            "Applications like baking and brewing",
+            "Equation recognition",
+            "Required practical: Effect of exercise on the body (e.g., pulse rate)"
+          ],
+          "required_skills": [
+            "Write equations for aerobic and anaerobic respiration",
+            "Explain applications of fermentation",
+            "Plan and carry out respiration practical investigations"
+          ],
+          "mathematical_skills": [
+            "Calculate respiration rates",
+            "Plot and interpret graphs",
+            "Calculate percentage changes"
+          ]
+        },
+        {
+          "code": "4.3",
+          "title": "Metabolism",
+          "content": [
+            "Definition of metabolism",
+            "Synthesis and breakdown of biological molecules"
+          ],
+          "required_skills": [
+            "Define metabolism",
+            "Explain synthesis and breakdown reactions",
+            "Link metabolism to energy requirements"
+          ],
+          "mathematical_skills": [
+            "Calculate energy requirements",
+            "Interpret data about metabolic rates"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "5. Homeostasis and Response",
+      "subtopics": [
+        {
+          "code": "5.1",
+          "title": "Homeostasis",
+          "content": [
+            "Definition and importance",
+            "Role of receptors, coordination centres, and effectors"
+          ],
+          "required_skills": [
+            "Define homeostasis",
+            "Explain importance of homeostasis",
+            "Describe control mechanisms"
+          ],
+          "mathematical_skills": [
+            "Interpret data about homeostatic responses",
+            "Calculate percentage changes"
+          ]
+        },
+        {
+          "code": "5.2",
+          "title": "Nervous System",
+          "content": [
+            "Structure and function (stimulus → receptor → coordinator → effector → response)",
+            "Reflex arcs",
+            "Required practical: Reaction time"
+          ],
+          "required_skills": [
+            "Explain nervous system structure and function",
+            "Describe reflex arcs",
+            "Plan and carry out reaction time investigations"
+          ],
+          "mathematical_skills": [
+            "Calculate reaction times",
+            "Calculate means and ranges",
+            "Plot and interpret graphs"
+          ]
+        },
+        {
+          "code": "5.3",
+          "title": "The Brain (Biology only)",
+          "content": [
+            "Functions of parts of the brain (cerebral cortex, cerebellum, medulla)",
+            "Brain mapping techniques"
+          ],
+          "required_skills": [
+            "Identify parts of the brain and their functions",
+            "Explain brain mapping techniques",
+            "Evaluate methods of studying the brain"
+          ],
+          "mathematical_skills": [
+            "Interpret brain scan data",
+            "Calculate percentages and ratios"
+          ]
+        },
+        {
+          "code": "5.4",
+          "title": "The Eye (Biology only)",
+          "content": [
+            "Eye structure and function",
+            "Common defects and their correction"
+          ],
+          "required_skills": [
+            "Explain eye structure and function",
+            "Describe common eye defects",
+            "Explain how eye defects are corrected"
+          ],
+          "mathematical_skills": [
+            "Calculate focal lengths",
+            "Interpret data about vision"
+          ]
+        },
+        {
+          "code": "5.5",
+          "title": "Hormonal Coordination",
+          "content": [
+            "Glands and hormones",
+            "Blood glucose regulation (insulin and glucagon)",
+            "Diabetes"
+          ],
+          "required_skills": [
+            "Explain role of hormones",
+            "Describe blood glucose regulation",
+            "Explain causes and treatment of diabetes"
+          ],
+          "mathematical_skills": [
+            "Interpret data about hormone levels",
+            "Calculate percentage changes"
+          ]
+        },
+        {
+          "code": "5.6",
+          "title": "Human Reproduction",
+          "content": [
+            "Hormonal control of the menstrual cycle",
+            "Contraceptives",
+            "Fertility treatments (IVF, FSH, LH)"
+          ],
+          "required_skills": [
+            "Explain hormonal control of menstrual cycle",
+            "Describe different contraceptive methods",
+            "Explain fertility treatments"
+          ],
+          "mathematical_skills": [
+            "Interpret data about hormone levels",
+            "Calculate success rates of treatments"
+          ]
+        },
+        {
+          "code": "5.7",
+          "title": "Plant Hormones (Biology only)",
+          "content": [
+            "Effects of auxin, gibberellins and ethene",
+            "Required practical: Effect of light/gravity on seedlings"
+          ],
+          "required_skills": [
+            "Explain effects of plant hormones",
+            "Plan and carry out plant hormone investigations"
+          ],
+          "mathematical_skills": [
+            "Measure and calculate growth rates",
+            "Plot and interpret graphs"
           ]
         }
       ]

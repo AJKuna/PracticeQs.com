@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { mathGcseTopics } from '../data/mathGcseTopics';
+import { biologyGcseAqaTopics } from '../data/biologyGcseAqaTopics';
+import { biologyGcseEdexcelTopics } from '../data/biologyGcseEdexcelTopics';
 
 interface TopicDropdownProps {
   searchTopic: string;
@@ -7,6 +9,7 @@ interface TopicDropdownProps {
   isVisible: boolean;
   subject: string;
   examLevel: string;
+  examBoard: string;
 }
 
 const TopicDropdown: React.FC<TopicDropdownProps> = ({
@@ -14,14 +17,29 @@ const TopicDropdown: React.FC<TopicDropdownProps> = ({
   onTopicSelect,
   isVisible,
   subject,
-  examLevel
+  examLevel,
+  examBoard
 }) => {
   const [filteredTopics, setFilteredTopics] = useState<string[]>([]);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Only show dropdown for Math GCSE
-  const shouldShowDropdown = subject === 'mathematics' && examLevel === 'gcse' && isVisible;
+  // Determine which topics to use based on subject, exam level, and exam board
+  const getTopicsList = () => {
+    if (subject === 'mathematics' && examLevel === 'gcse') {
+      return mathGcseTopics;
+    }
+    if (subject === 'biology' && examLevel === 'gcse' && examBoard === 'aqa') {
+      return biologyGcseAqaTopics;
+    }
+    if (subject === 'biology' && examLevel === 'gcse' && examBoard === 'edexcel') {
+      return biologyGcseEdexcelTopics;
+    }
+    return [];
+  };
+
+  // Only show dropdown for supported combinations
+  const shouldShowDropdown = getTopicsList().length > 0 && isVisible;
 
   useEffect(() => {
     if (!shouldShowDropdown || !searchTopic.trim()) {
@@ -30,13 +48,14 @@ const TopicDropdown: React.FC<TopicDropdownProps> = ({
       return;
     }
 
-    const filtered = mathGcseTopics.filter(topic =>
+    const topicsList = getTopicsList();
+    const filtered = topicsList.filter(topic =>
       topic.toLowerCase().includes(searchTopic.toLowerCase())
     ).slice(0, 8); // Limit to 8 suggestions to avoid overwhelming the user
 
     setFilteredTopics(filtered);
     setHighlightedIndex(-1);
-  }, [searchTopic, shouldShowDropdown]);
+  }, [searchTopic, shouldShowDropdown, subject, examLevel, examBoard]);
 
   // Handle keyboard navigation
   useEffect(() => {
