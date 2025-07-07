@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "question": "'Monitoring and prediction are the most effective ways to reduce the impacts of tectonic hazards.' To what extent do you agree with this statement?",
+    "answer": "Arguments supporting the statement: Modern seismic monitoring can provide early warning systems that save lives, as seen in Japan's earthquake preparedness. Prediction technology allows evacuation planning and emergency response preparation. Continuous monitoring enables building codes to be updated based on seismic risk assessments. Arguments against: Prediction remains imprecise - earthquakes cannot be predicted to exact times. Monitoring requires expensive technology that LICs cannot afford. Education and building design may be more effective long-term solutions. Overall evaluation: While monitoring is valuable in HICs, a combination of strategies including education, planning, and international cooperation provides more comprehensive protection, especially for vulnerable LIC populations.",
+    "marks": 9,
+    "topic": "The challenge of natural hazards",
+    "subtopic": "Tectonic hazards"
+  },
+  {
+    "id": 2,
+    "question": "Assess the extent to which tropical storms have different impacts in HICs compared to LICs.",
+    "answer": "Economic impacts: HICs face higher absolute costs due to expensive infrastructure, but better insurance systems and reconstruction capacity. LICs have lower absolute costs but impacts represent higher proportion of GDP with limited recovery resources. Social impacts: LICs typically experience higher death tolls due to poor warning systems and inadequate shelter. HICs have better emergency services and evacuation procedures but still face displacement issues. Environmental impacts: Both face similar physical damage but HICs have better restoration resources. Long-term recovery: HICs recover more quickly due to financial resources and infrastructure. LICs may take years to rebuild with international aid dependency. Overall, while absolute damage costs are higher in HICs, relative impacts and recovery challenges are typically greater in LICs.",
+    "marks": 9,
+    "topic": "The challenge of natural hazards",
+    "subtopic": "Weather hazards"
+  },
+  {
+    "id": 3,
+    "question": "Evaluate the effectiveness of different strategies used to manage tropical rainforests sustainably.",
+    "answer": "International agreements like REDD+ provide financial incentives for forest conservation but enforcement remains weak. Selective logging allows continued timber production while maintaining forest structure, though illegal logging undermines efforts. Ecotourism generates income for local communities while preserving ecosystems, but requires careful management to prevent damage. National parks protect core areas but may displace indigenous communities. Debt-for-nature swaps reduce financial pressure but don't address underlying economic drivers. Education programs raise awareness but behavior change is slow. Most effective approach combines multiple strategies: strong governance, economic alternatives for local communities, international funding, and strict enforcement of regulations.",
+    "marks": 9,
+    "topic": "The living world",
+    "subtopic": "Tropical rainforests"
+  },
+  {
+    "id": 4,
+    "question": "Explain how urban regeneration can address the challenges faced by inner city areas.",
+    "answer": "Physical regeneration improves housing quality by demolishing poor quality buildings and constructing new homes with better facilities. Infrastructure investment upgrades transport links, utilities, and public spaces improving accessibility and quality of life. Economic regeneration attracts new businesses and creates employment opportunities reducing unemployment and poverty. Social regeneration provides community facilities, improved education, and healthcare services. Environmental improvements include green spaces and pollution reduction. However, regeneration can lead to gentrification displacing original residents who cannot afford higher costs. Success requires community involvement, affordable housing provision, and balanced development that benefits existing residents rather than replacing them.",
+    "marks": 6,
+    "topic": "Urban issues and challenges",
+    "subtopic": "Urban regeneration"
+  },
+  {
+    "id": 5,
+    "question": "'Economic development always leads to improved quality of life.' To what extent do you agree with this statement?",
+    "answer": "Supporting evidence: Economic growth provides jobs and higher incomes improving living standards. Investment in infrastructure provides better healthcare, education, and transport. Increased government revenue enables social spending on welfare programs. Case study evidence from NICs shows correlation between growth and improved HDI. Opposing evidence: Rapid industrialization can increase pollution and environmental degradation. Economic growth may increase inequality if benefits aren't distributed fairly. Development can destroy traditional cultures and communities. Environmental costs may reduce long-term quality of life. Conclusion: Economic development can improve quality of life when managed sustainably with appropriate regulation and equitable distribution of benefits, but growth alone doesn't guarantee improved wellbeing for all.",
+    "marks": 9,
+    "topic": "The changing economic world",
+    "subtopic": "Global development gap"
+  },
+  {
+    "id": 6,
+    "question": "Explain how glacial processes create different landforms in cold environments.",
+    "answer": "Erosional processes: Plucking occurs when glaciers freeze to bedrock and pull away loose rock creating jagged landscapes. Abrasion acts like sandpaper as rock debris scraped along glacier base carves valleys. These processes create U-shaped valleys, corries, and arêtes. Depositional processes: Till deposited directly by ice forms moraines at glacier margins and terminal positions. Outwash plains form from meltwater deposition creating sorted sediments. Drumlin formation occurs under moving ice creating streamlined hills. Transportation processes move material long distances creating erratics. Combined processes create complex landscapes with both erosional features in highland areas and depositional features in lowland areas.",
+    "marks": 6,
+    "topic": "The living world",
+    "subtopic": "Cold environments"
+  },
+  {
+    "id": 7,
+    "question": "Assess the success of strategies used to reduce the development gap.",
+    "answer": "Aid effectiveness varies: Emergency aid saves lives in disasters but doesn't address underlying development issues. Development aid can fund infrastructure and education but may create dependency and debt. Tied aid benefits donor countries more than recipients. Trade policies show mixed results: Fair trade provides better prices for farmers but reaches limited numbers. Debt relief frees resources for development spending but requires good governance. Investment approaches: FDI creates jobs and technology transfer but profits may leave the country. Microfinance empowers individuals but interest rates can be problematic. Most successful strategies combine multiple approaches with local ownership, good governance, and long-term commitment rather than short-term fixes.",
+    "marks": 9,
+    "topic": "The changing economic world",
+    "subtopic": "Strategies for reducing development gap"
+  },
+  {
+    "id": 8,
+    "question": "Explain the social and economic impacts of urban growth in a city in an LIC or NEE you have studied.",
+    "answer": "Using Rio de Janeiro as an example: Social impacts include growth of favelas like Rocinha housing rural migrants with inadequate services. Overcrowding in schools and hospitals reduces service quality. Crime rates increase in areas with high unemployment and poverty. Cultural diversity increases but social segregation develops between rich and poor areas. Economic impacts include informal economy growth providing employment but with low wages and no security. Service sector expansion creates middle-class jobs in tourism and finance. Construction industry grows rapidly providing employment. However, income inequality widens between formal and informal workers, and infrastructure costs strain city budgets.",
+    "marks": 6,
+    "topic": "Urban issues and challenges",
+    "subtopic": "Urban growth in LICs/NEEs"
+  },
+  {
+    "id": 9,
+    "question": "'Sustainable management of hot deserts is impossible due to harsh environmental conditions.' How far do you agree with this statement?",
+    "answer": "Arguments supporting: Extreme temperatures and water scarcity make agriculture and settlement extremely difficult. Soil erosion and desertification processes are hard to reverse. Limited economic opportunities restrict funding for management projects. Traditional lifestyles are disrupted by modern development pressures. Arguments opposing: Technology enables water conservation through drip irrigation and desalination. Solar energy potential provides sustainable economic opportunities. Indigenous knowledge offers proven sustainable practices. Careful tourism development can provide income without environmental damage. International cooperation can fund conservation projects. Conclusion: While environmental challenges are significant, sustainable management is possible through appropriate technology, traditional knowledge, international support, and careful planning that works with rather than against natural processes.",
+    "marks": 9,
+    "topic": "The living world",
+    "subtopic": "Hot deserts"
+  },
+  {
+    "id": 10,
+    "question": "Explain how the UK's position in the world economy has changed over time.",
+    "answer": "Historical dominance: UK was the world's first industrial nation with global empire providing raw materials and markets. Manufacturing sector dominated with exports of textiles, steel, and machinery. London was the center of global finance and shipping. Modern transformation: Manufacturing decline due to global competition and cheaper production costs abroad. Service sector growth made UK a leader in financial services, insurance, and professional services. EU membership (1973-2020) increased trade integration with Europe. Technology sector emergence in computing, telecommunications, and creative industries. Current position: UK remains a major global financial center despite Brexit challenges. Knowledge-based economy relies on high-skilled services and innovation. Trade relationships increasingly global rather than focused on former colonies.",
+    "marks": 6,
+    "topic": "The changing economic world",
+    "subtopic": "UK in the wider world"
+  },
+  {
+    "id": 11,
+    "question": "Assess the effectiveness of strategies used to manage the impacts of climate change.",
+    "answer": "Mitigation strategies: Renewable energy development reduces greenhouse gas emissions but requires massive investment and infrastructure changes. Carbon trading creates market incentives but effectiveness depends on strong regulation. International agreements like Paris Accord set targets but enforcement is voluntary and progress is slow. Adaptation strategies: Flood defenses protect communities but are expensive and may only delay problems. Drought-resistant crops help farmers cope but don't address underlying causes. Early warning systems save lives but require ongoing investment and maintenance. Overall assessment: Combination of mitigation and adaptation is necessary. Success requires global cooperation, sustained investment, and political commitment. Progress has been made but scale and speed of action remains insufficient to meet climate targets.",
+    "marks": 9,
+    "topic": "The challenge of natural hazards",
+    "subtopic": "Climate change"
+  },
+  {
+    "id": 12,
+    "question": "Explain how fieldwork investigation helps geographers understand geographical processes.",
+    "answer": "Primary data collection allows direct measurement of geographical phenomena rather than relying on secondary sources. Hypothesis testing enables systematic investigation of geographical relationships and processes. Location-specific research reveals local variations that might not be apparent in broad studies. Real-time observation allows understanding of processes as they occur rather than just their outcomes. Skills development in data collection, analysis, and presentation techniques. However, fieldwork limitations include small sample sizes, time constraints, weather dependence, and potential safety issues. Combining fieldwork with secondary data sources provides more comprehensive understanding than either approach alone.",
+    "marks": 6,
+    "topic": "Geographical applications",
+    "subtopic": "Fieldwork"
+  }
+] 

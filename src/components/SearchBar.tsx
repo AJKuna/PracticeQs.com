@@ -31,6 +31,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
           placeholder="Enter topic (e.g., Photosynthesis, World War II, Calculus)"
           value={query}
           onChange={handleChange}
+          autoComplete="off"
         />
         {query && (
           <button

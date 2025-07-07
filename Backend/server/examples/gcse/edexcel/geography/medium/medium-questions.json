@@ -1,113 +1,98 @@
-{
-  "questions": [
-    {
-      "question": "Study the map and climate data for a tropical cyclone affecting the Philippines.\n\na) Using evidence from the resources, describe the track and intensity of the tropical cyclone. (4 marks)\n\nb) Explain two reasons why tropical cyclones can cause severe flooding in coastal areas. (6 marks)\n\nc) 'Economic impacts of tropical cyclones are more significant than social impacts in newly emerging countries.' To what extent do you agree with this statement? (8 marks)",
-      "topic": "Hazardous Earth",
-      "marks": 18,
-      "answer": [
-        "a) Track and intensity (4 marks):",
-        "- Direction of movement",
-        "- Wind speed changes",
-        "- Pressure variations",
-        "- Use of specific data",
-        "",
-        "b) Causes of flooding (6 marks):",
-        "- Storm surge mechanism",
-        "- Intense rainfall",
-        "- Physical geography factors",
-        "- Specific examples",
-        "- Technical terminology",
-        "- Clear explanation",
-        "",
-        "c) Impact evaluation (8 marks):",
-        "Economic impacts:",
-        "- Infrastructure damage",
-        "- Business disruption",
-        "- Agricultural losses",
-        "- Recovery costs",
-        "",
-        "Social impacts:",
-        "- Loss of life",
-        "- Displacement",
-        "- Health issues",
-        "- Community disruption",
-        "",
-        "Evaluation points:",
-        "- Short vs long term",
-        "- Interconnected nature",
-        "- Case study evidence"
-      ],
-      "explanation": "This question tests understanding of tropical cyclones, their impacts, and the ability to evaluate different types of effects using evidence."
-    },
-    {
-      "question": "Study the OS map extract and photographs of coastal features in Dorset.\n\na) Identify two landforms of coastal erosion shown on the map extract. (2 marks)\n\nb) Using the 1:25,000 OS map extract, calculate the distance between points X and Y. Show your working. (4 marks)\n\nc) Explain how geological structure and marine processes have influenced the development of the coastline shown. (6 marks)",
-      "topic": "The UK's evolving physical landscape",
-      "marks": 12,
-      "answer": [
-        "a) Landform identification (2 marks):",
-        "- Correct use of map evidence",
-        "- Specific landform names",
-        "",
-        "b) Distance calculation (4 marks):",
-        "- Correct use of scale",
-        "- Accurate measurement",
-        "- Clear working shown",
-        "- Final answer in km",
-        "",
-        "c) Coastal development (6 marks):",
-        "Geological factors:",
-        "- Rock type",
-        "- Rock structure",
-        "- Resistance variations",
-        "",
-        "Marine processes:",
-        "- Wave types",
-        "- Erosion methods",
-        "- Transportation",
-        "",
-        "Links to landforms:",
-        "- Process-form relationships",
-        "- Specific examples",
-        "- Technical terminology"
-      ],
-      "explanation": "This question tests map skills, numerical abilities, and understanding of coastal processes and landforms."
-    },
-    {
-      "question": "Study the resource booklet about deforestation in the Amazon rainforest.\n\na) Calculate the percentage change in forest cover between 2000 and 2020. (2 marks)\n\nb) Suggest two ways in which deforestation affects the carbon cycle. (4 marks)\n\nc) 'International agreements are the most effective way to protect tropical rainforests.' Assess this statement. (12 marks)",
-      "topic": "Forests under threat",
-      "marks": 18,
-      "answer": [
-        "a) Percentage calculation (2 marks):",
-        "- Correct formula use",
-        "- Accurate final answer",
-        "",
-        "b) Carbon cycle effects (4 marks):",
-        "- Reduced carbon storage",
-        "- Increased atmospheric CO2",
-        "- Disrupted nutrient cycles",
-        "- Specific examples",
-        "",
-        "c) Assessment (12 marks):",
-        "International agreements:",
-        "- Types of agreements",
-        "- Success examples",
-        "- Limitations",
-        "- Enforcement issues",
-        "",
-        "Alternative approaches:",
-        "- National policies",
-        "- Local management",
-        "- Economic incentives",
-        "- Education programs",
-        "",
-        "Evaluation:",
-        "- Effectiveness comparison",
-        "- Stakeholder perspectives",
-        "- Short/long term impacts",
-        "- Case study evidence",
-        "- Sustainable solutions"
-      ],
-      "explanation": "This question tests data handling, understanding of environmental processes, and ability to evaluate conservation strategies."
-    }
-  ]
-} 
+[
+  {
+    "id": 1,
+    "question": "Describe two social impacts of earthquakes.",
+    "answer": "1. Loss of life and injury from building collapse and falling debris. 2. Homelessness as buildings are damaged or destroyed, forcing people to live in temporary accommodation.",
+    "marks": 2,
+    "topic": "Hazardous Earth",
+    "subtopic": "Tectonic processes and hazards"
+  },
+  {
+    "id": 2,
+    "question": "Outline three characteristics of the global circulation system.",
+    "answer": "1. Warm air rises at the equator creating low pressure and high rainfall. 2. Cool air sinks at 30°N and 30°S creating high pressure and dry conditions. 3. Trade winds blow from high pressure areas towards the equatorial low pressure zone.",
+    "marks": 3,
+    "topic": "Hazardous Earth",
+    "subtopic": "Global circulation system"
+  },
+  {
+    "id": 3,
+    "question": "Explain why people continue to live in areas at risk from volcanic eruptions.",
+    "answer": "People continue to live near volcanoes because volcanic soils are very fertile and excellent for farming, providing good agricultural income. Many people cannot afford to move elsewhere and may lack alternative employment opportunities. Family and cultural ties keep communities together in familiar areas. Some people may not fully understand the risks or believe eruptions are unlikely to happen in their lifetime.",
+    "marks": 4,
+    "topic": "Hazardous Earth",
+    "subtopic": "Tectonic processes and hazards"
+  },
+  {
+    "id": 4,
+    "question": "Describe the characteristics of a tropical rainforest ecosystem.",
+    "answer": "Tropical rainforests have extremely high biodiversity with thousands of species of plants and animals. They have a layered structure from forest floor to emergent layer. The climate is hot (25-30°C) and wet (over 2000mm rainfall annually) throughout the year. Nutrient cycling is rapid with quick decomposition of organic matter. Soils are generally thin and nutrient-poor as nutrients are stored in the vegetation.",
+    "marks": 4,
+    "topic": "Forests under threat",
+    "subtopic": "Tropical rainforests"
+  },
+  {
+    "id": 5,
+    "question": "Explain how glaciers shape the landscape through erosion.",
+    "answer": "Glaciers erode the landscape through plucking, where ice freezes to bedrock and pulls away loose rock when it moves. Abrasion occurs when rock debris frozen in the glacier acts like sandpaper, scraping and wearing away the underlying rock. These processes create distinctive landforms including U-shaped valleys, corries, arêtes, and pyramidal peaks. The power of glacial erosion can carve deep valleys and create dramatic mountain landscapes.",
+    "marks": 6,
+    "topic": "The UK's evolving physical landscape",
+    "subtopic": "Glacial processes"
+  },
+  {
+    "id": 6,
+    "question": "Explain how rapid urbanisation creates challenges for cities in emerging countries.",
+    "answer": "Rapid urbanisation creates housing shortages leading to the growth of squatter settlements or slums with poor living conditions and lack of basic services. Infrastructure such as water supply, sewerage, and electricity cannot keep pace with population growth, leading to inadequate provision. Job creation cannot match the influx of migrants, resulting in high unemployment and growth of the informal economy. Public services like healthcare and education become overcrowded and under-resourced. Environmental problems increase including air pollution, waste management issues, and traffic congestion.",
+    "marks": 6,
+    "topic": "Challenges of an urbanising world",
+    "subtopic": "Urban growth challenges"
+  },
+  {
+    "id": 7,
+    "question": "Explain the advantages and disadvantages of economic development for an emerging country you have studied.",
+    "answer": "Using Nigeria as an example: Advantages include job creation in oil, manufacturing, and service sectors providing employment and higher incomes. Infrastructure development improves transport links, communication, and power supply. Foreign investment brings new technology and skills. GDP growth improves the country's international status. Disadvantages include increased income inequality between rich and poor. Environmental degradation from oil extraction and industrial pollution. Loss of traditional ways of life and cultural changes. Dependence on volatile oil prices affecting economic stability.",
+    "marks": 6,
+    "topic": "Development dynamics",
+    "subtopic": "Emerging countries"
+  },
+  {
+    "id": 8,
+    "question": "Describe three ways that climate change may affect the UK.",
+    "answer": "1. Rising sea levels may cause increased coastal flooding, particularly affecting low-lying areas like East Anglia. 2. Higher temperatures may lead to more frequent heat waves, affecting human health and increasing energy demand for cooling. 3. Changes in precipitation patterns may cause more frequent droughts in summer and increased flood risk in winter.",
+    "marks": 3,
+    "topic": "Hazardous Earth",
+    "subtopic": "Climate change"
+  },
+  {
+    "id": 9,
+    "question": "Outline two methods of sustainable forest management.",
+    "answer": "1. Selective logging involves removing only mature trees while leaving younger trees to grow, maintaining forest structure and biodiversity. 2. Reforestation programs plant new trees to replace those that have been cut down, ensuring forest cover is maintained for future generations.",
+    "marks": 2,
+    "topic": "Forests under threat",
+    "subtopic": "Sustainable management"
+  },
+  {
+    "id": 10,
+    "question": "Explain how energy security can be improved in a country you have studied.",
+    "answer": "Using the UK as an example: Energy security can be improved by diversifying energy sources to reduce dependence on imported fossil fuels. Investing in renewable energy like wind and solar power provides sustainable domestic energy production. Improving energy efficiency in buildings and transport reduces overall energy demand. Developing nuclear power provides reliable baseload electricity. Creating strategic energy reserves and improving international cooperation through energy partnerships help ensure supply security during crises.",
+    "marks": 6,
+    "topic": "Consuming energy resources",
+    "subtopic": "Energy security"
+  },
+  {
+    "id": 11,
+    "question": "Describe the process of coastal transportation.",
+    "answer": "Coastal transportation moves sediment along the coastline through longshore drift. Waves approach the beach at an angle due to the prevailing wind direction. The swash carries sediment up the beach at an angle. The backwash carries sediment straight back down the beach due to gravity. This creates a zigzag movement of sediment along the coast. The process is influenced by wave energy, wind direction, and the size of sediment particles.",
+    "marks": 4,
+    "topic": "The UK's evolving physical landscape",
+    "subtopic": "Coastal processes"
+  },
+  {
+    "id": 12,
+    "question": "Explain how fieldwork helps geographers understand environmental processes.",
+    "answer": "Fieldwork allows geographers to collect primary data directly from the environment, providing accurate and up-to-date information. It enables measurement of processes as they occur, such as monitoring river flow or coastal erosion rates. Fieldwork helps verify or challenge theoretical models and concepts learned in the classroom. It develops practical skills in data collection, measurement techniques, and the use of geographical equipment. Working in real environments helps geographers understand the complexity of natural systems and the interactions between different factors.",
+    "marks": 6,
+    "topic": "Geographical investigations",
+    "subtopic": "Fieldwork skills"
+  }
+] 

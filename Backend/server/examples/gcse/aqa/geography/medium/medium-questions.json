@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "question": "Explain why people continue to live in areas at risk from tectonic hazards.",
+    "answer": "People stay because they may not have the financial resources to move elsewhere. Some areas at risk have fertile soils (e.g., volcanic soils) which provide good farming opportunities. Employment opportunities may be limited elsewhere. Family and cultural ties keep people in familiar areas.",
+    "marks": 4,
+    "topic": "The challenge of natural hazards",
+    "subtopic": "Tectonic hazards"
+  },
+  {
+    "id": 2,
+    "question": "Describe the formation of a tropical storm and explain the conditions needed for development.",
+    "answer": "Tropical storms form over warm ocean water (at least 27°C) which provides energy through evaporation. Low pressure systems develop as warm, moist air rises rapidly. The Coriolis effect causes the system to spin due to Earth's rotation. Once wind speeds reach 74mph, it becomes a tropical storm. Eye and eyewall structure develops with calm conditions in the center and strongest winds in the eyewall. The storm moves across ocean gathering energy but weakens over land as it loses its warm water energy source.",
+    "marks": 6,
+    "topic": "The challenge of natural hazards",
+    "subtopic": "Weather hazards"
+  },
+  {
+    "id": 3,
+    "question": "Outline the main causes of deforestation in tropical rainforests.",
+    "answer": "1. Commercial logging for timber export provides economic income for countries. 2. Cattle ranching requires large areas of cleared land for grazing. 3. Palm oil plantations replace forest for agricultural production.",
+    "marks": 3,
+    "topic": "The living world",
+    "subtopic": "Tropical rainforests"
+  },
+  {
+    "id": 4,
+    "question": "Explain why rapid urbanisation creates challenges for cities in LICs and NEEs.",
+    "answer": "Rapid population growth puts pressure on housing, leading to development of squatter settlements with poor living conditions. Infrastructure such as water supply, sewerage, and electricity cannot keep pace with population growth. Job creation cannot match the influx of migrants, leading to high unemployment and informal economy. Public services like healthcare and education become overcrowded and underfunded. Traffic congestion increases as transport systems cannot cope with demand.",
+    "marks": 6,
+    "topic": "Urban issues and challenges",
+    "subtopic": "Urban growth in LICs/NEEs"
+  },
+  {
+    "id": 5,
+    "question": "State two social impacts and two economic impacts of tropical storms.",
+    "answer": "Social impacts: 1. Loss of life from flooding and high winds. 2. Displacement of people from their homes. Economic impacts: 1. Damage to infrastructure requiring expensive repairs. 2. Loss of tourism income during and after the storm.",
+    "marks": 4,
+    "topic": "The challenge of natural hazards",
+    "subtopic": "Weather hazards"
+  },
+  {
+    "id": 6,
+    "question": "Explain how plants and animals are adapted to hot desert environments.",
+    "answer": "Plants have developed several adaptations: waxy coatings on leaves to reduce water loss, extensive root systems to collect water from a wide area, and water storage tissues in stems and leaves. Animals are adapted through behavioral changes like being nocturnal to avoid daytime heat, physiological adaptations such as producing concentrated urine to conserve water, and physical features like large ears for heat dissipation. Many animals can obtain water from their food rather than drinking.",
+    "marks": 6,
+    "topic": "The living world",
+    "subtopic": "Hot deserts"
+  },
+  {
+    "id": 7,
+    "question": "Outline three factors that affect the development of countries.",
+    "answer": "1. Natural resources - oil, minerals, and fertile land can boost economic development. 2. Climate - tropical diseases and extreme weather can hinder development. 3. Political stability - conflict and corruption discourage investment and development.",
+    "marks": 3,
+    "topic": "The changing economic world",
+    "subtopic": "Causes of uneven development"
+  },
+  {
+    "id": 8,
+    "question": "Explain the advantages and disadvantages of economic development in cold environments.",
+    "answer": "Advantages include exploitation of natural resources such as oil, gas, and minerals which provide economic income and employment. Tourism can bring foreign currency and jobs to local communities. Infrastructure development improves transport links and communication. Disadvantages include high costs of construction and maintenance in harsh conditions. Environmental damage from resource extraction affects fragile ecosystems. Extreme weather makes working conditions dangerous and limits the working season.",
+    "marks": 6,
+    "topic": "The living world",
+    "subtopic": "Cold environments"
+  },
+  {
+    "id": 9,
+    "question": "State two causes of climate change.",
+    "answer": "1. Burning fossil fuels releases greenhouse gases into the atmosphere. 2. Deforestation reduces the Earth's capacity to absorb carbon dioxide.",
+    "marks": 2,
+    "topic": "The challenge of natural hazards",
+    "subtopic": "Climate change"
+  },
+  {
+    "id": 10,
+    "question": "Explain how Nigeria's economic development has been uneven across the country.",
+    "answer": "Lagos and the south have experienced greater economic growth due to oil industry development and better infrastructure. The north remains predominantly agricultural with lower incomes and less industrial development. Educational opportunities are better in urban areas, creating a skills gap between regions. Political instability and conflict in some northern areas discourage investment and development.",
+    "marks": 4,
+    "topic": "The changing economic world",
+    "subtopic": "Causes of uneven development"
+  },
+  {
+    "id": 11,
+    "question": "Outline two methods of sustainable urban transport.",
+    "answer": "1. Bus Rapid Transit (BRT) systems provide efficient public transport that reduces car use and air pollution. 2. Cycling infrastructure with dedicated cycle lanes encourages sustainable transport and improves air quality.",
+    "marks": 2,
+    "topic": "Urban issues and challenges",
+    "subtopic": "Sustainable urban development"
+  },
+  {
+    "id": 12,
+    "question": "Explain how the UK economy has changed from secondary to tertiary and quaternary sectors.",
+    "answer": "Manufacturing decline occurred due to cheaper production costs abroad and increased global competition. Service sector growth was driven by demand for financial services, retail, and tourism. Technological advances created new quaternary industries in research, development, and information technology. Government policies encouraged the shift toward knowledge-based industries. London became a global financial center attracting international investment. Education and training adapted to provide skills for the new economy.",
+    "marks": 6,
+    "topic": "The changing economic world",
+    "subtopic": "Economic change in the UK"
+  }
+] 

@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import jsPDF from 'jspdf';
 import PricingModal from './PricingModal';
+import TopicDropdown from './TopicDropdown';
 import { API_CONFIG } from '../config/api';
 import { trackQuestionGeneration, trackPDFExport, trackButtonClick, trackError, trackSubscription } from '../utils/analytics';
 
@@ -17,6 +18,7 @@ const QuestionGenerator: React.FC = () => {
 
   // State
   const [searchTopic, setSearchTopic] = useState('');
+  const [showDropdown, setShowDropdown] = useState(false);
   const [options, setOptions] = useState({
     examLevel: 'gcse',
     examBoard: '',
@@ -543,6 +545,26 @@ const QuestionGenerator: React.FC = () => {
     }
   };
 
+  // Handle topic selection from dropdown
+  const handleTopicSelect = (topic: string) => {
+    setSearchTopic(topic);
+    setShowDropdown(false);
+  };
+
+  // Handle input change and show dropdown
+  const handleTopicInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearchTopic(value);
+    setShowDropdown(value.trim().length > 0);
+  };
+
+  // Handle input focus to show dropdown
+  const handleTopicInputFocus = () => {
+    if (searchTopic.trim().length > 0) {
+      setShowDropdown(true);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 relative">
       {/* Logo in top left corner - responsive sizing */}
@@ -710,14 +732,25 @@ const QuestionGenerator: React.FC = () => {
             <label htmlFor="topic" className="block text-base font-semibold text-gray-800 mb-2">
               Search Topic
             </label>
-            <input
-              type="text"
-              id="topic"
-              value={searchTopic}
-              onChange={(e) => setSearchTopic(e.target.value)}
-              placeholder={placeholder}
-              className="topic-search-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 !text-black !bg-white focus:!bg-white focus:!text-black"
-            />
+            <div className="relative">
+              <input
+                type="text"
+                id="topic"
+                value={searchTopic}
+                onChange={handleTopicInputChange}
+                onFocus={handleTopicInputFocus}
+                placeholder={placeholder}
+                autoComplete="off"
+                className="topic-search-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 !text-black !bg-white focus:!bg-white focus:!text-black"
+              />
+              <TopicDropdown
+                searchTopic={searchTopic}
+                onTopicSelect={handleTopicSelect}
+                isVisible={showDropdown}
+                subject={normalizedSubject}
+                examLevel={options.examLevel}
+              />
+            </div>
           </div>
 
           {/* Options */}

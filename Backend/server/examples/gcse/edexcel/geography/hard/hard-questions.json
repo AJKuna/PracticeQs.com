@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "question": "Explain how plate tectonics theory helps us understand the distribution of earthquakes and volcanoes.",
+    "answer": "Plate tectonics theory explains that the Earth's crust is divided into large sections called plates that move very slowly. Most earthquakes and volcanoes occur at plate boundaries where plates interact. At destructive boundaries, oceanic plates subduct under continental plates, creating deep ocean trenches and volcanic mountain ranges like the Andes. At constructive boundaries, plates move apart allowing magma to rise and form new crust, creating mid-ocean ridges and rift valleys. Conservative boundaries see plates sliding past each other, generating friction and earthquake activity like along the San Andreas Fault. This theory explains why hazards are concentrated in linear patterns around plate boundaries rather than being randomly distributed.",
+    "marks": 6,
+    "topic": "Hazardous Earth",
+    "subtopic": "Tectonic processes and hazards"
+  },
+  {
+    "id": 2,
+    "question": "Assess the effectiveness of different methods used to manage tropical cyclone hazards.",
+    "answer": "Monitoring and prediction systems are highly effective in developed countries, with satellite technology and weather stations providing early warnings that save lives. Hurricane tracking allows for timely evacuation of coastal areas. However, prediction accuracy decreases for long-term forecasts. Preparation strategies include building sea walls, storm shelters, and enforcing building codes that make structures more resilient to high winds. Education programs help communities understand risks and evacuation procedures. Emergency response systems including rescue services and humanitarian aid are crucial for immediate aftermath. However, effectiveness varies between HICs and LICs - developed countries have better infrastructure and resources for prediction and response, while developing nations may lack early warning systems and evacuation infrastructure, leading to higher death tolls.",
+    "marks": 8,
+    "topic": "Hazardous Earth",
+    "subtopic": "Tropical cyclones"
+  },
+  {
+    "id": 3,
+    "question": "'Economic development in emerging countries always leads to environmental degradation.' Discuss this statement.",
+    "answer": "Arguments supporting the statement: Rapid industrialization often leads to increased pollution as factories release harmful chemicals into air and water. Mining and oil extraction cause habitat destruction and soil contamination. Urban expansion destroys natural ecosystems and increases waste production. China's rapid economic growth has resulted in severe air pollution in major cities. Deforestation for agriculture and development reduces biodiversity and increases greenhouse gas emissions. Fast economic growth often prioritizes short-term profits over environmental protection. Arguments against the statement: Economic development can provide resources for environmental protection through better technology and stricter regulations. Wealthier countries can invest in renewable energy and cleaner production methods. Environmental Kuznets Curve suggests pollution initially increases with development but then decreases as countries become more prosperous. South Korea and Singapore have achieved economic growth while improving environmental standards. Green technology can create economic opportunities while protecting the environment. Conclusion: While economic development can cause environmental problems, especially in early stages, it can also provide solutions through better technology, regulations, and public awareness. The key is sustainable development that balances economic growth with environmental protection.",
+    "marks": 12,
+    "topic": "Development dynamics",
+    "subtopic": "Emerging countries"
+  },
+  {
+    "id": 4,
+    "question": "Explain how different stakeholders may have conflicting views about urban development in megacities.",
+    "answer": "Government officials may prioritize economic growth and modernization, supporting large-scale development projects that attract foreign investment and create jobs. They may focus on improving international image and competitiveness. Local residents may oppose development that destroys their communities or increases living costs, but may support projects that improve infrastructure and services. Wealthy residents may support development that increases property values and provides better amenities. Poor residents may be displaced by development but may also benefit from job opportunities. Developers and construction companies support projects that generate profits and may lobby for fewer regulations. Environmental groups oppose development that damages ecosystems or increases pollution. International organizations may support sustainable development that improves quality of life while protecting the environment.",
+    "marks": 6,
+    "topic": "Challenges of an urbanising world",
+    "subtopic": "Urban planning"
+  },
+  {
+    "id": 5,
+    "question": "Evaluate the success of different strategies used to reduce the impacts of climate change.",
+    "answer": "Mitigation strategies aim to reduce greenhouse gas emissions. Renewable energy development has been successful in countries like Denmark and Germany, significantly reducing their carbon footprints. However, global adoption remains slow due to high costs and infrastructure requirements. Carbon trading schemes create economic incentives for emission reductions but effectiveness depends on strict regulation and enforcement. International agreements like the Paris Accord set global targets but enforcement is voluntary and progress varies between countries. Adaptation strategies help communities cope with climate change impacts. Flood defences protect coastal areas but are expensive and may only delay problems. Drought-resistant crops help farmers maintain productivity but don't address underlying causes. Early warning systems for extreme weather save lives but require ongoing investment. Overall assessment: Most successful approach combines mitigation and adaptation strategies with strong international cooperation and sustained political commitment.",
+    "marks": 8,
+    "topic": "Hazardous Earth",
+    "subtopic": "Climate change"
+  },
+  {
+    "id": 6,
+    "question": "'International cooperation is essential for the sustainable management of tropical rainforests.' Assess this statement.",
+    "answer": "Arguments supporting international cooperation: Rainforest conservation requires global action as these ecosystems affect worldwide climate patterns and biodiversity. International funding through programs like REDD+ provides financial incentives for countries to protect forests rather than exploit them. Debt-for-nature swaps allow developing countries to reduce debt in exchange for forest conservation. Technology transfer helps developing nations adopt sustainable practices. International monitoring through satellite imagery tracks deforestation rates and ensures compliance with agreements. Consumer pressure in developed countries can reduce demand for products causing deforestation. Arguments for national and local approaches: Local communities understand forest ecosystems best and traditional management practices are often sustainable. National governments can enforce laws and regulations more effectively than international bodies. Economic alternatives for local people are more important than international agreements. Education and awareness programs at local level change behavior more effectively. Counter-arguments: International agreements are often weak with poor enforcement mechanisms. Economic interests of powerful countries may conflict with conservation goals. Local communities may be excluded from international decision-making. Corruption and weak governance in some countries undermine international efforts. Conclusion: While international cooperation provides important funding and frameworks, success depends on combining this with strong national governance, local community involvement, and economic alternatives that make conservation more profitable than destruction.",
+    "marks": 12,
+    "topic": "Forests under threat",
+    "subtopic": "Conservation"
+  },
+  {
+    "id": 7,
+    "question": "Explain how coastal management strategies can be used to protect coastlines from erosion.",
+    "answer": "Hard engineering strategies include sea walls that absorb wave energy and protect the coastline, but they are expensive and may cause erosion elsewhere. Rock armour (rip rap) dissipates wave energy but can look unsightly and may be moved by storms. Groynes trap sediment to build up beaches but can cause erosion downdrift. Gabions are cheaper than sea walls but have a shorter lifespan. Soft engineering strategies work with natural processes - beach nourishment adds sand to beaches to absorb wave energy naturally. Dune regeneration creates natural barriers that can absorb storm surges. Managed retreat allows erosion in some areas while protecting key locations. Cliff drainage reduces mass movement by removing water that weakens rock. Sustainable management combines different approaches based on local conditions and cost-benefit analysis.",
+    "marks": 6,
+    "topic": "The UK's evolving physical landscape",
+    "subtopic": "Coastal processes"
+  },
+  {
+    "id": 8,
+    "question": "Assess the social and economic impacts of de-industrialisation in the UK.",
+    "answer": "Social impacts of de-industrialisation include high unemployment in former industrial areas, particularly affecting skilled manual workers. This led to increased poverty, social problems, and out-migration from areas like the North East and South Wales. Communities lost their identity and pride associated with traditional industries. However, some areas have successfully regenerated with new service industries creating different types of employment. Economic impacts include the decline of manufacturing from over 30% of GDP to less than 10% today. Traditional industrial regions experienced economic decline while service sector growth concentrated in London and the South East. This created regional inequalities and the North-South divide. However, the UK economy became more competitive globally through specialization in financial services, technology, and creative industries. The transition was painful but ultimately made the UK economy more flexible and adaptable to globalization.",
+    "marks": 8,
+    "topic": "The UK's evolving human landscape",
+    "subtopic": "Economic change"
+  },
+  {
+    "id": 9,
+    "question": "Explain the environmental impacts of energy production from fossil fuels.",
+    "answer": "Air pollution from burning fossil fuels releases sulfur dioxide causing acid rain that damages forests, soils, and buildings. Nitrogen oxides contribute to smog formation affecting human health and crop yields. Particulate matter from coal-fired power stations causes respiratory problems and premature deaths. Carbon dioxide emissions are the main cause of global warming and climate change. Water pollution occurs when oil spills damage marine ecosystems and coastal environments. Mining for coal and oil causes habitat destruction and landscape scarring. Fracking for natural gas can contaminate groundwater and cause minor earthquakes. Thermal pollution from power stations raises water temperatures affecting aquatic life. However, modern technology has reduced some impacts through cleaner burning and pollution control systems.",
+    "marks": 6,
+    "topic": "Consuming energy resources",
+    "subtopic": "Non-renewable energy"
+  },
+  {
+    "id": 10,
+    "question": "Evaluate the effectiveness of different approaches to urban sustainability.",
+    "answer": "Transport approaches include promoting public transport, cycling, and walking to reduce car dependency and air pollution. Bus rapid transit systems in cities like Bogotá have successfully reduced traffic congestion. However, changing transport behavior requires significant investment and cultural change. Energy efficiency measures include green building standards and renewable energy systems. Cities like Copenhagen have achieved carbon neutrality through district heating and wind power. Waste management strategies include recycling programs and waste-to-energy plants. Singapore has achieved high recycling rates through education and incentives. Water management involves rainwater harvesting and greywater recycling. Urban planning approaches include compact city development and green infrastructure. However, effectiveness varies greatly between cities depending on governance, funding, and public support. Most successful cities combine multiple approaches with strong political commitment and community engagement.",
+    "marks": 8,
+    "topic": "Challenges of an urbanising world",
+    "subtopic": "Urban planning"
+  },
+  {
+    "id": 11,
+    "question": "Explain how river processes create different landforms along a river's course.",
+    "answer": "In the upper course, rivers have high energy and steep gradients creating erosional landforms. Vertical erosion dominates, cutting V-shaped valleys with interlocking spurs. Waterfalls form where rivers flow over resistant rock bands, creating gorges through retreat of the waterfall. Rapids develop where rivers flow over rocks of varying resistance. In the middle course, lateral erosion becomes more important as gradients decrease. Meanders develop as rivers swing from side to side, creating river cliffs on the outside bend and slip-off slopes on the inside. Ox-bow lakes form when meanders are cut off during floods. In the lower course, deposition dominates as rivers lose energy on gentle gradients. Floodplains develop from sediment deposited during floods. Levees form natural embankments along river channels. Deltas form where rivers meet the sea and deposit sediment in fan-shaped formations.",
+    "marks": 6,
+    "topic": "The UK's evolving physical landscape",
+    "subtopic": "River processes"
+  },
+  {
+    "id": 12,
+    "question": "'Renewable energy is the solution to the world's energy problems.' Discuss this statement.",
+    "answer": "Arguments supporting renewable energy: Solar, wind, and hydroelectric power produce no greenhouse gas emissions during operation, helping combat climate change. Renewable sources are inexhaustible unlike fossil fuels which will eventually run out. Technology costs have fallen dramatically making renewables competitive with fossil fuels in many markets. Job creation in renewable energy sectors can replace employment lost in traditional industries. Energy independence reduces reliance on imported fuels and improves national security. Local environmental benefits include reduced air pollution and health improvements. Arguments against renewable energy alone: Intermittency problems mean solar and wind power are unreliable without energy storage systems. Current battery technology is expensive and has limited capacity. Renewable energy requires significant land use - wind farms and solar panels need large areas. Hydroelectric power can damage river ecosystems and displace communities. Grid infrastructure needs major upgrades to handle variable renewable energy supply. Base load power may still require nuclear or fossil fuel backup. Economic challenges include high initial investment costs and job losses in traditional energy sectors. Conclusion: Renewable energy is essential for sustainable development but needs to be part of a diverse energy mix including energy efficiency, storage technology, and possibly nuclear power. Success requires government support, technological innovation, and international cooperation to overcome current limitations.",
+    "marks": 12,
+    "topic": "Consuming energy resources",
+    "subtopic": "Renewable energy"
+  }
+] 

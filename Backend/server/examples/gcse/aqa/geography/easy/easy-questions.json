@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "question": "Name one type of plate boundary.",
+    "answer": "Destructive/Conservative/Constructive plate boundary (any one valid answer)",
+    "marks": 1,
+    "topic": "The challenge of natural hazards",
+    "subtopic": "Tectonic hazards"
+  },
+  {
+    "id": 2,
+    "question": "State the location of one tropical storm you have studied.",
+    "answer": "Typhoon Haiyan - Philippines/Western Pacific Ocean (or other valid example with correct location)",
+    "marks": 1,
+    "topic": "The challenge of natural hazards",
+    "subtopic": "Weather hazards"
+  },
+  {
+    "id": 3,
+    "question": "Outline two features of a tropical rainforest ecosystem.",
+    "answer": "1. High biodiversity with many different species of plants and animals. 2. Nutrient cycle where nutrients are quickly recycled through rapid decomposition.",
+    "marks": 2,
+    "topic": "The living world",
+    "subtopic": "Tropical rainforests"
+  },
+  {
+    "id": 4,
+    "question": "Briefly explain what is meant by the term 'megacity'.",
+    "answer": "A megacity is an urban area with a population of over 10 million people.",
+    "marks": 2,
+    "topic": "Urban issues and challenges",
+    "subtopic": "Global urbanisation trends"
+  },
+  {
+    "id": 5,
+    "question": "State three characteristics of a hot desert environment.",
+    "answer": "1. High temperatures during the day. 2. Very low rainfall (usually less than 250mm per year). 3. Sparse vegetation adapted to dry conditions.",
+    "marks": 3,
+    "topic": "The living world",
+    "subtopic": "Hot deserts"
+  },
+  {
+    "id": 6,
+    "question": "Outline three causes of global warming.",
+    "answer": "1. Burning fossil fuels releases carbon dioxide into the atmosphere. 2. Deforestation reduces the Earth's ability to absorb CO2. 3. Agriculture produces methane from livestock and rice farming.",
+    "marks": 3,
+    "topic": "The challenge of natural hazards",
+    "subtopic": "Climate change"
+  },
+  {
+    "id": 7,
+    "question": "Explain why earthquakes occur at destructive plate boundaries.",
+    "answer": "At destructive plate boundaries, two plates move towards each other. The denser oceanic plate is forced under the continental plate in a process called subduction. As the plates move, friction builds up between them. When this friction is suddenly released, it creates seismic waves that cause earthquakes. The subduction process creates pressure and tension in the rock, which when released causes the ground to shake.",
+    "marks": 4,
+    "topic": "The challenge of natural hazards",
+    "subtopic": "Tectonic hazards"
+  },
+  {
+    "id": 8,
+    "question": "Explain how plants in tropical rainforests are adapted to their environment.",
+    "answer": "Plants have large leaves to capture maximum sunlight in the dim forest floor conditions. Drip-tip leaves allow rain to run off quickly to prevent fungal growth. Buttress roots provide stability in shallow soils and help support tall trees. Epiphytes grow on other plants to reach sunlight without competing for ground space.",
+    "marks": 4,
+    "topic": "The living world",
+    "subtopic": "Tropical rainforests"
+  },
+  {
+    "id": 9,
+    "question": "Define the term 'development gap'.",
+    "answer": "The development gap refers to the difference in wealth and quality of life between the world's richest and poorest countries.",
+    "marks": 1,
+    "topic": "The changing economic world",
+    "subtopic": "Global development gap"
+  },
+  {
+    "id": 10,
+    "question": "Name two methods of measuring development.",
+    "answer": "1. GDP (Gross Domestic Product) per capita. 2. HDI (Human Development Index).",
+    "marks": 2,
+    "topic": "The changing economic world",
+    "subtopic": "Economic indicators"
+  },
+  {
+    "id": 11,
+    "question": "State two features of a squatter settlement.",
+    "answer": "1. Houses built from scrap materials like corrugated iron and wood. 2. Lack of basic services such as clean water supply and sewerage systems.",
+    "marks": 2,
+    "topic": "Urban issues and challenges",
+    "subtopic": "Urban growth in LICs/NEEs"
+  },
+  {
+    "id": 12,
+    "question": "Explain why cold environments have low biodiversity.",
+    "answer": "Cold environments have short growing seasons due to low temperatures for most of the year, limiting plant growth. Harsh conditions with freezing temperatures and strong winds make it difficult for many species to survive. Limited food sources mean fewer animals can be supported. The permafrost prevents deep root growth and limits the types of vegetation that can grow.",
+    "marks": 4,
+    "topic": "The living world",
+    "subtopic": "Cold environments"
+  }
+] 

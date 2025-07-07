@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "question": "Name one type of plate boundary.",
+    "answer": "Constructive/Destructive/Conservative plate boundary (any one valid answer)",
+    "marks": 1,
+    "topic": "Hazardous Earth",
+    "subtopic": "Tectonic processes and hazards"
+  },
+  {
+    "id": 2,
+    "question": "Identify one cause of global warming.",
+    "answer": "Burning fossil fuels/Deforestation/Agriculture/Industrial processes (any one valid answer)",
+    "marks": 1,
+    "topic": "Hazardous Earth",
+    "subtopic": "Climate change"
+  },
+  {
+    "id": 3,
+    "question": "Label the eye of the tropical cyclone on the diagram.",
+    "answer": "Correct identification of the central calm area of the storm",
+    "marks": 1,
+    "topic": "Hazardous Earth",
+    "subtopic": "Tropical cyclones"
+  },
+  {
+    "id": 4,
+    "question": "Describe two features of a megacity.",
+    "answer": "1. Population of over 10 million people in the urban area. 2. High population density with concentrated economic activity and infrastructure.",
+    "marks": 2,
+    "topic": "Challenges of an urbanising world",
+    "subtopic": "Megacities"
+  },
+  {
+    "id": 5,
+    "question": "Outline two characteristics of tropical rainforests.",
+    "answer": "1. High biodiversity with thousands of plant and animal species. 2. High temperatures (25-30°C) and rainfall (over 2000mm annually) throughout the year.",
+    "marks": 2,
+    "topic": "Forests under threat",
+    "subtopic": "Tropical rainforests"
+  },
+  {
+    "id": 6,
+    "question": "Explain what is meant by the term 'development gap'.",
+    "answer": "The development gap refers to the difference in wealth and quality of life between the world's richest and poorest countries. It shows the inequality in economic development globally.",
+    "marks": 2,
+    "topic": "Development dynamics",
+    "subtopic": "Global inequality"
+  },
+  {
+    "id": 7,
+    "question": "Describe three features of coastal erosion.",
+    "answer": "1. Wave action removes material from cliff faces through hydraulic action. 2. Abrasion occurs when waves throw rocks and pebbles against the cliff. 3. Weathering weakens rock through freeze-thaw and chemical processes.",
+    "marks": 3,
+    "topic": "The UK's evolving physical landscape",
+    "subtopic": "Coastal processes"
+  },
+  {
+    "id": 8,
+    "question": "Outline three causes of urban growth in LICs and NEEs.",
+    "answer": "1. Rural-urban migration as people move to cities seeking better employment opportunities. 2. Natural increase where birth rates exceed death rates in urban areas. 3. Economic development creating jobs in manufacturing and service sectors.",
+    "marks": 3,
+    "topic": "Challenges of an urbanising world",
+    "subtopic": "Urban growth challenges"
+  },
+  {
+    "id": 9,
+    "question": "Explain why tropical cyclones lose strength when they move over land.",
+    "answer": "Tropical cyclones lose strength over land because they are cut off from their energy source - warm ocean water. The warm ocean provides the energy through evaporation that fuels the storm. Over land, there is increased friction and no warm water source, so the cyclone weakens rapidly.",
+    "marks": 4,
+    "topic": "Hazardous Earth",
+    "subtopic": "Tropical cyclones"
+  },
+  {
+    "id": 10,
+    "question": "Describe the formation of a river meander.",
+    "answer": "A meander forms when a river flows around a bend. The water moves faster on the outside of the bend, causing erosion of the riverbank. On the inside of the bend, the water moves slower and deposits sediment, forming a slip-off slope. Over time, this process creates the characteristic curved shape of a meander.",
+    "marks": 4,
+    "topic": "The UK's evolving physical landscape",
+    "subtopic": "River processes"
+  },
+  {
+    "id": 11,
+    "question": "Explain why deforestation occurs in tropical rainforests.",
+    "answer": "Deforestation occurs for several reasons: commercial logging provides valuable timber for export and income for countries. Cattle ranching requires large areas of cleared land for grazing. Agricultural expansion for crops like soy and palm oil is profitable. Growing populations need more land for settlements and infrastructure development.",
+    "marks": 4,
+    "topic": "Forests under threat",
+    "subtopic": "Deforestation"
+  },
+  {
+    "id": 12,
+    "question": "Describe how renewable energy can help reduce greenhouse gas emissions.",
+    "answer": "Renewable energy sources like solar, wind, and hydroelectric power produce electricity without burning fossil fuels. This reduces carbon dioxide emissions that contribute to global warming. As renewable energy becomes cheaper and more efficient, it can replace coal and gas power stations, significantly reducing a country's carbon footprint.",
+    "marks": 4,
+    "topic": "Consuming energy resources",
+    "subtopic": "Renewable energy"
+  }
+] 

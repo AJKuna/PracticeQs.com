@@ -253,5 +253,16 @@
       "marks": 76,
       "percentage": 30
     }
+  },
+  "marking_scheme": {
+    "valid_mark_values": [1, 2, 3, 4, 6, 9],
+    "mark_descriptors": {
+      "1": "Quick retrieval (e.g., naming, labelling)",
+      "2-3": "Short answer (outline, explain briefly)",
+      "4": "Explain with detail or demonstrate understanding",
+      "6": "Structured answer often requiring evidence",
+      "9": "Extended evaluation or discussion (+3 SPaG - Spelling, Punctuation and Grammar)"
+    },
+    "note": "AQA Geography GCSE questions can only use these specific mark values. No 5, 7, 8, or 10+ mark questions except for extended 9+3 format."
   }
 } 

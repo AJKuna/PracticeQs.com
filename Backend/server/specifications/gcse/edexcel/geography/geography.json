@@ -187,5 +187,21 @@
       "Statistical analysis",
       "Data interpretation"
     ]
+  },
+  "command_words": [
+    "identify", "name", "label", "describe", "explain", "outline", 
+    "assess", "evaluate", "examine", "discuss", "analyse", "compare", 
+    "suggest", "justify", "calculate", "complete"
+  ],
+  "marking_scheme": {
+    "valid_mark_values": [1, 2, 3, 4, 6, 8, 12],
+    "mark_descriptors": {
+      "1": "Quick retrieval (e.g., identify, name, label)",
+      "2-4": "Short to mid-length answers (describe, explain, outline)",
+      "6": "Structured answers requiring explanation and evidence",
+      "8": "'Assess' / 'Evaluate' / 'Examine' questions linked to stimulus or resources",
+      "12": "Discuss issue in depth with judgement (+4 SPaG - Spelling, Punctuation and Grammar)"
+    },
+    "note": "Edexcel Geography GCSE questions use these specific mark values. The 12-mark questions include 4 additional marks for SPaG (Spelling, Punctuation and Grammar)."
   }
 } 

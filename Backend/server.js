@@ -631,10 +631,50 @@ Do not include any commentary, notes, or explanations — return only the JSON.
         `- ${t.name}: ${t.subtopics ? t.subtopics.join(', ') : ''}`
       ).join('\n') : '';
       
+      // Get marking scheme info for Geography subjects
+      let markingInstructions = '';
+      if (subject === 'geography' && specData?.marking_scheme) {
+        const markingScheme = specData.marking_scheme;
+        if (difficulty === 'hard') {
+          if (examBoard === 'aqa') {
+            markingInstructions = `
+CRITICAL MARKING REQUIREMENTS FOR HARD QUESTIONS:
+- Use ONLY these mark values: 6 marks and 9 marks
+- 6-mark questions: Use "Explain" command words requiring structured answers with evidence
+- 9-mark questions: Use "Assess", "Evaluate", "To what extent do you agree" requiring extended evaluation and discussion (+3 SPaG marks)
+- NO 3, 4, or 5 mark questions for hard difficulty
+- Include case study examples and detailed geographical reasoning`;
+          } else if (examBoard === 'edexcel') {
+            markingInstructions = `
+CRITICAL MARKING REQUIREMENTS FOR HARD QUESTIONS:
+- Use ONLY these mark values: 6 marks, 8 marks, and 12 marks
+- 6-mark questions: Structured answers requiring explanation and evidence
+- 8-mark questions: "Assess", "Evaluate", "Examine" questions linked to stimulus or resources
+- 12-mark questions: "Discuss" questions requiring in-depth analysis with judgement (+4 SPaG marks)
+- NO 3, 4, or 5 mark questions for hard difficulty
+- Include case study examples and synoptic understanding`;
+          }
+        } else if (difficulty === 'medium') {
+          markingInstructions = `
+MARKING REQUIREMENTS FOR MEDIUM QUESTIONS:
+- Use mark values: ${markingScheme.valid_mark_values.filter(v => v >= 3 && v <= 6).join(', ')} marks
+- Focus on "Explain", "Describe", "Outline" command words
+- Include some case study application`;
+        } else {
+          markingInstructions = `
+MARKING REQUIREMENTS FOR EASY QUESTIONS:
+- Use mark values: ${markingScheme.valid_mark_values.filter(v => v <= 4).join(', ')} marks
+- Focus on "Name", "Identify", "Describe", "State" command words
+- Keep questions straightforward and factual`;
+        }
+      }
+      
       prompt = `
 You are an expert ${examLevel} ${subject.replace('-', ' ')} exam question writer${examBoard ? ` for the ${examBoard.toUpperCase()} board` : ""}.
 
 CRITICAL INSTRUCTION: You MUST create questions specifically about "${topic}". Do NOT use generic examples.
+
+${markingInstructions}
 
 TEMPLATE INSTRUCTIONS:
 - Create questions that are directly related to the topic "${topic}"
@@ -664,6 +704,9 @@ SPECIFICATION CONTEXT:
 - Exam Board: ${specData.exam_board}
 - Subject: ${specData.subject}
 - Command words: ${specData.command_words ? specData.command_words.join(', ') : 'explain, describe, analyse, evaluate'}
+${specData.marking_scheme ? `
+- Valid mark values: ${specData.marking_scheme.valid_mark_values.join(', ')}
+- Mark descriptors: ${Object.entries(specData.marking_scheme.mark_descriptors).map(([marks, desc]) => `${marks} marks: ${desc}`).join('; ')}` : ''}
 ` : ''}
 
 CRITICAL: The "question" field must NOT contain any marks like [4 marks] or (4 marks). Only include the actual question text. The marks will be provided separately in the "marks" field.
@@ -671,7 +714,7 @@ CRITICAL: The "question" field must NOT contain any marks like [4 marks] or (4 m
 Return as a JSON object with a "questions" array. Each question object must have:
 - "question": The exam question with instructions (NO mark scheme, NO marks in brackets)
 - "answer": A detailed answer following the mark scheme, with mark breakdowns as shown above
-- "marks": Total marks as a number
+- "marks": Total marks as a number (must be from the valid mark values specified above)
       `;
     } else if (specData) {
       console.log("Falling back to spec data")
@@ -680,10 +723,57 @@ Return as a JSON object with a "questions" array. Each question object must have
       const topicsText = specData.topics ? specData.topics.map(t => 
         `- ${t.name}: ${t.subtopics ? t.subtopics.join(', ') : ''}`
       ).join('\n') : '';
+      
+      // Get marking scheme info for Geography subjects
+      let markingInstructions = '';
+      if (subject === 'geography' && specData?.marking_scheme) {
+        const markingScheme = specData.marking_scheme;
+        if (difficulty === 'hard') {
+          if (examBoard === 'aqa') {
+            markingInstructions = `
+CRITICAL MARKING REQUIREMENTS FOR HARD QUESTIONS:
+- Use ONLY these mark values: 6 marks and 9 marks
+- 6-mark questions: Use "Explain" command words requiring structured answers with evidence
+- 9-mark questions: Use "Assess", "Evaluate", "To what extent do you agree" requiring extended evaluation and discussion (+3 SPaG marks)
+- NO 3, 4, or 5 mark questions for hard difficulty
+- Include case study examples and detailed geographical reasoning
+
+`;
+          } else if (examBoard === 'edexcel') {
+            markingInstructions = `
+CRITICAL MARKING REQUIREMENTS FOR HARD QUESTIONS:
+- Use ONLY these mark values: 6 marks, 8 marks, and 12 marks
+- 6-mark questions: Structured answers requiring explanation and evidence
+- 8-mark questions: "Assess", "Evaluate", "Examine" questions linked to stimulus or resources
+- 12-mark questions: "Discuss" questions requiring in-depth analysis with judgement (+4 SPaG marks)
+- NO 3, 4, or 5 mark questions for hard difficulty
+- Include case study examples and synoptic understanding
+
+`;
+          }
+        } else if (difficulty === 'medium') {
+          markingInstructions = `
+MARKING REQUIREMENTS FOR MEDIUM QUESTIONS:
+- Use mark values: ${markingScheme.valid_mark_values.filter(v => v >= 3 && v <= 6).join(', ')} marks
+- Focus on "Explain", "Describe", "Outline" command words
+- Include some case study application
+
+`;
+        } else {
+          markingInstructions = `
+MARKING REQUIREMENTS FOR EASY QUESTIONS:
+- Use mark values: ${markingScheme.valid_mark_values.filter(v => v <= 4).join(', ')} marks
+- Focus on "Name", "Identify", "Describe", "State" command words
+- Keep questions straightforward and factual
+
+`;
+        }
+      }
+      
       prompt = `
       You are an expert ${examLevel} ${subject.replace('-', ' ')} exam question writer${examBoard ? ` for ${examBoard.toUpperCase()} board` : ""}.
       
-      Create ${numQuestions} ${difficulty} questions about "${topic}".
+      ${markingInstructions}Create ${numQuestions} ${difficulty} questions about "${topic}".
 
       Only get subtopics from this list of topics: ${topicsText}
       
@@ -691,8 +781,12 @@ Return as a JSON object with a "questions" array. Each question object must have
       - Do NOT include marks like [4 marks] in question text
       - Break down answers step by step with mark allocations
       - Use plain text math (x^2, not LaTeX)
+      ${subject === 'geography' ? '- Must use the specified mark values from the marking scheme above' : ''}
       
       ${specData ? `Exam Board: ${specData.exam_board} | ${specData?.command_words ? "Command words: ${specData.command_words.join(', ')}" : ""}` : ''}
+      ${specData?.marking_scheme ? `
+Valid mark values: ${specData.marking_scheme.valid_mark_values.join(', ')}
+Mark descriptors: ${Object.entries(specData.marking_scheme.mark_descriptors).map(([marks, desc]) => `${marks} marks: ${desc}`).join('; ')}` : ''}
 
       EXAMPLES:
       ${exampleQuestions}
@@ -703,7 +797,7 @@ Return JSON format:
           {
             "question": "question text only",
             "answer": "step-by-step answer with (X marks) for each step",
-            "marks": total_number
+            "marks": total_number${subject === 'geography' ? ' (must be from valid mark values above)' : ''}
           }
         ]
       }
