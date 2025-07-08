@@ -47,7 +47,8 @@ export const mathGcseTopics: string[] = [
   "Expanding & Factorising",
   "Factorising Quadratics",
   "Indices",
-  "Prime Factors, HCF & LCM",
+  "Prime Factors",
+  "HCF and LCM",
   "Inequalities",
   "Inequalities with Graphs",
   "Trial & Improvement",
@@ -109,6 +110,8 @@ export const mathGcseTopics: string[] = [
   "Sine Rule",
   "Cosine Rule",
   "Circle Theorems",
+  "Area of a Triangle",
+
 
   // Ratio and Proportion
   "Writing and Simplifying Ratios",
@@ -135,14 +138,20 @@ export const mathGcseTopics: string[] = [
   // Statistics - Averages
   "Averages",
   "Mean",
+  "Mean from Frequency Tables",
+  "Mean from Grouped Data",
   "Median",
+  "Median from Frequency Tables",
+  "Median from Grouped Data",
   "Mode",
   "Range",
   "Averages from Frequency Tables",
 
   // Probability
   "Probability",
+  "Probability of Two Events",
   "Frequency Trees",
+  "Probability Tree Diagrams",
   "Venn Diagrams",
 
   // Advanced Topics
