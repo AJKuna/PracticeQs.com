@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import PricingModal from './PricingModal';
+import FeedbackWidget from './FeedbackWidget';
 import { API_CONFIG } from '../config/api';
 
 interface SubjectCard {
@@ -223,6 +224,9 @@ const LandingPage: React.FC = () => {
         isOpen={showPricingModal} 
         onClose={() => setShowPricingModal(false)} 
       />
+
+      {/* Feedback Widget */}
+      <FeedbackWidget />
     </div>
   );
 };

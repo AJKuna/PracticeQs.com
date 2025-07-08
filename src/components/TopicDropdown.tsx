@@ -2,6 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import { mathGcseTopics } from '../data/mathGcseTopics';
 import { biologyGcseAqaTopics } from '../data/biologyGcseAqaTopics';
 import { biologyGcseEdexcelTopics } from '../data/biologyGcseEdexcelTopics';
+import { chemistryGcseAqaTopics } from '../data/chemistryGcseAqaTopics';
+import { chemistryGcseEdexcelTopics } from '../data/chemistryGcseEdexcelTopics';
+import { chemistryGcseOcrATopics } from '../data/chemistryGcseOcrATopics';
 
 interface TopicDropdownProps {
   searchTopic: string;
@@ -34,6 +37,15 @@ const TopicDropdown: React.FC<TopicDropdownProps> = ({
     }
     if (subject === 'biology' && examLevel === 'gcse' && examBoard === 'edexcel') {
       return biologyGcseEdexcelTopics;
+    }
+    if (subject === 'chemistry' && examLevel === 'gcse' && examBoard === 'aqa') {
+      return chemistryGcseAqaTopics;
+    }
+    if (subject === 'chemistry' && examLevel === 'gcse' && examBoard === 'edexcel') {
+      return chemistryGcseEdexcelTopics;
+    }
+    if (subject === 'chemistry' && examLevel === 'gcse' && examBoard === 'ocr') {
+      return chemistryGcseOcrATopics;
     }
     return [];
   };

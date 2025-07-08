@@ -5,6 +5,7 @@ import { useAuth } from '../contexts/AuthContext';
 import jsPDF from 'jspdf';
 import PricingModal from './PricingModal';
 import TopicDropdown from './TopicDropdown';
+import FeedbackWidget from './FeedbackWidget';
 import { API_CONFIG } from '../config/api';
 import { trackQuestionGeneration, trackPDFExport, trackButtonClick, trackError, trackSubscription } from '../utils/analytics';
 
@@ -727,33 +728,6 @@ const QuestionGenerator: React.FC = () => {
 
 
         <form onSubmit={handleSubmit} className="space-y-8">
-          {/* Search Topic Input */}
-          <div>
-            <label htmlFor="topic" className="block text-base font-semibold text-gray-800 mb-2">
-              Search Topic
-            </label>
-            <div className="relative">
-              <input
-                type="text"
-                id="topic"
-                value={searchTopic}
-                onChange={handleTopicInputChange}
-                onFocus={handleTopicInputFocus}
-                placeholder={placeholder}
-                autoComplete="off"
-                className="topic-search-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 !text-black !bg-white focus:!bg-white focus:!text-black"
-              />
-              <TopicDropdown
-                searchTopic={searchTopic}
-                onTopicSelect={handleTopicSelect}
-                isVisible={showDropdown}
-                subject={normalizedSubject}
-                examLevel={options.examLevel}
-                examBoard={options.examBoard}
-              />
-            </div>
-          </div>
-
           {/* Options */}
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
             <div>
@@ -860,6 +834,33 @@ const QuestionGenerator: React.FC = () => {
                   }
                 }}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              />
+            </div>
+          </div>
+
+          {/* Search Topic Input */}
+          <div>
+            <label htmlFor="topic" className="block text-base font-semibold text-gray-800 mb-2">
+              Search Topic
+            </label>
+            <div className="relative">
+              <input
+                type="text"
+                id="topic"
+                value={searchTopic}
+                onChange={handleTopicInputChange}
+                onFocus={handleTopicInputFocus}
+                placeholder={placeholder}
+                autoComplete="off"
+                className="topic-search-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 !text-black !bg-white focus:!bg-white focus:!text-black"
+              />
+              <TopicDropdown
+                searchTopic={searchTopic}
+                onTopicSelect={handleTopicSelect}
+                isVisible={showDropdown}
+                subject={normalizedSubject}
+                examLevel={options.examLevel}
+                examBoard={options.examBoard}
               />
             </div>
           </div>
@@ -988,6 +989,9 @@ const QuestionGenerator: React.FC = () => {
         isOpen={showPricingModal} 
         onClose={() => setShowPricingModal(false)} 
       />
+
+      {/* Feedback Widget */}
+      <FeedbackWidget />
     </div>
   );
 };

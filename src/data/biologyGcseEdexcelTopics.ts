@@ -1,4 +1,7 @@
 export const biologyGcseEdexcelTopics: string[] = [
+  // Required Practicals
+  'Required practicals',
+  
   // Cell Structure and Function
   "Eukaryotic cells",
   "Prokaryotic cells", 

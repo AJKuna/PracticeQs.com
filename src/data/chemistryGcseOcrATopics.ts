@@ -1,0 +1,236 @@
+export const chemistryGcseOcrATopics = [
+  // Required Practicals
+  'Required practicals',
+  
+  // Atomic Structure and the Periodic Table
+  'The particle model of matter',
+  'States of matter and particle arrangement',
+  'Changes of state',
+  'Structure of the atom',
+  'Subatomic particles: protons',
+  'Subatomic particles: neutrons',
+  'Subatomic particles: electrons',
+  'Atomic number and mass number',
+  'Isotopes and their properties',
+  'The periodic table arrangement',
+  'Electronic structure of atoms',
+  'Electron shells and configurations',
+  'Properties of metals',
+  'Properties of non-metals',
+  'Metals vs non-metals comparison',
+  
+  // Groups in the Periodic Table
+  'Group 1: alkali metals',
+  'Properties of alkali metals',
+  'Reactions of alkali metals',
+  'Group 7: halogens',
+  'Properties of halogens',
+  'Reactions of halogens',
+  'Group 0: noble gases',
+  'Properties of noble gases',
+  'Uses of noble gases',
+  'Trends in groups',
+  
+  // Compounds and Chemical Formulae
+  'Compounds and chemical formulae',
+  'Writing chemical formulae',
+  'Naming compounds',
+  'Ionic compounds',
+  'Covalent compounds',
+  'Formula of ionic compounds',
+  'Formula of covalent compounds',
+  
+  // Mixtures and Separation Techniques
+  'Mixtures and pure substances',
+  'Filtration technique',
+  'Crystallisation technique',
+  'Simple distillation technique',
+  'Fractional distillation technique',
+  'Chromatography technique',
+  'Choosing separation methods',
+  'Purity testing',
+  
+  // Chemical Reactions and Equations
+  'Chemical reactions and word equations',
+  'Balanced symbol equations',
+  'Conservation of mass in reactions',
+  'Balancing chemical equations',
+  'State symbols in equations',
+  'Writing word equations',
+  'Writing symbol equations',
+  
+  // Metals and Reactivity
+  'Reactivity series of metals',
+  'Displacement reactions',
+  'Extraction of metals',
+  'Metal extraction methods',
+  'Reduction in metal extraction',
+  'Oxidation and reduction',
+  'Redox reactions',
+  'Uses of metals',
+  'Metal corrosion',
+  'Preventing corrosion',
+  
+  // Acids and Alkalis
+  'Acids and alkalis properties',
+  'Indicators and pH scale',
+  'pH measurement',
+  'Reactions of acids with metals',
+  'Reactions of acids with carbonates',
+  'Reactions of acids with bases',
+  'Making salts from acids',
+  'Soluble salts preparation',
+  'Insoluble salts preparation',
+  'Crystallisation of salts',
+  'Salt formation reactions',
+  
+  // Electrolysis
+  'Electrolysis of molten compounds',
+  'Electrolysis of aqueous solutions',
+  'Products of electrolysis',
+  'Tests for gases from electrolysis',
+  'Electrolysis applications',
+  'Ionic conduction',
+  'Electrode reactions',
+  'Half equations in electrolysis',
+  
+  // Energy Changes in Reactions
+  'Energy changes in reactions',
+  'Exothermic reactions',
+  'Endothermic reactions',
+  'Reaction profiles',
+  'Activation energy',
+  'Bond energy calculations',
+  'Energy level diagrams',
+  'Heat changes in reactions',
+  
+  // Rates of Reaction
+  'Rates of reaction measurement',
+  'Temperature effects on reaction rate',
+  'Concentration effects on reaction rate',
+  'Surface area effects on reaction rate',
+  'Catalysts and reaction rate',
+  'Collision theory',
+  'Successful collisions',
+  'Activation energy and catalysts',
+  'Measuring reaction rates',
+  
+  // Reversible Reactions and Equilibrium
+  'Reversible reactions',
+  'Dynamic equilibrium',
+  'Equilibrium position',
+  'Effect of temperature on equilibrium',
+  'Effect of concentration on equilibrium',
+  'Le Chatelier\'s principle',
+  'Equilibrium in industrial processes',
+  
+  // Organic Chemistry - Hydrocarbons
+  'Crude oil and hydrocarbons',
+  'Fractional distillation of crude oil',
+  'Properties of hydrocarbon fractions',
+  'Uses of hydrocarbon fractions',
+  'Combustion of hydrocarbons',
+  'Complete combustion',
+  'Incomplete combustion',
+  'Pollutants from combustion',
+  'Acid rain formation',
+  'Environmental impact of combustion',
+  'Cracking of hydrocarbons',
+  'Thermal cracking',
+  'Catalytic cracking',
+  
+  // Organic Chemistry - Alkanes and Alkenes
+  'Alkanes structure and properties',
+  'Alkenes structure and properties',
+  'Testing for alkenes',
+  'Bromine water test',
+  'Differences between alkanes and alkenes',
+  'Homologous series',
+  'Saturated and unsaturated hydrocarbons',
+  
+  // Polymers
+  'Polymers and polymerisation',
+  'Addition polymerisation',
+  'Properties of polymers',
+  'Uses of polymers',
+  'Condensation polymers',
+  'Natural polymers',
+  'DNA as a natural polymer',
+  'Proteins as natural polymers',
+  'Polymer disposal',
+  'Biodegradable polymers',
+  
+  // Environmental Chemistry
+  'Greenhouse gases',
+  'Carbon dioxide as greenhouse gas',
+  'Methane as greenhouse gas',
+  'Global warming effects',
+  'Human activities and climate change',
+  'Reducing carbon footprint',
+  'Climate change mitigation',
+  'Ozone layer depletion',
+  
+  // Earth's Resources
+  'Finite resources',
+  'Renewable resources',
+  'Sustainable development',
+  'Water treatment and purification',
+  'Potable water production',
+  'Desalination processes',
+  'Water quality testing',
+  'Sewage treatment',
+  
+  // Life Cycle Assessment and Sustainability
+  'Life cycle assessment (LCA)',
+  'Environmental impact assessment',
+  'Recycling materials',
+  'Sustainability in chemistry',
+  'Waste reduction strategies',
+  'Circular economy',
+  
+  // Alternative Metal Extraction
+  'Extracting metals from ores',
+  'Bioleaching for metal extraction',
+  'Phytomining for metal extraction',
+  'Sustainable metal extraction',
+  'Metal recycling',
+  'Reducing metal ore demand',
+  
+  // Materials Science
+  'Ceramics properties',
+  'Ceramics uses',
+  'Polymers in materials',
+  'Composite materials',
+  'Properties of composites',
+  'Uses of composites',
+  'Material selection criteria',
+  'Smart materials',
+  'Nanomaterials',
+  'Properties of materials',
+  'Uses of materials',
+  'Material testing',
+  
+  // Practical Chemistry
+  'Laboratory safety',
+  'Risk assessment',
+  'Hazard identification',
+  'Safe handling of chemicals',
+  'Practical techniques',
+  'Measurement accuracy',
+  'Experimental design',
+  'Data analysis',
+  'Error analysis',
+  'Reproducibility',
+  
+  // Chemical Analysis
+  'Qualitative analysis',
+  'Quantitative analysis',
+  'Flame tests',
+  'Precipitation reactions',
+  'Gas tests',
+  'Instrumental analysis',
+  'Chromatography analysis',
+  'Spectroscopy',
+  'Chemical identification',
+  'Purity determination'
+]; 

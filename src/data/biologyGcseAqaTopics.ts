@@ -1,8 +1,10 @@
-export const biologyGcseAqaTopics: string[] = [
-  // 1. Cell Biology
-  // 1.1 Cell Structure
-  "Prokaryotic cells",
-  "Eukaryotic cells",
+export const biologyGcseAqaTopics = [
+  // Required Practicals
+  'Required practicals',
+  
+  // Cell Biology - Cell Structure
+  'Animal cells',
+  'Plant cells',
   "Difference between prokaryotic and eukaryotic cells",
   "Nucleus structure",
   "Nucleus function",
