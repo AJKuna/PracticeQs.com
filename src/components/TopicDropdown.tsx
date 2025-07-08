@@ -5,6 +5,9 @@ import { biologyGcseEdexcelTopics } from '../data/biologyGcseEdexcelTopics';
 import { chemistryGcseAqaTopics } from '../data/chemistryGcseAqaTopics';
 import { chemistryGcseEdexcelTopics } from '../data/chemistryGcseEdexcelTopics';
 import { chemistryGcseOcrATopics } from '../data/chemistryGcseOcrATopics';
+import { physicsGcseAqaTopics } from '../data/physicsGcseAqaTopics';
+import { physicsGcseEdexcelTopics } from '../data/physicsGcseEdexcelTopics';
+import { physicsGcseOcrTopics } from '../data/physicsGcseOcrTopics';
 
 interface TopicDropdownProps {
   searchTopic: string;
@@ -46,6 +49,15 @@ const TopicDropdown: React.FC<TopicDropdownProps> = ({
     }
     if (subject === 'chemistry' && examLevel === 'gcse' && examBoard === 'ocr') {
       return chemistryGcseOcrATopics;
+    }
+    if (subject === 'physics' && examLevel === 'gcse' && examBoard === 'aqa') {
+      return physicsGcseAqaTopics;
+    }
+    if (subject === 'physics' && examLevel === 'gcse' && examBoard === 'edexcel') {
+      return physicsGcseEdexcelTopics;
+    }
+    if (subject === 'physics' && examLevel === 'gcse' && examBoard === 'ocr') {
+      return physicsGcseOcrTopics;
     }
     return [];
   };

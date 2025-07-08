@@ -783,7 +783,7 @@ const QuestionGenerator: React.FC = () => {
                     <option value="edexcel">Edexcel</option>
                     {(normalizedSubject === 'mathematics' || normalizedSubject === 'physics' || normalizedSubject === 'chemistry') && (
                       <option value="ocr">
-                        {normalizedSubject === 'chemistry' ? 'OCR A' : 'OCR'}
+                        {(normalizedSubject === 'chemistry' || normalizedSubject === 'physics') ? 'OCR A' : 'OCR'}
                       </option>
                     )}
                     {normalizedSubject === 'mathematics' && (
