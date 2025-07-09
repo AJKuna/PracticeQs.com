@@ -1,0 +1,61 @@
+{
+  "difficulty": "medium",
+  "questions": [
+    {
+      "id": "M1",
+      "topic": "Algebra - Solving equations",
+      "question": "Solve the equation 3x + 7 = 22",
+      "answer": "Rearrange to isolate x: (3 marks)\n1. Subtract 7 from both sides: 3x = 22 - 7 = 15 (1 mark)\n2. Divide both sides by 3: x = 15 ÷ 3 (1 mark)\n3. Therefore x = 5 (1 mark)",
+      "marks": 3
+    },
+    {
+      "id": "M2",
+      "topic": "Algebra - Quadratic sequences",
+      "question": "Find the nth term of the quadratic sequence: 3, 8, 17, 30, 47, ...",
+      "answer": "Use the method for quadratic sequences: (4 marks)\n1. First differences: 5, 9, 13, 17... (1 mark)\n2. Second differences: 4, 4, 4... (constant, so quadratic) (1 mark)\n3. Since 2nd diff = 4, coefficient of n² is 4÷2 = 2 (1 mark)\n4. Compare with 2n²: differences give n-1, so nth term = 2n² + n + 1 (1 mark)",
+      "marks": 4
+    },
+    {
+      "id": "M3",
+      "topic": "Algebra - Quadratic equations",
+      "question": "Solve x² + 5x + 6 = 0 by factoring",
+      "answer": "Factor the quadratic: (3 marks)\n1. Find two numbers that multiply to 6 and add to 5: 2 and 3 (1 mark)\n2. Write as (x + 2)(x + 3) = 0 (1 mark)\n3. Solve: x = -2 or x = -3 (1 mark)",
+      "marks": 3
+    },
+    {
+      "id": "M4",
+      "topic": "Algebra - Sequences",
+      "question": "The nth term of a sequence is 2n + 3. Find the 10th term and determine if 25 is in the sequence",
+      "answer": "Apply the formula: (4 marks)\n1. 10th term: 2(10) + 3 = 20 + 3 = 23 (1 mark)\n2. For 25 to be in sequence: 2n + 3 = 25 (1 mark)\n3. Solve: 2n = 22, so n = 11 (1 mark)\n4. Since n = 11 is a positive integer, 25 is the 11th term (1 mark)",
+      "marks": 4
+    },
+    {
+      "id": "M5",
+      "topic": "Number - Standard form",
+      "question": "Calculate (2.4 × 10³) × (3 × 10⁻²), giving your answer in standard form",
+      "answer": "Multiply in standard form: (3 marks)\n1. Multiply numbers: 2.4 × 3 = 7.2 (1 mark)\n2. Add powers: 10³ × 10⁻² = 10³⁺⁽⁻²⁾ = 10¹ (1 mark)\n3. Result: 7.2 × 10¹ = 72 (1 mark)",
+      "marks": 3
+    },
+    {
+      "id": "M6",
+      "topic": "Geometry - Pythagoras theorem",
+      "question": "A right-angled triangle has sides of length 5 cm and 12 cm. Find the length of the hypotenuse",
+      "answer": "Apply Pythagoras theorem: (3 marks)\n1. c² = a² + b² where c is hypotenuse (1 mark)\n2. c² = 5² + 12² = 25 + 144 = 169 (1 mark)\n3. c = √169 = 13 cm (1 mark)",
+      "marks": 3
+    },
+    {
+      "id": "M7",
+      "topic": "Ratio and proportion - Direct proportion",
+      "question": "If 3 pens cost £4.50, how much do 8 pens cost?",
+      "answer": "Use direct proportion: (3 marks)\n1. Cost per pen = £4.50 ÷ 3 = £1.50 (1 mark)\n2. Cost of 8 pens = 8 × £1.50 (1 mark)\n3. = £12.00 (1 mark)",
+      "marks": 3
+    },
+    {
+      "id": "M8",
+      "topic": "Algebra - Expanding brackets",
+      "question": "Expand and simplify (x + 3)(x + 4)",
+      "answer": "Use FOIL method: (3 marks)\n1. First: x × x = x² (1 mark)\n2. Outer + Inner: x × 4 + 3 × x = 4x + 3x = 7x (1 mark)\n3. Last: 3 × 4 = 12, so x² + 7x + 12 (1 mark)",
+      "marks": 3
+    }
+  ]
+} 

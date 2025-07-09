@@ -54,6 +54,7 @@ export const mathGcseTopics: string[] = [
   "Trial & Improvement",
   "Sequences",
   "nth term",
+  "Quadratic Sequences",
   "Simultaneous Equations",
   "Linear Simultaneous Equations",
   "Quadratic Simultaneous Equations",

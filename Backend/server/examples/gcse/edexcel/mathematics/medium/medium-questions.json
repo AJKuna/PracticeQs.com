@@ -11,6 +11,22 @@
     },
     {
       "id": "M2",
+      "topic": "Algebra - Quadratic sequences",
+      "question": "Find the nth term of the quadratic sequence: 2, 7, 16, 29, 46, ...",
+      "answer": "nth term = 2n² - n + 1",
+      "explanation": "1. First differences: 5, 9, 13, 17... (1 mark)\n2. Second differences: 4, 4, 4... (constant, so quadratic) (1 mark)\n3. Since 2nd diff = 4, coefficient of n² is 4÷2 = 2 (1 mark)\n4. Compare with 2n²: 2-2=0, 7-8=-1, 16-18=-2, 29-32=-3... (1 mark)\n5. This gives sequence 1-n, so nth term = 2n² + (1-n) = 2n² - n + 1 (1 mark)",
+      "marks": 5
+    },
+    {
+      "id": "M3",
+      "topic": "Algebra - Sequences",
+      "question": "Find the nth term of the quadratic sequence: 5, 12, 23, 38, 57, ...",
+      "answer": "nth term = 2n² + n + 2",
+      "explanation": "1. First differences: 7, 11, 15, 19... (1 mark)\n2. Second differences: 4, 4, 4... (constant, confirms quadratic) (1 mark)\n3. Since 2nd diff = 4, coefficient of n² is 4÷2 = 2 (1 mark)\n4. Compare with 2n²: 5-2=3, 12-8=4, 23-18=5, 38-32=6... (1 mark)\n5. This gives arithmetic sequence n+2, so nth term = 2n² + (n+2) = 2n² + n + 2 (1 mark)",
+      "marks": 5
+    },
+    {
+      "id": "M4",
       "topic": "Geometry",
       "question": "A triangle has sides of length 5cm and 12cm, and the included angle is 30°. Calculate the area of the triangle.",
       "answer": "15 cm²",
@@ -18,7 +34,7 @@
       "marks": 3
     },
     {
-      "id": "M3",
+      "id": "M5",
       "topic": "Number",
       "question": "Calculate (2.4 × 10⁴) × (3 × 10⁻²), giving your answer in standard form.",
       "answer": "7.2 × 10²",
@@ -26,7 +42,7 @@
       "marks": 3
     },
     {
-      "id": "M4",
+      "id": "M6",
       "topic": "Statistics",
       "question": "The table shows the number of pets owned by 50 students:\nPets: 0, 1, 2, 3, 4\nFrequency: 12, 15, 13, 8, 2\nCalculate the mean number of pets.",
       "answer": "1.46 pets",
@@ -34,7 +50,7 @@
       "marks": 4
     },
     {
-      "id": "M5",
+      "id": "M7",
       "topic": "Probability",
       "question": "A bag contains 3 red balls, 4 blue balls, and 5 green balls. Two balls are drawn without replacement. Find the probability of drawing two different colored balls.",
       "answer": "0.7",
@@ -42,7 +58,7 @@
       "marks": 4
     },
     {
-      "id": "M6",
+      "id": "M8",
       "topic": "Algebra",
       "question": "The nth term of a sequence is 3n² - 2n. Find the 10th term of the sequence.",
       "answer": "280",
@@ -50,6 +66,6 @@
       "marks": 3
     }
   ],
-  "total_marks": 20,
-  "recommended_time": "25 minutes"
+  "total_marks": 30,
+  "recommended_time": "35 minutes"
 } 

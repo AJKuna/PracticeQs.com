@@ -1,0 +1,63 @@
+{
+  "subject": "mathematics",
+  "exam_board": "AQA",
+  "level": "GCSE",
+  "examples": {
+    "easy": [
+      {
+        "topic": "Number - Basic calculations",
+        "question": "Calculate 15 + 23 × 2",
+        "answer": "Using order of operations (BODMAS): (2 marks)\n1. First multiply: 23 × 2 = 46 (1 mark)\n2. Then add: 15 + 46 = 61 (1 mark)",
+        "marks": 2
+      },
+      {
+        "topic": "Algebra - Sequences",
+        "question": "Find the next term in the sequence: 2, 5, 8, 11, ...",
+        "answer": "Identify the pattern: (2 marks)\n1. Common difference: 5 - 2 = 3 (1 mark)\n2. Next term: 11 + 3 = 14 (1 mark)",
+        "marks": 2
+      }
+    ],
+    "medium": [
+      {
+        "topic": "Algebra - Quadratic sequences",
+        "question": "Find the nth term of the quadratic sequence: 3, 8, 17, 30, 47, ...",
+        "answer": "Use the method for quadratic sequences: (4 marks)\n1. First differences: 5, 9, 13, 17... (1 mark)\n2. Second differences: 4, 4, 4... (constant, so quadratic) (1 mark)\n3. Since 2nd diff = 4, coefficient of n² is 4÷2 = 2 (1 mark)\n4. Compare with 2n²: differences give n-1, so nth term = 2n² + n + 1 (1 mark)",
+        "marks": 4
+      },
+      {
+        "topic": "Algebra - Solving equations",
+        "question": "Solve the equation 3x + 7 = 22",
+        "answer": "Rearrange to isolate x: (3 marks)\n1. Subtract 7 from both sides: 3x = 22 - 7 = 15 (1 mark)\n2. Divide both sides by 3: x = 15 ÷ 3 (1 mark)\n3. Therefore x = 5 (1 mark)",
+        "marks": 3
+      }
+    ],
+    "hard": [
+      {
+        "topic": "Algebra - Quadratic nth term",
+        "question": "Find the nth term of the quadratic sequence: 4, 11, 22, 37, 56, ...",
+        "answer": "Use systematic method for quadratic sequences: (6 marks)\n1. First differences: 7, 11, 15, 19... (1 mark)\n2. Second differences: 4, 4, 4... (constant, confirms quadratic) (1 mark)\n3. Since 2nd diff = 4, coefficient of n² is 4÷2 = 2 (1 mark)\n4. Compare sequence with 2n²: 4-2=2, 11-8=3, 22-18=4, 37-32=5... (1 mark)\n5. This gives arithmetic sequence n+1, so linear part is n+1 (1 mark)\n6. Therefore nth term = 2n² + n + 1 (1 mark)",
+        "marks": 6
+      },
+      {
+        "topic": "Algebra - Quadratic formula",
+        "question": "Solve x² - 6x + 2 = 0 using the quadratic formula, giving your answer in surd form",
+        "answer": "Apply quadratic formula: (4 marks)\n1. Identify a=1, b=-6, c=2 (1 mark)\n2. x = (6 ± √(36-8))/2 = (6 ± √28)/2 (1 mark)\n3. Simplify: √28 = √(4×7) = 2√7 (1 mark)\n4. Therefore x = (6 ± 2√7)/2 = 3 ± √7 (1 mark)",
+        "marks": 4
+      }
+    ]
+  },
+  "key_topics": [
+    "Quadratic sequences and nth terms",
+    "Solving quadratic equations",
+    "Algebraic manipulation",
+    "Number operations",
+    "Geometry and measurement",
+    "Statistics and probability"
+  ],
+  "formatting_notes": [
+    "Use plain text for mathematical expressions (x^2, not LaTeX)",
+    "Include step-by-step working with mark allocations",
+    "Provide clear explanations for each step",
+    "Use appropriate mathematical terminology"
+  ]
+} 

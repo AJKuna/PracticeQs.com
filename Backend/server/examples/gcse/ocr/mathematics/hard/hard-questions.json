@@ -3,6 +3,22 @@
   "questions": [
     {
       "id": "H1",
+      "topic": "Algebra - Quadratic nth term",
+      "question": "Find the nth term of the quadratic sequence: 0, 5, 14, 27, 44, ...",
+      "answer": "nth term = 2n² - n - 1",
+      "explanation": "1. First differences: 5, 9, 13, 17... (1 mark)\n2. Second differences: 4, 4, 4... (constant, confirms quadratic) (1 mark)\n3. Since 2nd diff = 4, coefficient of n² is 4÷2 = 2 (1 mark)\n4. Compare with 2n²: 0-2=-2, 5-8=-3, 14-18=-4, 27-32=-5... (1 mark)\n5. This gives -2, -3, -4, -5... = -(n+1), so nth term = 2n² - (n+1) = 2n² - n - 1 (1 mark)\nVerify: n=1: 2-1-1=0 ✓; n=2: 8-2-1=5 ✓",
+      "marks": 6
+    },
+    {
+      "id": "H2",
+      "topic": "Algebra - Quadratic sequences",
+      "question": "A quadratic sequence has first term 3, second term 8, and third term 17. Find the nth term and hence find the 10th term.",
+      "answer": "nth term = 2n² - n + 2; 10th term = 192",
+      "explanation": "1. Given: 3, 8, 17... Find pattern (1 mark)\n2. First differences: 5, 9... Second diff: 4 (1 mark)\n3. Since 2nd diff = 4, coefficient of n² is 2 (1 mark)\n4. Compare with 2n²: 3-2=1, 8-8=0, 17-18=-1... (1 mark)\n5. This gives 2-n, so nth term = 2n² + (2-n) = 2n² - n + 2 (1 mark)\n6. 10th term: 2(100) - 10 + 2 = 192 (1 mark)",
+      "marks": 6
+    },
+    {
+      "id": "H3",
       "topic": "Algebraic inequalities",
       "question": "Solve the inequality: 3x - 5 ≤ 2x + 7",
       "answer": "x ≤ 12",
@@ -10,7 +26,7 @@
       "marks": 4
     },
     {
-      "id": "H2",
+      "id": "H4",
       "topic": "Transformations of curves and their equations",
       "question": "The graph of y = x² is transformed to y = (x - 3)² + 2. Describe the transformations.",
       "answer": "Translation 3 units right and 2 units up",
@@ -18,7 +34,7 @@
       "marks": 4
     },
     {
-      "id": "H3",
+      "id": "H5",
       "topic": "Direct and inverse proportion",
       "question": "If y is inversely proportional to x², and y = 8 when x = 3, find y when x = 6.",
       "answer": "y = 2",
@@ -26,7 +42,7 @@
       "marks": 5
     },
     {
-      "id": "H4",
+      "id": "H6",
       "topic": "Circle theorems",
       "question": "In a circle, a chord AB subtends an angle of 70° at the center. What angle does the same chord subtend at a point C on the circumference?",
       "answer": "35°",
@@ -34,7 +50,7 @@
       "marks": 3
     },
     {
-      "id": "H5",
+      "id": "H7",
       "topic": "Triangle mensuration",
       "question": "A triangle has sides 5 cm, 12 cm, and 13 cm. Calculate its area using Heron's formula.",
       "answer": "30 cm²",
@@ -42,7 +58,7 @@
       "marks": 5
     },
     {
-      "id": "H6",
+      "id": "H8",
       "topic": "Discrete growth and decay",
       "question": "A population of bacteria increases by 15% each hour. If there are initially 800 bacteria, how many will there be after 3 hours?",
       "answer": "1218 bacteria (to nearest whole number)",
@@ -50,7 +66,7 @@
       "marks": 4
     },
     {
-      "id": "H7",
+      "id": "H9",
       "topic": "Plane vector geometry",
       "question": "Given vectors a = (3, 4) and b = (-2, 1), find |2a - b|.",
       "answer": "√85",
@@ -58,7 +74,7 @@
       "marks": 4
     },
     {
-      "id": "H8",
+      "id": "H10",
       "topic": "Language of functions",
       "question": "If f(x) = 2x + 3 and g(x) = x² - 1, find fg(2).",
       "answer": "9",
@@ -66,7 +82,7 @@
       "marks": 3
     },
     {
-      "id": "H9",
+      "id": "H11",
       "topic": "Volume and surface area calculations",
       "question": "A cylinder has radius 4 cm and height 10 cm. Calculate its total surface area.",
       "answer": "112π cm² (or 352 cm² to 3 s.f.)",
@@ -74,7 +90,7 @@
       "marks": 4
     },
     {
-      "id": "H10",
+      "id": "H12",
       "topic": "Exact calculations",
       "question": "Rationalize the denominator: 12/(3 + √5)",
       "answer": "6(3 - √5)/2 or 9 - 3√5",
@@ -82,6 +98,6 @@
       "marks": 4
     }
   ],
-  "total_marks": 40,
-  "recommended_time": "50 minutes"
+  "total_marks": 52,
+  "recommended_time": "65 minutes"
 } 

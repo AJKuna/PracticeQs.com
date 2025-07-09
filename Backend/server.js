@@ -552,21 +552,42 @@ app.post('/api/generate-questions', async (req, res) => {
     // Get the specification and example questions
     let exampleQuestions = null;
     try {
-      // Try the standard pattern first
-      exampleQuestions = await import(`./server/examples/${examLevel}/${examBoard ? "${examBoard}/" : ""}${subject}/${subject}.json`, {type: 'json'});
-      console.log("Example questions:", exampleQuestions)
-    } catch (error) {
-      // For English subjects, try the difficulty-specific pattern
-      if (subject.startsWith('english-')) {
+      // For mathematics, try difficulty-specific files first
+      if (subject === 'mathematics') {
         try {
-          exampleQuestions = await import(`./server/examples/${examLevel}/${examBoard ? "${examBoard}/" : ""}${subject}/${difficulty}-questions.json`, {type: 'json'});
-          console.log("Example questions (difficulty-specific):", exampleQuestions)
+          exampleQuestions = await import(`./server/examples/${examLevel}/${examBoard ? `${examBoard}/` : ""}${subject}/${difficulty}/${difficulty}-questions.json`, {type: 'json'});
+          console.log("Example questions (mathematics difficulty-specific):", exampleQuestions);
         } catch (difficultyError) {
-          console.log('⚠️ Warning: Examples questions not found, using fallback');
+          console.log('⚠️ Warning: Mathematics difficulty-specific questions not found, trying standard pattern');
+          // Try the standard pattern as fallback
+          try {
+            exampleQuestions = await import(`./server/examples/${examLevel}/${examBoard ? `${examBoard}/` : ""}${subject}/${subject}.json`, {type: 'json'});
+            console.log("Example questions (standard pattern):", exampleQuestions);
+          } catch (standardError) {
+            console.log('⚠️ Warning: Standard pattern examples not found, using fallback');
+          }
         }
       } else {
-        console.log('⚠️ Warning: Examples questions not found, using fallback');
+        // Try the standard pattern first for non-mathematics subjects
+        try {
+          exampleQuestions = await import(`./server/examples/${examLevel}/${examBoard ? `${examBoard}/` : ""}${subject}/${subject}.json`, {type: 'json'});
+          console.log("Example questions:", exampleQuestions);
+        } catch (error) {
+          // For English subjects, try the difficulty-specific pattern
+          if (subject.startsWith('english-')) {
+            try {
+              exampleQuestions = await import(`./server/examples/${examLevel}/${examBoard ? `${examBoard}/` : ""}${subject}/${difficulty}-questions.json`, {type: 'json'});
+              console.log("Example questions (difficulty-specific):", exampleQuestions);
+            } catch (difficultyError) {
+              console.log('⚠️ Warning: Examples questions not found, using fallback');
+            }
+          } else {
+            console.log('⚠️ Warning: Examples questions not found, using fallback');
+          }
+        }
       }
+    } catch (error) {
+      console.log('⚠️ Warning: Unexpected error loading examples:', error);
     }
     
     let specData = null;

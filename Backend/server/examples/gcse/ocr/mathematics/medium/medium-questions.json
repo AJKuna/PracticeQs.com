@@ -11,6 +11,22 @@
     },
     {
       "id": "M2",
+      "topic": "Algebra - Quadratic sequences",
+      "question": "Find the nth term of the quadratic sequence: 4, 9, 18, 31, 48, ...",
+      "answer": "nth term = 2n² - n + 3",
+      "explanation": "1. First differences: 5, 9, 13, 17... (1 mark)\n2. Second differences: 4, 4, 4... (constant, so quadratic) (1 mark)\n3. Since 2nd diff = 4, coefficient of n² is 4÷2 = 2 (1 mark)\n4. Compare with 2n²: 4-2=2, 9-8=1, 18-18=0, 31-32=-1... (1 mark)\n5. This gives sequence 3-n, so nth term = 2n² + (3-n) = 2n² - n + 3 (1 mark)",
+      "marks": 5
+    },
+    {
+      "id": "M3",
+      "topic": "Sequences",
+      "question": "Find the nth term of the quadratic sequence: 6, 15, 28, 45, 66, ...",
+      "answer": "nth term = 2n² + 3n + 1",
+      "explanation": "1. First differences: 9, 13, 17, 21... (1 mark)\n2. Second differences: 4, 4, 4... (constant, confirms quadratic) (1 mark)\n3. Since 2nd diff = 4, coefficient of n² is 4÷2 = 2 (1 mark)\n4. Compare with 2n²: 6-2=4, 15-8=7, 28-18=10, 45-32=13... (1 mark)\n5. This gives arithmetic sequence 3n+1, so nth term = 2n² + 3n + 1 (1 mark)",
+      "marks": 5
+    },
+    {
+      "id": "M4",
       "topic": "Indices and surds",
       "question": "Simplify: 2³ × 2⁵",
       "answer": "2⁸ or 256",
@@ -18,7 +34,7 @@
       "marks": 2
     },
     {
-      "id": "M3",
+      "id": "M5",
       "topic": "Ratio, proportion and rates of change",
       "question": "If 3 apples cost £1.50, how much do 8 apples cost?",
       "answer": "£4.00",
@@ -26,7 +42,7 @@
       "marks": 3
     },
     {
-      "id": "M4",
+      "id": "M6",
       "topic": "Straight line graphs",
       "question": "Find the gradient of the line passing through points (2, 5) and (6, 13)",
       "answer": "2",
@@ -34,7 +50,7 @@
       "marks": 3
     },
     {
-      "id": "M5",
+      "id": "M7",
       "topic": "Area calculations",
       "question": "Calculate the area of a triangle with base 12 cm and height 8 cm",
       "answer": "48 cm²",
@@ -42,7 +58,7 @@
       "marks": 2
     },
     {
-      "id": "M6",
+      "id": "M8",
       "topic": "Combined events and probability diagrams",
       "question": "Two coins are tossed. What is the probability of getting at least one head?",
       "answer": "3/4",
@@ -50,7 +66,7 @@
       "marks": 3
     },
     {
-      "id": "M7",
+      "id": "M9",
       "topic": "Sequences",
       "question": "Find the nth term of the sequence: 5, 8, 11, 14, ...",
       "answer": "3n + 2",
@@ -58,7 +74,7 @@
       "marks": 3
     },
     {
-      "id": "M8",
+      "id": "M10",
       "topic": "Angles",
       "question": "In triangle ABC, angle A = 65° and angle B = 70°. Find angle C.",
       "answer": "45°",
@@ -66,7 +82,7 @@
       "marks": 2
     },
     {
-      "id": "M9",
+      "id": "M11",
       "topic": "Fractions",
       "question": "Calculate: 2/3 + 1/4",
       "answer": "11/12",
@@ -74,7 +90,7 @@
       "marks": 3
     },
     {
-      "id": "M10",
+      "id": "M12",
       "topic": "Interpreting and representing data",
       "question": "The frequency table shows test scores:\nScore: 1-10, 11-20, 21-30, 31-40\nFrequency: 4, 12, 18, 6\nFind the modal class.",
       "answer": "21-30",
@@ -82,6 +98,6 @@
       "marks": 2
     }
   ],
-  "total_marks": 26,
-  "recommended_time": "35 minutes"
+  "total_marks": 36,
+  "recommended_time": "45 minutes"
 } 

@@ -1,0 +1,70 @@
+{
+  "subject": "mathematics",
+  "exam_board": "OCR",
+  "level": "GCSE",
+  "examples": {
+    "easy": [
+      {
+        "topic": "Number - Basic calculations",
+        "question": "Calculate 24 ÷ 6 + 8 × 3",
+        "answer": "28",
+        "explanation": "Using order of operations (BODMAS): (2 marks)\n1. First divide and multiply: 24 ÷ 6 = 4 and 8 × 3 = 24 (1 mark)\n2. Then add: 4 + 24 = 28 (1 mark)",
+        "marks": 2
+      },
+      {
+        "topic": "Algebra - Sequences",
+        "question": "Find the next term in the sequence: 1, 4, 7, 10, ...",
+        "answer": "13",
+        "explanation": "Identify the pattern: (2 marks)\n1. Common difference: 4 - 1 = 3 (1 mark)\n2. Next term: 10 + 3 = 13 (1 mark)",
+        "marks": 2
+      }
+    ],
+    "medium": [
+      {
+        "topic": "Algebra - Quadratic sequences",
+        "question": "Find the nth term of the quadratic sequence: 4, 9, 18, 31, 48, ...",
+        "answer": "nth term = 2n² - n + 3",
+        "explanation": "Use the method for quadratic sequences: (5 marks)\n1. First differences: 5, 9, 13, 17... (1 mark)\n2. Second differences: 4, 4, 4... (constant, so quadratic) (1 mark)\n3. Since 2nd diff = 4, coefficient of n² is 4÷2 = 2 (1 mark)\n4. Compare with 2n²: 4-2=2, 9-8=1, 18-18=0, 31-32=-1... (1 mark)\n5. This gives sequence 3-n, so nth term = 2n² + (3-n) = 2n² - n + 3 (1 mark)",
+        "marks": 5
+      },
+      {
+        "topic": "Algebra - Solving equations",
+        "question": "Solve the equation 5x - 8 = 17",
+        "answer": "x = 5",
+        "explanation": "Rearrange to isolate x: (3 marks)\n1. Add 8 to both sides: 5x = 17 + 8 = 25 (1 mark)\n2. Divide both sides by 5: x = 25 ÷ 5 (1 mark)\n3. Therefore x = 5 (1 mark)",
+        "marks": 3
+      }
+    ],
+    "hard": [
+      {
+        "topic": "Algebra - Quadratic nth term",
+        "question": "Find the nth term of the quadratic sequence: 0, 5, 14, 27, 44, ...",
+        "answer": "nth term = 2n² - n - 1",
+        "explanation": "Use systematic method for quadratic sequences: (6 marks)\n1. First differences: 5, 9, 13, 17... (1 mark)\n2. Second differences: 4, 4, 4... (constant, confirms quadratic) (1 mark)\n3. Since 2nd diff = 4, coefficient of n² is 4÷2 = 2 (1 mark)\n4. Compare with 2n²: 0-2=-2, 5-8=-3, 14-18=-4, 27-32=-5... (1 mark)\n5. This gives -2, -3, -4, -5... = -(n+1) (1 mark)\n6. Therefore nth term = 2n² - (n+1) = 2n² - n - 1 (1 mark)",
+        "marks": 6
+      },
+      {
+        "topic": "Algebra - Quadratic sequences",
+        "question": "A quadratic sequence has first term 3, second term 8, and third term 17. Find the nth term and hence find the 10th term.",
+        "answer": "nth term = 2n² - n + 2; 10th term = 192",
+        "explanation": "Find the pattern systematically: (6 marks)\n1. Given: 3, 8, 17... Find differences (1 mark)\n2. First differences: 5, 9... Second diff: 4 (1 mark)\n3. Since 2nd diff = 4, coefficient of n² is 2 (1 mark)\n4. Compare with 2n²: 3-2=1, 8-8=0, 17-18=-1... (1 mark)\n5. This gives 2-n, so nth term = 2n² + (2-n) = 2n² - n + 2 (1 mark)\n6. 10th term: 2(100) - 10 + 2 = 192 (1 mark)",
+        "marks": 6
+      }
+    ]
+  },
+  "key_topics": [
+    "Quadratic sequences and nth terms",
+    "Solving quadratic equations",
+    "Algebraic manipulation",
+    "Number operations", 
+    "Geometry and measurement",
+    "Statistics and probability"
+  ],
+  "formatting_notes": [
+    "Use plain text for mathematical expressions (x^2, not LaTeX)",
+    "Include step-by-step working with mark allocations",
+    "Provide clear explanations for each step",
+    "Use appropriate mathematical terminology",
+    "Follow OCR exam format and style"
+  ]
+} 

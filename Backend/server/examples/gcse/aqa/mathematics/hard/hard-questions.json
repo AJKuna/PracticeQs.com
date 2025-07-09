@@ -1,0 +1,61 @@
+{
+  "difficulty": "hard",
+  "questions": [
+    {
+      "id": "H1",
+      "topic": "Algebra - Quadratic sequences",
+      "question": "The nth term of a quadratic sequence is n² + 3n + 1. Find the first 5 terms and explain why the second differences are constant",
+      "answer": "Calculate terms and analyze differences: (5 marks)\n1. n=1: 1² + 3(1) + 1 = 5; n=2: 4 + 6 + 1 = 11; n=3: 9 + 9 + 1 = 19; n=4: 16 + 12 + 1 = 29; n=5: 25 + 15 + 1 = 41 (2 marks)\n2. First differences: 6, 8, 10, 12 (1 mark)\n3. Second differences: 2, 2, 2 (constant) (1 mark)\n4. Second differences are constant because the highest power term is n², and the second difference equals 2a where a is the coefficient of n² (1 mark)",
+      "marks": 5
+    },
+    {
+      "id": "H2",
+      "topic": "Algebra - Quadratic nth term",
+      "question": "Find the nth term of the quadratic sequence: 4, 11, 22, 37, 56, ...",
+      "answer": "Use systematic method for quadratic sequences: (6 marks)\n1. First differences: 7, 11, 15, 19... (1 mark)\n2. Second differences: 4, 4, 4... (constant, confirms quadratic) (1 mark)\n3. Since 2nd diff = 4, coefficient of n² is 4÷2 = 2 (1 mark)\n4. Compare sequence with 2n²: 4-2=2, 11-8=3, 22-18=4, 37-32=5... (1 mark)\n5. This gives arithmetic sequence n+1, so linear part is n+1 (1 mark)\n6. Therefore nth term = 2n² + n + 1 (1 mark)",
+      "marks": 6
+    },
+    {
+      "id": "H3",
+      "topic": "Algebra - Simultaneous equations",
+      "question": "Solve the simultaneous equations: 2x + 3y = 13 and 3x - 2y = 4",
+      "answer": "Use elimination method: (4 marks)\n1. Multiply first equation by 2: 4x + 6y = 26 (1 mark)\n2. Multiply second equation by 3: 9x - 6y = 12 (1 mark)\n3. Add equations: 13x = 38, so x = 38/13 (1 mark)\n4. Substitute back: 2(38/13) + 3y = 13, solve to get y = 3 (1 mark)",
+      "marks": 4
+    },
+    {
+      "id": "H4",
+      "topic": "Algebra - Quadratic formula",
+      "question": "Solve x² - 6x + 2 = 0 using the quadratic formula, giving your answer in surd form",
+      "answer": "Apply quadratic formula: (4 marks)\n1. Identify a=1, b=-6, c=2 (1 mark)\n2. x = (6 ± √(36-8))/2 = (6 ± √28)/2 (1 mark)\n3. Simplify: √28 = √(4×7) = 2√7 (1 mark)\n4. Therefore x = (6 ± 2√7)/2 = 3 ± √7 (1 mark)",
+      "marks": 4
+    },
+    {
+      "id": "H5",
+      "topic": "Algebra - Rearranging formulae",
+      "question": "Make h the subject of the formula: A = 2πr(r + h)",
+      "answer": "Rearrange systematically: (4 marks)\n1. Expand: A = 2πr² + 2πrh (1 mark)\n2. Subtract 2πr²: A - 2πr² = 2πrh (1 mark)\n3. Divide by 2πr: (A - 2πr²)/(2πr) = h (1 mark)\n4. Therefore h = (A - 2πr²)/(2πr) or h = A/(2πr) - r (1 mark)",
+      "marks": 4
+    },
+    {
+      "id": "H6",
+      "topic": "Geometry - Circle theorems",
+      "question": "A circle has center O. Points A, B, C lie on the circle. If angle AOB = 80°, find angle ACB",
+      "answer": "Apply circle theorem: (3 marks)\n1. Angle at center is twice angle at circumference (1 mark)\n2. AOB is angle at center = 80° (1 mark)\n3. ACB is angle at circumference = 80° ÷ 2 = 40° (1 mark)",
+      "marks": 3
+    },
+    {
+      "id": "H7",
+      "topic": "Algebra - Proof",
+      "question": "Prove that the sum of any three consecutive integers is divisible by 3",
+      "answer": "Use algebraic proof: (4 marks)\n1. Let the three consecutive integers be n, n+1, n+2 (1 mark)\n2. Sum = n + (n+1) + (n+2) = 3n + 3 (1 mark)\n3. Factor: 3n + 3 = 3(n + 1) (1 mark)\n4. Since this is 3 times an integer, it's divisible by 3 (1 mark)",
+      "marks": 4
+    },
+    {
+      "id": "H8",
+      "topic": "Algebra - Completing the square",
+      "question": "Express x² + 8x + 5 in the form (x + a)² + b",
+      "answer": "Complete the square: (4 marks)\n1. Take half of coefficient of x: 8/2 = 4 (1 mark)\n2. Write as (x + 4)² - 16 + 5 (1 mark)\n3. Simplify: (x + 4)² - 11 (1 mark)\n4. Therefore a = 4, b = -11 (1 mark)",
+      "marks": 4
+    }
+  ]
+} 
