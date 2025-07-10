@@ -104,11 +104,24 @@ const QuestionGenerator: React.FC = () => {
 
   // Clean question string to format values
   const cleanQuestion = (question: string) => {
+    if (!question) return question;
+    
+    // First, convert mathematical operators to proper symbols
+    let processedQuestion = question;
+    processedQuestion = processedQuestion.replace(/\s*\*\s*/g, ' × '); // Convert * to × (multiplication with spaces)
+    processedQuestion = processedQuestion.replace(/\+\-/g, '±'); // Convert +- to ±
+    processedQuestion = processedQuestion.replace(/\+-/g, '±'); // Convert +- to ±
+    processedQuestion = processedQuestion.replace(/\s+\/\s+/g, ' ÷ '); // Convert / to ÷ (division with spaces)
+    processedQuestion = processedQuestion.replace(/\s*<=\s*/g, ' ≤ '); // Convert <= to ≤
+    processedQuestion = processedQuestion.replace(/\s*>=\s*/g, ' ≥ '); // Convert >= to ≥
+    processedQuestion = processedQuestion.replace(/\s*!=\s*/g, ' ≠ '); // Convert != to ≠
+    processedQuestion = processedQuestion.replace(/\s*~=\s*/g, ' ≈ '); // Convert ~= to ≈
+    
     const questionChars = [];
     let isCurrentSuperscript = false // If the current character is a superscript
     let isCurrentSubscript = false // If the current character is a subscript
     let prevStr = "" // Previous character
-    for (const char of question) {
+    for (const char of processedQuestion) {
       // Handle superscript
       if (char === "^") {
         isCurrentSuperscript = true // Set current character to superscript
@@ -116,7 +129,7 @@ const QuestionGenerator: React.FC = () => {
       }
       else if(isCurrentSuperscript) {
         if (!isNaN(Number(char))) {
-          questionChars.push(<sup>{char}</sup>) // Display character as a superscript
+          questionChars.push(<sup key={questionChars.length}>{char}</sup>) // Display character as a superscript
           continue;
         }
                     
@@ -130,7 +143,7 @@ const QuestionGenerator: React.FC = () => {
       }
       else if(isCurrentSubscript) {
         if (!isNaN(Number(char))) {
-          questionChars.push(<sub>{char}</sub>) // Display character as a subscript
+          questionChars.push(<sub key={questionChars.length}>{char}</sub>) // Display character as a subscript
           continue;
         }
                     
@@ -144,7 +157,7 @@ const QuestionGenerator: React.FC = () => {
       }
       else if (prevStr === "-") {
         if (char === ">") {
-          questionChars.push(<>&rarr;</>)
+          questionChars.push(<span key={questionChars.length}>&rarr;</span>)
           prevStr = ""
           continue
         }
@@ -154,7 +167,80 @@ const QuestionGenerator: React.FC = () => {
       prevStr = ""
     }
     
-    return <>{questionChars.map(char => <>{char}</>)}</>
+    return <>{questionChars.map((char, index) => <span key={index}>{char}</span>)}</>
+  };
+
+  // Function to convert mathematical notation to proper Unicode symbols for PDF
+  const formatMathForPDF = (text: string): string => {
+    if (!text) return text;
+    
+    // Convert superscripts to Unicode superscript symbols
+    const superscriptMap: { [key: string]: string } = {
+      '0': '⁰',
+      '1': '¹',
+      '2': '²',
+      '3': '³',
+      '4': '⁴',
+      '5': '⁵',
+      '6': '⁶',
+      '7': '⁷',
+      '8': '⁸',
+      '9': '⁹',
+      '+': '⁺',
+      '-': '⁻',
+      '=': '⁼',
+      '(': '⁽',
+      ')': '⁾',
+      'n': 'ⁿ'
+    };
+    
+    // Convert subscripts to Unicode subscript symbols
+    const subscriptMap: { [key: string]: string } = {
+      '0': '₀',
+      '1': '₁',
+      '2': '₂',
+      '3': '₃',
+      '4': '₄',
+      '5': '₅',
+      '6': '₆',
+      '7': '₇',
+      '8': '₈',
+      '9': '₉',
+      '+': '₊',
+      '-': '₋',
+      '=': '₌',
+      '(': '₍',
+      ')': '₎'
+    };
+    
+    let result = text;
+    
+    // Handle superscripts: convert x^2 to x²
+    result = result.replace(/\^([0-9+\-=()n]+)/g, (match, chars) => {
+      return chars.split('').map((char: string) => superscriptMap[char] || char).join('');
+    });
+    
+    // Handle subscripts: convert H_2 to H₂
+    result = result.replace(/_([0-9+\-=()]+)/g, (match, chars) => {
+      return chars.split('').map((char: string) => subscriptMap[char] || char).join('');
+    });
+    
+    // Handle arrows: convert -> to →
+    result = result.replace(/->/g, '→');
+    
+    // Handle mathematical operators
+    result = result.replace(/\* /g, '× '); // Convert * to × (multiplication)
+    result = result.replace(/ \* /g, ' × '); // Convert * to × (multiplication with spaces)
+    result = result.replace(/\s*\*\s*/g, ' × '); // Convert * to × (multiplication with variable spaces)
+    result = result.replace(/\+\-/g, '±'); // Convert +- to ±
+    result = result.replace(/\+-/g, '±'); // Convert +- to ±
+    result = result.replace(/\s+\/\s+/g, ' ÷ '); // Convert / to ÷ (division with spaces)
+    result = result.replace(/\s*<=\s*/g, ' ≤ '); // Convert <= to ≤
+    result = result.replace(/\s*>=\s*/g, ' ≥ '); // Convert >= to ≥
+    result = result.replace(/\s*!=\s*/g, ' ≠ '); // Convert != to ≠
+    result = result.replace(/\s*~=\s*/g, ' ≈ '); // Convert ~= to ≈
+    
+    return result;
   };
 
   // Fetch questions from backend
@@ -397,14 +483,14 @@ const QuestionGenerator: React.FC = () => {
     if (normalizedSubject === 'mathematics') {
       doc.setFontSize(20);
       doc.setFont('helvetica', 'bold');
-      doc.text(searchTopic, leftMargin, 20); // Move closer to top
+      doc.text(formatMathForPDF(searchTopic), leftMargin, 20); // Move closer to top
       doc.setFont('helvetica', 'normal');
       yPosition = getNextLinePosition(firstLineY + gridSpacing * 4); // Start questions after grid spacing
     } else {
       // For lined subjects, align with lines
       doc.setFontSize(18); // Bigger font size
       doc.setFont('helvetica', 'bold');
-      doc.text(searchTopic, leftMargin, 20); // Move closer to top
+      doc.text(formatMathForPDF(searchTopic), leftMargin, 20); // Move closer to top
       doc.setFont('helvetica', 'normal');
       yPosition = getNextLinePosition(firstLineY + lineSpacing); // Start questions after first line
     }
@@ -431,9 +517,10 @@ const QuestionGenerator: React.FC = () => {
       doc.setFont('helvetica', 'normal');
       yPosition = getNextLinePosition(yPosition + spacingUnit);
 
-      // Question text - align with grid/lines
+      // Question text - align with grid/lines with proper mathematical formatting
       doc.setFontSize(10); // Consistent font size for question text
-      const questionLines = doc.splitTextToSize(question.question, lineLength);
+      const formattedQuestion = formatMathForPDF(question.question);
+      const questionLines = doc.splitTextToSize(formattedQuestion, lineLength);
       
       // Place each line on grid/lines
       questionLines.forEach((line: string) => {
@@ -452,7 +539,8 @@ const QuestionGenerator: React.FC = () => {
         yPosition = getNextLinePosition(yPosition + spacingUnit);
         
         doc.setFontSize(8); // Smaller font for passages
-        const passageLines = doc.splitTextToSize(question.passage, lineLength);
+        const formattedPassage = formatMathForPDF(question.passage);
+        const passageLines = doc.splitTextToSize(formattedPassage, lineLength);
         passageLines.forEach((line: string) => {
           doc.text(line, leftMargin, yPosition);
           yPosition = getNextLinePosition(yPosition + spacingUnit);
@@ -481,7 +569,8 @@ const QuestionGenerator: React.FC = () => {
           answerText = String(question.answer);
         }
         
-        const answerLines = doc.splitTextToSize(answerText, lineLength);
+        const formattedAnswer = formatMathForPDF(answerText);
+        const answerLines = doc.splitTextToSize(formattedAnswer, lineLength);
         answerLines.forEach((line: string) => {
           doc.text(line, leftMargin, yPosition);
           yPosition = getNextLinePosition(yPosition + spacingUnit);
@@ -939,8 +1028,8 @@ const QuestionGenerator: React.FC = () => {
                                 <div className="flex items-start space-x-2">
                                   <span className="text-sm text-gray-500 mt-1">{idx + 1}.</span>
                                   <div>
-                                    <p className="font-medium text-gray-800">{stepObj.step}</p>
-                                    <p className="text-gray-900">{String(stepObj.explanation)}</p>
+                                    <p className="font-medium text-gray-800">{cleanQuestion(stepObj.step)}</p>
+                                    <p className="text-gray-900">{cleanQuestion(String(stepObj.explanation))}</p>
                                   </div>
                                 </div>
                               </li>
@@ -953,11 +1042,11 @@ const QuestionGenerator: React.FC = () => {
 <div key={key} className="mb-3">
   <div className="flex items-start">
     <span className="text-gray-900 mr-2">•</span>
-    <p className="text-gray-900">{String(value)}</p>
+                                    <p className="text-gray-900">{cleanQuestion(String(value))}</p>
   </div>
 </div>
     )) : 
-    <p>{String(question.answer)}</p>
+                              <p>{cleanQuestion(String(question.answer))}</p>
   }
 </div>
                         )}
@@ -966,13 +1055,13 @@ const QuestionGenerator: React.FC = () => {
                       {question.markScheme && (
                         <div>
                           <h4 className="font-medium text-gray-900 mb-2">Mark Scheme:</h4>
-                          <p className="text-gray-800 whitespace-pre-wrap">{question.markScheme}</p>
+                          <p className="text-gray-800 whitespace-pre-wrap">{cleanQuestion(question.markScheme)}</p>
                         </div>
                       )}
                       {question.examTechnique && (
                         <div>
                           <h4 className="font-medium text-gray-900 mb-2">Exam Technique Tips:</h4>
-                          <p className="text-gray-800">{question.examTechnique}</p>
+                          <p className="text-gray-800">{cleanQuestion(question.examTechnique)}</p>
                         </div>
                       )}
                     </div>
