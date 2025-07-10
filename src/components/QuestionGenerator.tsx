@@ -216,12 +216,12 @@ const QuestionGenerator: React.FC = () => {
     let result = text;
     
     // Handle superscripts: convert x^2 to x²
-    result = result.replace(/\^([0-9+\-=()n]+)/g, (match, chars) => {
+    result = result.replace(/\^([0-9+\-=()n]+)/g, (_, chars) => {
       return chars.split('').map((char: string) => superscriptMap[char] || char).join('');
     });
     
     // Handle subscripts: convert H_2 to H₂
-    result = result.replace(/_([0-9+\-=()]+)/g, (match, chars) => {
+    result = result.replace(/_([0-9+\-=()]+)/g, (_, chars) => {
       return chars.split('').map((char: string) => subscriptMap[char] || char).join('');
     });
     
