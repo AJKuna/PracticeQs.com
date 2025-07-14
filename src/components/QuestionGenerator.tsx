@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 //import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
@@ -6,6 +6,7 @@ import jsPDF from 'jspdf';
 import PricingModal from './PricingModal';
 import TopicDropdown from './TopicDropdown';
 import FeedbackWidget from './FeedbackWidget';
+import LoadingBar from './LoadingBar';
 import { API_CONFIG } from '../config/api';
 import { trackQuestionGeneration, trackPDFExport, trackButtonClick, trackError, trackSubscription } from '../utils/analytics';
 
@@ -35,6 +36,8 @@ const QuestionGenerator: React.FC = () => {
   const [alert, setAlert] = useState<any>(null);
   const [usage, setUsage] = useState<any>(null);
   const [showPricingModal, setShowPricingModal] = useState(false);
+  const [isCancelled, setIsCancelled] = useState(false);
+  const loadingBarRef = useRef<{ complete: () => void } | null>(null);
 
   // Fetch user usage on component mount and when user changes
   useEffect(() => {
@@ -248,6 +251,7 @@ const QuestionGenerator: React.FC = () => {
     if (!user) return;
 
     setIsGenerating(true);
+    setIsCancelled(false);
     setAlert(null);
     
     // Validate topic is entered
@@ -271,6 +275,9 @@ const QuestionGenerator: React.FC = () => {
       return;
     }
 
+    // Create AbortController for cancellation
+    const abortController = new AbortController();
+
     try {
       // Determine the correct subject to send to backend
       let subjectToSend = normalizedSubject;
@@ -292,7 +299,13 @@ const QuestionGenerator: React.FC = () => {
           numQuestions: options.questionCount,
           userId: user.id
         }),
+        signal: abortController.signal
       });
+
+      // Check if request was cancelled
+      if (abortController.signal.aborted) {
+        return;
+      }
 
       if (response.status === 429) {
         // Handle usage limit exceeded - show pricing modal instead of alert
@@ -316,26 +329,45 @@ const QuestionGenerator: React.FC = () => {
       if (!response.ok) throw new Error('Failed to generate questions');
       
       const data = await response.json();
-      setGeneratedQuestions(data);
       
-      // Track successful question generation
-      trackQuestionGeneration(normalizedSubject, searchTopic, data.length, options.difficulty);
-      
-      // Refresh usage after generating questions
-      if (user) {
-        const response = await fetch(API_CONFIG.ENDPOINTS.USAGE(user.id));
-        if (response.ok) {
-          const data = await response.json();
-          setUsage(data);
+      // Check if cancelled before setting data
+      if (!isCancelled) {
+        setGeneratedQuestions(data);
+        
+        // Complete the loading bar
+        if (loadingBarRef.current) {
+          loadingBarRef.current.complete();
+        }
+        
+        // Track successful question generation
+        trackQuestionGeneration(normalizedSubject, searchTopic, data.length, options.difficulty);
+        
+        // Refresh usage after generating questions
+        if (user) {
+          const response = await fetch(API_CONFIG.ENDPOINTS.USAGE(user.id));
+          if (response.ok) {
+            const data = await response.json();
+            setUsage(data);
+          }
         }
       }
     } catch (error: any) {
+      if (error.name === 'AbortError') {
+        // Request was cancelled - don't show error
+        return;
+      }
       setAlert({ type: 'error', message: error.message || 'Error generating questions' });
       // Track generation errors
       trackError('question_generation', error.message || 'Unknown error', 'QuestionGenerator');
     } finally {
       setIsGenerating(false);
     }
+  };
+
+  // Handle cancellation
+  const handleCancelGeneration = () => {
+    setIsCancelled(true);
+    setIsGenerating(false);
   };
 
   // Replace the existing generateSolutions function with this:
@@ -606,6 +638,8 @@ const QuestionGenerator: React.FC = () => {
     setGeneratedQuestions([]);
     setGeneratedSolutions([]);
     setShowSolutions(false);
+    setIsGenerating(false);
+    setIsCancelled(false);
   };
 
   const handleManageSubscription = async () => {
@@ -961,7 +995,7 @@ const QuestionGenerator: React.FC = () => {
               disabled={isGenerating}
               className={`flex-1 flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-gray-900 ${subjectTheme.bg} ${subjectTheme.hover} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${subjectTheme.bg.replace('bg-', '')}`}
             >
-              {isGenerating ? 'Generating...' : 'Generate Questions'}
+              Generate Questions
             </button>
 
             <button
@@ -973,6 +1007,13 @@ const QuestionGenerator: React.FC = () => {
             </button>
           </div>
         </form>
+
+        {/* Loading Bar */}
+        <LoadingBar 
+          isVisible={isGenerating} 
+          onCancel={handleCancelGeneration}
+          ref={loadingBarRef}
+        />
 
         {/* Generated Questions */}
         {generatedQuestions.length > 0 && (
