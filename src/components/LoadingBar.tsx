@@ -26,7 +26,7 @@ const LoadingBar = forwardRef<LoadingBarRef, LoadingBarProps>(({ onCancel, isVis
   const steps: ProgressStep[] = useMemo(() => [
     {
       id: 'analyzing',
-      text: 'Analyzing topic...',
+      text: 'Analyzing exam specification...',
       icon: Brain,
       maxProgress: 25
     },
