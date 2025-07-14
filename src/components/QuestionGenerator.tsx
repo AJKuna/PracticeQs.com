@@ -628,13 +628,6 @@ const QuestionGenerator: React.FC = () => {
 
   const resetForm = () => {
     setSearchTopic('');
-    setOptions({
-      examLevel: 'gcse',
-      examBoard: '',
-      difficulty: 'easy',
-      questionCount: 10,
-      englishExamType: ''
-    });
     setGeneratedQuestions([]);
     setGeneratedSolutions([]);
     setShowSolutions(false);
