@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useImperativeHandle, forwardRef } from 'react';
+import { useState, useEffect, useMemo, useImperativeHandle, forwardRef } from 'react';
 import { Brain, Sparkles, FileText, CheckCircle } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
