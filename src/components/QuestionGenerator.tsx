@@ -111,6 +111,12 @@ const QuestionGenerator: React.FC = () => {
     
     // First, convert mathematical operators to proper symbols
     let processedQuestion = question;
+    
+    // For mathematics subject, replace sqrt with square root symbol
+    if (normalizedSubject === 'mathematics') {
+      processedQuestion = processedQuestion.replace(/sqrt/g, '√');
+    }
+    
     processedQuestion = processedQuestion.replace(/\s*\*\s*/g, ' × '); // Convert * to × (multiplication with spaces)
     processedQuestion = processedQuestion.replace(/\+\-/g, '±'); // Convert +- to ±
     processedQuestion = processedQuestion.replace(/\+-/g, '±'); // Convert +- to ±
@@ -177,6 +183,10 @@ const QuestionGenerator: React.FC = () => {
   const formatMathForPDF = (text: string): string => {
     if (!text) return text;
     
+    let result = text;
+    
+    // Note: Keep sqrt as "sqrt" in PDF for better compatibility - don't convert to √ symbol
+    
     // Convert superscripts to Unicode superscript symbols
     const superscriptMap: { [key: string]: string } = {
       '0': '⁰',
@@ -215,8 +225,6 @@ const QuestionGenerator: React.FC = () => {
       '(': '₍',
       ')': '₎'
     };
-    
-    let result = text;
     
     // Handle superscripts: convert x^2 to x²
     result = result.replace(/\^([0-9+\-=()n]+)/g, (_, chars) => {
