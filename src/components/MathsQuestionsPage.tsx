@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Calculator, TrendingUp, BookOpen, Users, CheckCircle, ArrowRight, Star } from 'lucide-react';
+import { Calculator, TrendingUp, BookOpen, ArrowRight } from 'lucide-react';
 
 const MathsQuestionsPage: React.FC = () => {
   const navigate = useNavigate();

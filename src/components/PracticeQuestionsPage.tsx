@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BookOpen, Brain, Target, Users, CheckCircle, ArrowRight, Star, Calculator, Microscope, Book, Globe, Cpu, Dumbbell } from 'lucide-react';
+import { Brain, Target, Users, CheckCircle, ArrowRight, Calculator, Microscope, Book, Globe, Cpu } from 'lucide-react';
 
 const PracticeQuestionsPage: React.FC = () => {
   const navigate = useNavigate();
