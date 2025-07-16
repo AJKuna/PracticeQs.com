@@ -133,16 +133,7 @@ const LandingPage: React.FC = () => {
         </div>
       )}
       
-      <div className="max-w-4xl mx-auto pt-16 sm:pt-20 lg:pt-0">
-        <div className="text-center mb-12">
-          <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            Practice Question Generator
-          </h1>
-          <p className="text-lg sm:text-xl text-gray-600">
-            Select a subject to generate custom practice questions
-          </p>
-        </div>
-
+      <div className="max-w-4xl mx-auto pt-24 sm:pt-32 lg:pt-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {subjects.map((subject) => (
             <button
@@ -153,7 +144,7 @@ const LandingPage: React.FC = () => {
                 subject.disabled 
                   ? 'bg-gray-100 cursor-not-allowed opacity-75' 
                   : subject.color
-              } p-8 rounded-lg shadow-sm transition-all duration-200 ${
+              } p-10 rounded-lg shadow-sm transition-all duration-200 ${
                 subject.disabled 
                   ? '' 
                   : 'transform hover:scale-105'
