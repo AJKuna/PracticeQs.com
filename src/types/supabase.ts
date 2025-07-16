@@ -47,24 +47,27 @@ export interface Database {
       usage_logs: {
         Row: {
           id: string
-          created_at: string
           user_id: string
-          action: string
-          details: Json | null
+          date: string
+          questions_generated: number
+          last_generated_at: string
+          user_status: string | null
         }
         Insert: {
           id?: string
-          created_at?: string
           user_id: string
-          action: string
-          details?: Json | null
+          date?: string
+          questions_generated?: number
+          last_generated_at?: string
+          user_status?: string | null
         }
         Update: {
           id?: string
-          created_at?: string
           user_id?: string
-          action?: string
-          details?: Json | null
+          date?: string
+          questions_generated?: number
+          last_generated_at?: string
+          user_status?: string | null
         }
       }
       subscriptions: {

@@ -60,6 +60,7 @@ export type Json =
           date: string
           questions_generated: number
           last_generated_at: string
+          user_status: string | null
         }
         Insert: {
           id?: string
@@ -67,6 +68,7 @@ export type Json =
           date?: string
           questions_generated?: number
           last_generated_at?: string
+          user_status?: string | null
         }
         Update: {
           id?: string
@@ -74,6 +76,7 @@ export type Json =
           date?: string
           questions_generated?: number
           last_generated_at?: string
+          user_status?: string | null
         }
       }
       subscription_history: {

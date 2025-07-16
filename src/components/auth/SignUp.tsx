@@ -85,9 +85,9 @@ export const SignUp: React.FC = () => {
   // Show success message after signup
   if (signupSuccess) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 dark:bg-gray-50">
         <div className="max-w-md w-full space-y-8">
-          <div className="text-center">
+          <div className="text-center bg-white dark:bg-white p-8 rounded-lg shadow-sm">
             <img
               className="mx-auto h-16 w-auto"
               src="/logo.svg"
@@ -95,24 +95,24 @@ export const SignUp: React.FC = () => {
             />
             
             {/* Success Icon */}
-            <div className="mx-auto mt-6 flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
-              <svg className="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="mx-auto mt-6 flex h-12 w-12 items-center justify-center rounded-full bg-green-100 dark:bg-green-100">
+              <svg className="h-6 w-6 text-green-600 dark:text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
             </div>
 
-            <h2 className="mt-4 text-center text-3xl font-extrabold text-gray-900">
+            <h2 className="mt-4 text-center text-3xl font-extrabold text-gray-900 dark:text-gray-900">
               Check your email
             </h2>
             
             <div className="mt-4 space-y-3">
-              <p className="text-center text-sm text-gray-600">
+              <p className="text-center text-sm text-gray-600 dark:text-gray-600">
                 We've sent a confirmation link to:
               </p>
-              <p className="text-center text-base font-medium text-gray-900">
+              <p className="text-center text-base font-medium text-gray-900 dark:text-gray-900">
                 {userEmail}
               </p>
-              <p className="text-center text-sm text-gray-600">
+              <p className="text-center text-sm text-gray-600 dark:text-gray-600">
                 Click the link in the email to activate your account. If you don't see it, check your junk folder.
               </p>
             </div>
@@ -126,14 +126,14 @@ export const SignUp: React.FC = () => {
                 Go to Sign In
               </Button>
               
-              <p className="text-center text-xs text-gray-500">
+              <p className="text-center text-xs text-gray-500 dark:text-gray-500">
                 Didn't receive the email?{' '}
                 <button
                   onClick={() => {
                     setSignupSuccess(false);
                     setFormData(prev => ({ ...prev, password: '', confirmPassword: '' }));
                   }}
-                  className="font-medium text-blue-600 hover:text-blue-500"
+                  className="font-medium text-blue-600 hover:text-blue-500 dark:text-blue-600 dark:hover:text-blue-500"
                 >
                   Try again
                 </button>

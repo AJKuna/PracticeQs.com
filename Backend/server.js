@@ -177,7 +177,22 @@ const logUsage = async (userId, questionsGenerated) => {
   const now = new Date().toISOString();
 
   try {
-    // Try to update existing record
+    // Check if user has ANY previous usage logs (to determine new vs returning status)
+    const { data: allUserLogs, error: historyError } = await supabase
+      .from('usage_logs')
+      .select('id')
+      .eq('user_id', userId)
+      .limit(1);
+
+    if (historyError) {
+      console.error('Error checking user history:', historyError);
+      return false;
+    }
+
+    // Determine user status: "new" if no previous logs, "returning" if logs exist
+    const userStatus = allUserLogs && allUserLogs.length > 0 ? 'returning' : 'new';
+
+    // Try to get existing record for today
     const { data: existingLog, error: fetchError } = await supabase
       .from('usage_logs')
       .select('id, questions_generated')
@@ -186,12 +201,13 @@ const logUsage = async (userId, questionsGenerated) => {
       .single();
 
     if (existingLog) {
-      // Update existing record
+      // Update existing record - user is always "returning" if they have a log for today
       const { error: updateError } = await supabase
         .from('usage_logs')
         .update({
           questions_generated: existingLog.questions_generated + questionsGenerated,
-          last_generated_at: now
+          last_generated_at: now,
+          user_status: 'returning'
         })
         .eq('id', existingLog.id);
 
@@ -200,14 +216,15 @@ const logUsage = async (userId, questionsGenerated) => {
         return false;
       }
     } else {
-      // Create new record
+      // Create new record with determined user status
       const { error: insertError } = await supabase
         .from('usage_logs')
         .insert({
           user_id: userId,
           date: today,
           questions_generated: questionsGenerated,
-          last_generated_at: now
+          last_generated_at: now,
+          user_status: userStatus
         });
 
       if (insertError) {
@@ -216,6 +233,7 @@ const logUsage = async (userId, questionsGenerated) => {
       }
     }
 
+    console.log(`✅ Logged usage for user ${userId}: ${questionsGenerated} questions, status: ${userStatus}`);
     return true;
   } catch (error) {
     console.error('Error logging usage:', error);
