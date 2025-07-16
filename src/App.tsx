@@ -15,6 +15,9 @@ import TermsAndConditions from './components/TermsAndConditions';
 import Contact from './components/Contact';
 import CookiePolicy from './components/CookiePolicy';
 import CookieConsent from './components/CookieConsent';
+// SEO-optimized landing pages
+import MathsQuestionsPage from './components/MathsQuestionsPage';
+import PracticeQuestionsPage from './components/PracticeQuestionsPage';
 import { consentManager, updateConsent, type CookiePreferences } from './utils/consentManager';
 import { initializeGoogleAnalytics, trackConsentEvent } from './utils/analytics';
 
@@ -166,10 +169,21 @@ function App() {
               <Route path="/beta" element={<BetaLanding />} />
               <Route path="/lander" element={<Navigate to="/home" replace />} />
               <Route path="/home" element={<LandingPage />} />
+              
+              {/* SEO-optimized landing pages */}
+              <Route path="/maths-questions" element={<MathsQuestionsPage />} />
+              <Route path="/practice-questions" element={<PracticeQuestionsPage />} />
+              <Route path="/gcse-practice" element={<PracticeQuestionsPage />} />
+              <Route path="/custom-worksheets" element={<PracticeQuestionsPage />} />
+              <Route path="/generate-questions" element={<PracticeQuestionsPage />} />
+              
+              {/* Auth routes */}
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/reset-password" element={<ResetPassword />} />
+              
+              {/* Legal pages */}
               <Route path="/privacy" element={<PrivacyPolicy />} />
               <Route path="/terms" element={<TermsAndConditions />} />
               <Route path="/contact" element={<Contact />} />
