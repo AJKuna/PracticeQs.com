@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CheckCircle, Users, ArrowRight, TrendingUp, X, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
+import { LineChart, BarChart, Line, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LabelList } from 'recharts';
 
 const NewLandingPage: React.FC = () => {
   const navigate = useNavigate();
@@ -368,15 +369,37 @@ const NewLandingPage: React.FC = () => {
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-8">
             Why Practice Questions Work
           </h2>
-          
+
+          {/* Performance Comparison Graph */}
           <div className="bg-white rounded-xl p-8 shadow-lg mb-8">
+            <div className="mb-10">
+              <h3 className="text-2xl font-bold text-blue-700 mb-4">Exam Performance: Practice Questions vs Passive Methods</h3>
+              <ResponsiveContainer width="100%" height={260}>
+                <LineChart
+                  data={[
+                    { method: 'Passive Methods', performance: 67 },
+                    { method: 'Practice Questions', performance: 100 },
+                  ]}
+                  margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="method" tick={{ fontWeight: 'bold', fontSize: 16 }} />
+                  <YAxis domain={[0, 110]} tick={{ fontWeight: 'bold', fontSize: 14 }} />
+                  <Tooltip formatter={(value) => `${value}%`} />
+                  <Line type="monotone" dataKey="performance" stroke="#2563eb" strokeWidth={4} dot={{ r: 10, fill: '#2563eb', stroke: '#fff', strokeWidth: 3 }}>
+                    <LabelList dataKey="performance" position="top" formatter={(v) => `${v}%`} style={{ fontWeight: 'bold', fontSize: 18, fill: '#2563eb' }} />
+                  </Line>
+                </LineChart>
+              </ResponsiveContainer>
+              <p className="mt-4 text-base text-gray-700 font-semibold">
+                <span className="text-blue-700 font-bold">Practice Questions</span> boost exam performance by up to <span className="font-bold">50%</span> compared to passive revision methods such as rereading or highlighting.
+                (<a href="https://www.science.org/doi/10.1126/science.1199327" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 underline">Roediger & Karpicke, 2006</a>; <a href="https://journals.sagepub.com/doi/10.1177/1529100612453266" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 underline">Dunlosky et al., 2013</a>).
+                <br />
+              </p>
+            </div>
             <div className="flex items-center justify-center mb-6">
               <TrendingUp className="h-12 w-12 text-blue-600" />
             </div>
-            <p className="text-lg text-gray-700 mb-6">
-              📚 Practice testing improves performance by up to <strong>50%</strong> compared to passive methods like rereading or highlighting 
-              (<a href="https://www.science.org/doi/10.1126/science.1199327" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 underline">Roediger & Karpicke, 2006</a>; <a href="https://journals.sagepub.com/doi/10.1177/1529100612453266" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 underline">Dunlosky et al., 2013</a>).
-            </p>
             <p className="text-lg text-gray-700 mb-6">
               🧠 According to a review of over <strong>700 studies</strong>, practice testing and active recall are consistently ranked as the 
               most effective learning strategies for long-term retention (<a href="https://journals.sagepub.com/doi/10.1177/1529100612453266" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 underline">Dunlosky et al., 2013</a>; <a href="https://www.science.org/doi/10.1126/science.1199327" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 underline">Karpicke & Blunt, 2011</a>).
