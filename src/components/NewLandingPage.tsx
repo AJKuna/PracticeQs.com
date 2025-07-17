@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CheckCircle, Users, ArrowRight, TrendingUp, X, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
-import { LineChart, BarChart, Line, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LabelList } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LabelList } from 'recharts';
 
 const NewLandingPage: React.FC = () => {
   const navigate = useNavigate();
@@ -385,9 +385,9 @@ const NewLandingPage: React.FC = () => {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="method" tick={{ fontWeight: 'bold', fontSize: 16 }} />
                   <YAxis domain={[0, 110]} tick={{ fontWeight: 'bold', fontSize: 14 }} />
-                  <Tooltip formatter={(value) => `${value}%`} />
+                  <Tooltip formatter={(value: number | string) => `${value}%`} />
                   <Line type="monotone" dataKey="performance" stroke="#2563eb" strokeWidth={4} dot={{ r: 10, fill: '#2563eb', stroke: '#fff', strokeWidth: 3 }}>
-                    <LabelList dataKey="performance" position="top" formatter={(v) => `${v}%`} style={{ fontWeight: 'bold', fontSize: 18, fill: '#2563eb' }} />
+                    <LabelList dataKey="performance" position="top" formatter={(label: React.ReactNode): React.ReactNode => `${label}%`} style={{ fontWeight: 'bold', fontSize: 18, fill: '#2563eb' }} />
                   </Line>
                 </LineChart>
               </ResponsiveContainer>
