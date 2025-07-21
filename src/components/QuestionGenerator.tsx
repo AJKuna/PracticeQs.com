@@ -8,7 +8,7 @@ import TopicDropdown from './TopicDropdown';
 import FeedbackWidget from './FeedbackWidget';
 import LoadingBar from './LoadingBar';
 import { API_CONFIG } from '../config/api';
-import { trackQuestionGeneration, trackPDFExport, trackButtonClick, trackError, trackSubscription } from '../utils/analytics';
+import { trackQuestionGeneration, trackSubjectQuestionGeneration, trackPDFExport, trackSubjectPDFExport, trackButtonClick, trackError, trackSubscription } from '../utils/analytics';
 
 // ... (interfaces and constants unchanged)
 
@@ -350,6 +350,9 @@ const QuestionGenerator: React.FC = () => {
         // Track successful question generation
         trackQuestionGeneration(normalizedSubject, searchTopic, data.length, options.difficulty);
         
+        // Track subject-specific question generation for popularity analysis
+        trackSubjectQuestionGeneration(normalizedSubject, searchTopic, data.length, options.difficulty, options.examLevel, options.examBoard);
+        
         // Refresh usage after generating questions
         if (user) {
           const response = await fetch(API_CONFIG.ENDPOINTS.USAGE(user.id));
@@ -627,6 +630,9 @@ const QuestionGenerator: React.FC = () => {
     
     // Track PDF export
     trackPDFExport(normalizedSubject, searchTopic, generatedQuestions.length);
+    
+    // Track subject-specific PDF export
+    trackSubjectPDFExport(normalizedSubject, searchTopic, generatedQuestions.length);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -944,17 +950,27 @@ const QuestionGenerator: React.FC = () => {
                 id="questionCount"
                 min="1"
                 max="15"
-                value={options.questionCount}
+                value={options.questionCount === 0 ? "" : options.questionCount}
                 onChange={(e) => {
                   const val = e.target.value;
-                  const numVal = val === "" ? 1 : parseInt(val);
+                  // Allow empty string for editing
+                  if (val === "") {
+                    setOptions({ ...options, questionCount: 0 });
+                    e.target.setCustomValidity("");
+                    return;
+                  }
+                  const numVal = parseInt(val, 10);
                   setOptions({ ...options, questionCount: numVal });
-                  
-                  // Custom validation message
                   if (numVal > 15) {
                     e.target.setCustomValidity("Value must be less than or equal to 15. Smaller batches = better questions. Try a lower number for best results 👌");
                   } else {
                     e.target.setCustomValidity("");
+                  }
+                }}
+                onBlur={(e) => {
+                  // If left empty or 0, reset to 1
+                  if (e.target.value === "" || parseInt(e.target.value, 10) < 1) {
+                    setOptions({ ...options, questionCount: 1 });
                   }
                 }}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
