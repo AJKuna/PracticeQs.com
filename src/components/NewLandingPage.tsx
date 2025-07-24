@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CheckCircle, Users, ArrowRight, TrendingUp, X, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LabelList } from 'recharts';
+import { BarChart, Bar, Cell, XAxis as BarXAxis, YAxis as BarYAxis, CartesianGrid as BarCartesianGrid, Tooltip as BarTooltip, LabelList as BarLabelList } from 'recharts';
 
 const NewLandingPage: React.FC = () => {
   const navigate = useNavigate();
@@ -175,8 +176,11 @@ const NewLandingPage: React.FC = () => {
           <h1 className="text-5xl sm:text-6xl font-bold text-gray-900 mb-6 leading-tight">
             Practice Qs
           </h1>
-          <p className="text-xl sm:text-2xl text-gray-600 mb-8 leading-relaxed">
-            AI-generated exam questions. Based only on what you need to know.
+          <p className="text-xl sm:text-2xl text-gray-600 mb-4 leading-relaxed">
+          You're Studying — But Are You Really Learning?
+          </p>
+          <p className="text-lg sm:text-xl text-gray-500 mb-8 leading-relaxed">
+          Stop passively rereading textbooks and watching endless videos. Practice Qs gives you the only revision method proven to boost grades: active recall through exam-style questions.
           </p>
           <button
             onClick={handleGetStarted}
@@ -194,26 +198,6 @@ const NewLandingPage: React.FC = () => {
         <div className="absolute bottom-8 right-8 flex flex-col items-center z-10">
           <ChevronDown className="h-6 w-6 text-gray-400 animate-bounce" />
           <p className="text-xs text-gray-400 mt-1">scroll down</p>
-        </div>
-      </section>
-
-      {/* Hero Expanded Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
-            Don't fall behind this summer. Generate smart practice questions instantly.
-          </h2>
-          <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-            Practice Qs helps GCSE students study smarter with AI-generated, exam-board-aligned practice questions — complete with mark-by-mark solutions.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
-              onClick={handleGetStarted}
-              className="px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              Start Practicing
-            </button>
-          </div>
         </div>
       </section>
 
@@ -242,14 +226,31 @@ const NewLandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* How It Works */}
+      {/* Why Most Students Fall Behind */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-8">
+            Why Most Students Fall Behind
+          </h2>
+          <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+            Most students revise passively — reading notes, watching videos, highlighting textbooks. But these methods feel productive without actually helping you retain or apply what you've learned.
+          </p>
+          <div className="space-y-4 text-lg sm:text-xl text-gray-700">
+            <p>🔁 You read a topic.</p>
+            <p>😐 You think you understand it.</p>
+            <p>😬 But when a real question comes up — you freeze.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              How It Works
+            Practice Qs = Active Revision That Works
             </h2>
-            <p className="text-xl text-gray-600">Three simple steps to better exam preparation</p>
+            <p className="text-xl text-gray-600">Practice Qs gives you instant exam-style questions, aligned to your exam board, complete with mark-by-mark solutions — so you can study smart and make real progress.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -295,12 +296,86 @@ const NewLandingPage: React.FC = () => {
         </div>
       </section>
 
+      {/* Why Practice Questions Work */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-blue-50">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-8">
+            Why Practice Questions is More Effective than Passive Revision
+          </h2>
+
+          {/* Performance Comparison Graph */}
+          <div className="bg-white rounded-xl p-8 shadow-lg mb-8">
+            <div className="mb-10">
+              <h3 className="text-2xl font-bold text-blue-700 mb-4">Study Method Effectiveness</h3>
+              <ResponsiveContainer width="100%" height={200}>
+                <BarChart
+                  data={[
+                    { method: 'Watching videos', effectiveness: 50, fill: '#94a3b8' },
+                    { method: 'Highlighting notes', effectiveness: 50, fill: '#94a3b8' },
+                    { method: 'Practice questions', effectiveness: 75, fill: '#22c55e' }
+                  ]}
+                  margin={{ top: 20, right: 120, left: 20, bottom: 20 }}
+                  layout="vertical"
+                >
+                  <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} />
+                  <XAxis 
+                    type="number" 
+                    domain={[0, 100]} 
+                    label={{ 
+                      value: 'Effectiveness (%)', 
+                      position: 'bottom',
+                      offset: 0
+                    }}
+                  />
+                  <YAxis 
+                    type="category" 
+                    dataKey="method" 
+                    width={150}
+                  />
+                  <Tooltip 
+                    formatter={(value: number) => [`${value}% effective`, 'Effectiveness']}
+                  />
+                  <Bar 
+                    dataKey="effectiveness" 
+                    fill="#22c55e"
+                    radius={[0, 4, 4, 0]}
+                  >
+                    <Cell fill="#94a3b8" />
+                    <Cell fill="#94a3b8" />
+                    <Cell fill="#22c55e" />
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+              <p className="mt-4 text-base text-gray-700 font-semibold">
+                <span className="text-blue-700 font-bold">Practice Questions</span> boost exam performance by up to <span className="font-bold">50%</span> compared to passive revision methods such as watching videos, rereading notes or highlighting.
+                (<a href="https://www.science.org/doi/10.1126/science.1199327" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 underline">Roediger & Karpicke, 2006</a>; <a href="https://journals.sagepub.com/doi/10.1177/1529100612453266" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 underline">Dunlosky et al., 2013</a>).
+              </p>
+            </div>
+            <div className="flex items-center justify-center mb-6">
+              <TrendingUp className="h-12 w-12 text-blue-600" />
+            </div>
+            <p className="text-lg text-gray-700 mb-6">
+              🧠 According to a review of over <strong>700 studies</strong>, practice testing and active recall are consistently ranked as the 
+              most effective learning strategies for long-term retention (<a href="https://journals.sagepub.com/doi/10.1177/1529100612453266" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 underline">Dunlosky et al., 2013</a>; <a href="https://www.science.org/doi/10.1126/science.1199327" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 underline">Karpicke & Blunt, 2011</a>).
+            </p>
+            <p className="text-lg text-gray-700">
+              ✅ Students who regularly do topic-specific questions based on the actual curriculum not only retain more — 
+              they also perform better under exam conditions.
+            </p>
+          </div>
+
+          <p className="text-xl font-semibold text-gray-900">
+            Bottom line: The most effective way to study isn't studying harder. It's practising smarter.
+          </p>
+        </div>
+      </section>
+
       {/* What Makes Practice Qs Different */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              What Makes Practice Qs Different?
+            💡 What Makes Practice Qs Smarter Than Flashcards or YouTube?
             </h2>
           </div>
 
@@ -360,59 +435,6 @@ const NewLandingPage: React.FC = () => {
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Why Practice Works */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-blue-50">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-8">
-            Why Practice Questions Work
-          </h2>
-
-          {/* Performance Comparison Graph */}
-          <div className="bg-white rounded-xl p-8 shadow-lg mb-8">
-            <div className="mb-10">
-              <h3 className="text-2xl font-bold text-blue-700 mb-4">Exam Performance: Practice Questions vs Passive Methods</h3>
-              <ResponsiveContainer width="100%" height={260}>
-                <LineChart
-                  data={[
-                    { method: 'Passive Methods', performance: 67 },
-                    { method: 'Practice Questions', performance: 100 },
-                  ]}
-                  margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
-                >
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="method" tick={{ fontWeight: 'bold', fontSize: 16 }} />
-                  <YAxis domain={[0, 110]} tick={{ fontWeight: 'bold', fontSize: 14 }} />
-                  <Tooltip formatter={(value: number | string) => `${value}%`} />
-                  <Line type="monotone" dataKey="performance" stroke="#2563eb" strokeWidth={4} dot={{ r: 10, fill: '#2563eb', stroke: '#fff', strokeWidth: 3 }}>
-                    <LabelList dataKey="performance" position="top" formatter={(label: React.ReactNode): React.ReactNode => `${label}%`} style={{ fontWeight: 'bold', fontSize: 18, fill: '#2563eb' }} />
-                  </Line>
-                </LineChart>
-              </ResponsiveContainer>
-              <p className="mt-4 text-base text-gray-700 font-semibold">
-                <span className="text-blue-700 font-bold">Practice Questions</span> boost exam performance by up to <span className="font-bold">50%</span> compared to passive revision methods such as rereading or highlighting.
-                (<a href="https://www.science.org/doi/10.1126/science.1199327" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 underline">Roediger & Karpicke, 2006</a>; <a href="https://journals.sagepub.com/doi/10.1177/1529100612453266" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 underline">Dunlosky et al., 2013</a>).
-                <br />
-              </p>
-            </div>
-            <div className="flex items-center justify-center mb-6">
-              <TrendingUp className="h-12 w-12 text-blue-600" />
-            </div>
-            <p className="text-lg text-gray-700 mb-6">
-              🧠 According to a review of over <strong>700 studies</strong>, practice testing and active recall are consistently ranked as the 
-              most effective learning strategies for long-term retention (<a href="https://journals.sagepub.com/doi/10.1177/1529100612453266" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 underline">Dunlosky et al., 2013</a>; <a href="https://www.science.org/doi/10.1126/science.1199327" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 underline">Karpicke & Blunt, 2011</a>).
-            </p>
-            <p className="text-lg text-gray-700">
-              ✅ Students who regularly do topic-specific questions based on the actual curriculum not only retain more — 
-              they also perform better under exam conditions.
-            </p>
-          </div>
-
-          <p className="text-xl font-semibold text-gray-900">
-            Bottom line: The most effective way to study isn't studying harder. It's practising smarter.
-          </p>
         </div>
       </section>
 
@@ -501,7 +523,7 @@ const NewLandingPage: React.FC = () => {
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-blue-600">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-            🎯 Don't fall behind this summer. Get generating.
+          🎯 Studying isn't enough. It's time to practise.
           </h2>
           <p className="text-xl text-blue-100 mb-8">
             Start now — 15 free questions every day.
