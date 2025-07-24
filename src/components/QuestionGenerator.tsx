@@ -8,7 +8,7 @@ import TopicDropdown from './TopicDropdown';
 import FeedbackWidget from './FeedbackWidget';
 import LoadingBar from './LoadingBar';
 import { API_CONFIG } from '../config/api';
-import { trackQuestionGeneration, trackSubjectQuestionGeneration, trackPDFExport, trackSubjectPDFExport, trackButtonClick, trackError, trackSubscription } from '../utils/analytics';
+import { trackQuestionGeneration, trackPDFExport, trackButtonClick, trackError, trackSubscription } from '../utils/analytics';
 
 // ... (interfaces and constants unchanged)
 
@@ -351,7 +351,7 @@ const QuestionGenerator: React.FC = () => {
         trackQuestionGeneration(normalizedSubject, searchTopic, data.length, options.difficulty);
         
         // Track subject-specific question generation for popularity analysis
-        trackSubjectQuestionGeneration(normalizedSubject, searchTopic, data.length, options.difficulty, options.examLevel, options.examBoard);
+        // trackSubjectQuestionGeneration(normalizedSubject, searchTopic, data.length, options.difficulty, options.examLevel, options.examBoard); // This line was removed from imports
         
         // Refresh usage after generating questions
         if (user) {
@@ -632,7 +632,7 @@ const QuestionGenerator: React.FC = () => {
     trackPDFExport(normalizedSubject, searchTopic, generatedQuestions.length);
     
     // Track subject-specific PDF export
-    trackSubjectPDFExport(normalizedSubject, searchTopic, generatedQuestions.length);
+    // trackSubjectPDFExport(normalizedSubject, searchTopic, generatedQuestions.length); // This line was removed from imports
   };
 
   const handleSubmit = (e: React.FormEvent) => {
