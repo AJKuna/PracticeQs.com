@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { mathGcseTopics } from '../data/mathGcseTopics';
-import { biologyGcseAqaTopics } from '../data/biologyGcseAqaTopics';
-import { biologyGcseEdexcelTopics } from '../data/biologyGcseEdexcelTopics';
-import { chemistryGcseAqaTopics } from '../data/chemistryGcseAqaTopics';
-import { chemistryGcseEdexcelTopics } from '../data/chemistryGcseEdexcelTopics';
-import { chemistryGcseOcrATopics } from '../data/chemistryGcseOcrATopics';
-import { physicsGcseAqaTopics } from '../data/physicsGcseAqaTopics';
-import { physicsGcseEdexcelTopics } from '../data/physicsGcseEdexcelTopics';
-import { physicsGcseOcrTopics } from '../data/physicsGcseOcrTopics';
-import { computerScienceGcseAqaTopics } from '../data/computerScienceGcseAqaTopics';
-import { computerScienceGcseEdexcelTopics } from '../data/computerScienceGcseEdexcelTopics';
+import { mathGcseTopics } from '../data/mathGcseTopics.ts';
+import { biologyGcseAqaTopics } from '../data/biologyGcseAqaTopics.ts';
+import { biologyGcseEdexcelTopics } from '../data/biologyGcseEdexcelTopics.ts';
+import { chemistryGcseAqaTopics } from '../data/chemistryGcseAqaTopics.ts';
+import { chemistryGcseEdexcelTopics } from '../data/chemistryGcseEdexcelTopics.ts';
+import { chemistryGcseOcrATopics } from '../data/chemistryGcseOcrATopics.ts';
+import { physicsGcseAqaTopics } from '../data/physicsGcseAqaTopics.ts';
+import { physicsGcseEdexcelTopics } from '../data/physicsGcseEdexcelTopics.ts';
+import { physicsGcseOcrTopics } from '../data/physicsGcseOcrTopics.ts';
+import { computerScienceGcseAqaTopics } from '../data/computerScienceGcseAqaTopics.ts';
+import { computerScienceGcseEdexcelTopics } from '../data/computerScienceGcseEdexcelTopics.ts';
 
 interface TopicDropdownProps {
   searchTopic: string;

@@ -48,10 +48,28 @@ export const trackQuestionGeneration = (subject: string, topic: string, count: n
   }
 };
 
+// Track subject-specific question generation for popularity analysis
+export const trackSubjectQuestionGeneration = (subject: string, topic: string, count: number, difficulty: string, examLevel: string, examBoard?: string) => {
+  if (hasAnalyticsConsent()) {
+    // Track the specific subject event
+    trackEvent(`generate_questions_${subject.replace(/\s+/g, '_')}`, 'subject_questions', `${topic} - ${difficulty} - ${examLevel}${examBoard ? ` - ${examBoard}` : ''}`, count);
+    
+    // Also track general subject popularity
+    trackEvent('subject_question_generation', 'subject_popularity', subject, count);
+  }
+};
+
 // Track PDF exports
 export const trackPDFExport = (subject: string, topic: string, questionCount: number) => {
   if (hasAnalyticsConsent()) {
     trackEvent('export_pdf', 'questions', `${subject} - ${topic}`, questionCount);
+  }
+};
+
+// Track subject-specific PDF exports
+export const trackSubjectPDFExport = (subject: string, topic: string, questionCount: number) => {
+  if (hasAnalyticsConsent()) {
+    trackEvent(`export_pdf_${subject.replace(/\s+/g, '_')}`, 'subject_pdf_exports', topic, questionCount);
   }
 };
 
