@@ -8,6 +8,8 @@ import { chemistryGcseOcrATopics } from '../data/chemistryGcseOcrATopics';
 import { physicsGcseAqaTopics } from '../data/physicsGcseAqaTopics';
 import { physicsGcseEdexcelTopics } from '../data/physicsGcseEdexcelTopics';
 import { physicsGcseOcrTopics } from '../data/physicsGcseOcrTopics';
+import { computerScienceGcseAqaTopics } from '../data/computerScienceGcseAqaTopics';
+import { computerScienceGcseEdexcelTopics } from '../data/computerScienceGcseEdexcelTopics';
 
 interface TopicDropdownProps {
   searchTopic: string;
@@ -32,32 +34,41 @@ const TopicDropdown: React.FC<TopicDropdownProps> = ({
 
   // Determine which topics to use based on subject, exam level, and exam board
   const getTopicsList = () => {
-    if (subject === 'mathematics' && examLevel === 'gcse') {
+    // Normalize subject name to handle both hyphenated and space-separated formats
+    const normalizedSubject = subject.replace(/-/g, ' ').toLowerCase();
+
+    if (normalizedSubject === 'mathematics' && examLevel === 'gcse') {
       return mathGcseTopics;
     }
-    if (subject === 'biology' && examLevel === 'gcse' && examBoard === 'aqa') {
+    if (normalizedSubject === 'biology' && examLevel === 'gcse' && examBoard === 'aqa') {
       return biologyGcseAqaTopics;
     }
-    if (subject === 'biology' && examLevel === 'gcse' && examBoard === 'edexcel') {
+    if (normalizedSubject === 'biology' && examLevel === 'gcse' && examBoard === 'edexcel') {
       return biologyGcseEdexcelTopics;
     }
-    if (subject === 'chemistry' && examLevel === 'gcse' && examBoard === 'aqa') {
+    if (normalizedSubject === 'chemistry' && examLevel === 'gcse' && examBoard === 'aqa') {
       return chemistryGcseAqaTopics;
     }
-    if (subject === 'chemistry' && examLevel === 'gcse' && examBoard === 'edexcel') {
+    if (normalizedSubject === 'chemistry' && examLevel === 'gcse' && examBoard === 'edexcel') {
       return chemistryGcseEdexcelTopics;
     }
-    if (subject === 'chemistry' && examLevel === 'gcse' && examBoard === 'ocr') {
+    if (normalizedSubject === 'chemistry' && examLevel === 'gcse' && examBoard === 'ocr') {
       return chemistryGcseOcrATopics;
     }
-    if (subject === 'physics' && examLevel === 'gcse' && examBoard === 'aqa') {
+    if (normalizedSubject === 'physics' && examLevel === 'gcse' && examBoard === 'aqa') {
       return physicsGcseAqaTopics;
     }
-    if (subject === 'physics' && examLevel === 'gcse' && examBoard === 'edexcel') {
+    if (normalizedSubject === 'physics' && examLevel === 'gcse' && examBoard === 'edexcel') {
       return physicsGcseEdexcelTopics;
     }
-    if (subject === 'physics' && examLevel === 'gcse' && examBoard === 'ocr') {
+    if (normalizedSubject === 'physics' && examLevel === 'gcse' && examBoard === 'ocr') {
       return physicsGcseOcrTopics;
+    }
+    if (normalizedSubject === 'computer science' && examLevel === 'gcse' && examBoard === 'aqa') {
+      return computerScienceGcseAqaTopics;
+    }
+    if (normalizedSubject === 'computer science' && examLevel === 'gcse' && examBoard === 'edexcel') {
+      return computerScienceGcseEdexcelTopics;
     }
     return [];
   };
