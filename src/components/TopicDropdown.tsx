@@ -27,7 +27,7 @@ const TopicDropdown: React.FC<TopicDropdownProps> = ({
   subject,
   examLevel,
   examBoard
-}) => {
+}: TopicDropdownProps) => {
   const [filteredTopics, setFilteredTopics] = useState<string[]>([]);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
   const dropdownRef = useRef<HTMLDivElement>(null);
