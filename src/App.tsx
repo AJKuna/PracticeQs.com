@@ -17,7 +17,6 @@ import CookiePolicy from './components/CookiePolicy';
 import CookieConsent from './components/CookieConsent';
 // SEO-optimized landing pages
 import MathsQuestionsPage from './components/MathsQuestionsPage';
-import PracticeQuestionsPage from './components/PracticeQuestionsPage';
 import { consentManager, updateConsent, type CookiePreferences } from './utils/consentManager';
 import { initializeGoogleAnalytics, trackConsentEvent } from './utils/analytics';
 
@@ -172,10 +171,10 @@ function App() {
               
               {/* SEO-optimized landing pages */}
               <Route path="/maths-questions" element={<MathsQuestionsPage />} />
-              <Route path="/practice-questions" element={<PracticeQuestionsPage />} />
-              <Route path="/gcse-practice" element={<PracticeQuestionsPage />} />
-              <Route path="/custom-worksheets" element={<PracticeQuestionsPage />} />
-              <Route path="/generate-questions" element={<PracticeQuestionsPage />} />
+              <Route path="/practice-questions" element={<Navigate to="/" replace />} />
+              <Route path="/gcse-practice" element={<Navigate to="/" replace />} />
+              <Route path="/custom-worksheets" element={<Navigate to="/" replace />} />
+              <Route path="/generate-questions" element={<Navigate to="/" replace />} />
               
               {/* Auth routes */}
               <Route path="/login" element={<Login />} />
