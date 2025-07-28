@@ -82,10 +82,7 @@ const QuestionGenerator: React.FC = () => {
   const subjectTheme = subjectThemes[normalizedSubject] || subjectThemes['mathematics'];
   
   const subjectPlaceholders: any = {
-    mathematics: {
-      gcse: 'e.g. quadratic equations, trigonometry, calculus, algebra, geometry...',
-      ks3: 'e.g. fractions, area of circles, solving equations, angles in triangles, mean and median...'
-    },
+    mathematics: 'e.g. quadratic equations, trigonometry, calculus, algebra, geometry...',
     physics: 'e.g. forces, energy, electricity, waves, particles, motion...',
     chemistry: 'e.g. atomic structure, chemical bonding, acids and bases, organic chemistry...',
     biology: 'e.g. cell biology, microscopes, osmosis, photosynthesis, genetics...',
@@ -106,16 +103,7 @@ const QuestionGenerator: React.FC = () => {
   if (normalizedSubject === 'english' && options.englishExamType) {
     placeholderKey = options.englishExamType;
   }
-  
-  // Get the appropriate placeholder based on subject and exam level
-  let placeholder;
-  if (normalizedSubject === 'mathematics' && typeof subjectPlaceholders[placeholderKey] === 'object') {
-    // For mathematics, use exam level specific placeholder
-    placeholder = subjectPlaceholders[placeholderKey][options.examLevel] || subjectPlaceholders[placeholderKey]['gcse'] || 'Enter a topic...';
-  } else {
-    // For other subjects, use the standard placeholder
-    placeholder = subjectPlaceholders[placeholderKey] || 'Enter a topic...';
-  }
+  const placeholder = subjectPlaceholders[placeholderKey] || 'Enter a topic...';
 
   // Clean question string to format values
   const cleanQuestion = (question: string) => {
@@ -883,9 +871,7 @@ const QuestionGenerator: React.FC = () => {
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               >
                 <option value="gcse">GCSE</option>
-                <option value="ks3" disabled={normalizedSubject !== 'mathematics'}>
-                  {normalizedSubject === 'mathematics' ? 'KS3' : 'KS3 (Coming Soon)'}
-                </option>
+                <option value="ks3" disabled>KS3 (Coming Soon)</option>
                 <option value="alevel" disabled>A Level (Coming Soon)</option>
               </select>
             </div>
@@ -909,7 +895,7 @@ const QuestionGenerator: React.FC = () => {
               </div>
             )}
 
-            {/* Exam Board Selection - only for GCSE, hidden for KS3 */}
+            {/* Exam Board Selection - for GCSE, and for English only after exam type is selected */}
             {options.examLevel === 'gcse' && (
               (normalizedSubject !== 'english' || options.englishExamType) && (
                 <div>
@@ -994,9 +980,17 @@ const QuestionGenerator: React.FC = () => {
 
           {/* Search Topic Input */}
           <div>
-            <label htmlFor="topic" className="block text-base font-semibold text-gray-800 mb-2">
-              Search Topic
-            </label>
+            <div className="flex items-center gap-1 mb-2">
+              <label htmlFor="topic" className="block text-base font-semibold text-gray-800">
+                Search Topic
+              </label>
+              <div className="relative group">
+                <span className="cursor-help text-sm">ℹ️</span>
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 text-xs text-white bg-gray-800 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10">
+                  Type any topic you want to practice - the suggestions are just examples!
+                </div>
+              </div>
+            </div>
             <div className="relative">
               <input
                 type="text"

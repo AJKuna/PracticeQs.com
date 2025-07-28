@@ -531,12 +531,6 @@ app.post('/api/generate-questions', async (req, res) => {
         return res.status(400).json({ error: 'Invalid Exam Board - ' + examBoard });
       }
     }
-    
-    // For KS3, no exam board is required
-    if (examLevel === "ks3") {
-      // KS3 doesn't use exam boards, so we set examBoard to empty string
-      examBoard = '';
-    }
 
     // Check rate limiting (prevent spam requests)
     console.log('🚦 Checking rate limits for user:', userId);
@@ -579,21 +573,13 @@ app.post('/api/generate-questions', async (req, res) => {
       // For mathematics, try difficulty-specific files first
       if (subject === 'mathematics') {
         try {
-          const examplePath = examLevel === 'ks3'
-            ? `./server/examples/${examLevel}/${subject}/${difficulty}/${difficulty}-questions.json`
-            : `./server/examples/${examLevel}/${examBoard ? `${examBoard}/` : ""}${subject}/${difficulty}/${difficulty}-questions.json`;
-          
-          exampleQuestions = await import(examplePath, {type: 'json'});
+          exampleQuestions = await import(`./server/examples/${examLevel}/${examBoard ? `${examBoard}/` : ""}${subject}/${difficulty}/${difficulty}-questions.json`, {type: 'json'});
           console.log("Example questions (mathematics difficulty-specific):", exampleQuestions);
         } catch (difficultyError) {
           console.log('⚠️ Warning: Mathematics difficulty-specific questions not found, trying standard pattern');
           // Try the standard pattern as fallback
           try {
-            const standardPath = examLevel === 'ks3'
-              ? `./server/examples/${examLevel}/${subject}/${subject}.json`
-              : `./server/examples/${examLevel}/${examBoard ? `${examBoard}/` : ""}${subject}/${subject}.json`;
-            
-            exampleQuestions = await import(standardPath, {type: 'json'});
+            exampleQuestions = await import(`./server/examples/${examLevel}/${examBoard ? `${examBoard}/` : ""}${subject}/${subject}.json`, {type: 'json'});
             console.log("Example questions (standard pattern):", exampleQuestions);
           } catch (standardError) {
             console.log('⚠️ Warning: Standard pattern examples not found, using fallback');
@@ -602,21 +588,13 @@ app.post('/api/generate-questions', async (req, res) => {
       } else {
         // Try the standard pattern first for non-mathematics subjects
         try {
-          const standardPath = examLevel === 'ks3'
-            ? `./server/examples/${examLevel}/${subject}/${subject}.json`
-            : `./server/examples/${examLevel}/${examBoard ? `${examBoard}/` : ""}${subject}/${subject}.json`;
-          
-          exampleQuestions = await import(standardPath, {type: 'json'});
+          exampleQuestions = await import(`./server/examples/${examLevel}/${examBoard ? `${examBoard}/` : ""}${subject}/${subject}.json`, {type: 'json'});
           console.log("Example questions:", exampleQuestions);
         } catch (error) {
           // For English subjects, try the difficulty-specific pattern
           if (subject.startsWith('english-')) {
             try {
-              const difficultyPath = examLevel === 'ks3'
-                ? `./server/examples/${examLevel}/${subject}/${difficulty}-questions.json`
-                : `./server/examples/${examLevel}/${examBoard ? `${examBoard}/` : ""}${subject}/${difficulty}-questions.json`;
-              
-              exampleQuestions = await import(difficultyPath, {type: 'json'});
+              exampleQuestions = await import(`./server/examples/${examLevel}/${examBoard ? `${examBoard}/` : ""}${subject}/${difficulty}-questions.json`, {type: 'json'});
               console.log("Example questions (difficulty-specific):", exampleQuestions);
             } catch (difficultyError) {
               console.log('⚠️ Warning: Examples questions not found, using fallback');
@@ -632,13 +610,7 @@ app.post('/api/generate-questions', async (req, res) => {
     
     let specData = null;
     try {
-      // For KS3, path is: /ks3/{subject}/{subject}.json (no exam board folder)
-      // For GCSE, path is: /gcse/{examBoard}/{subject}/{subject}.json
-      const specPath = examLevel === 'ks3' 
-        ? `./server/specifications/${examLevel}/${subject}/${subject}.json`
-        : `./server/specifications/${examLevel}/${examBoard ? `${examBoard}/` : ""}${subject}/${subject}.json`;
-      
-      specData = await import(specPath, { with: { type: "json" } });
+      specData = await import(`./server/specifications/${examLevel}/${examBoard ? "${examBoard}/" : ""}${subject}/${subject}.json`, { with: { type: "json" } });
       console.log("Spec data:", specData)
     } catch (error) {
       console.log('⚠️ Warning: Specification not found, using fallback');
