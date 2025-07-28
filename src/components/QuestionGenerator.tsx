@@ -82,7 +82,10 @@ const QuestionGenerator: React.FC = () => {
   const subjectTheme = subjectThemes[normalizedSubject] || subjectThemes['mathematics'];
   
   const subjectPlaceholders: any = {
-    mathematics: 'e.g. quadratic equations, trigonometry, calculus, algebra, geometry...',
+    mathematics: {
+      gcse: 'e.g. quadratic equations, trigonometry, calculus, algebra, geometry...',
+      ks3: 'e.g. fractions, area of circles, solving equations, angles in triangles, mean and median...'
+    },
     physics: 'e.g. forces, energy, electricity, waves, particles, motion...',
     chemistry: 'e.g. atomic structure, chemical bonding, acids and bases, organic chemistry...',
     biology: 'e.g. cell biology, microscopes, osmosis, photosynthesis, genetics...',
@@ -103,7 +106,16 @@ const QuestionGenerator: React.FC = () => {
   if (normalizedSubject === 'english' && options.englishExamType) {
     placeholderKey = options.englishExamType;
   }
-  const placeholder = subjectPlaceholders[placeholderKey] || 'Enter a topic...';
+  
+  // Get the appropriate placeholder based on subject and exam level
+  let placeholder;
+  if (normalizedSubject === 'mathematics' && typeof subjectPlaceholders[placeholderKey] === 'object') {
+    // For mathematics, use exam level specific placeholder
+    placeholder = subjectPlaceholders[placeholderKey][options.examLevel] || subjectPlaceholders[placeholderKey]['gcse'] || 'Enter a topic...';
+  } else {
+    // For other subjects, use the standard placeholder
+    placeholder = subjectPlaceholders[placeholderKey] || 'Enter a topic...';
+  }
 
   // Clean question string to format values
   const cleanQuestion = (question: string) => {
@@ -871,7 +883,9 @@ const QuestionGenerator: React.FC = () => {
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               >
                 <option value="gcse">GCSE</option>
-                <option value="ks3" disabled>KS3 (Coming Soon)</option>
+                <option value="ks3" disabled={normalizedSubject !== 'mathematics'}>
+                  {normalizedSubject === 'mathematics' ? 'KS3' : 'KS3 (Coming Soon)'}
+                </option>
                 <option value="alevel" disabled>A Level (Coming Soon)</option>
               </select>
             </div>
@@ -895,7 +909,7 @@ const QuestionGenerator: React.FC = () => {
               </div>
             )}
 
-            {/* Exam Board Selection - for GCSE, and for English only after exam type is selected */}
+            {/* Exam Board Selection - only for GCSE, hidden for KS3 */}
             {options.examLevel === 'gcse' && (
               (normalizedSubject !== 'english' || options.englishExamType) && (
                 <div>
