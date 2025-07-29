@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { mathGcseTopics } from '../data/mathGcseTopics.ts';
+import { mathKs3Topics } from '../data/mathKs3Topics.ts';
 import { biologyGcseAqaTopics } from '../data/biologyGcseAqaTopics.ts';
 import { biologyGcseEdexcelTopics } from '../data/biologyGcseEdexcelTopics.ts';
 import { chemistryGcseAqaTopics } from '../data/chemistryGcseAqaTopics.ts';
@@ -37,6 +38,9 @@ const TopicDropdown: React.FC<TopicDropdownProps> = ({
     // Normalize subject name to handle both hyphenated and space-separated formats
     const normalizedSubject = subject.replace(/-/g, ' ').toLowerCase();
 
+    if (normalizedSubject === 'mathematics' && examLevel === 'ks3') {
+      return mathKs3Topics;
+    }
     if (normalizedSubject === 'mathematics' && examLevel === 'gcse') {
       return mathGcseTopics;
     }

@@ -64,6 +64,13 @@ const QuestionGenerator: React.FC = () => {
     }
   }, [user, profile?.subscription_tier]); // Include profile tier to refresh usage when subscription changes
 
+  // Reset exam level to GCSE if KS3 is selected but subject is not mathematics
+  useEffect(() => {
+    if (options.examLevel === 'ks3' && normalizedSubject !== 'mathematics') {
+      setOptions(prev => ({ ...prev, examLevel: 'gcse', examBoard: '', englishExamType: '' }));
+    }
+  }, [normalizedSubject, options.examLevel]);
+
   // Subject themes and placeholder
   const subjectThemes: any = {
     mathematics: { bg: 'bg-blue-100', hover: 'hover:bg-blue-200', light: 'bg-blue-50' },
@@ -83,6 +90,7 @@ const QuestionGenerator: React.FC = () => {
   
   const subjectPlaceholders: any = {
     mathematics: 'e.g. quadratic equations, trigonometry, calculus, algebra, geometry...',
+    'mathematics-ks3': 'e.g. prime numbers, fractions, basic algebra, area of shapes, sequences...',
     physics: 'e.g. forces, energy, electricity, waves, particles, motion...',
     chemistry: 'e.g. atomic structure, chemical bonding, acids and bases, organic chemistry...',
     biology: 'e.g. cell biology, microscopes, osmosis, photosynthesis, genetics...',
@@ -100,7 +108,9 @@ const QuestionGenerator: React.FC = () => {
   
   // Determine which placeholder to use
   let placeholderKey = normalizedSubject;
-  if (normalizedSubject === 'english' && options.englishExamType) {
+  if (normalizedSubject === 'mathematics' && options.examLevel === 'ks3') {
+    placeholderKey = 'mathematics-ks3';
+  } else if (normalizedSubject === 'english' && options.englishExamType) {
     placeholderKey = options.englishExamType;
   }
   const placeholder = subjectPlaceholders[placeholderKey] || 'Enter a topic...';
@@ -871,7 +881,9 @@ const QuestionGenerator: React.FC = () => {
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               >
                 <option value="gcse">GCSE</option>
-                <option value="ks3" disabled>KS3 (Coming Soon)</option>
+                <option value="ks3" disabled={normalizedSubject !== 'mathematics'}>
+                  {normalizedSubject === 'mathematics' ? 'KS3' : 'KS3 (Coming Soon)'}
+                </option>
                 <option value="alevel" disabled>A Level (Coming Soon)</option>
               </select>
             </div>

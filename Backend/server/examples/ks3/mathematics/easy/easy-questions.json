@@ -1,0 +1,44 @@
+{
+  "examples": [
+    {
+      "question": "Calculate 15 × 8.",
+      "answer": "15 × 8 = 120 (2 marks)",
+      "marks": 2
+    },
+    {
+      "question": "Write down the first five multiples of 7.",
+      "answer": "7, 14, 21, 28, 35 (2 marks)",
+      "marks": 2
+    },
+    {
+      "question": "Find the value of 3² + 4².",
+      "answer": "3² = 9 (1 mark)\n4² = 16 (1 mark)\n9 + 16 = 25 (1 mark)",
+      "marks": 3
+    },
+    {
+      "question": "Convert 0.75 to a fraction in its simplest form.",
+      "answer": "0.75 = 75/100 (1 mark)\n= 3/4 (1 mark)",
+      "marks": 2
+    },
+    {
+      "question": "Work out 20% of 60.",
+      "answer": "20% of 60 = 20/100 × 60 (1 mark)\n= 12 (1 mark)",
+      "marks": 2
+    },
+    {
+      "question": "Solve x + 7 = 15.",
+      "answer": "x + 7 = 15\nx = 15 - 7 (1 mark)\nx = 8 (1 mark)",
+      "marks": 2
+    },
+    {
+      "question": "Find the area of a rectangle with length 8 cm and width 5 cm.",
+      "answer": "Area = length × width (1 mark)\nArea = 8 × 5 = 40 cm² (1 mark)",
+      "marks": 2
+    },
+    {
+      "question": "Round 47.83 to 1 decimal place.",
+      "answer": "47.83 rounded to 1 decimal place = 47.8 (1 mark)",
+      "marks": 1
+    }
+  ]
+} 

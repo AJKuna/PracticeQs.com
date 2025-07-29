@@ -1,0 +1,44 @@
+{
+  "examples": [
+    {
+      "question": "A cylinder has radius 4 cm and height 10 cm. Calculate the volume of the cylinder. Give your answer in terms of π.",
+      "answer": "Volume of cylinder = πr²h (1 mark)\nVolume = π × 4² × 10 (1 mark)\n= π × 16 × 10 (1 mark)\n= 160π cm³ (1 mark)",
+      "marks": 4
+    },
+    {
+      "question": "Solve the simultaneous equations: 2x + y = 7 and x - y = 2.",
+      "answer": "From equation 2: x = y + 2 (1 mark)\nSubstitute into equation 1: 2(y + 2) + y = 7 (1 mark)\n2y + 4 + y = 7\n3y = 3, so y = 1 (1 mark)\nx = 1 + 2 = 3 (1 mark)",
+      "marks": 4
+    },
+    {
+      "question": "The angles in a triangle are in the ratio 2:3:4. Find the size of each angle.",
+      "answer": "Let the angles be 2x, 3x, and 4x (1 mark)\nSum of angles in triangle = 180° (1 mark)\n2x + 3x + 4x = 180°\n9x = 180°, so x = 20° (1 mark)\nAngles are: 40°, 60°, 80° (1 mark)",
+      "marks": 4
+    },
+    {
+      "question": "A right-angled triangle has sides of length 5 cm, 12 cm and 13 cm. Use Pythagoras' theorem to verify this is correct.",
+      "answer": "Pythagoras' theorem: a² + b² = c² (1 mark)\nCheck: 5² + 12² = c² (1 mark)\n25 + 144 = 169 (1 mark)\n√169 = 13 ✓ (1 mark)\nThis confirms it is a right-angled triangle (1 mark)",
+      "marks": 5
+    },
+    {
+      "question": "The equation of a straight line is y = 3x - 2. Find where this line crosses the y-axis and the x-axis.",
+      "answer": "y-axis crossing: when x = 0, y = 3(0) - 2 = -2 (1 mark)\ny-axis intercept: (0, -2) (1 mark)\nx-axis crossing: when y = 0, 0 = 3x - 2 (1 mark)\n3x = 2, x = 2/3 (1 mark)\nx-axis intercept: (2/3, 0) (1 mark)",
+      "marks": 5
+    },
+    {
+      "question": "Expand and simplify (x + 3)(x - 5).",
+      "answer": "(x + 3)(x - 5) = x(x - 5) + 3(x - 5) (1 mark)\n= x² - 5x + 3x - 15 (1 mark)\n= x² - 2x - 15 (1 mark)",
+      "marks": 3
+    },
+    {
+      "question": "A bag contains 3 red balls, 4 blue balls and 5 green balls. Two balls are drawn without replacement. Find the probability that both balls are red.",
+      "answer": "Total balls = 3 + 4 + 5 = 12 (1 mark)\nP(first red) = 3/12 = 1/4 (1 mark)\nAfter removing one red ball: 2 red balls left, 11 total (1 mark)\nP(second red | first red) = 2/11 (1 mark)\nP(both red) = 1/4 × 2/11 = 2/44 = 1/22 (1 mark)",
+      "marks": 5
+    },
+    {
+      "question": "The first term of an arithmetic sequence is 7 and the common difference is 4. Find the sum of the first 10 terms.",
+      "answer": "First term a = 7, common difference d = 4 (1 mark)\n10th term = 7 + (10-1) × 4 = 7 + 36 = 43 (1 mark)\nSum = n/2 × (first term + last term) (1 mark)\nSum = 10/2 × (7 + 43) = 5 × 50 = 250 (1 mark)",
+      "marks": 4
+    }
+  ]
+} 
