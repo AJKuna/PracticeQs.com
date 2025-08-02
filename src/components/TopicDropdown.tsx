@@ -11,6 +11,7 @@ import { physicsGcseEdexcelTopics } from '../data/physicsGcseEdexcelTopics.ts';
 import { physicsGcseOcrTopics } from '../data/physicsGcseOcrTopics.ts';
 import { computerScienceGcseAqaTopics } from '../data/computerScienceGcseAqaTopics.ts';
 import { computerScienceGcseEdexcelTopics } from '../data/computerScienceGcseEdexcelTopics.ts';
+import { historyGcseAqaTopics } from '../data/historyGcseAqaTopics.ts';
 
 interface TopicDropdownProps {
   searchTopic: string;
@@ -19,6 +20,7 @@ interface TopicDropdownProps {
   subject: string;
   examLevel: string;
   examBoard: string;
+  historyUnit?: string;
 }
 
 const TopicDropdown: React.FC<TopicDropdownProps> = ({
@@ -27,7 +29,8 @@ const TopicDropdown: React.FC<TopicDropdownProps> = ({
   isVisible,
   subject,
   examLevel,
-  examBoard
+  examBoard,
+  historyUnit
 }: TopicDropdownProps) => {
   const [filteredTopics, setFilteredTopics] = useState<string[]>([]);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
@@ -74,6 +77,9 @@ const TopicDropdown: React.FC<TopicDropdownProps> = ({
     if (normalizedSubject === 'computer science' && examLevel === 'gcse' && examBoard === 'edexcel') {
       return computerScienceGcseEdexcelTopics;
     }
+    if (normalizedSubject === 'history' && examLevel === 'gcse' && examBoard === 'aqa' && historyUnit) {
+      return historyGcseAqaTopics[historyUnit] || [];
+    }
     return [];
   };
 
@@ -94,7 +100,7 @@ const TopicDropdown: React.FC<TopicDropdownProps> = ({
 
     setFilteredTopics(filtered);
     setHighlightedIndex(-1);
-  }, [searchTopic, shouldShowDropdown, subject, examLevel, examBoard]);
+  }, [searchTopic, shouldShowDropdown, subject, examLevel, examBoard, historyUnit]);
 
   // Handle keyboard navigation
   useEffect(() => {

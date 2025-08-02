@@ -26,7 +26,8 @@ const QuestionGenerator: React.FC = () => {
     examBoard: '',
     difficulty: 'easy',
     questionCount: 10,
-    englishExamType: '' // New field for English Language vs Literature
+    englishExamType: '', // New field for English Language vs Literature
+    historyUnit: '' // New field for History AQA units
   });
   const [generatedQuestions, setGeneratedQuestions] = useState<any[]>([]);
   const [generatedSolutions, setGeneratedSolutions] = useState<any[]>([]);
@@ -67,7 +68,7 @@ const QuestionGenerator: React.FC = () => {
   // Reset exam level to GCSE if KS3 is selected but subject is not mathematics
   useEffect(() => {
     if (options.examLevel === 'ks3' && normalizedSubject !== 'mathematics') {
-      setOptions(prev => ({ ...prev, examLevel: 'gcse', examBoard: '', englishExamType: '' }));
+      setOptions(prev => ({ ...prev, examLevel: 'gcse', examBoard: '', englishExamType: '', historyUnit: '' }));
     }
   }, [normalizedSubject, options.examLevel]);
 
@@ -293,6 +294,13 @@ const QuestionGenerator: React.FC = () => {
       return;
     }
 
+    // Validate History unit for History + AQA + GCSE
+    if (normalizedSubject === 'history' && options.examBoard === 'aqa' && options.examLevel === 'gcse' && !options.historyUnit) {
+      setAlert({ type: 'error', message: 'Please choose a History unit' });
+      setIsGenerating(false);
+      return;
+    }
+
     // Create AbortController for cancellation
     const abortController = new AbortController();
 
@@ -315,7 +323,8 @@ const QuestionGenerator: React.FC = () => {
           examBoard: options.examBoard,
           difficulty: options.difficulty,
           numQuestions: options.questionCount,
-          userId: user.id
+          userId: user.id,
+          historyUnit: options.historyUnit // Include history unit for AQA History
         }),
         signal: abortController.signal
       });
@@ -657,6 +666,7 @@ const QuestionGenerator: React.FC = () => {
     setShowSolutions(false);
     setIsGenerating(false);
     setIsCancelled(false);
+    setOptions(prev => ({ ...prev, historyUnit: '' }));
   };
 
   const handleManageSubscription = async () => {
@@ -877,7 +887,7 @@ const QuestionGenerator: React.FC = () => {
               <select
                 id="examLevel"
                 value={options.examLevel}
-                onChange={(e) => setOptions({ ...options, examLevel: e.target.value, examBoard: '', englishExamType: '' })}
+                onChange={(e) => setOptions({ ...options, examLevel: e.target.value, examBoard: '', englishExamType: '', historyUnit: '' })}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               >
                 <option value="gcse">GCSE</option>
@@ -897,7 +907,7 @@ const QuestionGenerator: React.FC = () => {
                 <select
                   id="englishExamType"
                   value={options.englishExamType}
-                  onChange={(e) => setOptions({ ...options, englishExamType: e.target.value, examBoard: '' })}
+                  onChange={(e) => setOptions({ ...options, englishExamType: e.target.value, examBoard: '', historyUnit: '' })}
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 >
                   <option value="">Choose English exam type</option>
@@ -917,7 +927,7 @@ const QuestionGenerator: React.FC = () => {
                   <select
                     id="examBoard"
                     value={options.examBoard}
-                    onChange={(e) => setOptions({ ...options, examBoard: e.target.value })}
+                    onChange={(e) => setOptions({ ...options, examBoard: e.target.value, historyUnit: '' })}
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                   >
                     <option value="">Select an exam board</option>
@@ -934,6 +944,39 @@ const QuestionGenerator: React.FC = () => {
                   </select>
                 </div>
               )
+            )}
+
+            {/* History Unit Selection - only for AQA GCSE History */}
+            {normalizedSubject === 'history' && options.examBoard === 'aqa' && (
+              <div className="sm:col-span-3">
+                <label htmlFor="historyUnit" className="block text-base font-semibold text-gray-800 mb-2">
+                  History Unit
+                </label>
+                <select
+                  id="historyUnit"
+                  value={options.historyUnit}
+                  onChange={(e) => setOptions({ ...options, historyUnit: e.target.value })}
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                >
+                  <option value="">Select a History unit</option>
+                  <option value="america-1840-1895">America, 1840-1895: Expansion and consolidation</option>
+                  <option value="germany-1890-1945">Germany, 1890-1945: Democracy and dictatorship</option>
+                  <option value="russia-1894-1945">Russia, 1894-1945: Tsardom and communism</option>
+                  <option value="america-1920-1973">America, 1920-1973: Opportunity and inequality</option>
+                  <option value="conflict-first-world-war">Conflict and tension: The First World War, 1894–1918</option>
+                  <option value="conflict-inter-war">Conflict and tension: The inter-war years, 1918–1939</option>
+                  <option value="conflict-east-west">Conflict and tension between East and West, 1945–1972</option>
+                  <option value="conflict-asia">Conflict and tension in Asia, 1950–1975</option>
+                  <option value="conflict-gulf-afghanistan">Conflict and tension in the Gulf and Afghanistan, 1990–2009</option>
+                  <option value="britain-health">Britain: Health and the people: c1000 to the present day</option>
+                  <option value="britain-power">Britain: Power and the people: c1170 to the present day</option>
+                  <option value="britain-migration">Britain: Migration, empires and the people: c790 to the present day</option>
+                  <option value="norman-england">Norman England, c1066–c1100</option>
+                  <option value="medieval-england">Medieval England: the reign of Edward I, 1272–1307</option>
+                  <option value="elizabethan-england">Elizabethan England, c1568–1603</option>
+                  <option value="restoration-england">Restoration England, 1660–1685</option>
+                </select>
+              </div>
             )}
 
             <div>
@@ -1021,6 +1064,7 @@ const QuestionGenerator: React.FC = () => {
                 subject={normalizedSubject}
                 examLevel={options.examLevel}
                 examBoard={options.examBoard}
+                historyUnit={options.historyUnit}
               />
             </div>
           </div>
