@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import PricingModal from './PricingModal';
 import FeedbackWidget from './FeedbackWidget';
+import SplashScreen from './SplashScreen';
 import { API_CONFIG } from '../config/api';
 
 interface SubjectCard {
@@ -28,6 +29,19 @@ const LandingPage: React.FC = () => {
   const navigate = useNavigate();
   const { user, profile, signOut } = useAuth();
   const [showPricingModal, setShowPricingModal] = useState(false);
+  const [showSplashScreen, setShowSplashScreen] = useState(false);
+
+  // Show splash screen when user and profile are loaded
+  useEffect(() => {
+    if (user && profile) {
+      // Only show splash screen once per session
+      const splashShownThisSession = sessionStorage.getItem('splashShown');
+      if (!splashShownThisSession) {
+        setShowSplashScreen(true);
+        sessionStorage.setItem('splashShown', 'true');
+      }
+    }
+  }, [user, profile]);
 
   const handleSubjectClick = (subject: string, disabled?: boolean) => {
     if (disabled) return; // Prevent navigation for disabled subjects
@@ -218,6 +232,9 @@ const LandingPage: React.FC = () => {
 
       {/* Feedback Widget */}
       <FeedbackWidget />
+
+      {/* Splash Screen */}
+      <SplashScreen isOpen={showSplashScreen} onClose={() => setShowSplashScreen(false)} />
     </div>
   );
 };
