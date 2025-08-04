@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CheckCircle, Users, ArrowRight, TrendingUp, X, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
@@ -6,6 +6,31 @@ import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveCo
 const NewLandingPage: React.FC = () => {
   const navigate = useNavigate();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  // Prevent indexing of non-www domain
+  useEffect(() => {
+    const hostname = window.location.hostname;
+    
+    // If accessed via non-www domain (practiceqs.com), prevent indexing
+    if (hostname === 'practiceqs.com') {
+      // Set robots meta tag to noindex, nofollow
+      let robotsMeta = document.querySelector('meta[name="robots"]');
+      if (robotsMeta) {
+        robotsMeta.setAttribute('content', 'noindex, nofollow, noarchive, nosnippet');
+      } else {
+        robotsMeta = document.createElement('meta');
+        robotsMeta.setAttribute('name', 'robots');
+        robotsMeta.setAttribute('content', 'noindex, nofollow, noarchive, nosnippet');
+        document.head.appendChild(robotsMeta);
+      }
+    } else {
+      // For www domain (www.practiceqs.com), ensure normal indexing
+      let robotsMeta = document.querySelector('meta[name="robots"]');
+      if (robotsMeta) {
+        robotsMeta.setAttribute('content', 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1');
+      }
+    }
+  }, []);
 
   const screenshots = ['/step1-screenshot.png', '/step2-screenshot.png', '/step3-screenshot.png'];
   const currentImageIndex = selectedImage ? screenshots.indexOf(selectedImage) : -1;
