@@ -12,6 +12,7 @@ import { physicsGcseOcrTopics } from '../data/physicsGcseOcrTopics.ts';
 import { computerScienceGcseAqaTopics } from '../data/computerScienceGcseAqaTopics.ts';
 import { computerScienceGcseEdexcelTopics } from '../data/computerScienceGcseEdexcelTopics.ts';
 import { historyGcseAqaTopics } from '../data/historyGcseAqaTopics.ts';
+import { geographyGcseAqaTopics } from '../data/geographyGcseAqaTopics.ts';
 
 interface TopicDropdownProps {
   searchTopic: string;
@@ -21,6 +22,8 @@ interface TopicDropdownProps {
   examLevel: string;
   examBoard: string;
   historyUnit?: string;
+  geographyUnit?: string;
+  geographySection?: string;
 }
 
 const TopicDropdown: React.FC<TopicDropdownProps> = ({
@@ -30,7 +33,9 @@ const TopicDropdown: React.FC<TopicDropdownProps> = ({
   subject,
   examLevel,
   examBoard,
-  historyUnit
+  historyUnit,
+  geographyUnit,
+  geographySection
 }: TopicDropdownProps) => {
   const [filteredTopics, setFilteredTopics] = useState<string[]>([]);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
@@ -80,6 +85,17 @@ const TopicDropdown: React.FC<TopicDropdownProps> = ({
     if (normalizedSubject === 'history' && examLevel === 'gcse' && examBoard === 'aqa' && historyUnit) {
       return historyGcseAqaTopics[historyUnit] || [];
     }
+    if (normalizedSubject === 'geography' && examLevel === 'gcse' && examBoard === 'aqa' && geographyUnit) {
+      if (geographyUnit === 'geographical-skills') {
+        // Geographical skills has no sections, return topics directly
+        return geographyGcseAqaTopics[geographyUnit] as string[] || [];
+      } else if (geographySection) {
+        // Return topics for the specific section
+        const unitData = geographyGcseAqaTopics[geographyUnit] as { [key: string]: string[] };
+        return unitData[geographySection] || [];
+      }
+      return [];
+    }
     return [];
   };
 
@@ -100,7 +116,7 @@ const TopicDropdown: React.FC<TopicDropdownProps> = ({
 
     setFilteredTopics(filtered);
     setHighlightedIndex(-1);
-  }, [searchTopic, shouldShowDropdown, subject, examLevel, examBoard, historyUnit]);
+  }, [searchTopic, shouldShowDropdown, subject, examLevel, examBoard, historyUnit, geographyUnit, geographySection]);
 
   // Handle keyboard navigation
   useEffect(() => {
