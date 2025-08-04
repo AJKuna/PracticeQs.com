@@ -80,7 +80,7 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ isOpen, onClose }) => {
               </h1>
               <p className="text-gray-600 mb-6">
                 {isReturningUser 
-                  ? 'Ready to continue your learning journey?' 
+                  ? 'Let’s boost those grades!' 
                   : 'Your journey to academic excellence starts here'
                 }
               </p>
