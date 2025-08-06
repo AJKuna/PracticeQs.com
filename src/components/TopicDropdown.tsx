@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { mathGcseTopics } from '../data/mathGcseTopics.ts';
 import { mathKs3Topics } from '../data/mathKs3Topics.ts';
-import { biologyGcseAqaTopics } from '../data/biologyGcseAqaTopics.ts';
+import { biologyGcseAqaUnits } from '../data/biologyGcseAqaUnits.ts';
 import { biologyGcseEdexcelTopics } from '../data/biologyGcseEdexcelTopics.ts';
 import { chemistryGcseAqaTopics } from '../data/chemistryGcseAqaTopics.ts';
 import { chemistryGcseEdexcelTopics } from '../data/chemistryGcseEdexcelTopics.ts';
@@ -24,6 +24,7 @@ interface TopicDropdownProps {
   historyUnit?: string;
   geographyUnit?: string;
   geographySection?: string;
+  biologyUnit?: string;
 }
 
 const TopicDropdown: React.FC<TopicDropdownProps> = ({
@@ -35,7 +36,8 @@ const TopicDropdown: React.FC<TopicDropdownProps> = ({
   examBoard,
   historyUnit,
   geographyUnit,
-  geographySection
+  geographySection,
+  biologyUnit
 }: TopicDropdownProps) => {
   const [filteredTopics, setFilteredTopics] = useState<string[]>([]);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
@@ -52,8 +54,8 @@ const TopicDropdown: React.FC<TopicDropdownProps> = ({
     if (normalizedSubject === 'mathematics' && examLevel === 'gcse') {
       return mathGcseTopics;
     }
-    if (normalizedSubject === 'biology' && examLevel === 'gcse' && examBoard === 'aqa') {
-      return biologyGcseAqaTopics;
+    if (normalizedSubject === 'biology' && examLevel === 'gcse' && examBoard === 'aqa' && biologyUnit) {
+      return biologyGcseAqaUnits[biologyUnit] || [];
     }
     if (normalizedSubject === 'biology' && examLevel === 'gcse' && examBoard === 'edexcel') {
       return biologyGcseEdexcelTopics;
@@ -116,7 +118,7 @@ const TopicDropdown: React.FC<TopicDropdownProps> = ({
 
     setFilteredTopics(filtered);
     setHighlightedIndex(-1);
-  }, [searchTopic, shouldShowDropdown, subject, examLevel, examBoard, historyUnit, geographyUnit, geographySection]);
+  }, [searchTopic, shouldShowDropdown, subject, examLevel, examBoard, historyUnit, geographyUnit, geographySection, biologyUnit]);
 
   // Handle keyboard navigation
   useEffect(() => {
