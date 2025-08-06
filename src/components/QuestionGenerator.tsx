@@ -30,7 +30,8 @@ const QuestionGenerator: React.FC = () => {
     historyUnit: '', // New field for History AQA units
     geographyUnit: '', // New field for Geography AQA units
     geographySection: '', // New field for Geography AQA unit sections
-    biologyUnit: '' // New field for Biology AQA units
+    biologyUnit: '', // New field for Biology AQA units
+    chemistryUnit: '' // New field for Chemistry AQA units
   });
   const [generatedQuestions, setGeneratedQuestions] = useState<any[]>([]);
   const [generatedSolutions, setGeneratedSolutions] = useState<any[]>([]);
@@ -71,7 +72,7 @@ const QuestionGenerator: React.FC = () => {
   // Reset exam level to GCSE if KS3 is selected but subject is not mathematics
   useEffect(() => {
     if (options.examLevel === 'ks3' && normalizedSubject !== 'mathematics') {
-      setOptions(prev => ({ ...prev, examLevel: 'gcse', examBoard: '', englishExamType: '', historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '' }));
+      setOptions(prev => ({ ...prev, examLevel: 'gcse', examBoard: '', englishExamType: '', historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '' }));
     }
   }, [normalizedSubject, options.examLevel]);
 
@@ -311,6 +312,13 @@ const QuestionGenerator: React.FC = () => {
       return;
     }
 
+    // Check for Chemistry unit selection
+    if (normalizedSubject === 'chemistry' && options.examBoard === 'aqa' && options.examLevel === 'gcse' && !options.chemistryUnit) {
+      setAlert({ type: 'error', message: 'Please choose a Chemistry unit' });
+      setIsGenerating(false);
+      return;
+    }
+
     // Create AbortController for cancellation
     const abortController = new AbortController();
 
@@ -337,7 +345,8 @@ const QuestionGenerator: React.FC = () => {
           historyUnit: options.historyUnit, // Include history unit for AQA History
           geographyUnit: options.geographyUnit, // Include geography unit for AQA Geography
           geographySection: options.geographySection, // Include geography section for AQA Geography
-          biologyUnit: options.biologyUnit // Include biology unit for AQA Biology
+          biologyUnit: options.biologyUnit, // Include biology unit for AQA Biology
+          chemistryUnit: options.chemistryUnit // Include chemistry unit for AQA Chemistry
         }),
         signal: abortController.signal
       });
@@ -679,7 +688,7 @@ const QuestionGenerator: React.FC = () => {
     setShowSolutions(false);
     setIsGenerating(false);
     setIsCancelled(false);
-    setOptions(prev => ({ ...prev, historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '' }));
+    setOptions(prev => ({ ...prev, historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '' }));
   };
 
   const handleManageSubscription = async () => {
@@ -900,7 +909,7 @@ const QuestionGenerator: React.FC = () => {
               <select
                 id="examLevel"
                 value={options.examLevel}
-                onChange={(e) => setOptions({ ...options, examLevel: e.target.value, examBoard: '', englishExamType: '', historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '' })}
+                onChange={(e) => setOptions({ ...options, examLevel: e.target.value, examBoard: '', englishExamType: '', historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '' })}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               >
                 <option value="gcse">GCSE</option>
@@ -920,7 +929,7 @@ const QuestionGenerator: React.FC = () => {
                 <select
                   id="englishExamType"
                   value={options.englishExamType}
-                  onChange={(e) => setOptions({ ...options, englishExamType: e.target.value, examBoard: '', historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '' })}
+                  onChange={(e) => setOptions({ ...options, englishExamType: e.target.value, examBoard: '', historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '' })}
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 >
                   <option value="">Choose English exam type</option>
@@ -940,7 +949,7 @@ const QuestionGenerator: React.FC = () => {
                   <select
                     id="examBoard"
                     value={options.examBoard}
-                    onChange={(e) => setOptions({ ...options, examBoard: e.target.value, historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '' })}
+                    onChange={(e) => setOptions({ ...options, examBoard: e.target.value, historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '' })}
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                   >
                     <option value="">Select an exam board</option>
@@ -1001,7 +1010,7 @@ const QuestionGenerator: React.FC = () => {
                 <select
                   id="geographyUnit"
                   value={options.geographyUnit}
-                  onChange={(e) => setOptions({ ...options, geographyUnit: e.target.value, geographySection: '', biologyUnit: '' })}
+                  onChange={(e) => setOptions({ ...options, geographyUnit: e.target.value, geographySection: '', biologyUnit: '', chemistryUnit: '' })}
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 >
                   <option value="">Select a Geography unit</option>
@@ -1071,6 +1080,34 @@ const QuestionGenerator: React.FC = () => {
                   <option value="inheritance-variation-evolution">6. Inheritance, variation and evolution</option>
                   <option value="ecology">7. Ecology</option>
                   <option value="required-practicals">8. Required Practicals</option>
+                </select>
+              </div>
+            )}
+
+            {/* Chemistry Unit Selection - only for AQA GCSE Chemistry */}
+            {normalizedSubject === 'chemistry' && options.examBoard === 'aqa' && (
+              <div className="sm:col-span-3">
+                <label htmlFor="chemistryUnit" className="block text-base font-semibold text-gray-800 mb-2">
+                  Chemistry Unit
+                </label>
+                <select
+                  id="chemistryUnit"
+                  value={options.chemistryUnit}
+                  onChange={(e) => setOptions({ ...options, chemistryUnit: e.target.value })}
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                >
+                  <option value="">Select a Chemistry unit</option>
+                  <option value="atomic-structure-periodic-table">1. Atomic structure and the periodic table</option>
+                  <option value="bonding-structure-properties">2. Bonding, structure, and the properties of matter</option>
+                  <option value="quantitative-chemistry">3. Quantitative chemistry</option>
+                  <option value="chemical-changes">4. Chemical changes</option>
+                  <option value="energy-changes">5. Energy changes</option>
+                  <option value="rate-extent-chemical-change">6. The rate and extent of chemical change</option>
+                  <option value="organic-chemistry">7. Organic chemistry</option>
+                  <option value="chemical-analysis">8. Chemical analysis</option>
+                  <option value="chemistry-atmosphere">9. Chemistry of the atmosphere</option>
+                  <option value="using-resources">10. Using resources</option>
+                  <option value="required-practicals">11. Required Practicals</option>
                 </select>
               </div>
             )}
@@ -1164,6 +1201,7 @@ const QuestionGenerator: React.FC = () => {
                 geographyUnit={options.geographyUnit}
                 geographySection={options.geographySection}
                 biologyUnit={options.biologyUnit}
+                chemistryUnit={options.chemistryUnit}
               />
             </div>
           </div>
