@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { mathGcseTopics } from '../data/mathGcseTopics.ts';
 import { mathKs3Topics } from '../data/mathKs3Topics.ts';
 import { biologyGcseAqaUnits } from '../data/biologyGcseAqaUnits.ts';
-import { biologyGcseEdexcelTopics } from '../data/biologyGcseEdexcelTopics.ts';
+import { biologyGcseEdexcelUnits } from '../data/biologyGcseEdexcelUnits.ts';
 import { chemistryGcseAqaUnits } from '../data/chemistryGcseAqaUnits.ts';
 import { chemistryGcseEdexcelTopics } from '../data/chemistryGcseEdexcelTopics.ts';
 import { chemistryGcseOcrATopics } from '../data/chemistryGcseOcrATopics.ts';
@@ -26,6 +26,7 @@ interface TopicDropdownProps {
   geographySection?: string;
   biologyUnit?: string;
   chemistryUnit?: string;
+  biologyEdexcelUnit?: string;
 }
 
 const TopicDropdown: React.FC<TopicDropdownProps> = ({
@@ -39,8 +40,9 @@ const TopicDropdown: React.FC<TopicDropdownProps> = ({
   geographyUnit,
   geographySection,
   biologyUnit,
-  chemistryUnit
-}: TopicDropdownProps) => {
+  chemistryUnit,
+  biologyEdexcelUnit
+}) => {
   const [filteredTopics, setFilteredTopics] = useState<string[]>([]);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -59,8 +61,8 @@ const TopicDropdown: React.FC<TopicDropdownProps> = ({
     if (normalizedSubject === 'biology' && examLevel === 'gcse' && examBoard === 'aqa' && biologyUnit) {
       return biologyGcseAqaUnits[biologyUnit] || [];
     }
-    if (normalizedSubject === 'biology' && examLevel === 'gcse' && examBoard === 'edexcel') {
-      return biologyGcseEdexcelTopics;
+    if (normalizedSubject === 'biology' && examLevel === 'gcse' && examBoard === 'edexcel' && biologyEdexcelUnit) {
+      return biologyGcseEdexcelUnits[biologyEdexcelUnit] || [];
     }
     if (normalizedSubject === 'chemistry' && examLevel === 'gcse' && examBoard === 'aqa' && chemistryUnit) {
       return chemistryGcseAqaUnits[chemistryUnit] || [];
@@ -89,41 +91,40 @@ const TopicDropdown: React.FC<TopicDropdownProps> = ({
     if (normalizedSubject === 'history' && examLevel === 'gcse' && examBoard === 'aqa' && historyUnit) {
       return historyGcseAqaTopics[historyUnit] || [];
     }
-    if (normalizedSubject === 'geography' && examLevel === 'gcse' && examBoard === 'aqa' && geographyUnit) {
-      if (geographyUnit === 'geographical-skills') {
-        // Geographical skills has no sections, return topics directly
-        return geographyGcseAqaTopics[geographyUnit] as string[] || [];
-      } else if (geographySection) {
-        // Return topics for the specific section
-        const unitData = geographyGcseAqaTopics[geographyUnit] as { [key: string]: string[] };
+    if (normalizedSubject === 'geography' && examLevel === 'gcse' && examBoard === 'aqa' && geographyUnit && geographySection) {
+      const unitData = geographyGcseAqaTopics[geographyUnit];
+      if (unitData && typeof unitData === 'object' && !Array.isArray(unitData)) {
         return unitData[geographySection] || [];
       }
       return [];
     }
+    
     return [];
   };
 
-  // Only show dropdown for supported combinations
-  const shouldShowDropdown = getTopicsList().length > 0 && isVisible;
-
+  // Filter topics based on search input
   useEffect(() => {
-    if (!shouldShowDropdown || !searchTopic.trim()) {
+    const shouldShowDropdown = isVisible && searchTopic.trim().length > 0;
+    
+    if (!shouldShowDropdown) {
       setFilteredTopics([]);
-      setHighlightedIndex(-1);
       return;
     }
 
-    const topicsList = getTopicsList();
-    const filtered = topicsList.filter((topic: string) =>
-      topic.toLowerCase().includes(searchTopic.toLowerCase())
-    ).slice(0, 8); // Limit to 8 suggestions to avoid overwhelming the user
+    const topics = getTopicsList();
+    const searchLower = searchTopic.toLowerCase();
+    const filtered = topics.filter(topic => 
+      topic.toLowerCase().includes(searchLower)
+    ).slice(0, 10); // Limit to 10 suggestions
 
     setFilteredTopics(filtered);
     setHighlightedIndex(-1);
-  }, [searchTopic, shouldShowDropdown, subject, examLevel, examBoard, historyUnit, geographyUnit, geographySection, biologyUnit, chemistryUnit]);
+  }, [searchTopic, isVisible, subject, examLevel, examBoard, historyUnit, geographyUnit, geographySection, biologyUnit, chemistryUnit, biologyEdexcelUnit]);
 
   // Handle keyboard navigation
   useEffect(() => {
+    const shouldShowDropdown = isVisible && searchTopic.trim().length > 0;
+    
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!shouldShowDropdown || filteredTopics.length === 0) return;
 
@@ -153,7 +154,7 @@ const TopicDropdown: React.FC<TopicDropdownProps> = ({
 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [filteredTopics, highlightedIndex, onTopicSelect, shouldShowDropdown]);
+  }, [filteredTopics, highlightedIndex, onTopicSelect, isVisible, searchTopic]);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -167,6 +168,8 @@ const TopicDropdown: React.FC<TopicDropdownProps> = ({
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  const shouldShowDropdown = isVisible && searchTopic.trim().length > 0;
 
   if (!shouldShowDropdown || filteredTopics.length === 0) {
     return null;

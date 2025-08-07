@@ -125,12 +125,12 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ isOpen, onClose }) => {
               </div>
             </div>
 
-            {/* GCSE Biology AQA Card */}
+            {/* GCSE Biology AQA + Edexcel Card */}
             <div className="bg-green-50 border border-green-200 rounded-xl p-4 mb-4">
               <div className="flex items-start space-x-3">
                 <div className="text-2xl">🧬</div>
                 <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-1">GCSE Biology AQA</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-1">GCSE Biology AQA + Edexcel</h3>
                   <p className="text-gray-700 text-sm">Full update with comprehensive content</p>
                 </div>
               </div>

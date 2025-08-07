@@ -9,6 +9,9 @@ import FeedbackWidget from './FeedbackWidget';
 import LoadingBar from './LoadingBar';
 import { API_CONFIG } from '../config/api';
 import { trackQuestionGeneration, trackPDFExport, trackButtonClick, trackError, trackSubscription } from '../utils/analytics';
+import { biologyGcseAqaUnits } from '../data/biologyGcseAqaUnits';
+import { chemistryGcseAqaUnits } from '../data/chemistryGcseAqaUnits';
+import { biologyGcseEdexcelUnits } from '../data/biologyGcseEdexcelUnits';
 
 // ... (interfaces and constants unchanged)
 
@@ -31,7 +34,8 @@ const QuestionGenerator: React.FC = () => {
     geographyUnit: '', // New field for Geography AQA units
     geographySection: '', // New field for Geography AQA unit sections
     biologyUnit: '', // New field for Biology AQA units
-    chemistryUnit: '' // New field for Chemistry AQA units
+    chemistryUnit: '', // New field for Chemistry AQA units
+    biologyEdexcelUnit: '' // New field for Biology Edexcel units
   });
   const [generatedQuestions, setGeneratedQuestions] = useState<any[]>([]);
   const [generatedSolutions, setGeneratedSolutions] = useState<any[]>([]);
@@ -72,7 +76,7 @@ const QuestionGenerator: React.FC = () => {
   // Reset exam level to GCSE if KS3 is selected but subject is not mathematics
   useEffect(() => {
     if (options.examLevel === 'ks3' && normalizedSubject !== 'mathematics') {
-      setOptions(prev => ({ ...prev, examLevel: 'gcse', examBoard: '', englishExamType: '', historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '' }));
+      setOptions(prev => ({ ...prev, examLevel: 'gcse', examBoard: '', englishExamType: '', historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '', biologyEdexcelUnit: '' }));
     }
   }, [normalizedSubject, options.examLevel]);
 
@@ -111,14 +115,65 @@ const QuestionGenerator: React.FC = () => {
     spanish: 'e.g. family and relationships, school life, hobbies, travel, food...'
   };
   
-  // Determine which placeholder to use
-  let placeholderKey = normalizedSubject;
-  if (normalizedSubject === 'mathematics' && options.examLevel === 'ks3') {
-    placeholderKey = 'mathematics-ks3';
-  } else if (normalizedSubject === 'english' && options.englishExamType) {
-    placeholderKey = options.englishExamType;
-  }
-  const placeholder = subjectPlaceholders[placeholderKey] || 'Enter a topic...';
+  // Get dynamic placeholder based on subject and unit selection
+  const getDynamicPlaceholder = (): string => {
+    let placeholderKey = normalizedSubject;
+    
+    if (normalizedSubject === 'mathematics' && options.examLevel === 'ks3') {
+      placeholderKey = 'mathematics-ks3';
+    } else if (normalizedSubject === 'english' && options.englishExamType) {
+      placeholderKey = options.englishExamType;
+    } else if (normalizedSubject === 'biology' && options.examLevel === 'gcse' && options.examBoard === 'aqa' && options.biologyUnit) {
+      // Get first few topics from the selected biology unit for the placeholder
+      const unitTopics = biologyGcseAqaUnits[options.biologyUnit];
+      if (unitTopics && unitTopics.length > 0) {
+        // Take fewer topics if they're long (like practicals), more if they're short
+        const averageLength = unitTopics.slice(0, 4).reduce((sum, topic) => sum + topic.length, 0) / Math.min(4, unitTopics.length);
+        const numTopics = averageLength > 50 ? 2 : averageLength > 30 ? 3 : 4;
+        
+        let sampleTopics = unitTopics.slice(0, numTopics).join(', ');
+        
+        // Truncate if still too long
+        if (sampleTopics.length > 80) {
+          sampleTopics = sampleTopics.substring(0, 77) + '...';
+        }
+        
+        return `e.g. ${sampleTopics}...`;
+      }
+    } else if (normalizedSubject === 'biology' && options.examLevel === 'gcse' && options.examBoard === 'edexcel' && options.biologyEdexcelUnit) {
+      const unitTopics = biologyGcseEdexcelUnits[options.biologyEdexcelUnit];
+      if (unitTopics && unitTopics.length > 0) {
+        const averageLength = unitTopics.slice(0, 4).reduce((sum, topic) => sum + topic.length, 0) / Math.min(4, unitTopics.length);
+        const numTopics = averageLength > 50 ? 2 : averageLength > 30 ? 3 : 4;
+        
+        let sampleTopics = unitTopics.slice(0, numTopics).join(', ');
+        
+        if (sampleTopics.length > 80) {
+          sampleTopics = sampleTopics.substring(0, 77) + '...';
+        }
+        
+        return `e.g. ${sampleTopics}...`;
+      }
+    } else if (normalizedSubject === 'chemistry' && options.examLevel === 'gcse' && options.examBoard === 'aqa' && options.chemistryUnit) {
+      const unitTopics = chemistryGcseAqaUnits[options.chemistryUnit];
+      if (unitTopics && unitTopics.length > 0) {
+        const averageLength = unitTopics.slice(0, 4).reduce((sum, topic) => sum + topic.length, 0) / Math.min(4, unitTopics.length);
+        const numTopics = averageLength > 50 ? 2 : averageLength > 30 ? 3 : 4;
+        
+        let sampleTopics = unitTopics.slice(0, numTopics).join(', ');
+        
+        if (sampleTopics.length > 80) {
+          sampleTopics = sampleTopics.substring(0, 77) + '...';
+        }
+        
+        return `e.g. ${sampleTopics}...`;
+      }
+    }
+    
+    return subjectPlaceholders[placeholderKey] || 'Enter a topic...';
+  };
+
+  const placeholder = getDynamicPlaceholder();
 
   // Clean question string to format values
   const cleanQuestion = (question: string) => {
@@ -312,6 +367,13 @@ const QuestionGenerator: React.FC = () => {
       return;
     }
 
+    // Check for Biology Edexcel unit selection
+    if (normalizedSubject === 'biology' && options.examBoard === 'edexcel' && options.examLevel === 'gcse' && !options.biologyEdexcelUnit) {
+      setAlert({ type: 'error', message: 'Please choose a Biology unit' });
+      setIsGenerating(false);
+      return;
+    }
+
     // Check for Chemistry unit selection
     if (normalizedSubject === 'chemistry' && options.examBoard === 'aqa' && options.examLevel === 'gcse' && !options.chemistryUnit) {
       setAlert({ type: 'error', message: 'Please choose a Chemistry unit' });
@@ -346,7 +408,8 @@ const QuestionGenerator: React.FC = () => {
           geographyUnit: options.geographyUnit, // Include geography unit for AQA Geography
           geographySection: options.geographySection, // Include geography section for AQA Geography
           biologyUnit: options.biologyUnit, // Include biology unit for AQA Biology
-          chemistryUnit: options.chemistryUnit // Include chemistry unit for AQA Chemistry
+          chemistryUnit: options.chemistryUnit, // Include chemistry unit for AQA Chemistry
+          biologyEdexcelUnit: options.biologyEdexcelUnit // Include biology unit for Edexcel Biology
         }),
         signal: abortController.signal
       });
@@ -688,7 +751,7 @@ const QuestionGenerator: React.FC = () => {
     setShowSolutions(false);
     setIsGenerating(false);
     setIsCancelled(false);
-    setOptions(prev => ({ ...prev, historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '' }));
+    setOptions(prev => ({ ...prev, historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '', biologyEdexcelUnit: '' }));
   };
 
   const handleManageSubscription = async () => {
@@ -909,7 +972,7 @@ const QuestionGenerator: React.FC = () => {
               <select
                 id="examLevel"
                 value={options.examLevel}
-                onChange={(e) => setOptions({ ...options, examLevel: e.target.value, examBoard: '', englishExamType: '', historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '' })}
+                onChange={(e) => setOptions({ ...options, examLevel: e.target.value, examBoard: '', englishExamType: '', historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '', biologyEdexcelUnit: '' })}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               >
                 <option value="gcse">GCSE</option>
@@ -929,7 +992,7 @@ const QuestionGenerator: React.FC = () => {
                 <select
                   id="englishExamType"
                   value={options.englishExamType}
-                  onChange={(e) => setOptions({ ...options, englishExamType: e.target.value, examBoard: '', historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '' })}
+                  onChange={(e) => setOptions({ ...options, englishExamType: e.target.value, examBoard: '', historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '', biologyEdexcelUnit: '' })}
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 >
                   <option value="">Choose English exam type</option>
@@ -949,7 +1012,7 @@ const QuestionGenerator: React.FC = () => {
                   <select
                     id="examBoard"
                     value={options.examBoard}
-                    onChange={(e) => setOptions({ ...options, examBoard: e.target.value, historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '' })}
+                    onChange={(e) => setOptions({ ...options, examBoard: e.target.value, historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '', biologyEdexcelUnit: '' })}
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                   >
                     <option value="">Select an exam board</option>
@@ -1010,7 +1073,7 @@ const QuestionGenerator: React.FC = () => {
                 <select
                   id="geographyUnit"
                   value={options.geographyUnit}
-                  onChange={(e) => setOptions({ ...options, geographyUnit: e.target.value, geographySection: '', biologyUnit: '', chemistryUnit: '' })}
+                  onChange={(e) => setOptions({ ...options, geographyUnit: e.target.value, geographySection: '', biologyUnit: '', chemistryUnit: '', biologyEdexcelUnit: '' })}
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 >
                   <option value="">Select a Geography unit</option>
@@ -1080,6 +1143,33 @@ const QuestionGenerator: React.FC = () => {
                   <option value="inheritance-variation-evolution">6. Inheritance, variation and evolution</option>
                   <option value="ecology">7. Ecology</option>
                   <option value="required-practicals">8. Required Practicals</option>
+                </select>
+              </div>
+            )}
+
+            {/* Biology Unit Selection - only for Edexcel GCSE Biology */}
+            {normalizedSubject === 'biology' && options.examBoard === 'edexcel' && (
+              <div className="sm:col-span-3">
+                <label htmlFor="biologyEdexcelUnit" className="block text-base font-semibold text-gray-800 mb-2">
+                  Biology Unit
+                </label>
+                <select
+                  id="biologyEdexcelUnit"
+                  value={options.biologyEdexcelUnit}
+                  onChange={(e) => setOptions({ ...options, biologyEdexcelUnit: e.target.value })}
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                >
+                  <option value="">Select a Biology unit</option>
+                  <option value="key-concepts-biology">1. Key concepts in biology</option>
+                  <option value="cells-control">2. Cells and control</option>
+                  <option value="genetics">3. Genetics</option>
+                  <option value="natural-selection-genetic-modification">4. Natural selection and genetic modification</option>
+                  <option value="health-disease-medicines">5. Health, disease and the development of medicines</option>
+                  <option value="plant-structures-functions">6. Plant structures and their functions</option>
+                  <option value="animal-coordination-control-homeostasis">7. Animal coordination, control and homeostasis</option>
+                  <option value="exchange-transport-animals">8. Exchange and transport in animals</option>
+                  <option value="ecosystems-material-cycles">9. Ecosystems and material cycles</option>
+                  <option value="required-practicals">10. Required Practicals</option>
                 </select>
               </div>
             )}
@@ -1202,6 +1292,7 @@ const QuestionGenerator: React.FC = () => {
                 geographySection={options.geographySection}
                 biologyUnit={options.biologyUnit}
                 chemistryUnit={options.chemistryUnit}
+                biologyEdexcelUnit={options.biologyEdexcelUnit}
               />
             </div>
           </div>
