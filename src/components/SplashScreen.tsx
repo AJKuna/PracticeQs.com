@@ -92,17 +92,6 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ isOpen, onClose }) => {
             {/* Latest Updates Header */}
             <h2 className="text-xl font-bold text-gray-900 mb-4">Latest Updates</h2>
             
-            {/* KS3 Maths Card */}
-            <div className="bg-green-50 border border-green-200 rounded-xl p-4 mb-4">
-              <div className="flex items-start space-x-3">
-                <div className="text-2xl">🎉</div>
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-1">KS3 Maths</h3>
-                  <p className="text-gray-700 text-sm">Now available with full content</p>
-                </div>
-              </div>
-            </div>
-
             {/* GCSE History AQA Card */}
             <div className="bg-green-50 border border-green-200 rounded-xl p-4 mb-4">
               <div className="flex items-start space-x-3">
@@ -137,11 +126,22 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ isOpen, onClose }) => {
             </div>
 
             {/* GCSE Chemistry AQA Card */}
-            <div className="bg-green-50 border border-green-200 rounded-xl p-4">
+            <div className="bg-green-50 border border-green-200 rounded-xl p-4 mb-4">
               <div className="flex items-start space-x-3">
                 <div className="text-2xl">⚗️</div>
                 <div className="flex-1">
                   <h3 className="text-lg font-semibold text-gray-900 mb-1">GCSE Chemistry AQA</h3>
+                  <p className="text-gray-700 text-sm">Full update with comprehensive content</p>
+                </div>
+              </div>
+            </div>
+
+            {/* GCSE Physics AQA Card */}
+            <div className="bg-green-50 border border-green-200 rounded-xl p-4">
+              <div className="flex items-start space-x-3">
+                <div className="text-2xl">⚡</div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-1">GCSE Physics AQA</h3>
                   <p className="text-gray-700 text-sm">Full update with comprehensive content</p>
                 </div>
               </div>

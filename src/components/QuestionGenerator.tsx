@@ -12,6 +12,7 @@ import { trackQuestionGeneration, trackPDFExport, trackButtonClick, trackError, 
 import { biologyGcseAqaUnits } from '../data/biologyGcseAqaUnits';
 import { chemistryGcseAqaUnits } from '../data/chemistryGcseAqaUnits';
 import { biologyGcseEdexcelUnits } from '../data/biologyGcseEdexcelUnits';
+import { physicsGcseAqaUnits } from '../data/physicsGcseAqaUnits';
 
 // ... (interfaces and constants unchanged)
 
@@ -35,7 +36,8 @@ const QuestionGenerator: React.FC = () => {
     geographySection: '', // New field for Geography AQA unit sections
     biologyUnit: '', // New field for Biology AQA units
     chemistryUnit: '', // New field for Chemistry AQA units
-    biologyEdexcelUnit: '' // New field for Biology Edexcel units
+    biologyEdexcelUnit: '', // New field for Biology Edexcel units
+    physicsUnit: '' // New field for Physics AQA units
   });
   const [generatedQuestions, setGeneratedQuestions] = useState<any[]>([]);
   const [generatedSolutions, setGeneratedSolutions] = useState<any[]>([]);
@@ -76,7 +78,7 @@ const QuestionGenerator: React.FC = () => {
   // Reset exam level to GCSE if KS3 is selected but subject is not mathematics
   useEffect(() => {
     if (options.examLevel === 'ks3' && normalizedSubject !== 'mathematics') {
-      setOptions(prev => ({ ...prev, examLevel: 'gcse', examBoard: '', englishExamType: '', historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '', biologyEdexcelUnit: '' }));
+      setOptions(prev => ({ ...prev, examLevel: 'gcse', examBoard: '', englishExamType: '', historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '', biologyEdexcelUnit: '', physicsUnit: '' }));
     }
   }, [normalizedSubject, options.examLevel]);
 
@@ -168,6 +170,22 @@ const QuestionGenerator: React.FC = () => {
         
         return `e.g. ${sampleTopics}...`;
       }
+    } else if (normalizedSubject === 'physics' && options.examLevel === 'gcse' && options.examBoard === 'aqa' && options.physicsUnit) {
+      const unitTopics = physicsGcseAqaUnits[options.physicsUnit];
+      if (unitTopics && unitTopics.length > 0) {
+        const averageLength = unitTopics.slice(0, 4).reduce((sum, topic) => sum + topic.length, 0) / Math.min(4, unitTopics.length);
+        const numTopics = averageLength > 50 ? 2 : averageLength > 30 ? 3 : 4;
+        
+        let sampleTopics = unitTopics.slice(0, numTopics).join(', ');
+        
+        if (sampleTopics.length > 80) {
+          sampleTopics = sampleTopics.substring(0, 77) + '...';
+        }
+        
+        return `e.g. ${sampleTopics}...`;
+      }
+      // Fallback if no topics are available yet
+      return `e.g. Enter physics topics for ${options.physicsUnit}...`;
     }
     
     return subjectPlaceholders[placeholderKey] || 'Enter a topic...';
@@ -381,6 +399,13 @@ const QuestionGenerator: React.FC = () => {
       return;
     }
 
+    // Check for Physics unit selection
+    if (normalizedSubject === 'physics' && options.examBoard === 'aqa' && options.examLevel === 'gcse' && !options.physicsUnit) {
+      setAlert({ type: 'error', message: 'Please choose a Physics unit' });
+      setIsGenerating(false);
+      return;
+    }
+
     // Create AbortController for cancellation
     const abortController = new AbortController();
 
@@ -409,7 +434,8 @@ const QuestionGenerator: React.FC = () => {
           geographySection: options.geographySection, // Include geography section for AQA Geography
           biologyUnit: options.biologyUnit, // Include biology unit for AQA Biology
           chemistryUnit: options.chemistryUnit, // Include chemistry unit for AQA Chemistry
-          biologyEdexcelUnit: options.biologyEdexcelUnit // Include biology unit for Edexcel Biology
+          biologyEdexcelUnit: options.biologyEdexcelUnit, // Include biology unit for Edexcel Biology
+          physicsUnit: options.physicsUnit // Include physics unit for AQA Physics
         }),
         signal: abortController.signal
       });
@@ -630,16 +656,34 @@ const QuestionGenerator: React.FC = () => {
     if (normalizedSubject === 'mathematics') {
       doc.setFontSize(20);
       doc.setFont('helvetica', 'bold');
-      doc.text(formatMathForPDF(searchTopic), leftMargin, 20); // Move closer to top
+      const titleText = formatMathForPDF(searchTopic);
+      // Calculate available width for title (leave space for logo in top right)
+      const logoReservedWidth = 50; // Reserve space for "Practice Qs" logo
+      const titleMaxWidth = lineLength - logoReservedWidth;
+      const titleLines = doc.splitTextToSize(titleText, titleMaxWidth);
+      let titleY = 12; // Start at same level as logo
+      titleLines.forEach((line: string) => {
+        doc.text(line, leftMargin, titleY);
+        titleY += 8; // Line spacing for title
+      });
       doc.setFont('helvetica', 'normal');
-      yPosition = getNextLinePosition(firstLineY + gridSpacing * 4); // Start questions after grid spacing
+      yPosition = getNextLinePosition(firstLineY + gridSpacing * 6); // Increase gap to questions
     } else {
       // For lined subjects, align with lines
       doc.setFontSize(18); // Bigger font size
       doc.setFont('helvetica', 'bold');
-      doc.text(formatMathForPDF(searchTopic), leftMargin, 20); // Move closer to top
+      const titleText = formatMathForPDF(searchTopic);
+      // Calculate available width for title (leave space for logo in top right)
+      const logoReservedWidth = 50; // Reserve space for "Practice Qs" logo
+      const titleMaxWidth = lineLength - logoReservedWidth;
+      const titleLines = doc.splitTextToSize(titleText, titleMaxWidth);
+      let titleY = 12; // Start at same level as logo
+      titleLines.forEach((line: string) => {
+        doc.text(line, leftMargin, titleY);
+        titleY += 7; // Line spacing for title
+      });
       doc.setFont('helvetica', 'normal');
-      yPosition = getNextLinePosition(firstLineY + lineSpacing); // Start questions after first line
+      yPosition = getNextLinePosition(firstLineY + lineSpacing * 3); // Increase gap to questions
     }
 
     // Add questions
@@ -751,7 +795,7 @@ const QuestionGenerator: React.FC = () => {
     setShowSolutions(false);
     setIsGenerating(false);
     setIsCancelled(false);
-    setOptions(prev => ({ ...prev, historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '', biologyEdexcelUnit: '' }));
+    setOptions(prev => ({ ...prev, historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '', biologyEdexcelUnit: '', physicsUnit: '' }));
   };
 
   const handleManageSubscription = async () => {
@@ -972,7 +1016,7 @@ const QuestionGenerator: React.FC = () => {
               <select
                 id="examLevel"
                 value={options.examLevel}
-                onChange={(e) => setOptions({ ...options, examLevel: e.target.value, examBoard: '', englishExamType: '', historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '', biologyEdexcelUnit: '' })}
+                onChange={(e) => setOptions({ ...options, examLevel: e.target.value, examBoard: '', englishExamType: '', historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '', biologyEdexcelUnit: '', physicsUnit: '' })}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               >
                 <option value="gcse">GCSE</option>
@@ -992,7 +1036,7 @@ const QuestionGenerator: React.FC = () => {
                 <select
                   id="englishExamType"
                   value={options.englishExamType}
-                  onChange={(e) => setOptions({ ...options, englishExamType: e.target.value, examBoard: '', historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '', biologyEdexcelUnit: '' })}
+                  onChange={(e) => setOptions({ ...options, englishExamType: e.target.value, examBoard: '', historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '', biologyEdexcelUnit: '', physicsUnit: '' })}
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 >
                   <option value="">Choose English exam type</option>
@@ -1012,7 +1056,7 @@ const QuestionGenerator: React.FC = () => {
                   <select
                     id="examBoard"
                     value={options.examBoard}
-                    onChange={(e) => setOptions({ ...options, examBoard: e.target.value, historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '', biologyEdexcelUnit: '' })}
+                    onChange={(e) => setOptions({ ...options, examBoard: e.target.value, historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '', biologyEdexcelUnit: '', physicsUnit: '' })}
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                   >
                     <option value="">Select an exam board</option>
@@ -1073,7 +1117,7 @@ const QuestionGenerator: React.FC = () => {
                 <select
                   id="geographyUnit"
                   value={options.geographyUnit}
-                  onChange={(e) => setOptions({ ...options, geographyUnit: e.target.value, geographySection: '', biologyUnit: '', chemistryUnit: '', biologyEdexcelUnit: '' })}
+                  onChange={(e) => setOptions({ ...options, geographyUnit: e.target.value, geographySection: '', biologyUnit: '', chemistryUnit: '', biologyEdexcelUnit: '', physicsUnit: '' })}
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 >
                   <option value="">Select a Geography unit</option>
@@ -1202,6 +1246,32 @@ const QuestionGenerator: React.FC = () => {
               </div>
             )}
 
+            {/* Physics Unit Selection - only for AQA GCSE Physics */}
+            {normalizedSubject === 'physics' && options.examBoard === 'aqa' && (
+              <div className="sm:col-span-3">
+                <label htmlFor="physicsUnit" className="block text-base font-semibold text-gray-800 mb-2">
+                  Physics Unit
+                </label>
+                <select
+                  id="physicsUnit"
+                  value={options.physicsUnit}
+                  onChange={(e) => setOptions({ ...options, physicsUnit: e.target.value })}
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                >
+                  <option value="">Select a Physics unit</option>
+                  <option value="energy">1. Energy</option>
+                  <option value="electricity">2. Electricity</option>
+                  <option value="particle-model-matter">3. Particle model of matter</option>
+                  <option value="atomic-structure">4. Atomic structure</option>
+                  <option value="forces">5. Forces</option>
+                  <option value="waves">6. Waves</option>
+                  <option value="magnetism-electromagnetism">7. Magnetism and electromagnetism</option>
+                  <option value="space-physics">8. Space physics (physics only)</option>
+                  <option value="required-practicals">9. Required Practicals</option>
+                </select>
+              </div>
+            )}
+
             <div>
               <label htmlFor="difficulty" className="block text-base font-semibold text-gray-800 mb-2">
                 Difficulty
@@ -1293,6 +1363,7 @@ const QuestionGenerator: React.FC = () => {
                 biologyUnit={options.biologyUnit}
                 chemistryUnit={options.chemistryUnit}
                 biologyEdexcelUnit={options.biologyEdexcelUnit}
+                physicsUnit={options.physicsUnit}
               />
             </div>
           </div>

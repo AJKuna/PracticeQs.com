@@ -6,7 +6,7 @@ import { biologyGcseEdexcelUnits } from '../data/biologyGcseEdexcelUnits.ts';
 import { chemistryGcseAqaUnits } from '../data/chemistryGcseAqaUnits.ts';
 import { chemistryGcseEdexcelTopics } from '../data/chemistryGcseEdexcelTopics.ts';
 import { chemistryGcseOcrATopics } from '../data/chemistryGcseOcrATopics.ts';
-import { physicsGcseAqaTopics } from '../data/physicsGcseAqaTopics.ts';
+import { physicsGcseAqaUnits } from '../data/physicsGcseAqaUnits.ts';
 import { physicsGcseEdexcelTopics } from '../data/physicsGcseEdexcelTopics.ts';
 import { physicsGcseOcrTopics } from '../data/physicsGcseOcrTopics.ts';
 import { computerScienceGcseAqaTopics } from '../data/computerScienceGcseAqaTopics.ts';
@@ -27,6 +27,7 @@ interface TopicDropdownProps {
   biologyUnit?: string;
   chemistryUnit?: string;
   biologyEdexcelUnit?: string;
+  physicsUnit?: string;
 }
 
 const TopicDropdown: React.FC<TopicDropdownProps> = ({
@@ -41,7 +42,8 @@ const TopicDropdown: React.FC<TopicDropdownProps> = ({
   geographySection,
   biologyUnit,
   chemistryUnit,
-  biologyEdexcelUnit
+  biologyEdexcelUnit,
+  physicsUnit
 }) => {
   const [filteredTopics, setFilteredTopics] = useState<string[]>([]);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
@@ -73,8 +75,8 @@ const TopicDropdown: React.FC<TopicDropdownProps> = ({
     if (normalizedSubject === 'chemistry' && examLevel === 'gcse' && examBoard === 'ocr') {
       return chemistryGcseOcrATopics;
     }
-    if (normalizedSubject === 'physics' && examLevel === 'gcse' && examBoard === 'aqa') {
-      return physicsGcseAqaTopics;
+    if (normalizedSubject === 'physics' && examLevel === 'gcse' && examBoard === 'aqa' && physicsUnit) {
+      return physicsGcseAqaUnits[physicsUnit] || [];
     }
     if (normalizedSubject === 'physics' && examLevel === 'gcse' && examBoard === 'edexcel') {
       return physicsGcseEdexcelTopics;
@@ -119,7 +121,7 @@ const TopicDropdown: React.FC<TopicDropdownProps> = ({
 
     setFilteredTopics(filtered);
     setHighlightedIndex(-1);
-  }, [searchTopic, isVisible, subject, examLevel, examBoard, historyUnit, geographyUnit, geographySection, biologyUnit, chemistryUnit, biologyEdexcelUnit]);
+  }, [searchTopic, isVisible, subject, examLevel, examBoard, historyUnit, geographyUnit, geographySection, biologyUnit, chemistryUnit, biologyEdexcelUnit, physicsUnit]);
 
   // Handle keyboard navigation
   useEffect(() => {

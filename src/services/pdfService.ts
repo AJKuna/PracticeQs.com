@@ -19,8 +19,12 @@ export const generateQuestionsPDF = (questions: Question[], options: PDFOptions)
 
   // Title
   doc.setFontSize(18);
-  doc.text(options.title || 'Practice Questions', margin, yPosition);
-  yPosition += 10;
+  const titleText = options.title || 'Practice Questions';
+  const titleLines = doc.splitTextToSize(titleText, maxWidth);
+  titleLines.forEach((line: string) => {
+    doc.text(line, margin, yPosition);
+    yPosition += 10;
+  });
 
   // Subject and topic
   doc.setFontSize(12);
