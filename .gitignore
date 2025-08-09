@@ -35,6 +35,9 @@ Backend/.env.production.local
 *.sln
 *.sw?
 
+# Development environment metadata
+.bolt/
+
 # OS generated files
 Thumbs.db
 .DS_Store
