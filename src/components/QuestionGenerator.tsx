@@ -667,7 +667,7 @@ const QuestionGenerator: React.FC = () => {
         titleY += 8; // Line spacing for title
       });
       doc.setFont('helvetica', 'normal');
-      yPosition = getNextLinePosition(firstLineY + gridSpacing * 6); // Increase gap to questions
+      yPosition = getNextLinePosition(firstLineY + gridSpacing * 5); // Slightly reduced gap to questions
     } else {
       // For lined subjects, align with lines
       doc.setFontSize(18); // Bigger font size
@@ -683,7 +683,7 @@ const QuestionGenerator: React.FC = () => {
         titleY += 7; // Line spacing for title
       });
       doc.setFont('helvetica', 'normal');
-      yPosition = getNextLinePosition(firstLineY + lineSpacing * 3); // Increase gap to questions
+      yPosition = getNextLinePosition(firstLineY + lineSpacing * 2.5); // Slightly reduced gap to questions
     }
 
     // Add questions
