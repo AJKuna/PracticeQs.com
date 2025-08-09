@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 
 interface SplashScreenProps {
@@ -8,6 +9,7 @@ interface SplashScreenProps {
 
 const SplashScreen: React.FC<SplashScreenProps> = ({ isOpen, onClose }) => {
   const { user, profile } = useAuth();
+  const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
   const [isReturningUser, setIsReturningUser] = useState(false);
 
@@ -40,6 +42,15 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ isOpen, onClose }) => {
     setTimeout(() => {
       onClose();
     }, 300); // Match the fade-out animation duration
+  };
+
+  const handleSubjectClick = (subject: string) => {
+    // Convert subject to URL-friendly format (lowercase with hyphens)
+    const urlSubject = subject.toLowerCase().replace(/ /g, '-');
+    handleClose(); // Close splash screen first
+    setTimeout(() => {
+      navigate(`/generator/${urlSubject}`);
+    }, 300); // Wait for splash screen to close
   };
 
   if (!isOpen) return null;
@@ -93,7 +104,10 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ isOpen, onClose }) => {
             <h2 className="text-xl font-bold text-gray-900 mb-4">Latest Updates</h2>
             
             {/* GCSE History AQA Card */}
-            <div className="bg-green-50 border border-green-200 rounded-xl p-4 mb-4">
+            <div 
+              className="bg-green-50 border border-green-200 rounded-xl p-4 mb-4 cursor-pointer transition-all duration-200 hover:bg-green-100 hover:border-green-300 hover:shadow-md transform hover:-translate-y-0.5"
+              onClick={() => handleSubjectClick('history')}
+            >
               <div className="flex items-start space-x-3">
                 <div className="text-2xl">📚</div>
                 <div className="flex-1">
@@ -104,7 +118,10 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ isOpen, onClose }) => {
             </div>
 
             {/* GCSE Geography AQA Card */}
-            <div className="bg-green-50 border border-green-200 rounded-xl p-4 mb-4">
+            <div 
+              className="bg-green-50 border border-green-200 rounded-xl p-4 mb-4 cursor-pointer transition-all duration-200 hover:bg-green-100 hover:border-green-300 hover:shadow-md transform hover:-translate-y-0.5"
+              onClick={() => handleSubjectClick('geography')}
+            >
               <div className="flex items-start space-x-3">
                 <div className="text-2xl">🌍</div>
                 <div className="flex-1">
@@ -115,7 +132,10 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ isOpen, onClose }) => {
             </div>
 
             {/* GCSE Biology AQA + Edexcel Card */}
-            <div className="bg-green-50 border border-green-200 rounded-xl p-4 mb-4">
+            <div 
+              className="bg-green-50 border border-green-200 rounded-xl p-4 mb-4 cursor-pointer transition-all duration-200 hover:bg-green-100 hover:border-green-300 hover:shadow-md transform hover:-translate-y-0.5"
+              onClick={() => handleSubjectClick('biology')}
+            >
               <div className="flex items-start space-x-3">
                 <div className="text-2xl">🧬</div>
                 <div className="flex-1">
@@ -126,7 +146,10 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ isOpen, onClose }) => {
             </div>
 
             {/* GCSE Chemistry AQA Card */}
-            <div className="bg-green-50 border border-green-200 rounded-xl p-4 mb-4">
+            <div 
+              className="bg-green-50 border border-green-200 rounded-xl p-4 mb-4 cursor-pointer transition-all duration-200 hover:bg-green-100 hover:border-green-300 hover:shadow-md transform hover:-translate-y-0.5"
+              onClick={() => handleSubjectClick('chemistry')}
+            >
               <div className="flex items-start space-x-3">
                 <div className="text-2xl">⚗️</div>
                 <div className="flex-1">
@@ -137,7 +160,10 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ isOpen, onClose }) => {
             </div>
 
             {/* GCSE Physics AQA Card */}
-            <div className="bg-green-50 border border-green-200 rounded-xl p-4">
+            <div 
+              className="bg-green-50 border border-green-200 rounded-xl p-4 cursor-pointer transition-all duration-200 hover:bg-green-100 hover:border-green-300 hover:shadow-md transform hover:-translate-y-0.5"
+              onClick={() => handleSubjectClick('physics')}
+            >
               <div className="flex items-start space-x-3">
                 <div className="text-2xl">⚡</div>
                 <div className="flex-1">
