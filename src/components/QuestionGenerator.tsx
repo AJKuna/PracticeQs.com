@@ -567,7 +567,8 @@ const QuestionGenerator: React.FC = () => {
     }
   };
 
-  const exportToPDF = () => {
+  // Shared PDF generation logic
+  const generatePDFContent = (includeSolutions: boolean) => {
     const doc = new jsPDF();
     const pageHeight = doc.internal.pageSize.height;
     const pageWidth = doc.internal.pageSize.width;
@@ -739,8 +740,8 @@ const QuestionGenerator: React.FC = () => {
         yPosition = getNextLinePosition(yPosition + spacingUnit);
       }
 
-      // Add solutions if they're visible
-      if (showSolutions && question.answer) {
+      // Add solutions if includeSolutions is true and answer exists
+      if (includeSolutions && question.answer) {
         doc.setFontSize(10);
         doc.setFont('helvetica', 'bold');
         doc.text('Answer:', leftMargin, yPosition);
@@ -773,14 +774,27 @@ const QuestionGenerator: React.FC = () => {
       }
     });
 
-    // Save the PDF
-    doc.save(`${normalizedSubject}-${searchTopic.replace(/\s+/g, '-')}-questions.pdf`);
+    return doc;
+  };
+
+  // Export PDF with questions only
+  const exportToPDFQuestionsOnly = () => {
+    const doc = generatePDFContent(false);
+    const fileName = `${normalizedSubject}-${searchTopic.replace(/\s+/g, '-')}-questions.pdf`;
+    doc.save(fileName);
     
     // Track PDF export
     trackPDFExport(normalizedSubject, searchTopic, generatedQuestions.length);
+  };
+
+  // Export PDF with solutions included
+  const exportToPDFWithSolutions = () => {
+    const doc = generatePDFContent(true);
+    const fileName = `${normalizedSubject}-${searchTopic.replace(/\s+/g, '-')}-questions-with-solutions.pdf`;
+    doc.save(fileName);
     
-    // Track subject-specific PDF export
-    // trackSubjectPDFExport(normalizedSubject, searchTopic, generatedQuestions.length); // This line was removed from imports
+    // Track PDF export
+    trackPDFExport(normalizedSubject, searchTopic, generatedQuestions.length);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -1401,12 +1415,20 @@ const QuestionGenerator: React.FC = () => {
             <div className="flex items-center justify-between">
               <h2 className="text-xl font-bold text-gray-900">Generated Questions:</h2>
               <div className="flex gap-2">
-                <button
-                  onClick={exportToPDF}
-                  className="py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-                >
-                  Save as PDF
-                </button>
+                <div className="flex gap-2">
+                  <button
+                    onClick={exportToPDFQuestionsOnly}
+                    className="py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                  >
+                    Save PDF (Questions Only)
+                  </button>
+                  <button
+                    onClick={exportToPDFWithSolutions}
+                    className="py-2 px-4 border border-blue-300 rounded-md shadow-sm text-sm font-medium text-blue-700 bg-blue-50 hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  >
+                    Save PDF (With Solutions)
+                  </button>
+                </div>
                 <button
                   onClick={handleShowSolutions}
                   disabled={isGeneratingSolutions}
