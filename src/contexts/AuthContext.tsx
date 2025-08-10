@@ -10,6 +10,8 @@ interface AuthContextType {
   profile: Profile | null;
   loading: boolean;
   profileLoading: boolean;
+  showSplashScreen: boolean;
+  closeSplashScreen: () => void;
   signIn: (email: string, password: string) => Promise<void>;
   signUp: (email: string, password: string, fullName: string) => Promise<void>;
   signInWithGoogle: () => Promise<void>;
@@ -28,6 +30,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
   const [profileLoading, setProfileLoading] = useState(false);
+  const [showSplashScreen, setShowSplashScreen] = useState(false);
   
   // Use ref to track current user to avoid dependency issues
   const currentUserRef = useRef<User | null>(null);
@@ -260,6 +263,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
           console.log(`🔄 Processing ${event} - starting profile operations`);
           
+          // Show splash screen only on actual sign in, not token refresh
+          if (event === 'SIGNED_IN') {
+            setShowSplashScreen(true);
+          }
+          
           // ✅ CRITICAL FIX: Don't wait for profile operations to complete
           // Run them in the background so they don't block the auth flow
           createOrUpdateProfile(sessionUser).then(() => {
@@ -278,6 +286,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         // Handle sign out
         console.log(`🔐 Setting profile to null for event: ${event}`);
         setProfile(null);
+        setShowSplashScreen(false);
       }
       
       console.log(`🔄 Setting loading to false for event: ${event}`);
@@ -338,11 +347,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     if (error) throw error;
   };
 
+  const closeSplashScreen = () => {
+    setShowSplashScreen(false);
+  };
+
   const value: AuthContextType = {
     user,
     profile,
     loading,
     profileLoading,
+    showSplashScreen,
+    closeSplashScreen,
     signIn,
     signUp,
     signInWithGoogle,

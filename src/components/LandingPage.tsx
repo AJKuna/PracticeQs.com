@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import PricingModal from './PricingModal';
@@ -27,17 +27,8 @@ const subjects: SubjectCard[] = [
 
 const LandingPage: React.FC = () => {
   const navigate = useNavigate();
-  const { user, profile, signOut } = useAuth();
+  const { user, profile, signOut, showSplashScreen, closeSplashScreen } = useAuth();
   const [showPricingModal, setShowPricingModal] = useState(false);
-  const [showSplashScreen, setShowSplashScreen] = useState(false);
-
-  // Show splash screen when user and profile are loaded
-  useEffect(() => {
-    if (user && profile) {
-      // Show splash screen every time user logs in
-      setShowSplashScreen(true);
-    }
-  }, [user, profile]);
 
   const handleSubjectClick = (subject: string, disabled?: boolean) => {
     if (disabled) return; // Prevent navigation for disabled subjects
@@ -230,7 +221,7 @@ const LandingPage: React.FC = () => {
       <FeedbackWidget />
 
       {/* Splash Screen */}
-      <SplashScreen isOpen={showSplashScreen} onClose={() => setShowSplashScreen(false)} />
+      <SplashScreen isOpen={showSplashScreen} onClose={closeSplashScreen} />
     </div>
   );
 };
