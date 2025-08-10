@@ -34,12 +34,8 @@ const LandingPage: React.FC = () => {
   // Show splash screen when user and profile are loaded
   useEffect(() => {
     if (user && profile) {
-      // Only show splash screen once per session
-      const splashShownThisSession = sessionStorage.getItem('splashShown');
-      if (!splashShownThisSession) {
-        setShowSplashScreen(true);
-        sessionStorage.setItem('splashShown', 'true');
-      }
+      // Show splash screen every time user logs in
+      setShowSplashScreen(true);
     }
   }, [user, profile]);
 
