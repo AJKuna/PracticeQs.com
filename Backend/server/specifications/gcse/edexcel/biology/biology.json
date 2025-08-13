@@ -100,5 +100,20 @@
       "Graphs",
       "Geometry and trigonometry"
     ]
+  },
+  "level_restrictions": {
+    "excluded_concepts": [
+      "ATP (adenosine triphosphate) - not taught until A-level",
+      "Detailed biochemical pathways - save for A-level",
+      "Complex protein synthesis mechanisms - basic only at GCSE",
+      "Gene regulation and expression - beyond GCSE scope",
+      "Detailed cellular respiration cycles (Krebs cycle, electron transport chain) - A-level content",
+      "Advanced genetics (epistasis, linkage, sex linkage) - A-level only",
+      "Detailed plant transport mechanisms - keep basic at GCSE",
+      "Advanced ecology concepts (nitrogen cycle details) - A-level content",
+      "Detailed enzyme kinetics and competitive/non-competitive inhibition - A-level",
+      "Complex evolutionary mechanisms - basic evolution only at GCSE"
+    ],
+    "solution_guidance": "Solutions must stay within GCSE level concepts. Avoid explaining biological processes using ATP, detailed biochemical pathways, or complex molecular mechanisms. Focus on basic processes, simple explanations, and observable phenomena. Use simple terminology and avoid university-level biochemistry."
   }
 } 

@@ -746,6 +746,15 @@ SPECIFICATION CONTEXT:
 ${specData.marking_scheme ? `
 - Valid mark values: ${specData.marking_scheme.valid_mark_values.join(', ')}
 - Mark descriptors: ${Object.entries(specData.marking_scheme.mark_descriptors).map(([marks, desc]) => `${marks} marks: ${desc}`).join('; ')}` : ''}
+${specData.level_restrictions ? `
+
+🚨 CRITICAL LEVEL RESTRICTIONS FOR ${examLevel.toUpperCase()} SOLUTIONS:
+${specData.level_restrictions.solution_guidance}
+
+CONCEPTS TO COMPLETELY AVOID IN SOLUTIONS:
+${specData.level_restrictions.excluded_concepts.map(concept => `- ${concept}`).join('\n')}
+
+These restrictions apply specifically to the "answer" field - ensure solutions use only ${examLevel}-appropriate concepts and terminology.` : ''}
 ` : ''}
 
 CRITICAL: The "question" field must NOT contain any marks like [4 marks] or (4 marks). Only include the actual question text. The marks will be provided separately in the "marks" field.
@@ -826,6 +835,15 @@ MARKING REQUIREMENTS FOR EASY QUESTIONS:
       ${specData?.marking_scheme ? `
 Valid mark values: ${specData.marking_scheme.valid_mark_values.join(', ')}
 Mark descriptors: ${Object.entries(specData.marking_scheme.mark_descriptors).map(([marks, desc]) => `${marks} marks: ${desc}`).join('; ')}` : ''}
+      ${specData?.level_restrictions ? `
+
+🚨 CRITICAL LEVEL RESTRICTIONS FOR ${examLevel.toUpperCase()} SOLUTIONS:
+${specData.level_restrictions.solution_guidance}
+
+CONCEPTS TO COMPLETELY AVOID IN SOLUTIONS:
+${specData.level_restrictions.excluded_concepts.map(concept => `- ${concept}`).join('\n')}
+
+These restrictions apply specifically to the "answer" field - ensure solutions use only ${examLevel}-appropriate concepts and terminology.` : ''}
 
       EXAMPLES:
       ${exampleQuestions}

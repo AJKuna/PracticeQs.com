@@ -65,7 +65,8 @@
         "Speed, distance, time",
         "Density",
         "Pressure",
-        "Kinematics"
+        "Kinematics",
+        "Pressure, force and area"
       ]
     },
     {
@@ -141,5 +142,20 @@
       "foundation": "Grades 1-5",
       "higher": "Grades 4-9"
     }
+  },
+  "level_restrictions": {
+    "excluded_concepts": [
+      "Logarithms and log functions - not taught until A-level",
+      "Calculus (differentiation and integration) - A-level content",
+      "Complex numbers - A-level only",
+      "Advanced trigonometric identities - A-level content",
+      "Matrices and determinants - A-level mathematics",
+      "Advanced probability distributions - A-level statistics",
+      "Parametric equations - A-level content",
+      "Advanced algebraic manipulation (factor theorem) - A-level",
+      "Exponential growth models using e - A-level (simple compound interest only at GCSE)",
+      "Advanced coordinate geometry (ellipses, hyperbolas) - A-level content"
+    ],
+    "solution_guidance": "Solutions must use only GCSE-level mathematics. For compound interest problems, use only the simple compound interest formula A = P(1 + r/100)^n. Do NOT use logarithms, natural log, or e. For exponential problems, use basic repeated multiplication or simple formulas. Avoid calculus-based explanations. Keep trigonometry to basic sin, cos, tan in right-angled triangles and simple graphs."
   }
 } 

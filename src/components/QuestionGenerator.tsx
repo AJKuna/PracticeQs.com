@@ -197,8 +197,16 @@ const QuestionGenerator: React.FC = () => {
   const cleanQuestion = (question: string) => {
     if (!question) return question;
     
-    // First, convert mathematical operators to proper symbols
-    let processedQuestion = question;
+    // First, normalize whitespace and remove formatting artifacts
+    let processedQuestion = question
+    .replace(/```/g, '') // Remove markdown code blocks
+    .replace(/\u00A0/g, ' ') // Replace non-breaking spaces
+    .replace(/[^\S\r\n]+/g, ' ') // Replace all other weird spaces
+    .normalize('NFKC') // Convert full-width/monospace chars to normal
+    .replace(/\s+/g, ' ') // Collapse multiple spaces
+    .trim();
+    
+    // Then, convert mathematical operators to proper symbols
     
     // For mathematics subject, replace sqrt with square root symbol
     if (normalizedSubject === 'mathematics') {
@@ -271,7 +279,12 @@ const QuestionGenerator: React.FC = () => {
   const formatMathForPDF = (text: string): string => {
     if (!text) return text;
     
-    let result = text;
+    // First, normalize whitespace and remove formatting artifacts
+    let result = text
+      .replace(/```/g, '') // Remove markdown code blocks
+      .replace(/\u00A0/g, ' ') // Replace non-breaking spaces with regular spaces
+      .replace(/\s+/g, ' ') // Normalize multiple whitespace to single space
+      .trim(); // Remove leading/trailing whitespace
     
     // Note: Keep sqrt as "sqrt" in PDF for better compatibility - don't convert to √ symbol
     
@@ -668,7 +681,7 @@ const QuestionGenerator: React.FC = () => {
         titleY += 8; // Line spacing for title
       });
       doc.setFont('helvetica', 'normal');
-      yPosition = getNextLinePosition(firstLineY + gridSpacing * 5); // Slightly reduced gap to questions
+      yPosition = getNextLinePosition(firstLineY + gridSpacing * 3); // Reduced gap to questions
     } else {
       // For lined subjects, align with lines
       doc.setFontSize(18); // Bigger font size
@@ -684,7 +697,7 @@ const QuestionGenerator: React.FC = () => {
         titleY += 7; // Line spacing for title
       });
       doc.setFont('helvetica', 'normal');
-      yPosition = getNextLinePosition(firstLineY + lineSpacing * 2.5); // Slightly reduced gap to questions
+      yPosition = getNextLinePosition(firstLineY + lineSpacing * 0.5); // Reduced gap to questions
     }
 
     // Add questions
@@ -719,8 +732,10 @@ const QuestionGenerator: React.FC = () => {
         doc.text(line, leftMargin, yPosition);
         yPosition = getNextLinePosition(yPosition + spacingUnit);
       });
-      // Add extra space for writing
-      yPosition = getNextLinePosition(yPosition + spacingUnit * 3);
+      // Add extra space for writing (only if not including solutions)
+      if (!includeSolutions) {
+        yPosition = getNextLinePosition(yPosition + spacingUnit * 3);
+      }
 
       // Display passage if it exists (for questions with passages)
       if (question.passage) {
@@ -737,7 +752,10 @@ const QuestionGenerator: React.FC = () => {
           doc.text(line, leftMargin, yPosition);
           yPosition = getNextLinePosition(yPosition + spacingUnit);
         });
-        yPosition = getNextLinePosition(yPosition + spacingUnit);
+        // Add spacing after passage (only if not including solutions)
+        if (!includeSolutions) {
+          yPosition = getNextLinePosition(yPosition + spacingUnit);
+        }
       }
 
       // Add solutions if includeSolutions is true and answer exists
