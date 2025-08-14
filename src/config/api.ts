@@ -11,6 +11,7 @@ export const API_CONFIG = {
     GENERATE_QUESTIONS: `${API_BASE_URL}/api/generate-questions`,
     GENERATE_SOLUTIONS: `${API_BASE_URL}/api/generate-solutions`,
     USAGE: (userId: string) => `${API_BASE_URL}/api/usage/${userId}`,
+    STREAK: (userId: string) => `${API_BASE_URL}/api/streak/${userId}`,
   }
 };
 

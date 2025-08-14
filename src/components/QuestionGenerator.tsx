@@ -7,12 +7,15 @@ import PricingModal from './PricingModal';
 import TopicDropdown from './TopicDropdown';
 import FeedbackWidget from './FeedbackWidget';
 import LoadingBar from './LoadingBar';
+import StreakCounter, { StreakCounterRef } from './StreakCounter';
+import StreakPopup from './StreakPopup';
 import { API_CONFIG } from '../config/api';
 import { trackQuestionGeneration, trackPDFExport, trackButtonClick, trackError, trackSubscription } from '../utils/analytics';
 import { biologyGcseAqaUnits } from '../data/biologyGcseAqaUnits';
 import { chemistryGcseAqaUnits } from '../data/chemistryGcseAqaUnits';
 import { biologyGcseEdexcelUnits } from '../data/biologyGcseEdexcelUnits';
 import { physicsGcseAqaUnits } from '../data/physicsGcseAqaUnits';
+import { getUserStreak, updateStreakOnGeneration, StreakData } from '../services/streakService';
 
 // ... (interfaces and constants unchanged)
 
@@ -49,12 +52,24 @@ const QuestionGenerator: React.FC = () => {
   const [showPricingModal, setShowPricingModal] = useState(false);
   const [isCancelled, setIsCancelled] = useState(false);
   const loadingBarRef = useRef<{ complete: () => void } | null>(null);
+  
+  // Streak-related state
+  const [streakData, setStreakData] = useState<StreakData>({
+    currentStreak: 0,
+    lastPracticeDate: null,
+    hasGeneratedToday: false,
+    shouldShowPopup: false
+  });
+  const [showStreakPopup, setShowStreakPopup] = useState(false);
+  const [newStreakCount, setNewStreakCount] = useState(0);
+  const streakCounterRef = useRef<StreakCounterRef>(null);
 
-  // Fetch user usage on component mount and when user changes
+  // Fetch user usage and streak data on component mount and when user changes
   useEffect(() => {
     if (user) {
-      const fetchUsage = async () => {
+      const fetchUsageAndStreak = async () => {
         try {
+          // Fetch usage data
           const response = await fetch(API_CONFIG.ENDPOINTS.USAGE(user.id));
           if (response.ok) {
             const data = await response.json();
@@ -65,13 +80,18 @@ const QuestionGenerator: React.FC = () => {
               setShowPricingModal(true);
             }
           }
+          
+          // Fetch streak data
+          const streakResponse = await getUserStreak(user.id);
+          if (streakResponse.success && streakResponse.data) {
+            setStreakData(streakResponse.data);
+          }
         } catch (error) {
-          console.error('Error fetching usage:', error);
+          console.error('Error fetching usage and streak:', error);
         }
       };
       
-      // Only fetch usage data - profile is managed by AuthContext
-      fetchUsage();
+      fetchUsageAndStreak();
     }
   }, [user, profile?.subscription_tier]); // Include profile tier to refresh usage when subscription changes
 
@@ -496,6 +516,29 @@ const QuestionGenerator: React.FC = () => {
         // Track subject-specific question generation for popularity analysis
         // trackSubjectQuestionGeneration(normalizedSubject, searchTopic, data.length, options.difficulty, options.examLevel, options.examBoard); // This line was removed from imports
         
+        // Handle streak logic - check if this is their first generation of the day
+        if (user && !streakData.hasGeneratedToday) {
+          try {
+            const streakResponse = await updateStreakOnGeneration(user.id);
+            
+            if (streakResponse.success && streakResponse.data) {
+              const newStreak = streakResponse.data.currentStreak;
+              setNewStreakCount(newStreak);
+              setShowStreakPopup(true);
+              
+              // Update streak data
+              setStreakData(streakResponse.data);
+              
+              // Refresh the streak counter in the header
+              if (streakCounterRef.current) {
+                await streakCounterRef.current.refresh();
+              }
+            }
+          } catch (error) {
+            console.error('Error updating streak:', error);
+          }
+        }
+        
         // Refresh usage after generating questions
         if (user) {
           const response = await fetch(API_CONFIG.ENDPOINTS.USAGE(user.id));
@@ -895,9 +938,17 @@ const QuestionGenerator: React.FC = () => {
       
       <div className="max-w-3xl mx-auto pt-16 sm:pt-20 lg:pt-0">
         <div className="flex items-center justify-between mb-8">
-          <h1 className="text-2xl sm:text-3xl font-semibold text-gray-800 capitalize">
-            {normalizedSubject} Practice Questions
-          </h1>
+          <div className="flex items-center gap-4">
+            <h1 className="text-2xl sm:text-3xl font-semibold text-gray-800 capitalize">
+              {normalizedSubject} Practice Questions
+            </h1>
+            {/* Streak Counter */}
+            <StreakCounter 
+              ref={streakCounterRef}
+              onStreakUpdate={setStreakData}
+              className="hidden sm:flex"
+            />
+          </div>
           <div className="flex gap-1 sm:gap-2">
             {/* Upgrade button - only show for non-premium users */}
             {profile && profile.subscription_tier === 'free' && (
@@ -1427,6 +1478,13 @@ const QuestionGenerator: React.FC = () => {
           ref={loadingBarRef}
         />
 
+        {/* Mobile Streak Counter - show only on small screens */}
+        <div className="sm:hidden mb-4 flex justify-center">
+          <StreakCounter 
+            onStreakUpdate={setStreakData}
+          />
+        </div>
+
         {/* Generated Questions */}
         {generatedQuestions.length > 0 && (
           <div className="mt-8 space-y-4">
@@ -1538,6 +1596,13 @@ const QuestionGenerator: React.FC = () => {
       <PricingModal 
         isOpen={showPricingModal} 
         onClose={() => setShowPricingModal(false)} 
+      />
+
+      {/* Streak Popup */}
+      <StreakPopup 
+        isOpen={showStreakPopup}
+        onClose={() => setShowStreakPopup(false)}
+        streakCount={newStreakCount}
       />
 
       {/* Feedback Widget */}

@@ -4,6 +4,7 @@ import { useAuth } from '../contexts/AuthContext';
 import PricingModal from './PricingModal';
 import FeedbackWidget from './FeedbackWidget';
 import SplashScreen from './SplashScreen';
+import StreakCounter from './StreakCounter';
 import { API_CONFIG } from '../config/api';
 
 interface SubjectCard {
@@ -92,7 +93,10 @@ const LandingPage: React.FC = () => {
 
       {/* Top right buttons - only show if user is logged in */}
       {user && (
-        <div className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 flex gap-1 sm:gap-2">
+        <div className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 flex items-center gap-1 sm:gap-2">
+          {/* Streak Counter - show to the left of upgrade/manage buttons */}
+          <StreakCounter className="mr-1 sm:mr-2" />
+          
           {/* Upgrade button - only show for non-premium users */}
           {profile && profile.subscription_tier === 'free' && (
             <button

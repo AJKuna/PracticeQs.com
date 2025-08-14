@@ -1067,6 +1067,97 @@ app.get('/api/usage/:userId', async (req, res) => {
   }
 });
 
+// Add endpoint to get user's streak data
+app.get('/api/streak/:userId', async (req, res) => {
+  try {
+    const { userId } = req.params;
+    
+    if (!userId) {
+      return res.status(400).json({ error: 'User ID is required' });
+    }
+
+    console.log('🔥 Getting streak data for user:', userId);
+    
+    // Get user's practice history from usage_logs
+    const { data: usageLogs, error: usageError } = await supabase
+      .from('usage_logs')
+      .select('date, questions_generated')
+      .eq('user_id', userId)
+      .gte('questions_generated', 1) // Only days where they generated at least 1 question
+      .order('date', { ascending: false });
+
+    if (usageError) {
+      console.error('Error fetching usage logs for streak:', usageError);
+      return res.status(500).json({ error: 'Failed to fetch practice history' });
+    }
+
+    const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
+    const hasGeneratedToday = usageLogs?.some(log => log.date === today) || false;
+    
+    // Calculate streak
+    const streak = calculateStreakFromLogs(usageLogs || []);
+    const lastPracticeDate = usageLogs && usageLogs.length > 0 ? usageLogs[0].date : null;
+    
+    // Determine if we should show popup (only if they haven't generated today)
+    const shouldShowPopup = !hasGeneratedToday && (streak > 0 || !lastPracticeDate);
+
+    res.json({
+      currentStreak: streak,
+      lastPracticeDate,
+      hasGeneratedToday,
+      shouldShowPopup
+    });
+    
+  } catch (error) {
+    console.error('❌ Error getting streak:', error);
+    res.status(500).json({ 
+      error: 'Failed to get streak data',
+      details: error.message 
+    });
+  }
+});
+
+// Helper function to calculate streak from usage logs
+const calculateStreakFromLogs = (practiceHistory) => {
+  if (!practiceHistory || practiceHistory.length === 0) {
+    return 0;
+  }
+
+  const today = new Date().toISOString().split('T')[0];
+  const mostRecentDate = practiceHistory[0].date;
+
+  // Check if two date strings are consecutive days
+  const areConsecutiveDays = (date1, date2) => {
+    const d1 = new Date(date1);
+    const d2 = new Date(date2);
+    const diffTime = Math.abs(d2.getTime() - d1.getTime());
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays === 1;
+  };
+
+  // If the most recent practice is not today or yesterday, streak is 0
+  if (mostRecentDate !== today && !areConsecutiveDays(mostRecentDate, today)) {
+    return 0;
+  }
+
+  // Calculate consecutive days
+  let streak = 1;
+  let currentDate = mostRecentDate;
+
+  for (let i = 1; i < practiceHistory.length; i++) {
+    const prevDate = practiceHistory[i].date;
+    
+    if (areConsecutiveDays(prevDate, currentDate)) {
+      streak++;
+      currentDate = prevDate;
+    } else {
+      break;
+    }
+  }
+
+  return streak;
+};
+
 // Add Stripe checkout session creation endpoint
 app.post('/api/create-checkout-session', async (req, res) => {
   try {
@@ -1947,9 +2038,11 @@ app.get('/api/health', async (req, res) => {
 
 // Staging Mode Middleware (applied after health endpoint)
 const stagingModeCheck = async (req, res, next) => {
-  // Skip staging check for health endpoints and webhooks
+  // Skip staging check for health endpoints, webhooks, and streak endpoints
   const skipPaths = ['/api/health', '/api/stripe-webhook', '/api/webhook-diagnostics'];
-  if (skipPaths.some(path => req.path === path)) {
+  const skipPatterns = [/^\/api\/streak\//, /^\/api\/usage\//]; // Skip streak and usage endpoints
+  
+  if (skipPaths.some(path => req.path === path) || skipPatterns.some(pattern => pattern.test(req.path))) {
     return next();
   }
 
@@ -1963,7 +2056,9 @@ const stagingModeCheck = async (req, res, next) => {
   
   // In staging mode, check if user is authorized
   const authorizedEmails = ['aj@practiceqs.com', 'aj-k121@outlook.com'];
-  const { userId } = req.body || {};
+  
+  // Get userId from body (POST) or params (GET) or query
+  const userId = req.body?.userId || req.params?.userId || req.query?.userId;
   
   // If no userId provided, reject (except for contact form which doesn't require auth)
   if (!userId && !req.path.includes('/contact')) {
