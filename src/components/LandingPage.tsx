@@ -93,12 +93,13 @@ const LandingPage: React.FC = () => {
 
       {/* Top right buttons - only show if user is logged in */}
       {user && (
-        <div className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 flex items-center gap-1 sm:gap-2">
-          {/* Streak Counter - show to the left of upgrade/manage buttons */}
-          <StreakCounter className="mr-1 sm:mr-2" />
+        <div className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 flex items-center gap-0">
+          {/* Streak Counter - directly attached to buttons */}
+          <StreakCounter />
           
-          {/* Upgrade button - only show for non-premium users */}
-          {profile && profile.subscription_tier === 'free' && (
+          <div className="flex gap-1 sm:gap-2 ml-2">
+            {/* Upgrade button - only show for non-premium users */}
+            {profile && profile.subscription_tier === 'free' && (
             <button
               onClick={() => setShowPricingModal(true)}
               className="flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-2 bg-blue-50 text-blue-700 hover:bg-blue-100 border border-blue-200 rounded-lg transition-colors duration-200 shadow-sm"
@@ -125,16 +126,17 @@ const LandingPage: React.FC = () => {
             </button>
           )}
           
-          {/* Sign Out Button */}
-          <button
-            onClick={handleSignOut}
-            className="flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-2 bg-red-600 text-white hover:bg-red-700 border border-red-600 rounded-lg transition-colors duration-200 shadow-sm"
-          >
-            <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-            </svg>
-            <span className="text-xs sm:text-sm font-medium">Sign Out</span>
-          </button>
+            {/* Sign Out Button */}
+            <button
+              onClick={handleSignOut}
+              className="flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-2 bg-red-600 text-white hover:bg-red-700 border border-red-600 rounded-lg transition-colors duration-200 shadow-sm"
+            >
+              <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+              </svg>
+              <span className="text-xs sm:text-sm font-medium">Sign Out</span>
+            </button>
+          </div>
         </div>
       )}
       
