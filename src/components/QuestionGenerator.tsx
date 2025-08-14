@@ -946,7 +946,6 @@ const QuestionGenerator: React.FC = () => {
             <StreakCounter 
               ref={streakCounterRef}
               onStreakUpdate={setStreakData}
-              className="hidden sm:flex"
             />
             <div className="flex gap-1 sm:gap-2 ml-2">
             {/* Upgrade button - only show for non-premium users */}
@@ -1477,13 +1476,6 @@ const QuestionGenerator: React.FC = () => {
           onCancel={handleCancelGeneration}
           ref={loadingBarRef}
         />
-
-        {/* Mobile Streak Counter - show only on small screens */}
-        <div className="sm:hidden mb-4 flex justify-center">
-          <StreakCounter 
-            onStreakUpdate={setStreakData}
-          />
-        </div>
 
         {/* Generated Questions */}
         {generatedQuestions.length > 0 && (
