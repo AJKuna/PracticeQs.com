@@ -39,20 +39,21 @@ const StreakPopup: React.FC<StreakPopupProps> = ({ isOpen, onClose, streakCount 
           isVisible ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
         }`}
         style={{
-          background: 'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)', // Green gradient background
+          background: 'linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%)', // Orange gradient background
         }}
       >
-        {/* Green header with brain icon */}
+        {/* Orange header with brain icon */}
         <div className="text-center pt-8 pb-4">
           <div className="mb-4">
-            {/* Large brain icon with green glow effect */}
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-green-200 rounded-full shadow-lg">
+            {/* Large brain icon with orange glow effect */}
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-orange-200 rounded-full shadow-lg">
               <span 
                 className="text-4xl"
                 role="img" 
                 aria-label="brain"
                 style={{
-                  filter: 'drop-shadow(0 0 8px rgba(34, 197, 94, 0.3))',
+                  filter: 'drop-shadow(0 0 8px rgba(251, 146, 60, 0.3))',
+                  animation: 'pulse 2s infinite'
                 }}
               >
                 🧠
@@ -80,7 +81,7 @@ const StreakPopup: React.FC<StreakPopupProps> = ({ isOpen, onClose, streakCount 
         <div className="px-6 pb-8">
           <button
             onClick={handleClose}
-            className="w-full py-4 px-6 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-xl transition-colors duration-200 shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
+            className="w-full py-4 px-6 bg-orange-600 hover:bg-orange-700 text-white font-semibold rounded-xl transition-colors duration-200 shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
           >
             I'm committed to learning
           </button>
@@ -100,10 +101,10 @@ const StreakPopup: React.FC<StreakPopupProps> = ({ isOpen, onClose, streakCount 
         {/* Decorative elements */}
         <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden rounded-2xl">
           {/* Subtle sparkle effects */}
-          <div className="absolute top-8 left-8 w-2 h-2 bg-green-300 rounded-full opacity-60 animate-pulse"></div>
-          <div className="absolute top-16 right-12 w-1 h-1 bg-green-400 rounded-full opacity-80 animate-pulse" style={{ animationDelay: '0.5s' }}></div>
-          <div className="absolute bottom-20 left-12 w-1.5 h-1.5 bg-green-300 rounded-full opacity-70 animate-pulse" style={{ animationDelay: '1s' }}></div>
-          <div className="absolute bottom-32 right-8 w-1 h-1 bg-green-400 rounded-full opacity-60 animate-pulse" style={{ animationDelay: '1.5s' }}></div>
+          <div className="absolute top-8 left-8 w-2 h-2 bg-orange-300 rounded-full opacity-60 animate-pulse"></div>
+          <div className="absolute top-16 right-12 w-1 h-1 bg-orange-400 rounded-full opacity-80 animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+          <div className="absolute bottom-20 left-12 w-1.5 h-1.5 bg-orange-300 rounded-full opacity-70 animate-pulse" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute bottom-32 right-8 w-1 h-1 bg-orange-400 rounded-full opacity-60 animate-pulse" style={{ animationDelay: '1.5s' }}></div>
         </div>
       </div>
     </div>
