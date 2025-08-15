@@ -1,13 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CheckCircle, Users, ArrowRight, TrendingUp, X, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { hasMarketingConsent } from '../utils/consentManager';
 
 const NewLandingPage: React.FC = () => {
   const navigate = useNavigate();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const screenshots = ['/step1-screenshot.png', '/step2-screenshot.png', '/step3-screenshot.png'];
+
+  // Initialize AdSense
+  useEffect(() => {
+    try {
+      // Only initialize AdSense if user has given marketing consent (GDPR compliance)
+      if (hasMarketingConsent() && typeof window !== 'undefined' && (window as any).adsbygoogle) {
+        ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
+      }
+    } catch (error) {
+      console.error('AdSense initialization error:', error);
+    }
+  }, []);
   const currentImageIndex = selectedImage ? screenshots.indexOf(selectedImage) : -1;
 
   const handleGetStarted = () => {
@@ -584,6 +597,23 @@ const NewLandingPage: React.FC = () => {
           </div>
         </div>
       </footer>
+
+      {/* Google AdSense - Bottom of Landing Page */}
+      {hasMarketingConsent() && (
+        <div className="bg-gray-50 py-4">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center">
+              {/* LandingPageBottom */}
+              <ins className="adsbygoogle"
+                   style={{display: 'block'}}
+                   data-ad-client="ca-pub-3636761324152374"
+                   data-ad-slot="9067140454"
+                   data-ad-format="auto"
+                   data-full-width-responsive="true"></ins>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
