@@ -103,6 +103,22 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ isOpen, onClose }) => {
             {/* Latest Updates Header */}
             <h2 className="text-xl font-bold text-gray-900 mb-4">Latest Updates</h2>
             
+            {/* Introducing Streaks Card */}
+            <div 
+              className="bg-orange-50 border border-orange-200 rounded-xl p-4 mb-4 cursor-pointer transition-all duration-200 hover:bg-orange-100 hover:border-orange-300 hover:shadow-md transform hover:-translate-y-0.5"
+              onClick={handleClose}
+            >
+              <div className="flex items-start space-x-3">
+                <div className="text-2xl" style={{ animation: 'pulse 2s infinite' }}>🧠</div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-semibold text-orange-700 mb-1">
+                    Introducing Streaks
+                  </h3>
+                  <p className="text-gray-700 text-sm">Stay committed to learning and boost your streak!</p>
+                </div>
+              </div>
+            </div>
+
             {/* GCSE History AQA Card */}
             <div 
               className="bg-green-50 border border-green-200 rounded-xl p-4 mb-4 cursor-pointer transition-all duration-200 hover:bg-green-100 hover:border-green-300 hover:shadow-md transform hover:-translate-y-0.5"
@@ -140,34 +156,6 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ isOpen, onClose }) => {
                 <div className="text-2xl">🧬</div>
                 <div className="flex-1">
                   <h3 className="text-lg font-semibold text-gray-900 mb-1">GCSE Biology AQA + Edexcel</h3>
-                  <p className="text-gray-700 text-sm">Full update with comprehensive content</p>
-                </div>
-              </div>
-            </div>
-
-            {/* GCSE Chemistry AQA Card */}
-            <div 
-              className="bg-green-50 border border-green-200 rounded-xl p-4 mb-4 cursor-pointer transition-all duration-200 hover:bg-green-100 hover:border-green-300 hover:shadow-md transform hover:-translate-y-0.5"
-              onClick={() => handleSubjectClick('chemistry')}
-            >
-              <div className="flex items-start space-x-3">
-                <div className="text-2xl">⚗️</div>
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-1">GCSE Chemistry AQA</h3>
-                  <p className="text-gray-700 text-sm">Full update with comprehensive content</p>
-                </div>
-              </div>
-            </div>
-
-            {/* GCSE Physics AQA Card */}
-            <div 
-              className="bg-green-50 border border-green-200 rounded-xl p-4 cursor-pointer transition-all duration-200 hover:bg-green-100 hover:border-green-300 hover:shadow-md transform hover:-translate-y-0.5"
-              onClick={() => handleSubjectClick('physics')}
-            >
-              <div className="flex items-start space-x-3">
-                <div className="text-2xl">⚡</div>
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-1">GCSE Physics AQA</h3>
                   <p className="text-gray-700 text-sm">Full update with comprehensive content</p>
                 </div>
               </div>

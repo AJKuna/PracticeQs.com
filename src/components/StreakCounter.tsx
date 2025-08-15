@@ -72,11 +72,11 @@ const StreakCounter = forwardRef<StreakCounterRef, StreakCounterProps>(({ classN
 
   return (
     <div 
-      className={`inline-flex items-center gap-2 px-3 py-2 bg-green-100 text-green-800 rounded-full text-sm font-medium transition-all duration-300 transform ${
-        isAnimating ? 'scale-110 bg-green-200 animate-pulse' : ''
+      className={`inline-flex items-center gap-2 px-3 py-2 bg-orange-100 text-orange-800 rounded-full text-sm font-medium transition-all duration-300 transform ${
+        isAnimating ? 'scale-110 bg-orange-200 animate-pulse' : ''
       } ${className}`}
     >
-      <span className="text-lg" role="img" aria-label="brain">🧠</span>
+      <span className="text-lg" style={{ animation: 'pulse 2s infinite' }} role="img" aria-label="brain">🧠</span>
       <span className="font-semibold whitespace-nowrap">
         {streakData.currentStreak === 0 ? 'Start Streak' : 
          streakData.currentStreak === 1 ? 'Day 1' : 
