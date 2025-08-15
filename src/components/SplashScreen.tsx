@@ -8,7 +8,7 @@ interface SplashScreenProps {
 }
 
 const SplashScreen: React.FC<SplashScreenProps> = ({ isOpen, onClose }) => {
-  const { user, profile } = useAuth();
+  const { user, profile, updateLastSplashShown } = useAuth();
   const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
   const [isReturningUser, setIsReturningUser] = useState(false);
@@ -16,8 +16,14 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ isOpen, onClose }) => {
   useEffect(() => {
     if (isOpen) {
       setIsVisible(true);
+      // Update the last splash shown date when splash screen opens
+      updateLastSplashShown().catch(error => {
+        if (import.meta.env.DEV) {
+          console.error('❌ Failed to update last splash shown:', error);
+        }
+      });
     }
-  }, [isOpen]);
+  }, [isOpen, updateLastSplashShown]);
 
   useEffect(() => {
     if (profile && user) {

@@ -12,6 +12,7 @@ interface AuthContextType {
   profileLoading: boolean;
   showSplashScreen: boolean;
   closeSplashScreen: () => void;
+  updateLastSplashShown: () => Promise<void>;
   signIn: (email: string, password: string) => Promise<void>;
   signUp: (email: string, password: string, fullName: string) => Promise<void>;
   signInWithGoogle: () => Promise<void>;
@@ -263,11 +264,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
           console.log(`🔄 Processing ${event} - starting profile operations`);
           
-          // Show splash screen only on actual sign in, not token refresh
-          if (event === 'SIGNED_IN') {
-            setShowSplashScreen(true);
-          }
-          
           // ✅ CRITICAL FIX: Don't wait for profile operations to complete
           // Run them in the background so they don't block the auth flow
           createOrUpdateProfile(sessionUser).then(() => {
@@ -275,6 +271,25 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             // After profile creation/update, refresh the profile data
             refreshProfile().then(() => {
               console.log(`✅ Background refreshProfile completed for ${event}`);
+              
+              // Check if we should show splash screen only on actual sign in, not token refresh
+              if (event === 'SIGNED_IN') {
+                // Get the current profile to check if splash should be shown
+                getProfile(sessionUser.id).then((currentProfile) => {
+                  if (currentProfile && shouldShowSplashToday(currentProfile)) {
+                    if (import.meta.env.DEV) {
+                      console.log('🎉 Showing splash screen for user login');
+                    }
+                    setShowSplashScreen(true);
+                  } else {
+                    if (import.meta.env.DEV) {
+                      console.log('⏭️ Skipping splash screen - already shown today or user ineligible');
+                    }
+                  }
+                }).catch(error => {
+                  console.error('❌ Error checking splash screen eligibility:', error);
+                });
+              }
             }).catch(error => {
               console.error(`❌ Background refreshProfile failed for ${event}:`, error);
             });
@@ -351,6 +366,90 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setShowSplashScreen(false);
   };
 
+  // Function to update the last splash shown date
+  const updateLastSplashShown = async () => {
+    if (!user) return;
+    
+    try {
+      const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
+      
+      const { error } = await supabase
+        .from('profiles')
+        .update({
+          last_splash_shown: today,
+          updated_at: new Date().toISOString()
+        })
+        .eq('id', user.id);
+
+      if (error) {
+        // If column doesn't exist yet, just log warning and continue
+        if (error.message.includes("Could not find the 'last_splash_shown' column")) {
+          console.warn('⚠️ last_splash_shown column not found - please run migration. Using local storage fallback.');
+          // Use localStorage as temporary fallback
+          localStorage.setItem(`lastSplashShown_${user.id}`, today);
+          return;
+        }
+        console.error('❌ Error updating last splash shown:', error);
+      } else {
+        if (import.meta.env.DEV) {
+          console.log('✅ Updated last splash shown to today for user:', user.id);
+        }
+        // Invalidate cache to ensure fresh data
+        invalidateProfileCache(user.id);
+        // Refresh profile to get updated data
+        await refreshProfile();
+      }
+    } catch (error) {
+      console.error('❌ Exception updating last splash shown:', error);
+    }
+  };
+
+  // Function to check if user should see splash screen today
+  const shouldShowSplashToday = (userProfile: Profile | null): boolean => {
+    if (!userProfile) return false;
+    
+    // Always show for new users (created within last 24 hours)
+    const profileCreatedAt = new Date(userProfile.created_at);
+    const now = new Date();
+    const hoursSinceCreation = (now.getTime() - profileCreatedAt.getTime()) / (1000 * 60 * 60);
+    
+    const isNewUser = hoursSinceCreation < 24 && (
+      !userProfile.last_sign_in || 
+      (new Date(userProfile.last_sign_in).getTime() - profileCreatedAt.getTime()) < (1000 * 60 * 5) // 5 minutes
+    );
+    
+    if (isNewUser) {
+      if (import.meta.env.DEV) {
+        console.log('🆕 New user detected - showing splash screen');
+      }
+      return true;
+    }
+    
+    // For returning users, check if they've seen it today
+    const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
+    let lastSplashShown = userProfile.last_splash_shown;
+    
+    // Fallback to localStorage if database column doesn't exist
+    if (!lastSplashShown && user) {
+      lastSplashShown = localStorage.getItem(`lastSplashShown_${user.id}`);
+      if (lastSplashShown && import.meta.env.DEV) {
+        console.log('📱 Using localStorage fallback for last splash shown');
+      }
+    }
+    
+    if (!lastSplashShown || lastSplashShown !== today) {
+      if (import.meta.env.DEV) {
+        console.log('🔄 Returning user - showing splash screen for first login today');
+      }
+      return true;
+    }
+    
+    if (import.meta.env.DEV) {
+      console.log('✅ User already saw splash screen today - not showing');
+    }
+    return false;
+  };
+
   const value: AuthContextType = {
     user,
     profile,
@@ -358,6 +457,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     profileLoading,
     showSplashScreen,
     closeSplashScreen,
+    updateLastSplashShown,
     signIn,
     signUp,
     signInWithGoogle,

@@ -23,6 +23,7 @@ export type Json =
           subscription_start_date: string | null
           subscription_end_date: string | null
           daily_question_limit: number
+          last_splash_shown: string | null
         }
         Insert: {
           id: string
@@ -37,6 +38,7 @@ export type Json =
           subscription_start_date?: string | null
           subscription_end_date?: string | null
           daily_question_limit?: number
+          last_splash_shown?: string | null
         }
         Update: {
           id?: string
@@ -51,6 +53,7 @@ export type Json =
           subscription_start_date?: string | null
           subscription_end_date?: string | null
           daily_question_limit?: number
+          last_splash_shown?: string | null
         }
       }
       usage_logs: {
