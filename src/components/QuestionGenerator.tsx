@@ -25,28 +25,68 @@ const QuestionGenerator: React.FC = () => {
   const { user, profile } = useAuth();
   const normalizedSubject = subject?.replace(/-/g, ' ') || 'mathematics';
 
-  // State
-  const [searchTopic, setSearchTopic] = useState('');
+  // LocalStorage keys for persistence
+  const getStorageKey = (suffix: string) => `practiceqs_${normalizedSubject}_${suffix}`;
+  
+  // Helper functions for localStorage persistence
+  const saveToLocalStorage = (key: string, data: any) => {
+    try {
+      localStorage.setItem(key, JSON.stringify(data));
+    } catch (error) {
+      console.warn('Failed to save to localStorage:', error);
+    }
+  };
+
+  const loadFromLocalStorage = (key: string, defaultValue: any = null) => {
+    try {
+      const saved = localStorage.getItem(key);
+      return saved ? JSON.parse(saved) : defaultValue;
+    } catch (error) {
+      console.warn('Failed to load from localStorage:', error);
+      return defaultValue;
+    }
+  };
+
+  const clearFromLocalStorage = (key: string) => {
+    try {
+      localStorage.removeItem(key);
+    } catch (error) {
+      console.warn('Failed to clear from localStorage:', error);
+    }
+  };
+
+  // State with localStorage initialization
+  const [searchTopic, setSearchTopic] = useState(() => 
+    loadFromLocalStorage(getStorageKey('searchTopic'), '')
+  );
   const [showDropdown, setShowDropdown] = useState(false);
-  const [options, setOptions] = useState({
-    examLevel: 'gcse',
-    examBoard: '',
-    difficulty: 'easy',
-    questionCount: 10,
-    englishExamType: '', // New field for English Language vs Literature
-    historyUnit: '', // New field for History AQA units
-    geographyUnit: '', // New field for Geography AQA units
-    geographySection: '', // New field for Geography AQA unit sections
-    biologyUnit: '', // New field for Biology AQA units
-    chemistryUnit: '', // New field for Chemistry AQA units
-    biologyEdexcelUnit: '', // New field for Biology Edexcel units
-    physicsUnit: '' // New field for Physics AQA units
-  });
-  const [generatedQuestions, setGeneratedQuestions] = useState<any[]>([]);
-  const [generatedSolutions, setGeneratedSolutions] = useState<any[]>([]);
+  const [options, setOptions] = useState(() => 
+    loadFromLocalStorage(getStorageKey('options'), {
+      examLevel: 'gcse',
+      examBoard: '',
+      difficulty: 'easy',
+      questionCount: 10,
+      englishExamType: '', // New field for English Language vs Literature
+      historyUnit: '', // New field for History AQA units
+      geographyUnit: '', // New field for Geography AQA units
+      geographySection: '', // New field for Geography AQA unit sections
+      biologyUnit: '', // New field for Biology AQA units
+      chemistryUnit: '', // New field for Chemistry AQA units
+      biologyEdexcelUnit: '', // New field for Biology Edexcel units
+      physicsUnit: '' // New field for Physics AQA units
+    })
+  );
+  const [generatedQuestions, setGeneratedQuestions] = useState<any[]>(() => 
+    loadFromLocalStorage(getStorageKey('questions'), [])
+  );
+  const [generatedSolutions, setGeneratedSolutions] = useState<any[]>(() => 
+    loadFromLocalStorage(getStorageKey('solutions'), [])
+  );
   const [isGenerating, setIsGenerating] = useState(false);
   const [isGeneratingSolutions, setIsGeneratingSolutions] = useState(false);
-  const [showSolutions, setShowSolutions] = useState(false);
+  const [showSolutions, setShowSolutions] = useState(() => 
+    loadFromLocalStorage(getStorageKey('showSolutions'), false)
+  );
   const [alert, setAlert] = useState<any>(null);
   const [usage, setUsage] = useState<any>(null);
   const [showPricingModal, setShowPricingModal] = useState(false);
@@ -63,6 +103,27 @@ const QuestionGenerator: React.FC = () => {
   const [showStreakPopup, setShowStreakPopup] = useState(false);
   const [newStreakCount, setNewStreakCount] = useState(0);
   const streakCounterRef = useRef<StreakCounterRef>(null);
+
+  // Save to localStorage whenever state changes
+  useEffect(() => {
+    saveToLocalStorage(getStorageKey('searchTopic'), searchTopic);
+  }, [searchTopic, normalizedSubject]);
+
+  useEffect(() => {
+    saveToLocalStorage(getStorageKey('options'), options);
+  }, [options, normalizedSubject]);
+
+  useEffect(() => {
+    saveToLocalStorage(getStorageKey('questions'), generatedQuestions);
+  }, [generatedQuestions, normalizedSubject]);
+
+  useEffect(() => {
+    saveToLocalStorage(getStorageKey('solutions'), generatedSolutions);
+  }, [generatedSolutions, normalizedSubject]);
+
+  useEffect(() => {
+    saveToLocalStorage(getStorageKey('showSolutions'), showSolutions);
+  }, [showSolutions, normalizedSubject]);
 
   // Fetch user usage and streak data on component mount and when user changes
   useEffect(() => {
@@ -98,7 +159,7 @@ const QuestionGenerator: React.FC = () => {
   // Reset exam level to GCSE if KS3 is selected but subject is not mathematics
   useEffect(() => {
     if (options.examLevel === 'ks3' && normalizedSubject !== 'mathematics') {
-      setOptions(prev => ({ ...prev, examLevel: 'gcse', examBoard: '', englishExamType: '', historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '', biologyEdexcelUnit: '', physicsUnit: '' }));
+      setOptions((prev: any) => ({ ...prev, examLevel: 'gcse', examBoard: '', englishExamType: '', historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '', biologyEdexcelUnit: '', physicsUnit: '' }));
     }
   }, [normalizedSubject, options.examLevel]);
 
@@ -870,7 +931,14 @@ const QuestionGenerator: React.FC = () => {
     setShowSolutions(false);
     setIsGenerating(false);
     setIsCancelled(false);
-    setOptions(prev => ({ ...prev, historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '', biologyEdexcelUnit: '', physicsUnit: '' }));
+    setOptions((prev: any) => ({ ...prev, historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '', biologyEdexcelUnit: '', physicsUnit: '' }));
+    
+    // Clear localStorage when user explicitly chooses another topic
+    clearFromLocalStorage(getStorageKey('searchTopic'));
+    clearFromLocalStorage(getStorageKey('questions'));
+    clearFromLocalStorage(getStorageKey('solutions'));
+    clearFromLocalStorage(getStorageKey('showSolutions'));
+    // Note: We don't clear options as they might want to keep their exam level/board settings
   };
 
   const handleManageSubscription = async () => {
