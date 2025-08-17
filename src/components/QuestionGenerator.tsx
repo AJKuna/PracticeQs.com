@@ -13,7 +13,6 @@ import { API_CONFIG } from '../config/api';
 import { trackQuestionGeneration, trackPDFExport, trackButtonClick, trackError, trackSubscription } from '../utils/analytics';
 import { biologyGcseAqaUnits } from '../data/biologyGcseAqaUnits';
 import { chemistryGcseAqaUnits } from '../data/chemistryGcseAqaUnits';
-import { chemistryGcseEdexcelUnits } from '../data/chemistryGcseEdexcelUnits';
 import { biologyGcseEdexcelUnits } from '../data/biologyGcseEdexcelUnits';
 import { physicsGcseAqaUnits } from '../data/physicsGcseAqaUnits';
 import { getUserStreak, updateStreakOnGeneration, StreakData } from '../services/streakService';
