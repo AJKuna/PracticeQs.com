@@ -154,7 +154,8 @@
       "Parametric equations - A-level content",
       "Advanced algebraic manipulation (factor theorem) - A-level",
       "Exponential growth models using e - A-level (simple compound interest only at GCSE)",
-      "Advanced coordinate geometry (ellipses, hyperbolas) - A-level content"
+      "Advanced coordinate geometry (ellipses, hyperbolas) - A-level content",
+      "Heron's formula - A-level content"
     ],
     "solution_guidance": "Solutions must use only GCSE-level mathematics. For compound interest problems, use only the simple compound interest formula A = P(1 + r/100)^n. Do NOT use logarithms, natural log, or e. For exponential problems, use basic repeated multiplication or simple formulas. Avoid calculus-based explanations. Keep trigonometry to basic sin, cos, tan in right-angled triangles and simple graphs."
   }

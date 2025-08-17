@@ -13,6 +13,7 @@ import { API_CONFIG } from '../config/api';
 import { trackQuestionGeneration, trackPDFExport, trackButtonClick, trackError, trackSubscription } from '../utils/analytics';
 import { biologyGcseAqaUnits } from '../data/biologyGcseAqaUnits';
 import { chemistryGcseAqaUnits } from '../data/chemistryGcseAqaUnits';
+import { chemistryGcseEdexcelUnits } from '../data/chemistryGcseEdexcelUnits';
 import { biologyGcseEdexcelUnits } from '../data/biologyGcseEdexcelUnits';
 import { physicsGcseAqaUnits } from '../data/physicsGcseAqaUnits';
 import { getUserStreak, updateStreakOnGeneration, StreakData } from '../services/streakService';
@@ -72,6 +73,7 @@ const QuestionGenerator: React.FC = () => {
       geographySection: '', // New field for Geography AQA unit sections
       biologyUnit: '', // New field for Biology AQA units
       chemistryUnit: '', // New field for Chemistry AQA units
+      chemistryEdexcelUnit: '', // New field for Chemistry Edexcel units
       biologyEdexcelUnit: '', // New field for Biology Edexcel units
       physicsUnit: '' // New field for Physics AQA units
     })
@@ -1396,6 +1398,33 @@ const QuestionGenerator: React.FC = () => {
               </div>
             )}
 
+            {/* Chemistry Unit Selection - only for Edexcel GCSE Chemistry */}
+            {normalizedSubject === 'chemistry' && options.examBoard === 'edexcel' && (
+              <div className="sm:col-span-3">
+                <label htmlFor="chemistryEdexcelUnit" className="block text-base font-semibold text-gray-800 mb-2">
+                  Chemistry Unit
+                </label>
+                <select
+                  id="chemistryEdexcelUnit"
+                  value={options.chemistryEdexcelUnit}
+                  onChange={(e) => setOptions({ ...options, chemistryEdexcelUnit: e.target.value })}
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                >
+                  <option value="">Select a Chemistry unit</option>
+                  <option value="key-concepts-chemistry">1. Key concepts in chemistry</option>
+                  <option value="states-matter-mixtures">2. States of matter and mixtures</option>
+                  <option value="chemical-changes">3. Chemical changes</option>
+                  <option value="extracting-metals-equilibria">4. Extracting metals and equilibria</option>
+                  <option value="separate-chemistry-1">5. Separate chemistry 1</option>
+                  <option value="groups-periodic-table">6. Groups in the periodic table</option>
+                  <option value="rates-reaction-energy-changes">7. Rates of reaction and energy changes</option>
+                  <option value="fuels-earth-science">8. Fuels and Earth science</option>
+                  <option value="separate-chemistry-2">9. Separate chemistry 2</option>
+                  <option value="core-practicals">10. Core Practicals</option>
+                </select>
+              </div>
+            )}
+
             {/* Physics Unit Selection - only for AQA GCSE Physics */}
             {normalizedSubject === 'physics' && options.examBoard === 'aqa' && (
               <div className="sm:col-span-3">
@@ -1512,6 +1541,7 @@ const QuestionGenerator: React.FC = () => {
                 geographySection={options.geographySection}
                 biologyUnit={options.biologyUnit}
                 chemistryUnit={options.chemistryUnit}
+                chemistryEdexcelUnit={options.chemistryEdexcelUnit}
                 biologyEdexcelUnit={options.biologyEdexcelUnit}
                 physicsUnit={options.physicsUnit}
               />

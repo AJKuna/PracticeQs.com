@@ -55,3 +55,10 @@ update_to_premium.sql
 # Temporary files
 *.tmp
 *.temp
+
+# Supabase backup files
+backup.sql
+backup_2025-08-16.sql
+/supabase_backups/
+
+

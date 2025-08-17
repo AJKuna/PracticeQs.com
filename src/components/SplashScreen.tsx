@@ -153,16 +153,16 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ isOpen, onClose }) => {
               </div>
             </div>
 
-            {/* GCSE Biology AQA + Edexcel Card */}
+            {/* GCSE Chemistry Edexcel Card */}
             <div 
               className="bg-green-50 border border-green-200 rounded-xl p-4 mb-4 cursor-pointer transition-all duration-200 hover:bg-green-100 hover:border-green-300 hover:shadow-md transform hover:-translate-y-0.5"
-              onClick={() => handleSubjectClick('biology')}
+              onClick={() => handleSubjectClick('chemistry')}
             >
               <div className="flex items-start space-x-3">
-                <div className="text-2xl">🧬</div>
+                <div className="text-2xl">🧪</div>
                 <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-1">GCSE Biology AQA + Edexcel</h3>
-                  <p className="text-gray-700 text-sm">Full update with comprehensive content</p>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-1">GCSE Chemistry Edexcel</h3>
+                  <p className="text-gray-700 text-sm">Full update with unit-based structure and comprehensive topics</p>
                 </div>
               </div>
             </div>

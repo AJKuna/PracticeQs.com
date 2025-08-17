@@ -4,7 +4,7 @@ import { mathKs3Topics } from '../data/mathKs3Topics.ts';
 import { biologyGcseAqaUnits } from '../data/biologyGcseAqaUnits.ts';
 import { biologyGcseEdexcelUnits } from '../data/biologyGcseEdexcelUnits.ts';
 import { chemistryGcseAqaUnits } from '../data/chemistryGcseAqaUnits.ts';
-import { chemistryGcseEdexcelTopics } from '../data/chemistryGcseEdexcelTopics.ts';
+import { chemistryGcseEdexcelUnits } from '../data/chemistryGcseEdexcelUnits.ts';
 import { chemistryGcseOcrATopics } from '../data/chemistryGcseOcrATopics.ts';
 import { physicsGcseAqaUnits } from '../data/physicsGcseAqaUnits.ts';
 import { physicsGcseEdexcelTopics } from '../data/physicsGcseEdexcelTopics.ts';
@@ -26,6 +26,7 @@ interface TopicDropdownProps {
   geographySection?: string;
   biologyUnit?: string;
   chemistryUnit?: string;
+  chemistryEdexcelUnit?: string;
   biologyEdexcelUnit?: string;
   physicsUnit?: string;
 }
@@ -42,6 +43,7 @@ const TopicDropdown: React.FC<TopicDropdownProps> = ({
   geographySection,
   biologyUnit,
   chemistryUnit,
+  chemistryEdexcelUnit,
   biologyEdexcelUnit,
   physicsUnit
 }) => {
@@ -69,8 +71,8 @@ const TopicDropdown: React.FC<TopicDropdownProps> = ({
     if (normalizedSubject === 'chemistry' && examLevel === 'gcse' && examBoard === 'aqa' && chemistryUnit) {
       return chemistryGcseAqaUnits[chemistryUnit] || [];
     }
-    if (normalizedSubject === 'chemistry' && examLevel === 'gcse' && examBoard === 'edexcel') {
-      return chemistryGcseEdexcelTopics;
+    if (normalizedSubject === 'chemistry' && examLevel === 'gcse' && examBoard === 'edexcel' && chemistryEdexcelUnit) {
+      return chemistryGcseEdexcelUnits[chemistryEdexcelUnit] || [];
     }
     if (normalizedSubject === 'chemistry' && examLevel === 'gcse' && examBoard === 'ocr') {
       return chemistryGcseOcrATopics;
