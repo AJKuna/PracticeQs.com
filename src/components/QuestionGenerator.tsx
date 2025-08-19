@@ -25,8 +25,11 @@ const QuestionGenerator: React.FC = () => {
   const { user, profile } = useAuth();
   const normalizedSubject = subject?.replace(/-/g, ' ') || 'mathematics';
 
-  // LocalStorage keys for persistence
-  const getStorageKey = (suffix: string) => `practiceqs_${normalizedSubject}_${suffix}`;
+  // LocalStorage keys for persistence - user-specific when logged in
+  const getStorageKey = (suffix: string) => {
+    const userPrefix = user?.id ? `user_${user.id}_` : 'anonymous_';
+    return `practiceqs_${userPrefix}${normalizedSubject}_${suffix}`;
+  };
   
   // Helper functions for localStorage persistence
   const saveToLocalStorage = (key: string, data: any) => {

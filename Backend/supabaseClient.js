@@ -29,6 +29,9 @@ export const supabase = createClient(supabaseUrl, supabaseServiceKey, {
     autoRefreshToken: false,
     persistSession: false,
     detectSessionInUrl: false
+  },
+  db: {
+    schema: 'public'
   }
 });
 

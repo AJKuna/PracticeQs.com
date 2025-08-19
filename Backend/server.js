@@ -141,7 +141,22 @@ const checkDailyUsage = async (userId) => {
 
     if (profileError) {
       console.error('Error fetching user profile:', profileError);
-      return { canGenerate: false, error: 'Failed to verify user account' };
+      // For non-existent users or schema errors, return default free user settings
+      if (profileError.code === 'PGRST116' || profileError.code === 'PGRST106') {
+        return { 
+          canGenerate: true, 
+          usage: 0, 
+          limit: 15, 
+          isPremium: false 
+        };
+      }
+      return { 
+        canGenerate: false, 
+        usage: 0, 
+        limit: 15, 
+        isPremium: false, 
+        error: 'Failed to verify user account' 
+      };
     }
 
     // Premium users have unlimited questions
@@ -168,7 +183,13 @@ const checkDailyUsage = async (userId) => {
     };
   } catch (error) {
     console.error('Error checking daily usage:', error);
-    return { canGenerate: false, error: 'Failed to check usage limits' };
+    return { 
+      canGenerate: false, 
+      usage: 0, 
+      limit: 15, 
+      isPremium: false, 
+      error: 'Failed to check usage limits' 
+    };
   }
 };
 
@@ -402,6 +423,9 @@ function normalizeAnswer(answer) {
 const generateQuestions = async (prompt) => {
   console.log('🤖 Calling OpenAI API...');
   console.log('📝 Prompt being sent:', prompt.substring(0, 200) + '...');
+  
+  // Add delay to prevent rate limiting
+  await new Promise(resolve => setTimeout(resolve, 1000));
   
   try {
     const response = await fetch('https://api.openai.com/v1/chat/completions', {

@@ -213,7 +213,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setProfileLoading(false);
       console.log('🔄 Profile refresh completed - profileLoading set to false');
     }
-  }, [profileLoading]); // ✅ FIX: Remove profile dependency to prevent infinite loop
+  }, []); // ✅ FIX: No dependencies to prevent infinite loop since we use currentUserRef
 
   // Handle auth state changes
   useEffect(() => {
@@ -396,8 +396,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         }
         // Invalidate cache to ensure fresh data
         invalidateProfileCache(user.id);
-        // Refresh profile to get updated data
-        await refreshProfile();
+        // Don't call refreshProfile here as it causes infinite loop on splash screen
       }
     } catch (error) {
       console.error('❌ Exception updating last splash shown:', error);
