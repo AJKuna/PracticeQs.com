@@ -27,19 +27,21 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ isOpen, onClose }) => {
 
   useEffect(() => {
     if (profile && user) {
-      // Determine if user is new or returning
-      const profileCreatedAt = new Date(profile.created_at);
-      const now = new Date();
-      const hoursSinceCreation = (now.getTime() - profileCreatedAt.getTime()) / (1000 * 60 * 60);
+      // Determine if user is new or returning based on whether they've ever seen a splash screen
+      // New users: have never seen a splash screen (no last_splash_shown)
+      // Returning users: have seen a splash screen before (last_splash_shown exists)
       
-      // Consider user "new" if profile was created within the last 24 hours
-      // and they don't have a last_sign_in or it's very recent to creation
-      const isNewUser = hoursSinceCreation < 24 && (
-        !profile.last_sign_in || 
-        (new Date(profile.last_sign_in).getTime() - profileCreatedAt.getTime()) < (1000 * 60 * 5) // 5 minutes
-      );
+      let hasSeenSplashBefore = !!profile.last_splash_shown;
       
-      setIsReturningUser(!isNewUser);
+      // Fallback to localStorage if database column doesn't exist
+      if (!hasSeenSplashBefore) {
+        const lastSplashShownLocal = localStorage.getItem(`lastSplashShown_${user.id}`);
+        hasSeenSplashBefore = !!lastSplashShownLocal;
+      }
+      
+      // New user = has never seen splash before
+      // Returning user = has seen splash before
+      setIsReturningUser(hasSeenSplashBefore);
     }
   }, [profile, user]);
 

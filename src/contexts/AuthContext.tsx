@@ -35,6 +35,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   
   // Use ref to track current user to avoid dependency issues
   const currentUserRef = useRef<User | null>(null);
+  // Track if splash was already shown this session to prevent multiple shows
+  const splashShownThisSessionRef = useRef<boolean>(false);
 
   // Add debug utilities in development mode
   useEffect(() => {
@@ -274,12 +276,21 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
               
               // Check if we should show splash screen only on actual sign in, not token refresh
               if (event === 'SIGNED_IN') {
+                // Check if we already showed splash this session
+                if (splashShownThisSessionRef.current) {
+                  if (import.meta.env.DEV) {
+                    console.log('⏭️ Splash already shown this session - skipping');
+                  }
+                  return;
+                }
+                
                 // Get the current profile to check if splash should be shown
                 getProfile(sessionUser.id).then((currentProfile) => {
                   if (currentProfile && shouldShowSplashToday(currentProfile)) {
                     if (import.meta.env.DEV) {
                       console.log('🎉 Showing splash screen for user login');
                     }
+                    splashShownThisSessionRef.current = true;
                     setShowSplashScreen(true);
                   } else {
                     if (import.meta.env.DEV) {
@@ -302,6 +313,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         console.log(`🔐 Setting profile to null for event: ${event}`);
         setProfile(null);
         setShowSplashScreen(false);
+        // Reset splash session flag on sign out
+        splashShownThisSessionRef.current = false;
       }
       
       console.log(`🔄 Setting loading to false for event: ${event}`);
@@ -364,6 +377,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const closeSplashScreen = () => {
     setShowSplashScreen(false);
+    // Mark as shown this session when user closes it
+    splashShownThisSessionRef.current = true;
   };
 
   // Function to update the last splash shown date
@@ -407,24 +422,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const shouldShowSplashToday = (userProfile: Profile | null): boolean => {
     if (!userProfile) return false;
     
-    // Always show for new users (created within last 24 hours)
-    const profileCreatedAt = new Date(userProfile.created_at);
-    const now = new Date();
-    const hoursSinceCreation = (now.getTime() - profileCreatedAt.getTime()) / (1000 * 60 * 60);
-    
-    const isNewUser = hoursSinceCreation < 24 && (
-      !userProfile.last_sign_in || 
-      (new Date(userProfile.last_sign_in).getTime() - profileCreatedAt.getTime()) < (1000 * 60 * 5) // 5 minutes
-    );
-    
-    if (isNewUser) {
-      if (import.meta.env.DEV) {
-        console.log('🆕 New user detected - showing splash screen');
-      }
-      return true;
-    }
-    
-    // For returning users, check if they've seen it today
+    // Check if user has already seen splash today - this applies to ALL users
     const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
     let lastSplashShown = userProfile.last_splash_shown;
     
@@ -436,17 +434,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
     }
     
-    if (!lastSplashShown || lastSplashShown !== today) {
+    // If user already saw splash today, don't show it again
+    if (lastSplashShown === today) {
       if (import.meta.env.DEV) {
-        console.log('🔄 Returning user - showing splash screen for first login today');
+        console.log('✅ User already saw splash screen today - not showing');
       }
-      return true;
+      return false;
     }
     
+    // If user hasn't seen splash today, show it (regardless of new vs returning)
     if (import.meta.env.DEV) {
-      console.log('✅ User already saw splash screen today - not showing');
+      console.log('🎉 User has not seen splash today - showing');
     }
-    return false;
+    return true;
   };
 
   const value: AuthContextType = {
