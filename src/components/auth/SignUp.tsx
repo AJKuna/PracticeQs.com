@@ -17,8 +17,9 @@ export const SignUp: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [signupSuccess, setSignupSuccess] = useState(false);
-  const [userEmail, setUserEmail] = useState('');
+  // REMOVED: signupSuccess and userEmail no longer needed since email confirmation is disabled
+  // const [signupSuccess, setSignupSuccess] = useState(false);
+  // const [userEmail, setUserEmail] = useState('');
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -94,70 +95,8 @@ export const SignUp: React.FC = () => {
 
   // DISABLED: Email confirmation screen (to be re-enabled later)
   // TODO: Re-enable this when email confirmation is working
-  /*
-  // Show success message after signup
-  if (signupSuccess) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 dark:bg-gray-50">
-        <div className="max-w-md w-full space-y-8">
-          <div className="text-center bg-white dark:bg-white p-8 rounded-lg shadow-sm">
-            <img
-              className="mx-auto h-16 w-auto"
-              src="/logo.svg"
-              alt="PracticeQs"
-            />
-            
-            {/* Success Icon */}
-            <div className="mx-auto mt-6 flex h-12 w-12 items-center justify-center rounded-full bg-green-100 dark:bg-green-100">
-              <svg className="h-6 w-6 text-green-600 dark:text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-              </svg>
-            </div>
-
-            <h2 className="mt-4 text-center text-3xl font-extrabold text-gray-900 dark:text-gray-900">
-              Check your email
-            </h2>
-            
-            <div className="mt-4 space-y-3">
-              <p className="text-center text-sm text-gray-600 dark:text-gray-600">
-                We've sent a confirmation link to:
-              </p>
-              <p className="text-center text-base font-medium text-gray-900 dark:text-gray-900">
-                {userEmail}
-              </p>
-              <p className="text-center text-sm text-gray-600 dark:text-gray-600">
-                Click the link in the email to activate your account. If you don't see it, check your junk folder.
-              </p>
-            </div>
-
-            <div className="mt-8 space-y-4">
-              <Button
-                onClick={() => navigate('/login')}
-                fullWidth
-                variant="outline"
-              >
-                Go to Sign In
-              </Button>
-              
-              <p className="text-center text-xs text-gray-500 dark:text-gray-500">
-                Didn't receive the email?{' '}
-                <button
-                  onClick={() => {
-                    setSignupSuccess(false);
-                    setFormData(prev => ({ ...prev, password: '', confirmPassword: '' }));
-                  }}
-                  className="font-medium text-blue-600 hover:text-blue-500 dark:text-blue-600 dark:hover:text-blue-500"
-                >
-                  Try again
-                </button>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-  */
+  // The email confirmation JSX code was removed to prevent build errors
+  // It can be restored from git history when needed
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
