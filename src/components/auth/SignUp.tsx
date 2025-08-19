@@ -5,6 +5,10 @@ import { Button } from '../ui/Button';
 import { Input } from '../ui/Input';
 import { trackAuth, trackButtonClick } from '../../utils/analytics';
 
+// TODO: TEMPORARY CHANGE - Email confirmation disabled
+// This component temporarily skips email confirmation screen
+// Re-enable email confirmation flow when email service is fixed
+
 export const SignUp: React.FC = () => {
   const navigate = useNavigate();
   const { signUp, signInWithGoogle } = useAuth();
@@ -46,10 +50,16 @@ export const SignUp: React.FC = () => {
 
     try {
       await signUp(formData.email, formData.password, formData.fullName);
-      setUserEmail(formData.email);
-      setSignupSuccess(true);
       // Track successful sign up
       trackAuth('sign_up', 'email');
+      
+      // TODO: TEMPORARY - Re-enable email confirmation screen later
+      // Temporarily skip email confirmation and go directly to home
+      navigate('/home');
+      
+      // DISABLED: Email confirmation flow (to be re-enabled later)
+      // setUserEmail(formData.email);
+      // setSignupSuccess(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred during sign up');
     } finally {
@@ -82,6 +92,9 @@ export const SignUp: React.FC = () => {
     });
   };
 
+  // DISABLED: Email confirmation screen (to be re-enabled later)
+  // TODO: Re-enable this when email confirmation is working
+  /*
   // Show success message after signup
   if (signupSuccess) {
     return (
@@ -144,6 +157,7 @@ export const SignUp: React.FC = () => {
       </div>
     );
   }
+  */
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
