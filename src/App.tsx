@@ -132,17 +132,16 @@ const StagingGate: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         </div>
         
         <h1 className="text-2xl font-bold text-gray-900 mb-4">
-          🚧 Coming Soon
+          🚧 We’ll be back soon!
         </h1>
         
         <p className="text-gray-600 mb-6">
-          Practice Qs is currently in development. We're working hard to bring you the best 
-          question generation experience for educational purposes.
+        Practice Qs is temporarily down while we fix a few things. It shouldn’t take long — thank you for your patience.
         </p>
         
         <div className="space-y-4">
           <div className="text-sm text-gray-500">
-            Want early access? Contact us:
+            Got any questions? Contact us:
           </div>
           <a
             href="mailto:aj@practiceqs.com"
