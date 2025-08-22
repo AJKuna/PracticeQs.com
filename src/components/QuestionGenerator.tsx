@@ -1084,16 +1084,7 @@ const QuestionGenerator: React.FC = () => {
           </div>
         )}
 
-{/* Enhanced Debugging - check console */}
-{usage && console.log('=== USAGE DEBUG START ===')}
-{usage && console.log('Usage object:', JSON.stringify(usage, null, 2))}
-{usage && console.log('isPremium value:', usage?.isPremium)}
-{usage && console.log('isPremium type:', typeof usage?.isPremium)}
-{usage && console.log('isPremium === false:', usage?.isPremium === false)}
-{usage && console.log('isPremium == false:', usage?.isPremium == false)}
-{usage && console.log('!usage.isPremium:', !usage?.isPremium)}
-{usage && console.log('Condition (usage && !usage.isPremium):', usage && !usage?.isPremium)}
-{usage && console.log('=== USAGE DEBUG END ===')}
+{/* Enhanced Debugging - check console: currently removed */}
 
 
 {/* Usage Counter */}
@@ -1682,6 +1673,13 @@ const QuestionGenerator: React.FC = () => {
             </div>
           </div>
         )}
+        
+        {/* Disclaimer - Always at the bottom of content */}
+        <div className="text-center mt-8 pb-4">
+          <p className="text-xs text-gray-500">
+            Practice Qs may make mistakes. Check with your specification.
+          </p>
+        </div>
       </div>
 
       {/* Pricing Modal */}

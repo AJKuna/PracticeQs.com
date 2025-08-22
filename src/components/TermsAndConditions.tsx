@@ -42,7 +42,7 @@ const TermsAndConditions: React.FC = () => {
           <section>
             <h2 className="text-xl font-semibold text-gray-900 mb-3">2. Educational Purpose</h2>
             <p className="text-gray-700">
-              This practice question generator is intended for educational use only. While we strive for accuracy, we recommend cross-referencing with official curriculum materials and exam board specifications.
+            This practice question generator is intended solely for educational use and practice.
             </p>
           </section>
 
@@ -62,8 +62,17 @@ const TermsAndConditions: React.FC = () => {
 
           <section>
             <h2 className="text-xl font-semibold text-gray-900 mb-3">5. Limitation of Liability</h2>
-            <p className="text-gray-700">
-              We provide this platform "as is." We do not guarantee the accuracy, completeness, or suitability of generated content for exam preparation. Use of this content is at your own discretion.
+            <p className="text-gray-700 mb-3">
+              We provide this platform "as is." By using Practice Qs, you acknowledge and agree that:
+            </p>
+            <ul className="list-disc list-inside text-gray-700 space-y-2 ml-4">
+              <li>Practice Qs may generate mistakes or content that does not perfectly align with exam specifications.</li>
+              <li>You are responsible for verifying all questions and answers against your exam board's official materials.</li>
+              <li>We do not guarantee the accuracy, completeness, or suitability of any generated content for exam preparation.</li>
+              <li>We are not responsible for exam results, academic performance, or grades.</li>
+            </ul>
+            <p className="text-gray-700 mt-3">
+              Use of this content is at your own discretion.
             </p>
           </section>
 
