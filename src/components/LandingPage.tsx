@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import PricingModal from './PricingModal';
-import FeedbackWidget from './FeedbackWidget';
+
 import SplashScreen from './SplashScreen';
 import StreakCounter from './StreakCounter';
 import { API_CONFIG } from '../config/api';
@@ -223,8 +223,7 @@ const LandingPage: React.FC = () => {
         onClose={() => setShowPricingModal(false)} 
       />
 
-      {/* Feedback Widget */}
-      <FeedbackWidget />
+
 
       {/* Splash Screen */}
       <SplashScreen isOpen={showSplashScreen} onClose={closeSplashScreen} />

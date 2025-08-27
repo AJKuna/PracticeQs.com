@@ -52,14 +52,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   }, [user, profile, loading, profileLoading]);
 
-  // Function to create or update profile with email from auth user
+  // Function to ensure profile exists and update if needed
+  // Note: New profiles are automatically created by database trigger, this just handles updates
   const createOrUpdateProfile = async (authUser: User) => {
     console.log(`🔄 createOrUpdateProfile started for user: ${authUser.id}`);
     
     try {
-      console.log(`🔍 Fetching existing profile for user: ${authUser.id}`);
+      // Wait a moment for database trigger to complete for new users
+      await new Promise(resolve => setTimeout(resolve, 500));
       
-      // First try to get existing profile
+      console.log(`🔍 Fetching profile for user: ${authUser.id}`);
+      
+      // Try to get profile (should exist due to database trigger)
       const { data: existingProfile, error: fetchError } = await supabase
         .from('profiles')
         .select('*')
@@ -67,71 +71,55 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         .single();
 
       console.log(`🔍 Profile fetch completed for user: ${authUser.id}`);
-      console.log(`🔍 Existing profile:`, existingProfile ? 'found' : 'not found');
+      console.log(`🔍 Profile found:`, existingProfile ? 'yes' : 'no');
       console.log(`🔍 Fetch error:`, fetchError ? fetchError.message : 'none');
 
-      if (fetchError && fetchError.code !== 'PGRST116') {
-        // PGRST116 is "not found" error, which is expected for new users
-        console.error('❌ Error fetching profile:', fetchError);
-        console.log(`🔄 createOrUpdateProfile completed with fetch error for user: ${authUser.id}`);
-        return;
-      }
-
-      if (existingProfile) {
-        console.log(`🔍 Profile exists - checking if email update needed for user: ${authUser.id}`);
-        
-        // Profile exists, update it with current email if it's missing
-        if (!existingProfile.email && authUser.email) {
-          console.log(`🔄 Updating profile email for user: ${authUser.id}`);
+      if (fetchError) {
+        if (fetchError.code === 'PGRST116') {
+          // Profile not found - this shouldn't happen with the trigger, but let's handle it
+          console.warn(`⚠️ Profile not found for user: ${authUser.id} - database trigger may have failed`);
           
-          const { error: updateError } = await supabase
+          // Fallback: create profile manually
+          const { error: insertError } = await supabase
             .from('profiles')
-            .update({
-              email: authUser.email,
-              updated_at: new Date().toISOString()
-            })
-            .eq('id', authUser.id);
+            .insert({
+              id: authUser.id,
+              email: authUser.email || '',
+              full_name: authUser.user_metadata?.full_name || ''
+            });
 
-          console.log(`🔍 Profile email update completed for user: ${authUser.id}`);
-          console.log(`🔍 Update error:`, updateError ? updateError.message : 'none');
-
-          if (updateError) {
-            console.error('❌ Error updating profile email:', updateError);
+          if (insertError) {
+            console.error('❌ Error creating fallback profile:', insertError);
           } else {
-            console.log(`✅ Profile email updated successfully for user: ${authUser.id}`);
-            // Invalidate cache after successful update
+            console.log(`✅ Fallback profile created for user: ${authUser.id}`);
             invalidateProfileCache(authUser.id);
           }
         } else {
-          console.log(`✅ Profile email already exists or no email to update for user: ${authUser.id}`);
+          console.error('❌ Error fetching profile:', fetchError);
         }
-      } else {
-        console.log(`🔄 Creating new profile for user: ${authUser.id}`);
+        return;
+      }
+
+      // Profile exists - check if email needs updating (for older users with null emails)
+      if (existingProfile && !existingProfile.email && authUser.email) {
+        console.log(`🔄 Updating missing email for user: ${authUser.id}`);
         
-        // Profile doesn't exist, create new one with email
-        const { error: insertError } = await supabase
+        const { error: updateError } = await supabase
           .from('profiles')
-          .insert({
-            id: authUser.id,
-            email: authUser.email || '',
-            full_name: authUser.user_metadata?.full_name || '',
-            subscription_tier: 'free',
-            subscription_status: 'active',
-            daily_question_limit: 15,
-            created_at: new Date().toISOString(),
+          .update({
+            email: authUser.email,
             updated_at: new Date().toISOString()
-          });
+          })
+          .eq('id', authUser.id);
 
-        console.log(`🔍 Profile creation completed for user: ${authUser.id}`);
-        console.log(`🔍 Insert error:`, insertError ? insertError.message : 'none');
-
-        if (insertError) {
-          console.error('❌ Error creating profile:', insertError);
+        if (updateError) {
+          console.error('❌ Error updating profile email:', updateError);
         } else {
-          console.log(`✅ Profile created successfully for user: ${authUser.id}`);
-          // Invalidate cache after profile creation
+          console.log(`✅ Profile email updated successfully for user: ${authUser.id}`);
           invalidateProfileCache(authUser.id);
         }
+      } else {
+        console.log(`✅ Profile is up to date for user: ${authUser.id}`);
       }
       
       console.log(`✅ createOrUpdateProfile completed successfully for user: ${authUser.id}`);
@@ -140,7 +128,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       console.log(`❌ createOrUpdateProfile failed for user: ${authUser.id}`);
       
       // ✅ CRITICAL: Don't let profile operations block the auth flow
-      // The user should still be able to use the app even if profile operations fail
       console.warn('⚠️ Profile operation failed - continuing with auth flow');
     }
   };

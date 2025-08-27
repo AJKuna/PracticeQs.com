@@ -5,10 +5,11 @@ import { useAuth } from '../contexts/AuthContext';
 import jsPDF from 'jspdf';
 import PricingModal from './PricingModal';
 import TopicDropdown from './TopicDropdown';
-import FeedbackWidget from './FeedbackWidget';
+
 import LoadingBar from './LoadingBar';
 import StreakCounter, { StreakCounterRef } from './StreakCounter';
 import StreakPopup from './StreakPopup';
+import StickyFeedbackBar from './StickyFeedbackBar';
 import { API_CONFIG } from '../config/api';
 import { trackQuestionGeneration, trackPDFExport, trackButtonClick, trackError, trackSubscription } from '../utils/analytics';
 import { biologyGcseAqaUnits } from '../data/biologyGcseAqaUnits';
@@ -1695,8 +1696,9 @@ const QuestionGenerator: React.FC = () => {
         streakCount={newStreakCount}
       />
 
-      {/* Feedback Widget */}
-      <FeedbackWidget />
+      {/* Sticky Feedback Bar - shows after questions are generated */}
+      <StickyFeedbackBar show={generatedQuestions.length > 0} />
+
     </div>
   );
 };
