@@ -6,10 +6,13 @@ import dotenv from 'dotenv';
 import { encoding_for_model } from 'tiktoken';
 import { supabase } from './supabaseClient.js';
 import Stripe from 'stripe';
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 
 // Load environment variables
 dotenv.config();
+
+// Initialize Resend
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Validate critical environment variables
 console.log('🔍 Environment Variable Check:');
@@ -1961,49 +1964,10 @@ app.post('/api/contact', async (req, res) => {
       return res.status(400).json({ error: 'Name, email, and message are required' });
     }
 
-    // Create transporter - supports both Gmail and Microsoft email
-    let transporterConfig;
-    const emailUser = process.env.EMAIL_USER;
-    
-    if (emailUser && emailUser.includes('@gmail.com')) {
-      // Gmail configuration
-      transporterConfig = {
-        service: 'gmail',
-        auth: {
-          user: process.env.EMAIL_USER,
-          pass: process.env.EMAIL_PASS
-        }
-      };
-    } else if (emailUser && (emailUser.includes('@outlook.com') || emailUser.includes('@hotmail.com') || emailUser.includes('@live.com'))) {
-      // Microsoft email configuration
-      transporterConfig = {
-        host: 'smtp-mail.outlook.com',
-        port: 587,
-        secure: false,
-        auth: {
-          user: process.env.EMAIL_USER,
-          pass: process.env.EMAIL_PASS
-        }
-      };
-    } else {
-      // Default to Office 365 SMTP for non-Gmail addresses (includes business emails)
-      transporterConfig = {
-        host: 'smtp-mail.outlook.com',
-        port: 587,
-        secure: false,
-        auth: {
-          user: process.env.EMAIL_USER,
-          pass: process.env.EMAIL_PASS
-        }
-      };
-    }
-
-    const transporter = nodemailer.createTransport(transporterConfig);
-
-    // Email content
-    const mailOptions = {
-      from: process.env.EMAIL_USER,
-      to: 'aj@practiceqs.com',
+    // Send email using Resend
+    await resend.emails.send({
+      from: 'PracticeQs Contact Form <onboarding@resend.dev>',
+      to: ['aj@practiceqs.com'],
       subject: `Contact Form Message from ${name}`,
       html: `
         <h3>New Contact Form Submission</h3>
@@ -2014,11 +1978,8 @@ app.post('/api/contact', async (req, res) => {
         <hr>
         <p><em>This message was sent from the PracticeQs contact form.</em></p>
       `,
-      replyTo: email
-    };
-
-    // Send email
-    await transporter.sendMail(mailOptions);
+      reply_to: email
+    });
     
     console.log('✅ Contact form email sent successfully');
     res.json({ success: true, message: 'Message sent successfully!' });
