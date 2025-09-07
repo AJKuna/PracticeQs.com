@@ -60,6 +60,7 @@ update_to_premium.sql
 backup.sql
 backup_2025-08-16.sql
 backup_2025-08-26.sql  
+backup_2025-09-06.sql
 /supabase_backups/
 
 
