@@ -796,7 +796,7 @@ const QuestionGenerator: React.FC = () => {
 
     // Add title - positioned consistently for both subjects
     if (normalizedSubject === 'mathematics') {
-      doc.setFontSize(20);
+      doc.setFontSize(16);
       doc.setFont('helvetica', 'bold');
       const titleText = formatMathForPDF(searchTopic);
       // Calculate available width for title (leave space for logo in top right)
@@ -812,7 +812,7 @@ const QuestionGenerator: React.FC = () => {
       yPosition = getNextLinePosition(firstLineY + gridSpacing * 3); // Reduced gap to questions
     } else {
       // For lined subjects, align with lines
-      doc.setFontSize(18); // Bigger font size
+      doc.setFontSize(14); // Reduced font size
       doc.setFont('helvetica', 'bold');
       const titleText = formatMathForPDF(searchTopic);
       // Calculate available width for title (leave space for logo in top right)
