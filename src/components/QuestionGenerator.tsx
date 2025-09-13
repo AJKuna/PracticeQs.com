@@ -65,6 +65,9 @@ const QuestionGenerator: React.FC = () => {
     loadFromLocalStorage(getStorageKey('searchTopic'), '')
   );
   const [showDropdown, setShowDropdown] = useState(false);
+  const [selectedTopic, setSelectedTopic] = useState(() => 
+    loadFromLocalStorage(getStorageKey('selectedTopic'), '')
+  );
   const [options, setOptions] = useState(() => 
     loadFromLocalStorage(getStorageKey('options'), {
       examLevel: 'gcse',
@@ -116,6 +119,10 @@ const QuestionGenerator: React.FC = () => {
   useEffect(() => {
     saveToLocalStorage(getStorageKey('searchTopic'), searchTopic);
   }, [searchTopic, normalizedSubject]);
+
+  useEffect(() => {
+    saveToLocalStorage(getStorageKey('selectedTopic'), selectedTopic);
+  }, [selectedTopic, normalizedSubject]);
 
   useEffect(() => {
     saveToLocalStorage(getStorageKey('options'), options);
@@ -281,6 +288,30 @@ const QuestionGenerator: React.FC = () => {
   };
 
   const placeholder = getDynamicPlaceholder();
+
+  // Function to get available topics for Religious Studies
+  const getAvailableTopics = (): string[] => {
+    if (normalizedSubject === 'religious studies' && options.examLevel === 'gcse' && options.examBoard === 'aqa' && options.religiousStudiesComponent && options.religiousStudiesUnit) {
+      const componentData = religiousStudiesGcseAqaUnits[options.religiousStudiesComponent];
+      if (componentData && componentData[options.religiousStudiesUnit]) {
+        return componentData[options.religiousStudiesUnit] || [];
+      }
+    }
+    return [];
+  };
+
+  // Check if we should show topic grid (for Religious Studies with proper selections)
+  const shouldShowTopicGrid = normalizedSubject === 'religious studies' && 
+    options.examLevel === 'gcse' && 
+    options.examBoard === 'aqa' && 
+    options.religiousStudiesComponent && 
+    options.religiousStudiesUnit;
+
+  // Get filtered topics for display
+  const availableTopics = getAvailableTopics();
+  const filteredTopicsForDisplay = searchTopic.trim() 
+    ? availableTopics.filter(topic => topic.toLowerCase().includes(searchTopic.toLowerCase()))
+    : availableTopics;
 
   // Clean question string to format values
   const cleanQuestion = (question: string) => {
@@ -452,9 +483,10 @@ const QuestionGenerator: React.FC = () => {
     setIsCancelled(false);
     setAlert(null);
     
-    // Validate topic is entered
-    if (!searchTopic.trim()) {
-      setAlert({ type: 'error', message: 'Please enter a topic' });
+    // Validate topic is entered or selected
+    const topicToUse = selectedTopic || searchTopic.trim();
+    if (!topicToUse) {
+      setAlert({ type: 'error', message: 'Please select or enter a topic' });
       setIsGenerating(false);
       return;
     }
@@ -539,7 +571,7 @@ const QuestionGenerator: React.FC = () => {
         },
         body: JSON.stringify({
           subject: subjectToSend,
-          topic: searchTopic,
+          topic: topicToUse,
           examLevel: options.examLevel,
           examBoard: options.examBoard,
           difficulty: options.difficulty,
@@ -596,7 +628,7 @@ const QuestionGenerator: React.FC = () => {
         }
         
         // Track successful question generation
-        trackQuestionGeneration(normalizedSubject, searchTopic, data.length, options.difficulty);
+        trackQuestionGeneration(normalizedSubject, topicToUse, data.length, options.difficulty);
         
         // Track subject-specific question generation for popularity analysis
         // trackSubjectQuestionGeneration(normalizedSubject, searchTopic, data.length, options.difficulty, options.examLevel, options.examBoard); // This line was removed from imports
@@ -798,7 +830,7 @@ const QuestionGenerator: React.FC = () => {
     if (normalizedSubject === 'mathematics') {
       doc.setFontSize(16);
       doc.setFont('helvetica', 'bold');
-      const titleText = formatMathForPDF(searchTopic);
+      const titleText = formatMathForPDF(selectedTopic || searchTopic);
       // Calculate available width for title (leave space for logo in top right)
       const logoReservedWidth = 50; // Reserve space for "Practice Qs" logo
       const titleMaxWidth = lineLength - logoReservedWidth;
@@ -814,7 +846,7 @@ const QuestionGenerator: React.FC = () => {
       // For lined subjects, align with lines
       doc.setFontSize(14); // Reduced font size
       doc.setFont('helvetica', 'bold');
-      const titleText = formatMathForPDF(searchTopic);
+      const titleText = formatMathForPDF(selectedTopic || searchTopic);
       // Calculate available width for title (leave space for logo in top right)
       const logoReservedWidth = 50; // Reserve space for "Practice Qs" logo
       const titleMaxWidth = lineLength - logoReservedWidth;
@@ -926,21 +958,23 @@ const QuestionGenerator: React.FC = () => {
   // Export PDF with questions only
   const exportToPDFQuestionsOnly = () => {
     const doc = generatePDFContent(false);
-    const fileName = `${normalizedSubject}-${searchTopic.replace(/\s+/g, '-')}-questions.pdf`;
+    const topicForFileName = selectedTopic || searchTopic.trim();
+    const fileName = `${normalizedSubject}-${topicForFileName.replace(/\s+/g, '-')}-questions.pdf`;
     doc.save(fileName);
     
     // Track PDF export
-    trackPDFExport(normalizedSubject, searchTopic, generatedQuestions.length);
+    trackPDFExport(normalizedSubject, topicForFileName, generatedQuestions.length);
   };
 
   // Export PDF with solutions included
   const exportToPDFWithSolutions = () => {
     const doc = generatePDFContent(true);
-    const fileName = `${normalizedSubject}-${searchTopic.replace(/\s+/g, '-')}-questions-with-solutions.pdf`;
+    const topicForFileName = selectedTopic || searchTopic.trim();
+    const fileName = `${normalizedSubject}-${topicForFileName.replace(/\s+/g, '-')}-questions-with-solutions.pdf`;
     doc.save(fileName);
     
     // Track PDF export
-    trackPDFExport(normalizedSubject, searchTopic, generatedQuestions.length);
+    trackPDFExport(normalizedSubject, topicForFileName, generatedQuestions.length);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -950,6 +984,7 @@ const QuestionGenerator: React.FC = () => {
 
   const resetForm = () => {
     setSearchTopic('');
+    setSelectedTopic('');
     setGeneratedQuestions([]);
     setGeneratedSolutions([]);
     setShowSolutions(false);
@@ -959,6 +994,7 @@ const QuestionGenerator: React.FC = () => {
     
     // Clear localStorage when user explicitly chooses another topic
     clearFromLocalStorage(getStorageKey('searchTopic'));
+    clearFromLocalStorage(getStorageKey('selectedTopic'));
     clearFromLocalStorage(getStorageKey('questions'));
     clearFromLocalStorage(getStorageKey('solutions'));
     clearFromLocalStorage(getStorageKey('showSolutions'));
@@ -992,24 +1028,52 @@ const QuestionGenerator: React.FC = () => {
     }
   };
 
-  // Handle topic selection from dropdown
+  // Handle topic selection from dropdown or grid
   const handleTopicSelect = (topic: string) => {
-    setSearchTopic(topic);
-    setShowDropdown(false);
+    if (shouldShowTopicGrid) {
+      // For Religious Studies grid mode
+      setSelectedTopic(topic);
+      setSearchTopic(topic);
+      setShowDropdown(false);
+    } else {
+      // For other subjects (existing behavior)
+      setSearchTopic(topic);
+      setShowDropdown(false);
+    }
   };
 
   // Handle input change and show dropdown
   const handleTopicInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearchTopic(value);
-    setShowDropdown(value.trim().length > 0);
+    
+    if (shouldShowTopicGrid) {
+      // For Religious Studies, clear selected topic if typing something different
+      if (value !== selectedTopic) {
+        setSelectedTopic('');
+      }
+      // If input exactly matches a topic, select it
+      if (availableTopics.includes(value)) {
+        setSelectedTopic(value);
+      }
+    } else {
+      // For other subjects (existing behavior)
+      setShowDropdown(value.trim().length > 0);
+    }
   };
 
   // Handle input focus to show dropdown
   const handleTopicInputFocus = () => {
-    if (searchTopic.trim().length > 0) {
+    if (!shouldShowTopicGrid && searchTopic.trim().length > 0) {
       setShowDropdown(true);
     }
+  };
+
+  // Handle clear button
+  const handleClearTopic = () => {
+    setSearchTopic('');
+    setSelectedTopic('');
+    setShowDropdown(false);
   };
 
   return (
@@ -1473,7 +1537,11 @@ const QuestionGenerator: React.FC = () => {
                 <select
                   id="religiousStudiesComponent"
                   value={options.religiousStudiesComponent}
-                  onChange={(e) => setOptions({ ...options, religiousStudiesComponent: e.target.value, religiousStudiesUnit: '' })}
+                  onChange={(e) => {
+                    setOptions({ ...options, religiousStudiesComponent: e.target.value, religiousStudiesUnit: '' });
+                    setSelectedTopic('');
+                    setSearchTopic('');
+                  }}
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 >
                   <option value="">Select a Religious Studies component</option>
@@ -1495,7 +1563,11 @@ const QuestionGenerator: React.FC = () => {
                 <select
                   id="religiousStudiesUnit"
                   value={options.religiousStudiesUnit}
-                  onChange={(e) => setOptions({ ...options, religiousStudiesUnit: e.target.value })}
+                  onChange={(e) => {
+                    setOptions({ ...options, religiousStudiesUnit: e.target.value });
+                    setSelectedTopic('');
+                    setSearchTopic('');
+                  }}
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 >
                   <option value="">
@@ -1573,48 +1645,115 @@ const QuestionGenerator: React.FC = () => {
               <div className="relative group">
                 <span className="cursor-help text-sm">ℹ️</span>
                 <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 text-xs text-white bg-gray-800 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10">
-                  Type any topic you want to practice - the suggestions are just examples!
+                  {shouldShowTopicGrid ? 'Search for a topic or select from below' : 'Type any topic you want to practice - the suggestions are just examples!'}
                 </div>
               </div>
             </div>
-            <div className="relative">
+            <div className="relative flex gap-2">
               <input
                 type="text"
                 id="topic"
                 value={searchTopic}
                 onChange={handleTopicInputChange}
                 onFocus={handleTopicInputFocus}
-                placeholder={placeholder}
+                placeholder={shouldShowTopicGrid ? 'Search for a topic or select from below...' : placeholder}
                 autoComplete="off"
                 className="topic-search-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 !text-black !bg-white focus:!bg-white focus:!text-black"
               />
-              <TopicDropdown
-                searchTopic={searchTopic}
-                onTopicSelect={handleTopicSelect}
-                isVisible={showDropdown}
-                subject={normalizedSubject}
-                examLevel={options.examLevel}
-                examBoard={options.examBoard}
-                historyUnit={options.historyUnit}
-                geographyUnit={options.geographyUnit}
-                geographySection={options.geographySection}
-                biologyUnit={options.biologyUnit}
-                chemistryUnit={options.chemistryUnit}
-                chemistryEdexcelUnit={options.chemistryEdexcelUnit}
-                biologyEdexcelUnit={options.biologyEdexcelUnit}
-                physicsUnit={options.physicsUnit}
-                religiousStudiesComponent={options.religiousStudiesComponent}
-                religiousStudiesUnit={options.religiousStudiesUnit}
-              />
+              {(searchTopic || selectedTopic) && (
+                <button
+                  type="button"
+                  onClick={handleClearTopic}
+                  className="mt-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                >
+                  Clear
+                </button>
+              )}
+              {!shouldShowTopicGrid && (
+                <TopicDropdown
+                  searchTopic={searchTopic}
+                  onTopicSelect={handleTopicSelect}
+                  isVisible={showDropdown}
+                  subject={normalizedSubject}
+                  examLevel={options.examLevel}
+                  examBoard={options.examBoard}
+                  historyUnit={options.historyUnit}
+                  geographyUnit={options.geographyUnit}
+                  geographySection={options.geographySection}
+                  biologyUnit={options.biologyUnit}
+                  chemistryUnit={options.chemistryUnit}
+                  chemistryEdexcelUnit={options.chemistryEdexcelUnit}
+                  biologyEdexcelUnit={options.biologyEdexcelUnit}
+                  physicsUnit={options.physicsUnit}
+                  religiousStudiesComponent={options.religiousStudiesComponent}
+                  religiousStudiesUnit={options.religiousStudiesUnit}
+                />
+              )}
             </div>
           </div>
+
+          {/* Topic Grid for Religious Studies */}
+          {shouldShowTopicGrid && (
+            <div>
+              <h3 className="text-base font-semibold text-gray-800 mb-4">Choose a topic to practice:</h3>
+              {filteredTopicsForDisplay.length > 0 ? (
+                <>
+                  <p className="text-sm text-gray-600 mb-4">Showing {filteredTopicsForDisplay.length} topics</p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+                    {filteredTopicsForDisplay.map((topic: string, index: number) => (
+                      <button
+                        key={index}
+                        type="button"
+                        onClick={() => handleTopicSelect(topic)}
+                        className={`p-4 text-left border rounded-lg transition-all duration-200 ${
+                          selectedTopic === topic
+                            ? `border-blue-500 bg-blue-50 ring-2 ring-blue-500 ring-opacity-50`
+                            : 'border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50'
+                        }`}
+                      >
+                        <span className="text-sm text-gray-900">{topic}</span>
+                        {selectedTopic === topic && (
+                          <div className="mt-1 flex items-center">
+                            <svg className="w-4 h-4 text-green-500 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span className="text-xs text-green-600 font-medium">Selected</span>
+                          </div>
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                </>
+              ) : !searchTopic.trim() ? (
+                <p className="text-gray-500 text-center py-8">Please select a component and religion/theme first to see available topics.</p>
+              ) : null}
+
+              {/* Selection status message - shows for both selected topics and custom topics */}
+              {(selectedTopic || (searchTopic.trim() && !availableTopics.includes(searchTopic.trim()))) && (
+                <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg">
+                  <div className="flex items-center">
+                    <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span className="text-sm text-green-800">
+                      Selected: "<strong>{selectedTopic || searchTopic.trim()}</strong>". Click "Generate Questions" to continue.
+                    </span>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
 
           {/* Action Buttons */}
           <div className="flex gap-6 pt-4">
             <button
               type="submit"
-              disabled={isGenerating}
-              className={`flex-1 flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-gray-900 ${subjectTheme.bg} ${subjectTheme.hover} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${subjectTheme.bg.replace('bg-', '')}`}
+              disabled={isGenerating || (shouldShowTopicGrid && !selectedTopic && !searchTopic.trim())}
+              className={`flex-1 flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium ${
+                isGenerating || (shouldShowTopicGrid && !selectedTopic && !searchTopic.trim())
+                  ? 'text-gray-400 bg-gray-200 cursor-not-allowed'
+                  : `text-gray-900 ${subjectTheme.bg} ${subjectTheme.hover} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${subjectTheme.bg.replace('bg-', '')}`
+              }`}
             >
               Generate Questions
             </button>
