@@ -697,7 +697,7 @@ Do not include any commentary, notes, or explanations — return only the JSON.
         `- ${t.name}: ${t.subtopics ? t.subtopics.join(', ') : ''}`
       ).join('\n') : '';
       
-      // Get marking scheme info for Geography subjects
+      // Get marking scheme info for Geography and Religious Studies subjects
       let markingInstructions = '';
       if (subject === 'geography' && specData?.marking_scheme) {
         const markingScheme = specData.marking_scheme;
@@ -732,6 +732,38 @@ MARKING REQUIREMENTS FOR EASY QUESTIONS:
 - Use mark values: ${markingScheme.valid_mark_values.filter(v => v <= 4).join(', ')} marks
 - Focus on "Name", "Identify", "Describe", "State" command words
 - Keep questions straightforward and factual`;
+        }
+      } else if (subject === 'religious-studies' && specData?.marking_scheme) {
+        const markingScheme = specData.marking_scheme;
+        if (difficulty === 'easy') {
+          markingInstructions = `
+CRITICAL MARKING REQUIREMENTS FOR EASY QUESTIONS:
+- Use ONLY these mark values: 1 mark and 2 marks
+- 1-mark questions: Use "State", "Give", "Name", or "What is meant by" command words
+- 1-mark answers: Very short recall fact or definition (one word or short phrase)
+- 2-mark questions: Use "Give two..." command words  
+- 2-mark answers: Two simple points, each point gets 1 mark (no explanation needed)
+- Focus on basic recall and simple factual knowledge
+- NO explanation or development required for easy questions`;
+        } else if (difficulty === 'medium') {
+          markingInstructions = `
+MARKING REQUIREMENTS FOR MEDIUM QUESTIONS:
+- Use ONLY these mark values: 4 marks and 5 marks
+- 4-mark questions: Use "Explain two..." command words
+- 4-mark answers: Two explained points developed with 'because' or relevant example/teaching (AO1)
+- 5-mark questions: Use "Explain two... refer to sacred writing or another source" command words
+- 5-mark answers: Two explained points with explicit reference to scripture, authority, or tradition (AO1 with required reference)
+- Questions require explanation and development, not just simple recall`;
+        } else if (difficulty === 'hard') {
+          markingInstructions = `
+CRITICAL MARKING REQUIREMENTS FOR HARD QUESTIONS:
+- Use ONLY 12 marks (+ 3 SPaG marks = 15 total)
+- Command word: "Evaluate this statement"
+- Must include: "In your answer you should: • give reasoned arguments to support this statement • give reasoned arguments to support a different point of view • reach a justified conclusion"
+- Requires balanced evaluation (AO2) with reference to beliefs, arguments, and sources of wisdom/authority
+- Students must provide arguments for AND against the statement
+- Must reach a justified conclusion
+- Include reference to religious beliefs, teachings, and sources of authority`;
         }
       }
       
@@ -799,7 +831,7 @@ Return as a JSON object with a "questions" array. Each question object must have
         `- ${t.name}: ${t.subtopics ? t.subtopics.join(', ') : ''}`
       ).join('\n') : '';
       
-      // Get marking scheme info for Geography subjects
+      // Get marking scheme info for Geography and Religious Studies subjects
       let markingInstructions = '';
       if (subject === 'geography' && specData?.marking_scheme) {
         const markingScheme = specData.marking_scheme;
@@ -843,6 +875,44 @@ MARKING REQUIREMENTS FOR EASY QUESTIONS:
 
 `;
         }
+      } else if (subject === 'religious-studies' && specData?.marking_scheme) {
+        const markingScheme = specData.marking_scheme;
+        if (difficulty === 'easy') {
+          markingInstructions = `
+CRITICAL MARKING REQUIREMENTS FOR EASY QUESTIONS:
+- Use ONLY these mark values: 1 mark and 2 marks
+- 1-mark questions: Use "State", "Give", "Name", or "What is meant by" command words
+- 1-mark answers: Very short recall fact or definition (one word or short phrase)
+- 2-mark questions: Use "Give two..." command words  
+- 2-mark answers: Two simple points, each point gets 1 mark (no explanation needed)
+- Focus on basic recall and simple factual knowledge
+- NO explanation or development required for easy questions
+
+`;
+        } else if (difficulty === 'medium') {
+          markingInstructions = `
+MARKING REQUIREMENTS FOR MEDIUM QUESTIONS:
+- Use ONLY these mark values: 4 marks and 5 marks
+- 4-mark questions: Use "Explain two..." command words
+- 4-mark answers: Two explained points developed with 'because' or relevant example/teaching (AO1)
+- 5-mark questions: Use "Explain two... refer to sacred writing or another source" command words
+- 5-mark answers: Two explained points with explicit reference to scripture, authority, or tradition (AO1 with required reference)
+- Questions require explanation and development, not just simple recall
+
+`;
+        } else if (difficulty === 'hard') {
+          markingInstructions = `
+CRITICAL MARKING REQUIREMENTS FOR HARD QUESTIONS:
+- Use ONLY 12 marks (+ 3 SPaG marks = 15 total)
+- Command word: "Evaluate this statement"
+- Must include: "In your answer you should: • give reasoned arguments to support this statement • give reasoned arguments to support a different point of view • reach a justified conclusion"
+- Requires balanced evaluation (AO2) with reference to beliefs, arguments, and sources of wisdom/authority
+- Students must provide arguments for AND against the statement
+- Must reach a justified conclusion
+- Include reference to religious beliefs, teachings, and sources of authority
+
+`;
+        }
       }
       
       prompt = `
@@ -856,7 +926,7 @@ MARKING REQUIREMENTS FOR EASY QUESTIONS:
       - Do NOT include marks like [4 marks] in question text
       - Break down answers step by step with mark allocations
       - Use plain text math (x^2, not LaTeX)
-      ${subject === 'geography' ? '- Must use the specified mark values from the marking scheme above' : ''}
+      ${(subject === 'geography' || subject === 'religious-studies') ? '- Must use the specified mark values from the marking scheme above' : ''}
       
       ${specData ? `Exam Board: ${specData.exam_board} | ${specData?.command_words ? "Command words: ${specData.command_words.join(', ')}" : ""}` : ''}
       ${specData?.marking_scheme ? `
@@ -881,7 +951,7 @@ Return JSON format:
           {
             "question": "question text only",
             "answer": "step-by-step answer with (X marks) for each step",
-            "marks": total_number${subject === 'geography' ? ' (must be from valid mark values above)' : ''}
+            "marks": total_number${(subject === 'geography' || subject === 'religious-studies') ? ' (must be from valid mark values above)' : ''}
           }
         ]
       }

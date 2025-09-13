@@ -1,73 +1,44 @@
 {
   "questions": [
     {
-      "question": "'Religious believers should not use contraception.' Evaluate this statement.",
-      "marks": 12,
+      "question": "Explain two Christian beliefs about the nature of God.",
+      "marks": 4,
+      "topic": "Christianity: Beliefs and teachings",
+      "answer": [
+        "First belief: Christians believe God is omnipotent (1) which means God is all-powerful and can do anything, as shown when God created the universe from nothing (1)",
+        "Second belief: Christians believe God is omnibenevolent (1) which means God is all-loving and shows perfect love to all creation, as demonstrated by sending Jesus to save humanity (1)"
+      ],
+      "explanation": "This is a 4-mark question using 'Explain two' command word. Each belief needs a point (1 mark) plus development with 'because' or example (1 mark)."
+    },
+    {
+      "question": "Explain two ways Muslims show their devotion during Hajj.",
+      "marks": 4,
+      "topic": "Islam: Practices",
+      "answer": [
+        "First way: Muslims perform Tawaf by walking seven times around the Kaaba (1) because this follows the example of Prophet Muhammad and shows submission to Allah (1)",
+        "Second way: Muslims throw stones at the pillars in Mina (1) because this symbolically rejects Satan and shows their commitment to following Allah's guidance (1)"
+      ],
+      "explanation": "This is a 4-mark question requiring explanation and development of two ways Muslims show devotion."
+    },
+    {
+      "question": "Explain two religious beliefs about marriage. Refer to sacred writings or another source of religious belief and teaching in your answer.",
+      "marks": 5,
       "topic": "Theme A: Relationships and families",
       "answer": [
-        "Arguments supporting the statement:",
-        "• Catholic Church teaches contraception is wrong as it prevents natural purpose of sex",
-        "• Some believe it goes against God's command to 'be fruitful and multiply'",
-        "• Natural family planning is seen as acceptable alternative",
-        "• Life begins at conception, some contraceptives prevent implantation",
-        "",
-        "Arguments against the statement:",
-        "• Many Protestant denominations accept contraception for family planning",
-        "• Islamic teaching generally permits contraception within marriage",
-        "• Responsible parenthood includes planning family size",
-        "• Contraception can protect health and prevent spread of disease",
-        "",
-        "Evaluation:",
-        "• Different religious traditions have varying views",
-        "• Modern interpretations often more accepting than traditional views",
-        "• Personal conscience plays important role in decision",
-        "",
-        "Conclusion:",
-        "While some religious groups oppose contraception, many accept it as part of responsible family planning, suggesting the statement is too absolute."
+        "First belief: Marriage is a sacred covenant blessed by God (1) because in Genesis it states that 'a man will leave his father and mother and be united to his wife' (1), showing marriage was part of God's plan from creation (1)",
+        "Second belief: Marriage should be permanent and indissoluble (1) as Jesus taught 'what God has joined together, let no one separate' (Mark 10:9) (1), meaning divorce goes against God's will (1)"
       ],
-      "explanation": "This question requires detailed knowledge of religious teachings about contraception and the ability to evaluate different viewpoints."
+      "explanation": "This is a 5-mark question requiring explicit reference to sacred writings. Each belief needs explanation with scriptural support."
     },
     {
-      "question": "Explain how religious believers might respond to the problem of evil and suffering.",
-      "marks": 8,
-      "topic": "Theme C: The existence of God and revelation",
+      "question": "Explain two religious attitudes to abortion. Refer to sacred writings or another source of religious belief and teaching in your answer.",
+      "marks": 5,
+      "topic": "Theme B: Religion and life", 
       "answer": [
-        "1. Free will defence (2 marks):",
-        "• God gave humans free will",
-        "• Evil results from human choices",
-        "",
-        "2. Test of faith (2 marks):",
-        "• Suffering tests and strengthens faith",
-        "• Example of Job in scripture",
-        "",
-        "3. Soul-making (2 marks):",
-        "• Suffering helps develop moral character",
-        "• Opportunity for spiritual growth",
-        "",
-        "4. Greater good argument (2 marks):",
-        "• God has a greater purpose we can't understand",
-        "• Evil and suffering serve ultimate divine plan"
+        "First attitude: Some Christians oppose abortion in all circumstances (1) because they believe life begins at conception, and the commandment 'You shall not murder' (Exodus 20:13) (1) applies to unborn life as it is sacred to God (1)",
+        "Second attitude: Some religious believers accept abortion in extreme circumstances (1) following the principle of lesser evil, where saving the mother's life takes priority (1) as Islamic teaching permits abortion to save the mother's life (1)"
       ],
-      "explanation": "This question tests understanding of theological responses to a key philosophical challenge to religious belief."
-    },
-    {
-      "question": "Compare and contrast Islamic and Christian beliefs about life after death.",
-      "marks": 8,
-      "topic": "Beliefs and teachings",
-      "answer": [
-        "Similarities (4 marks):",
-        "1. Both believe in resurrection of the body (1)",
-        "2. Both teach final judgment by God (1)",
-        "3. Actions in this life affect afterlife (1)",
-        "4. Eternal existence of the soul (1)",
-        "",
-        "Differences (4 marks):",
-        "1. Islamic belief in Barzakh vs Christian immediate judgment (1)",
-        "2. Different descriptions of paradise/heaven (1)",
-        "3. Islamic physical descriptions vs Christian spiritual focus (1)",
-        "4. Role of Jesus in Christian judgment vs Allah's direct judgment (1)"
-      ],
-      "explanation": "This question tests ability to analyze similarities and differences between religious beliefs."
+      "explanation": "This is a 5-mark question requiring religious attitudes with reference to sources of authority and teaching."
     }
   ]
-} 
+}

@@ -205,5 +205,66 @@
       "Shariah law",
       "Islamic scholars"
     ]
+  },
+  "marking_scheme": {
+    "valid_mark_values": [1, 2, 4, 5, 12],
+    "mark_descriptors": {
+      "1": "Part a - State/Give/Name/What is meant by - very short recall fact or definition (one word or short phrase)",
+      "2": "Part b - Give two... - two simple points, each point gets 1 mark (no explanation needed)",
+      "4": "Part c - Explain two... - two explained points developed with 'because' or relevant example/teaching (AO1)",
+      "5": "Part d - Explain two... refer to sacred writing or another source - two explained points with explicit reference to scripture/authority/tradition (AO1 with required reference)",
+      "12": "Part e - Evaluate this statement - balanced evaluation (AO2) with reference to beliefs, arguments, and sources of wisdom/authority (+3 SPaG marks)"
+    },
+    "command_words_by_marks": {
+      "1": ["State", "Give", "Name", "What is meant by"],
+      "2": ["Give two"],
+      "4": ["Explain two"],
+      "5": ["Explain two... refer to sacred writing or another source"],
+      "12": ["Evaluate this statement"]
+    },
+    "question_structure": {
+      "five_part_question": {
+        "part_a": {
+          "marks": 1,
+          "command_words": ["State", "Give", "Name", "What is meant by"],
+          "type": "Short recall fact or definition",
+          "answer_length": "One word or short phrase"
+        },
+        "part_b": {
+          "marks": 2,
+          "command_words": ["Give two"],
+          "type": "Two simple points",
+          "answer_length": "Each point gets 1 mark, no explanation needed"
+        },
+        "part_c": {
+          "marks": 4,
+          "command_words": ["Explain two"],
+          "type": "Two explained points",
+          "answer_length": "Developed with 'because' or relevant example/teaching",
+          "assessment_objective": "AO1"
+        },
+        "part_d": {
+          "marks": 5,
+          "command_words": ["Explain two... refer to sacred writing or another source"],
+          "type": "Two explained points with reference",
+          "answer_length": "Explicit reference to scripture, authority, or tradition",
+          "assessment_objective": "AO1 with required reference"
+        },
+        "part_e": {
+          "marks": 12,
+          "spag_marks": 3,
+          "total_marks": 15,
+          "command_words": ["Evaluate this statement"],
+          "type": "Balanced evaluation",
+          "requirements": [
+            "Give reasoned arguments to support this statement",
+            "Give reasoned arguments to support a different point of view", 
+            "Reach a justified conclusion"
+          ],
+          "assessment_objective": "AO2",
+          "reference_required": "Reference to beliefs, arguments, and sources of wisdom/authority"
+        }
+      }
+    }
   }
 } 

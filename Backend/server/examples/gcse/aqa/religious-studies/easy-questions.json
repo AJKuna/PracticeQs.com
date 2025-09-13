@@ -1,54 +1,55 @@
 {
   "questions": [
     {
-      "question": "Explain two Christian beliefs about the nature of God.",
-      "marks": 4,
+      "question": "What is meant by the Trinity?",
+      "marks": 1,
+      "topic": "Christianity: Beliefs and teachings",
+      "answer": "The belief that God exists as three persons in one - Father, Son and Holy Spirit",
+      "explanation": "This is a 1-mark definition question using 'What is meant by' command word. Answer should be a short, accurate definition."
+    },
+    {
+      "question": "State what is meant by Tawhid.",
+      "marks": 1,
+      "topic": "Islam: Beliefs and teachings", 
+      "answer": "The oneness/unity of Allah",
+      "explanation": "This is a 1-mark recall question using 'State' command word. Answer is a brief definition."
+    },
+    {
+      "question": "Give two Christian beliefs about the afterlife.",
+      "marks": 2,
       "topic": "Christianity: Beliefs and teachings",
       "answer": [
-        "First belief: God is omnipotent/all-powerful (1) which means He can do anything, as shown in the creation story (1)",
-        "Second belief: God is omnibenevolent/all-loving (1) which means He loves and cares for all His creation equally (1)"
+        "Heaven exists (1)",
+        "There will be a Day of Judgement (1)"
       ],
-      "explanation": "This question tests knowledge of Christian beliefs about God's nature. Each belief needs a description and development for full marks."
+      "explanation": "This is a 2-mark question using 'Give two' command word. Each belief gets 1 mark with no explanation needed."
     },
     {
-      "question": "Explain two ways in which Muslims carry out Salah.",
-      "marks": 4,
+      "question": "Give two features of a mosque.",
+      "marks": 2,
       "topic": "Islam: Practices",
       "answer": [
-        "First way: Muslims perform ritual washing/wudu before prayer (1) to ensure they are physically and spiritually clean (1)",
-        "Second way: Muslims face the direction of the Kabah/qibla (1) to show unity with Muslims worldwide/following Prophet Muhammad's example (1)"
+        "Mihrab (1)",
+        "Minaret (1)"
       ],
-      "explanation": "This question tests knowledge of Islamic prayer practices. Each way needs a description and explanation for full marks."
+      "explanation": "This is a 2-mark question asking for two simple features. Each feature gets 1 mark."
     },
     {
-      "question": "'Divorce is always wrong.' Evaluate this statement.",
-      "marks": 12,
-      "topic": "Theme A: Relationships and families",
+      "question": "Name two types of Christian worship.",
+      "marks": 2,
+      "topic": "Christianity: Practices",
       "answer": [
-        "Arguments supporting the statement:",
-        "• Some Christians believe marriage is a sacred bond that should not be broken",
-        "• Jesus taught that divorce was against God's original plan",
-        "• Breaking marriage vows can harm families and children",
-        "",
-        "Arguments against the statement:",
-        "• Some religious believers accept divorce in cases of adultery",
-        "• Modern interpretations recognize that some marriages become harmful",
-        "• Both Christianity and Islam allow divorce in certain circumstances",
-        "",
-        "Conclusion:",
-        "While religious teachings generally discourage divorce, most religions accept it may be necessary in some situations to prevent greater harm."
+        "Liturgical worship (1)",
+        "Non-liturgical worship (1)"
       ],
-      "explanation": "This evaluation question requires consideration of different religious and moral viewpoints, supported by religious teachings and reaching a justified conclusion."
+      "explanation": "This is a 2-mark question using 'Name' command word. Each type gets 1 mark."
     },
     {
-      "question": "Explain two religious beliefs about environmental sustainability.",
-      "marks": 5,
-      "topic": "Theme B: Religion and life",
-      "answer": [
-        "First belief: Humans have a duty of stewardship/khilafah (1) which means they must protect and care for God's creation (2)",
-        "Second belief: The world is sacred as God created it (1) so humans should not exploit or damage it (1)"
-      ],
-      "explanation": "This question tests understanding of religious attitudes to environmental issues. Each belief needs explanation and religious teaching for full marks."
+      "question": "What is meant by pilgrimage?",
+      "marks": 1,
+      "topic": "Religious practices",
+      "answer": "A journey to a sacred place for religious reasons",
+      "explanation": "This is a 1-mark definition question. Answer should be concise and accurate."
     }
   ]
-} 
+}
