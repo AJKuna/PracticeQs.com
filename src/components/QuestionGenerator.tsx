@@ -16,6 +16,7 @@ import { biologyGcseAqaUnits } from '../data/biologyGcseAqaUnits';
 import { chemistryGcseAqaUnits } from '../data/chemistryGcseAqaUnits';
 import { biologyGcseEdexcelUnits } from '../data/biologyGcseEdexcelUnits';
 import { physicsGcseAqaUnits } from '../data/physicsGcseAqaUnits';
+import { mathGcseEdexcelUnits } from '../data/mathGcseEdexcelUnits';
 import { religiousStudiesGcseAqaUnits, getComponentDisplayName, getUnitDisplayName } from '../data/religiousStudiesGcseAqaUnits';
 import { getUserStreak, updateStreakOnGeneration, StreakData } from '../services/streakService';
 
@@ -83,6 +84,7 @@ const QuestionGenerator: React.FC = () => {
       chemistryEdexcelUnit: '', // New field for Chemistry Edexcel units
       biologyEdexcelUnit: '', // New field for Biology Edexcel units
       physicsUnit: '', // New field for Physics AQA units
+      mathUnit: '', // New field for Mathematics Edexcel units
       religiousStudiesComponent: '', // New field for Religious Studies component
       religiousStudiesUnit: '' // New field for Religious Studies unit
     })
@@ -174,7 +176,7 @@ const QuestionGenerator: React.FC = () => {
   // Reset exam level to GCSE if KS3 is selected but subject is not mathematics
   useEffect(() => {
     if (options.examLevel === 'ks3' && normalizedSubject !== 'mathematics') {
-      setOptions((prev: any) => ({ ...prev, examLevel: 'gcse', examBoard: '', englishExamType: '', historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '', biologyEdexcelUnit: '', physicsUnit: '', religiousStudiesComponent: '', religiousStudiesUnit: '' }));
+      setOptions((prev: any) => ({ ...prev, examLevel: 'gcse', examBoard: '', englishExamType: '', historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '', biologyEdexcelUnit: '', physicsUnit: '', mathUnit: '', religiousStudiesComponent: '', religiousStudiesUnit: '' }));
     }
   }, [normalizedSubject, options.examLevel]);
 
@@ -282,6 +284,22 @@ const QuestionGenerator: React.FC = () => {
       }
       // Fallback if no topics are available yet
       return `e.g. Enter physics topics for ${options.physicsUnit}...`;
+    } else if (normalizedSubject === 'mathematics' && options.examLevel === 'gcse' && options.examBoard === 'edexcel' && options.mathUnit) {
+      const unitTopics = mathGcseEdexcelUnits[options.mathUnit];
+      if (unitTopics && unitTopics.length > 0) {
+        const averageLength = unitTopics.slice(0, 4).reduce((sum, topic) => sum + topic.length, 0) / Math.min(4, unitTopics.length);
+        const numTopics = averageLength > 50 ? 2 : averageLength > 30 ? 3 : 4;
+        
+        let sampleTopics = unitTopics.slice(0, numTopics).join(', ');
+        
+        if (sampleTopics.length > 80) {
+          sampleTopics = sampleTopics.substring(0, 77) + '...';
+        }
+        
+        return `e.g. ${sampleTopics}...`;
+      }
+      // Fallback if no topics are available yet
+      return `e.g. Enter mathematics topics for ${options.mathUnit}...`;
     }
     
     return subjectPlaceholders[placeholderKey] || 'Enter a topic...';
@@ -289,7 +307,7 @@ const QuestionGenerator: React.FC = () => {
 
   const placeholder = getDynamicPlaceholder();
 
-  // Function to get available topics for Religious Studies
+  // Function to get available topics for Religious Studies and Mathematics Edexcel
   const getAvailableTopics = (): string[] => {
     if (normalizedSubject === 'religious studies' && options.examLevel === 'gcse' && options.examBoard === 'aqa' && options.religiousStudiesComponent && options.religiousStudiesUnit) {
       const componentData = religiousStudiesGcseAqaUnits[options.religiousStudiesComponent];
@@ -297,15 +315,22 @@ const QuestionGenerator: React.FC = () => {
         return componentData[options.religiousStudiesUnit] || [];
       }
     }
+    if (normalizedSubject === 'mathematics' && options.examLevel === 'gcse' && options.examBoard === 'edexcel' && options.mathUnit) {
+      return mathGcseEdexcelUnits[options.mathUnit] || [];
+    }
     return [];
   };
 
-  // Check if we should show topic grid (for Religious Studies with proper selections)
-  const shouldShowTopicGrid = normalizedSubject === 'religious studies' && 
+  // Check if we should show topic grid (for Religious Studies and Mathematics Edexcel with proper selections)
+  const shouldShowTopicGrid = (normalizedSubject === 'religious studies' && 
     options.examLevel === 'gcse' && 
     options.examBoard === 'aqa' && 
     options.religiousStudiesComponent && 
-    options.religiousStudiesUnit;
+    options.religiousStudiesUnit) ||
+    (normalizedSubject === 'mathematics' && 
+    options.examLevel === 'gcse' && 
+    options.examBoard === 'edexcel' && 
+    options.mathUnit);
 
   // Get filtered topics for display
   const availableTopics = getAvailableTopics();
@@ -540,6 +565,13 @@ const QuestionGenerator: React.FC = () => {
       return;
     }
 
+    // Check for Mathematics unit selection
+    if (normalizedSubject === 'mathematics' && options.examBoard === 'edexcel' && options.examLevel === 'gcse' && !options.mathUnit) {
+      setAlert({ type: 'error', message: 'Please choose a Mathematics unit' });
+      setIsGenerating(false);
+      return;
+    }
+
     // Check for Religious Studies component selection
     if (normalizedSubject === 'religious studies' && options.examBoard === 'aqa' && options.examLevel === 'gcse' && !options.religiousStudiesComponent) {
       setAlert({ type: 'error', message: 'Please choose a Religious Studies component' });
@@ -584,6 +616,7 @@ const QuestionGenerator: React.FC = () => {
           chemistryUnit: options.chemistryUnit, // Include chemistry unit for AQA Chemistry
           biologyEdexcelUnit: options.biologyEdexcelUnit, // Include biology unit for Edexcel Biology
           physicsUnit: options.physicsUnit, // Include physics unit for AQA Physics
+          mathUnit: options.mathUnit, // Include mathematics unit for Edexcel Mathematics
           religiousStudiesComponent: options.religiousStudiesComponent, // Include religious studies component for AQA Religious Studies
           religiousStudiesUnit: options.religiousStudiesUnit // Include religious studies unit for AQA Religious Studies
         }),
@@ -990,7 +1023,7 @@ const QuestionGenerator: React.FC = () => {
     setShowSolutions(false);
     setIsGenerating(false);
     setIsCancelled(false);
-    setOptions((prev: any) => ({ ...prev, historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '', biologyEdexcelUnit: '', physicsUnit: '', religiousStudiesComponent: '', religiousStudiesUnit: '' }));
+    setOptions((prev: any) => ({ ...prev, historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '', biologyEdexcelUnit: '', physicsUnit: '', mathUnit: '', religiousStudiesComponent: '', religiousStudiesUnit: '' }));
     
     // Clear localStorage when user explicitly chooses another topic
     clearFromLocalStorage(getStorageKey('searchTopic'));
@@ -1245,7 +1278,7 @@ const QuestionGenerator: React.FC = () => {
               <select
                 id="examLevel"
                 value={options.examLevel}
-                onChange={(e) => setOptions({ ...options, examLevel: e.target.value, examBoard: '', englishExamType: '', historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '', biologyEdexcelUnit: '', physicsUnit: '', religiousStudiesComponent: '', religiousStudiesUnit: '' })}
+                onChange={(e) => setOptions({ ...options, examLevel: e.target.value, examBoard: '', englishExamType: '', historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '', biologyEdexcelUnit: '', physicsUnit: '', mathUnit: '', religiousStudiesComponent: '', religiousStudiesUnit: '' })}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               >
                 <option value="gcse">GCSE</option>
@@ -1265,7 +1298,7 @@ const QuestionGenerator: React.FC = () => {
                 <select
                   id="englishExamType"
                   value={options.englishExamType}
-                  onChange={(e) => setOptions({ ...options, englishExamType: e.target.value, examBoard: '', historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '', biologyEdexcelUnit: '', physicsUnit: '', religiousStudiesComponent: '', religiousStudiesUnit: '' })}
+                  onChange={(e) => setOptions({ ...options, englishExamType: e.target.value, examBoard: '', historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '', biologyEdexcelUnit: '', physicsUnit: '', mathUnit: '', religiousStudiesComponent: '', religiousStudiesUnit: '' })}
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 >
                   <option value="">Choose English exam type</option>
@@ -1285,7 +1318,7 @@ const QuestionGenerator: React.FC = () => {
                   <select
                     id="examBoard"
                     value={options.examBoard}
-                    onChange={(e) => setOptions({ ...options, examBoard: e.target.value, historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '', biologyEdexcelUnit: '', physicsUnit: '', religiousStudiesComponent: '', religiousStudiesUnit: '' })}
+                    onChange={(e) => setOptions({ ...options, examBoard: e.target.value, historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '', biologyEdexcelUnit: '', physicsUnit: '', mathUnit: '', religiousStudiesComponent: '', religiousStudiesUnit: '' })}
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                   >
                     <option value="">Select an exam board</option>
@@ -1346,7 +1379,7 @@ const QuestionGenerator: React.FC = () => {
                 <select
                   id="geographyUnit"
                   value={options.geographyUnit}
-                  onChange={(e) => setOptions({ ...options, geographyUnit: e.target.value, geographySection: '', biologyUnit: '', chemistryUnit: '', biologyEdexcelUnit: '', physicsUnit: '', religiousStudiesComponent: '', religiousStudiesUnit: '' })}
+                  onChange={(e) => setOptions({ ...options, geographyUnit: e.target.value, geographySection: '', biologyUnit: '', chemistryUnit: '', biologyEdexcelUnit: '', physicsUnit: '', mathUnit: '', religiousStudiesComponent: '', religiousStudiesUnit: '' })}
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 >
                   <option value="">Select a Geography unit</option>
@@ -1443,6 +1476,33 @@ const QuestionGenerator: React.FC = () => {
                   <option value="exchange-transport-animals">8. Exchange and transport in animals</option>
                   <option value="ecosystems-material-cycles">9. Ecosystems and material cycles</option>
                   <option value="required-practicals">10. Required Practicals</option>
+                </select>
+              </div>
+            )}
+
+            {/* Mathematics Unit Selection - only for Edexcel GCSE Mathematics */}
+            {normalizedSubject === 'mathematics' && options.examBoard === 'edexcel' && (
+              <div className="sm:col-span-3">
+                <label htmlFor="mathUnit" className="block text-base font-semibold text-gray-800 mb-2">
+                  Mathematics Unit
+                </label>
+                <select
+                  id="mathUnit"
+                  value={options.mathUnit}
+                  onChange={(e) => {
+                    setOptions({ ...options, mathUnit: e.target.value });
+                    setSelectedTopic('');
+                    setSearchTopic('');
+                  }}
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                >
+                  <option value="">Select a Mathematics unit</option>
+                  <option value="number">1. Number</option>
+                  <option value="algebra">2. Algebra</option>
+                  <option value="ratio-proportion-rates">3. Ratio, proportion and rates of change</option>
+                  <option value="geometry-measures">4. Geometry and measures</option>
+                  <option value="probability">5. Probability</option>
+                  <option value="statistics">6. Statistics</option>
                 </select>
               </div>
             )}
@@ -1685,6 +1745,7 @@ const QuestionGenerator: React.FC = () => {
                   chemistryEdexcelUnit={options.chemistryEdexcelUnit}
                   biologyEdexcelUnit={options.biologyEdexcelUnit}
                   physicsUnit={options.physicsUnit}
+                  mathUnit={options.mathUnit}
                   religiousStudiesComponent={options.religiousStudiesComponent}
                   religiousStudiesUnit={options.religiousStudiesUnit}
                 />
@@ -1692,7 +1753,7 @@ const QuestionGenerator: React.FC = () => {
             </div>
           </div>
 
-          {/* Topic Grid for Religious Studies */}
+          {/* Topic Grid for Religious Studies and Mathematics Edexcel */}
           {shouldShowTopicGrid && (
             <div>
               <h3 className="text-base font-semibold text-gray-800 mb-4">Choose a topic to practice:</h3>
@@ -1725,7 +1786,12 @@ const QuestionGenerator: React.FC = () => {
                   </div>
                 </>
               ) : !searchTopic.trim() ? (
-                <p className="text-gray-500 text-center py-8">Please select a component and religion/theme first to see available topics.</p>
+                <p className="text-gray-500 text-center py-8">
+                  {normalizedSubject === 'religious studies' 
+                    ? 'Please select a component and religion/theme first to see available topics.'
+                    : 'Please select a mathematics unit first to see available topics.'
+                  }
+                </p>
               ) : null}
 
               {/* Selection status message - shows for both selected topics and custom topics */}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { mathGcseTopics } from '../data/mathGcseTopics.ts';
 import { mathKs3Topics } from '../data/mathKs3Topics.ts';
+import { mathGcseEdexcelUnits } from '../data/mathGcseEdexcelUnits.ts';
 import { biologyGcseAqaUnits } from '../data/biologyGcseAqaUnits.ts';
 import { biologyGcseEdexcelUnits } from '../data/biologyGcseEdexcelUnits.ts';
 import { chemistryGcseAqaUnits } from '../data/chemistryGcseAqaUnits.ts';
@@ -30,6 +31,7 @@ interface TopicDropdownProps {
   chemistryEdexcelUnit?: string;
   biologyEdexcelUnit?: string;
   physicsUnit?: string;
+  mathUnit?: string;
   religiousStudiesComponent?: string;
   religiousStudiesUnit?: string;
 }
@@ -49,6 +51,7 @@ const TopicDropdown: React.FC<TopicDropdownProps> = ({
   chemistryEdexcelUnit,
   biologyEdexcelUnit,
   physicsUnit,
+  mathUnit,
   religiousStudiesComponent,
   religiousStudiesUnit
 }) => {
@@ -64,7 +67,10 @@ const TopicDropdown: React.FC<TopicDropdownProps> = ({
     if (normalizedSubject === 'mathematics' && examLevel === 'ks3') {
       return mathKs3Topics;
     }
-    if (normalizedSubject === 'mathematics' && examLevel === 'gcse') {
+    if (normalizedSubject === 'mathematics' && examLevel === 'gcse' && examBoard === 'edexcel' && mathUnit) {
+      return mathGcseEdexcelUnits[mathUnit] || [];
+    }
+    if (normalizedSubject === 'mathematics' && examLevel === 'gcse' && examBoard !== 'edexcel') {
       return mathGcseTopics;
     }
     if (normalizedSubject === 'biology' && examLevel === 'gcse' && examBoard === 'aqa' && biologyUnit) {
@@ -135,7 +141,7 @@ const TopicDropdown: React.FC<TopicDropdownProps> = ({
 
     setFilteredTopics(filtered);
     setHighlightedIndex(-1);
-  }, [searchTopic, isVisible, subject, examLevel, examBoard, historyUnit, geographyUnit, geographySection, biologyUnit, chemistryUnit, biologyEdexcelUnit, physicsUnit, religiousStudiesComponent, religiousStudiesUnit]);
+  }, [searchTopic, isVisible, subject, examLevel, examBoard, historyUnit, geographyUnit, geographySection, biologyUnit, chemistryUnit, biologyEdexcelUnit, physicsUnit, mathUnit, religiousStudiesComponent, religiousStudiesUnit]);
 
   // Handle keyboard navigation
   useEffect(() => {
