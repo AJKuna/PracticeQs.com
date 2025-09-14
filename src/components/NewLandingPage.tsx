@@ -200,7 +200,7 @@ const NewLandingPage: React.FC = () => {
             onClick={handleGetStarted}
             className="inline-flex items-center px-8 py-4 bg-blue-600 text-white text-lg font-semibold rounded-xl hover:bg-blue-700 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
           >
-            Don't fall behind this summer. Get practicing
+            Start strong this term. Get practicing
             <ArrowRight className="ml-2 h-5 w-5" />
           </button>
           <div className="mt-6">
