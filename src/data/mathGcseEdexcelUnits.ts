@@ -293,7 +293,6 @@ export const mathGcseEdexcelUnits: { [key: string]: string[] } = {
   ],
 
   "statistics": [
-    "Data handling cycle",
     "Bar charts",
     "Composite/dual bar charts",
     "Vertical line charts",

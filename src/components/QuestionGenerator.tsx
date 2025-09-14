@@ -1483,27 +1483,52 @@ const QuestionGenerator: React.FC = () => {
             {/* Mathematics Unit Selection - only for Edexcel GCSE Mathematics */}
             {normalizedSubject === 'mathematics' && options.examBoard === 'edexcel' && (
               <div className="sm:col-span-3">
-                <label htmlFor="mathUnit" className="block text-base font-semibold text-gray-800 mb-2">
-                  Mathematics Unit
-                </label>
-                <select
-                  id="mathUnit"
-                  value={options.mathUnit}
-                  onChange={(e) => {
-                    setOptions({ ...options, mathUnit: e.target.value });
-                    setSelectedTopic('');
-                    setSearchTopic('');
-                  }}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                >
-                  <option value="">Select a Mathematics unit</option>
-                  <option value="number">1. Number</option>
-                  <option value="algebra">2. Algebra</option>
-                  <option value="ratio-proportion-rates">3. Ratio, proportion and rates of change</option>
-                  <option value="geometry-measures">4. Geometry and measures</option>
-                  <option value="probability">5. Probability</option>
-                  <option value="statistics">6. Statistics</option>
-                </select>
+                <h3 className="block text-base font-semibold text-gray-800 mb-4">
+                  Select a Mathematics Unit
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {[
+                    { value: 'number', number: '1', title: 'Number' },
+                    { value: 'algebra', number: '2', title: 'Algebra' },
+                    { value: 'ratio-proportion-rates', number: '3', title: 'Ratio, Proportion', subtitle: 'and Rates of Change' },
+                    { value: 'geometry-measures', number: '4', title: 'Geometry and Measures' },
+                    { value: 'probability', number: '5', title: 'Probability' },
+                    { value: 'statistics', number: '6', title: 'Statistics' }
+                  ].map((unit) => (
+                    <button
+                      key={unit.value}
+                      type="button"
+                      onClick={() => {
+                        setOptions({ ...options, mathUnit: unit.value });
+                        setSelectedTopic('');
+                        setSearchTopic('');
+                      }}
+                      className={`p-3 text-center border-2 rounded-lg transition-all duration-200 h-20 flex flex-col justify-center ${
+                        options.mathUnit === unit.value
+                          ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-500 ring-opacity-50'
+                          : 'border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50'
+                      }`}
+                    >
+                      <div className={`text-xl font-bold ${
+                        options.mathUnit === unit.value ? 'text-blue-600' : 'text-blue-500'
+                      }`}>
+                        {unit.number}
+                      </div>
+                      <div className={`text-sm font-semibold leading-tight ${
+                        options.mathUnit === unit.value ? 'text-gray-900' : 'text-gray-800'
+                      }`}>
+                        {unit.title}
+                      </div>
+                      {unit.subtitle && (
+                        <div className={`text-xs leading-tight ${
+                          options.mathUnit === unit.value ? 'text-gray-700' : 'text-gray-600'
+                        }`}>
+                          {unit.subtitle}
+                        </div>
+                      )}
+                    </button>
+                  ))}
+                </div>
               </div>
             )}
 
