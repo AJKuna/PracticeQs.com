@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 import PricingModal from './PricingModal';
 import TopicDropdown from './TopicDropdown';
 
@@ -116,6 +117,9 @@ const QuestionGenerator: React.FC = () => {
   const [showStreakPopup, setShowStreakPopup] = useState(false);
   const [newStreakCount, setNewStreakCount] = useState(0);
   const streakCounterRef = useRef<StreakCounterRef>(null);
+  
+  // Copy to clipboard state
+  const [copiedQuestions, setCopiedQuestions] = useState<Set<number>>(new Set());
 
   // Save to localStorage whenever state changes
   useEffect(() => {
@@ -1109,6 +1113,51 @@ const QuestionGenerator: React.FC = () => {
     setShowDropdown(false);
   };
 
+  // Copy question as image to clipboard
+  const copyQuestionAsImage = async (questionIndex: number) => {
+    const questionElement = document.getElementById(`question-content-${questionIndex}`);
+    if (!questionElement) return;
+
+    try {
+      const canvas = await html2canvas(questionElement, {
+        backgroundColor: null,
+        scale: 2,
+      });
+
+      canvas.toBlob(async (blob) => {
+        if (!blob) {
+          console.error("Failed to create blob from canvas");
+          alert("Failed to capture question as image.");
+          return;
+        }
+        
+        try {
+          await navigator.clipboard.write([
+            new ClipboardItem({
+              "image/png": blob,
+            }),
+          ]);
+          
+          // Add to copied set and remove after 2 seconds
+          setCopiedQuestions(prev => new Set([...prev, questionIndex]));
+          setTimeout(() => {
+            setCopiedQuestions(prev => {
+              const newSet = new Set(prev);
+              newSet.delete(questionIndex);
+              return newSet;
+            });
+          }, 2000);
+        } catch (err) {
+          console.error("Failed to copy: ", err);
+          alert("Your browser doesn't allow copying images directly.");
+        }
+      });
+    } catch (error) {
+      console.error("Failed to capture question: ", error);
+      alert("Failed to capture question as image.");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 relative">
       {/* Logo in top left corner - responsive sizing */}
@@ -1901,21 +1950,45 @@ const QuestionGenerator: React.FC = () => {
                 <div key={`q-${index}`} className="p-4 border rounded-md">
                   <div className="flex justify-between items-start mb-2">
                     <h3 className="text-lg font-medium text-gray-900">Question {index + 1}</h3>
-                    {question.marks && (
-                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                        {question.marks} marks
-                      </span>
+                    <div className="flex items-center gap-2">
+                      {question.marks && (
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                          {question.marks} marks
+                        </span>
+                      )}
+                      <div className="relative group">
+                        <button
+                          onClick={() => copyQuestionAsImage(index)}
+                          className="p-1.5 text-gray-400 hover:text-blue-600 transition-colors rounded-md hover:bg-gray-100"
+                          title="Copy to clipboard"
+                        >
+                          {copiedQuestions.has(index) ? (
+                            <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                            </svg>
+                          ) : (
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                            </svg>
+                          )}
+                        </button>
+                        <div className="absolute top-full right-0 mt-1 px-2 py-1 text-xs text-white bg-gray-800 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10">
+                          {copiedQuestions.has(index) ? 'Copied!' : 'Copy to clipboard'}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div id={`question-content-${index}`} className="bg-white p-4 rounded-md">
+                    <p className="text-gray-800 mb-4">{cleanQuestion(question.question)}</p>
+                    
+                    {/* Display passage if it exists (for questions with passages) */}
+                    {question.passage && (
+                      <div className="mb-4 p-4 bg-gray-50 border-l-4 border-blue-500 rounded-md">
+                        <h4 className="font-medium text-gray-900 mb-2">Extract:</h4>
+                        <p className="text-gray-800 italic whitespace-pre-wrap">{question.passage}</p>
+                      </div>
                     )}
                   </div>
-                  <p className="text-gray-800 mb-4">{cleanQuestion(question.question)}</p>
-                  
-                  {/* Display passage if it exists (for questions with passages) */}
-                  {question.passage && (
-                    <div className="mb-4 p-4 bg-gray-50 border-l-4 border-blue-500 rounded-md">
-                      <h4 className="font-medium text-gray-900 mb-2">Extract:</h4>
-                      <p className="text-gray-800 italic whitespace-pre-wrap">{question.passage}</p>
-                    </div>
-                  )}
                   
                   {showSolutions && (
                     <div className={`mt-4 space-y-4 ${subjectTheme.light} p-4 rounded-md`}>
