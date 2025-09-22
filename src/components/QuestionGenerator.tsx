@@ -16,6 +16,7 @@ import { trackQuestionGeneration, trackPDFExport, trackButtonClick, trackError, 
 import { biologyGcseAqaUnits } from '../data/biologyGcseAqaUnits';
 import { biologyGcseAqaUnitsData, getBiologyUnits } from '../data/biologyGcseAqaUnitsData';
 import { chemistryGcseAqaUnitsData, getChemistryUnits } from '../data/chemistryGcseAqaUnitsData';
+import { chemistryGcseEdexcelUnitsData, getChemistryEdexcelUnits } from '../data/chemistryGcseEdexcelUnitsData';
 import { biologyGcseEdexcelUnits } from '../data/biologyGcseEdexcelUnits';
 import { physicsGcseAqaUnits } from '../data/physicsGcseAqaUnits';
 import { mathGcseEdexcelUnits } from '../data/mathGcseEdexcelUnits';
@@ -273,6 +274,20 @@ const QuestionGenerator: React.FC = () => {
         
         return `e.g. ${sampleTopics}...`;
       }
+    } else if (normalizedSubject === 'chemistry' && options.examLevel === 'gcse' && options.examBoard === 'edexcel' && options.chemistryEdexcelUnit) {
+      const unitTopics = chemistryGcseEdexcelUnitsData[options.chemistryEdexcelUnit];
+      if (unitTopics && unitTopics.length > 0) {
+        const averageLength = unitTopics.slice(0, 4).reduce((sum, topic) => sum + topic.length, 0) / Math.min(4, unitTopics.length);
+        const numTopics = averageLength > 50 ? 2 : averageLength > 30 ? 3 : 4;
+        
+        let sampleTopics = unitTopics.slice(0, numTopics).join(', ');
+        
+        if (sampleTopics.length > 80) {
+          sampleTopics = sampleTopics.substring(0, 77) + '...';
+        }
+        
+        return `e.g. ${sampleTopics}...`;
+      }
     } else if (normalizedSubject === 'physics' && options.examLevel === 'gcse' && options.examBoard === 'aqa' && options.physicsUnit) {
       const unitTopics = physicsGcseAqaUnits[options.physicsUnit];
       if (unitTopics && unitTopics.length > 0) {
@@ -329,10 +344,13 @@ const QuestionGenerator: React.FC = () => {
     if (normalizedSubject === 'chemistry' && options.examLevel === 'gcse' && options.examBoard === 'aqa' && options.chemistryUnit) {
       return chemistryGcseAqaUnitsData[options.chemistryUnit] || [];
     }
+    if (normalizedSubject === 'chemistry' && options.examLevel === 'gcse' && options.examBoard === 'edexcel' && options.chemistryEdexcelUnit) {
+      return chemistryGcseEdexcelUnitsData[options.chemistryEdexcelUnit] || [];
+    }
     return [];
   };
 
-  // Check if we should show topic grid (for Religious Studies, Mathematics Edexcel, Biology AQA, and Chemistry AQA with proper selections)
+  // Check if we should show topic grid (for Religious Studies, Mathematics Edexcel, Biology AQA, Chemistry AQA, and Chemistry Edexcel with proper selections)
   const shouldShowTopicGrid = (normalizedSubject === 'religious studies' && 
     options.examLevel === 'gcse' && 
     options.examBoard === 'aqa' && 
@@ -349,7 +367,11 @@ const QuestionGenerator: React.FC = () => {
     (normalizedSubject === 'chemistry' && 
     options.examLevel === 'gcse' && 
     options.examBoard === 'aqa' && 
-    options.chemistryUnit);
+    options.chemistryUnit) ||
+    (normalizedSubject === 'chemistry' && 
+    options.examLevel === 'gcse' && 
+    options.examBoard === 'edexcel' && 
+    options.chemistryEdexcelUnit);
 
   // Get filtered topics for display
   const availableTopics = getAvailableTopics();
@@ -577,6 +599,13 @@ const QuestionGenerator: React.FC = () => {
       return;
     }
 
+    // Check for Chemistry Edexcel unit selection
+    if (normalizedSubject === 'chemistry' && options.examBoard === 'edexcel' && options.examLevel === 'gcse' && !options.chemistryEdexcelUnit) {
+      setAlert({ type: 'error', message: 'Please choose a Chemistry unit' });
+      setIsGenerating(false);
+      return;
+    }
+
     // Check for Physics unit selection
     if (normalizedSubject === 'physics' && options.examBoard === 'aqa' && options.examLevel === 'gcse' && !options.physicsUnit) {
       setAlert({ type: 'error', message: 'Please choose a Physics unit' });
@@ -633,6 +662,7 @@ const QuestionGenerator: React.FC = () => {
           geographySection: options.geographySection, // Include geography section for AQA Geography
           biologyUnit: options.biologyUnit, // Include biology unit for AQA Biology
           chemistryUnit: options.chemistryUnit, // Include chemistry unit for AQA Chemistry
+          chemistryEdexcelUnit: options.chemistryEdexcelUnit, // Include chemistry unit for Edexcel Chemistry
           biologyEdexcelUnit: options.biologyEdexcelUnit, // Include biology unit for Edexcel Biology
           physicsUnit: options.physicsUnit, // Include physics unit for AQA Physics
           mathUnit: options.mathUnit, // Include mathematics unit for Edexcel Mathematics
@@ -1664,27 +1694,45 @@ const QuestionGenerator: React.FC = () => {
             {/* Chemistry Unit Selection - only for Edexcel GCSE Chemistry */}
             {normalizedSubject === 'chemistry' && options.examBoard === 'edexcel' && (
               <div className="sm:col-span-3">
-                <label htmlFor="chemistryEdexcelUnit" className="block text-base font-semibold text-gray-800 mb-2">
-                  Chemistry Unit
-                </label>
-                <select
-                  id="chemistryEdexcelUnit"
-                  value={options.chemistryEdexcelUnit}
-                  onChange={(e) => setOptions({ ...options, chemistryEdexcelUnit: e.target.value })}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 px-3 py-2.5"
-                >
-                  <option value="">Select a Chemistry unit</option>
-                  <option value="key-concepts-chemistry">1. Key concepts in chemistry</option>
-                  <option value="states-matter-mixtures">2. States of matter and mixtures</option>
-                  <option value="chemical-changes">3. Chemical changes</option>
-                  <option value="extracting-metals-equilibria">4. Extracting metals and equilibria</option>
-                  <option value="separate-chemistry-1">5. Separate chemistry 1</option>
-                  <option value="groups-periodic-table">6. Groups in the periodic table</option>
-                  <option value="rates-reaction-energy-changes">7. Rates of reaction and energy changes</option>
-                  <option value="fuels-earth-science">8. Fuels and Earth science</option>
-                  <option value="separate-chemistry-2">9. Separate chemistry 2</option>
-                  <option value="core-practicals">10. Core Practicals</option>
-                </select>
+                <h3 className="block text-base font-semibold text-gray-800 mb-4">
+                  Select a Chemistry Unit
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {getChemistryEdexcelUnits().map((unit) => (
+                    <button
+                      key={unit.value}
+                      type="button"
+                      onClick={() => {
+                        setOptions({ ...options, chemistryEdexcelUnit: unit.value });
+                        setSelectedTopic('');
+                        setSearchTopic('');
+                      }}
+                      className={`p-3 text-center border-2 rounded-lg transition-all duration-200 h-20 flex flex-col justify-center ${
+                        options.chemistryEdexcelUnit === unit.value
+                          ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-500 ring-opacity-50'
+                          : 'border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50'
+                      }`}
+                    >
+                      <div className={`text-xl font-bold ${
+                        options.chemistryEdexcelUnit === unit.value ? 'text-blue-600' : 'text-blue-500'
+                      }`}>
+                        {unit.number}
+                      </div>
+                      <div className={`text-sm font-semibold leading-tight ${
+                        options.chemistryEdexcelUnit === unit.value ? 'text-gray-900' : 'text-gray-800'
+                      }`}>
+                        {unit.title}
+                      </div>
+                      {unit.subtitle && (
+                        <div className={`text-xs leading-tight ${
+                          options.chemistryEdexcelUnit === unit.value ? 'text-gray-700' : 'text-gray-600'
+                        }`}>
+                          {unit.subtitle}
+                        </div>
+                      )}
+                    </button>
+                  ))}
+                </div>
               </div>
             )}
 
