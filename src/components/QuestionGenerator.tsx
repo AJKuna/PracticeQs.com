@@ -1830,7 +1830,6 @@ const QuestionGenerator: React.FC = () => {
           {/* Topic Grid for Religious Studies and Mathematics Edexcel */}
           {shouldShowTopicGrid && (
             <div>
-              <h3 className="text-base font-semibold text-gray-800 mb-4">Choose a topic to practice:</h3>
               {filteredTopicsForDisplay.length > 0 ? (
                 <>
                   <p className="text-sm text-gray-600 mb-4">Showing {filteredTopicsForDisplay.length} topics</p>
