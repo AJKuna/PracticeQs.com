@@ -14,6 +14,7 @@ import StickyFeedbackBar from './StickyFeedbackBar';
 import { API_CONFIG } from '../config/api';
 import { trackQuestionGeneration, trackPDFExport, trackButtonClick, trackError, trackSubscription } from '../utils/analytics';
 import { biologyGcseAqaUnits } from '../data/biologyGcseAqaUnits';
+import { biologyGcseAqaUnitsData, getBiologyUnits } from '../data/biologyGcseAqaUnitsData';
 import { chemistryGcseAqaUnits } from '../data/chemistryGcseAqaUnits';
 import { biologyGcseEdexcelUnits } from '../data/biologyGcseEdexcelUnits';
 import { physicsGcseAqaUnits } from '../data/physicsGcseAqaUnits';
@@ -311,7 +312,7 @@ const QuestionGenerator: React.FC = () => {
 
   const placeholder = getDynamicPlaceholder();
 
-  // Function to get available topics for Religious Studies and Mathematics Edexcel
+  // Function to get available topics for Religious Studies, Mathematics Edexcel, and Biology AQA
   const getAvailableTopics = (): string[] => {
     if (normalizedSubject === 'religious studies' && options.examLevel === 'gcse' && options.examBoard === 'aqa' && options.religiousStudiesComponent && options.religiousStudiesUnit) {
       const componentData = religiousStudiesGcseAqaUnits[options.religiousStudiesComponent];
@@ -322,10 +323,13 @@ const QuestionGenerator: React.FC = () => {
     if (normalizedSubject === 'mathematics' && options.examLevel === 'gcse' && options.examBoard === 'edexcel' && options.mathUnit) {
       return mathGcseEdexcelUnits[options.mathUnit] || [];
     }
+    if (normalizedSubject === 'biology' && options.examLevel === 'gcse' && options.examBoard === 'aqa' && options.biologyUnit) {
+      return biologyGcseAqaUnitsData[options.biologyUnit] || [];
+    }
     return [];
   };
 
-  // Check if we should show topic grid (for Religious Studies and Mathematics Edexcel with proper selections)
+  // Check if we should show topic grid (for Religious Studies, Mathematics Edexcel, and Biology AQA with proper selections)
   const shouldShowTopicGrid = (normalizedSubject === 'religious studies' && 
     options.examLevel === 'gcse' && 
     options.examBoard === 'aqa' && 
@@ -334,7 +338,11 @@ const QuestionGenerator: React.FC = () => {
     (normalizedSubject === 'mathematics' && 
     options.examLevel === 'gcse' && 
     options.examBoard === 'edexcel' && 
-    options.mathUnit);
+    options.mathUnit) ||
+    (normalizedSubject === 'biology' && 
+    options.examLevel === 'gcse' && 
+    options.examBoard === 'aqa' && 
+    options.biologyUnit);
 
   // Get filtered topics for display
   const availableTopics = getAvailableTopics();
@@ -1480,25 +1488,45 @@ const QuestionGenerator: React.FC = () => {
             {/* Biology Unit Selection - only for AQA GCSE Biology */}
             {normalizedSubject === 'biology' && options.examBoard === 'aqa' && (
               <div className="sm:col-span-3">
-                <label htmlFor="biologyUnit" className="block text-base font-semibold text-gray-800 mb-2">
-                  Biology Unit
-                </label>
-                <select
-                  id="biologyUnit"
-                  value={options.biologyUnit}
-                  onChange={(e) => setOptions({ ...options, biologyUnit: e.target.value })}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 px-3 py-2.5"
-                >
-                  <option value="">Select a Biology unit</option>
-                  <option value="cell-biology">1. Cell biology</option>
-                  <option value="organisation">2. Organisation</option>
-                  <option value="infection-response">3. Infection and response</option>
-                  <option value="bioenergetics">4. Bioenergetics</option>
-                  <option value="homeostasis-response">5. Homeostasis and response</option>
-                  <option value="inheritance-variation-evolution">6. Inheritance, variation and evolution</option>
-                  <option value="ecology">7. Ecology</option>
-                  <option value="required-practicals">8. Required Practicals</option>
-                </select>
+                <h3 className="block text-base font-semibold text-gray-800 mb-4">
+                  Select a Biology Unit
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {getBiologyUnits().map((unit) => (
+                    <button
+                      key={unit.value}
+                      type="button"
+                      onClick={() => {
+                        setOptions({ ...options, biologyUnit: unit.value });
+                        setSelectedTopic('');
+                        setSearchTopic('');
+                      }}
+                      className={`p-3 text-center border-2 rounded-lg transition-all duration-200 h-20 flex flex-col justify-center ${
+                        options.biologyUnit === unit.value
+                          ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-500 ring-opacity-50'
+                          : 'border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50'
+                      }`}
+                    >
+                      <div className={`text-xl font-bold ${
+                        options.biologyUnit === unit.value ? 'text-blue-600' : 'text-blue-500'
+                      }`}>
+                        {unit.number}
+                      </div>
+                      <div className={`text-sm font-semibold leading-tight ${
+                        options.biologyUnit === unit.value ? 'text-gray-900' : 'text-gray-800'
+                      }`}>
+                        {unit.title}
+                      </div>
+                      {unit.subtitle && (
+                        <div className={`text-xs leading-tight ${
+                          options.biologyUnit === unit.value ? 'text-gray-700' : 'text-gray-600'
+                        }`}>
+                          {unit.subtitle}
+                        </div>
+                      )}
+                    </button>
+                  ))}
+                </div>
               </div>
             )}
 
@@ -1862,7 +1890,9 @@ const QuestionGenerator: React.FC = () => {
                 <p className="text-gray-500 text-center py-8">
                   {normalizedSubject === 'religious studies' 
                     ? 'Please select a component and religion/theme first to see available topics.'
-                    : 'Please select a mathematics unit first to see available topics.'
+                    : normalizedSubject === 'mathematics'
+                    ? 'Please select a mathematics unit first to see available topics.'
+                    : 'Please select a biology unit first to see available topics.'
                   }
                 </p>
               ) : null}
