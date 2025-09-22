@@ -1328,7 +1328,7 @@ const QuestionGenerator: React.FC = () => {
                 id="examLevel"
                 value={options.examLevel}
                 onChange={(e) => setOptions({ ...options, examLevel: e.target.value, examBoard: '', englishExamType: '', historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '', biologyEdexcelUnit: '', physicsUnit: '', mathUnit: '', religiousStudiesComponent: '', religiousStudiesUnit: '' })}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 px-3 py-2.5"
               >
                 <option value="gcse">GCSE</option>
                 <option value="ks3" disabled={normalizedSubject !== 'mathematics'}>
@@ -1348,7 +1348,7 @@ const QuestionGenerator: React.FC = () => {
                   id="englishExamType"
                   value={options.englishExamType}
                   onChange={(e) => setOptions({ ...options, englishExamType: e.target.value, examBoard: '', historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '', biologyEdexcelUnit: '', physicsUnit: '', mathUnit: '', religiousStudiesComponent: '', religiousStudiesUnit: '' })}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 px-3 py-2.5"
                 >
                   <option value="">Choose English exam type</option>
                   <option value="english-language">English Language</option>
@@ -1368,7 +1368,7 @@ const QuestionGenerator: React.FC = () => {
                     id="examBoard"
                     value={options.examBoard}
                     onChange={(e) => setOptions({ ...options, examBoard: e.target.value, historyUnit: '', geographyUnit: '', geographySection: '', biologyUnit: '', chemistryUnit: '', biologyEdexcelUnit: '', physicsUnit: '', mathUnit: '', religiousStudiesComponent: '', religiousStudiesUnit: '' })}
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 px-3 py-2.5"
                   >
                     <option value="">Select an exam board</option>
                     <option value="aqa">AQA</option>
@@ -1396,7 +1396,7 @@ const QuestionGenerator: React.FC = () => {
                   id="historyUnit"
                   value={options.historyUnit}
                   onChange={(e) => setOptions({ ...options, historyUnit: e.target.value })}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 px-3 py-2.5"
                 >
                   <option value="">Select a History unit</option>
                   <option value="america-1840-1895">America, 1840-1895: Expansion and consolidation</option>
@@ -1429,7 +1429,7 @@ const QuestionGenerator: React.FC = () => {
                   id="geographyUnit"
                   value={options.geographyUnit}
                   onChange={(e) => setOptions({ ...options, geographyUnit: e.target.value, geographySection: '', biologyUnit: '', chemistryUnit: '', biologyEdexcelUnit: '', physicsUnit: '', mathUnit: '', religiousStudiesComponent: '', religiousStudiesUnit: '' })}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 px-3 py-2.5"
                 >
                   <option value="">Select a Geography unit</option>
                   <option value="living-physical-environment">Living with the physical environment</option>
@@ -1450,7 +1450,7 @@ const QuestionGenerator: React.FC = () => {
                   id="geographySection"
                   value={options.geographySection}
                   onChange={(e) => setOptions({ ...options, geographySection: e.target.value })}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 px-3 py-2.5"
                 >
                   <option value="">Select a Geography section</option>
                   {options.geographyUnit === 'living-physical-environment' && (
@@ -1487,7 +1487,7 @@ const QuestionGenerator: React.FC = () => {
                   id="biologyUnit"
                   value={options.biologyUnit}
                   onChange={(e) => setOptions({ ...options, biologyUnit: e.target.value })}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 px-3 py-2.5"
                 >
                   <option value="">Select a Biology unit</option>
                   <option value="cell-biology">1. Cell biology</option>
@@ -1512,7 +1512,7 @@ const QuestionGenerator: React.FC = () => {
                   id="biologyEdexcelUnit"
                   value={options.biologyEdexcelUnit}
                   onChange={(e) => setOptions({ ...options, biologyEdexcelUnit: e.target.value })}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 px-3 py-2.5"
                 >
                   <option value="">Select a Biology unit</option>
                   <option value="key-concepts-biology">1. Key concepts in biology</option>
@@ -1591,7 +1591,7 @@ const QuestionGenerator: React.FC = () => {
                   id="chemistryUnit"
                   value={options.chemistryUnit}
                   onChange={(e) => setOptions({ ...options, chemistryUnit: e.target.value })}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 px-3 py-2.5"
                 >
                   <option value="">Select a Chemistry unit</option>
                   <option value="atomic-structure-periodic-table">1. Atomic structure and the periodic table</option>
@@ -1619,7 +1619,7 @@ const QuestionGenerator: React.FC = () => {
                   id="chemistryEdexcelUnit"
                   value={options.chemistryEdexcelUnit}
                   onChange={(e) => setOptions({ ...options, chemistryEdexcelUnit: e.target.value })}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 px-3 py-2.5"
                 >
                   <option value="">Select a Chemistry unit</option>
                   <option value="key-concepts-chemistry">1. Key concepts in chemistry</option>
@@ -1646,7 +1646,7 @@ const QuestionGenerator: React.FC = () => {
                   id="physicsUnit"
                   value={options.physicsUnit}
                   onChange={(e) => setOptions({ ...options, physicsUnit: e.target.value })}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 px-3 py-2.5"
                 >
                   <option value="">Select a Physics unit</option>
                   <option value="energy">1. Energy</option>
@@ -1676,7 +1676,7 @@ const QuestionGenerator: React.FC = () => {
                     setSelectedTopic('');
                     setSearchTopic('');
                   }}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 px-3 py-2.5"
                 >
                   <option value="">Select a Religious Studies component</option>
                   {Object.keys(religiousStudiesGcseAqaUnits).map((componentKey) => (
@@ -1702,7 +1702,7 @@ const QuestionGenerator: React.FC = () => {
                     setSelectedTopic('');
                     setSearchTopic('');
                   }}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 px-3 py-2.5"
                 >
                   <option value="">
                     {options.religiousStudiesComponent === 'component-1' ? 'Select a religion' : 'Choose a theme'}
@@ -1724,7 +1724,7 @@ const QuestionGenerator: React.FC = () => {
                 id="difficulty"
                 value={options.difficulty}
                 onChange={(e) => setOptions({ ...options, difficulty: e.target.value })}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 px-3 py-2.5"
               >
                 <option value="easy">Easy</option>
                 <option value="medium">Medium</option>
@@ -1765,7 +1765,7 @@ const QuestionGenerator: React.FC = () => {
                     setOptions({ ...options, questionCount: 1 });
                   }
                 }}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 px-3 py-2.5"
               />
             </div>
           </div>
@@ -1792,13 +1792,13 @@ const QuestionGenerator: React.FC = () => {
                 onFocus={handleTopicInputFocus}
                 placeholder={shouldShowTopicGrid ? 'Search for a topic or select from below...' : placeholder}
                 autoComplete="off"
-                className="topic-search-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 !text-black !bg-white focus:!bg-white focus:!text-black"
+                className="topic-search-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 !text-black !bg-white focus:!bg-white focus:!text-black px-3 py-2.5"
               />
               {(searchTopic || selectedTopic) && (
                 <button
                   type="button"
                   onClick={handleClearTopic}
-                  className="mt-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                  className="mt-1 px-3 py-2.5 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                 >
                   Clear
                 </button>
