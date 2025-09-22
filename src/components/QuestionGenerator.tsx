@@ -15,7 +15,7 @@ import { API_CONFIG } from '../config/api';
 import { trackQuestionGeneration, trackPDFExport, trackButtonClick, trackError, trackSubscription } from '../utils/analytics';
 import { biologyGcseAqaUnits } from '../data/biologyGcseAqaUnits';
 import { biologyGcseAqaUnitsData, getBiologyUnits } from '../data/biologyGcseAqaUnitsData';
-import { chemistryGcseAqaUnits } from '../data/chemistryGcseAqaUnits';
+import { chemistryGcseAqaUnitsData, getChemistryUnits } from '../data/chemistryGcseAqaUnitsData';
 import { biologyGcseEdexcelUnits } from '../data/biologyGcseEdexcelUnits';
 import { physicsGcseAqaUnits } from '../data/physicsGcseAqaUnits';
 import { mathGcseEdexcelUnits } from '../data/mathGcseEdexcelUnits';
@@ -260,7 +260,7 @@ const QuestionGenerator: React.FC = () => {
         return `e.g. ${sampleTopics}...`;
       }
     } else if (normalizedSubject === 'chemistry' && options.examLevel === 'gcse' && options.examBoard === 'aqa' && options.chemistryUnit) {
-      const unitTopics = chemistryGcseAqaUnits[options.chemistryUnit];
+      const unitTopics = chemistryGcseAqaUnitsData[options.chemistryUnit];
       if (unitTopics && unitTopics.length > 0) {
         const averageLength = unitTopics.slice(0, 4).reduce((sum, topic) => sum + topic.length, 0) / Math.min(4, unitTopics.length);
         const numTopics = averageLength > 50 ? 2 : averageLength > 30 ? 3 : 4;
@@ -312,7 +312,7 @@ const QuestionGenerator: React.FC = () => {
 
   const placeholder = getDynamicPlaceholder();
 
-  // Function to get available topics for Religious Studies, Mathematics Edexcel, and Biology AQA
+  // Function to get available topics for Religious Studies, Mathematics Edexcel, Biology AQA, and Chemistry AQA
   const getAvailableTopics = (): string[] => {
     if (normalizedSubject === 'religious studies' && options.examLevel === 'gcse' && options.examBoard === 'aqa' && options.religiousStudiesComponent && options.religiousStudiesUnit) {
       const componentData = religiousStudiesGcseAqaUnits[options.religiousStudiesComponent];
@@ -326,10 +326,13 @@ const QuestionGenerator: React.FC = () => {
     if (normalizedSubject === 'biology' && options.examLevel === 'gcse' && options.examBoard === 'aqa' && options.biologyUnit) {
       return biologyGcseAqaUnitsData[options.biologyUnit] || [];
     }
+    if (normalizedSubject === 'chemistry' && options.examLevel === 'gcse' && options.examBoard === 'aqa' && options.chemistryUnit) {
+      return chemistryGcseAqaUnitsData[options.chemistryUnit] || [];
+    }
     return [];
   };
 
-  // Check if we should show topic grid (for Religious Studies, Mathematics Edexcel, and Biology AQA with proper selections)
+  // Check if we should show topic grid (for Religious Studies, Mathematics Edexcel, Biology AQA, and Chemistry AQA with proper selections)
   const shouldShowTopicGrid = (normalizedSubject === 'religious studies' && 
     options.examLevel === 'gcse' && 
     options.examBoard === 'aqa' && 
@@ -342,7 +345,11 @@ const QuestionGenerator: React.FC = () => {
     (normalizedSubject === 'biology' && 
     options.examLevel === 'gcse' && 
     options.examBoard === 'aqa' && 
-    options.biologyUnit);
+    options.biologyUnit) ||
+    (normalizedSubject === 'chemistry' && 
+    options.examLevel === 'gcse' && 
+    options.examBoard === 'aqa' && 
+    options.chemistryUnit);
 
   // Get filtered topics for display
   const availableTopics = getAvailableTopics();
@@ -1612,28 +1619,45 @@ const QuestionGenerator: React.FC = () => {
             {/* Chemistry Unit Selection - only for AQA GCSE Chemistry */}
             {normalizedSubject === 'chemistry' && options.examBoard === 'aqa' && (
               <div className="sm:col-span-3">
-                <label htmlFor="chemistryUnit" className="block text-base font-semibold text-gray-800 mb-2">
-                  Chemistry Unit
-                </label>
-                <select
-                  id="chemistryUnit"
-                  value={options.chemistryUnit}
-                  onChange={(e) => setOptions({ ...options, chemistryUnit: e.target.value })}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 px-3 py-2.5"
-                >
-                  <option value="">Select a Chemistry unit</option>
-                  <option value="atomic-structure-periodic-table">1. Atomic structure and the periodic table</option>
-                  <option value="bonding-structure-properties">2. Bonding, structure, and the properties of matter</option>
-                  <option value="quantitative-chemistry">3. Quantitative chemistry</option>
-                  <option value="chemical-changes">4. Chemical changes</option>
-                  <option value="energy-changes">5. Energy changes</option>
-                  <option value="rate-extent-chemical-change">6. The rate and extent of chemical change</option>
-                  <option value="organic-chemistry">7. Organic chemistry</option>
-                  <option value="chemical-analysis">8. Chemical analysis</option>
-                  <option value="chemistry-atmosphere">9. Chemistry of the atmosphere</option>
-                  <option value="using-resources">10. Using resources</option>
-                  <option value="required-practicals">11. Required Practicals</option>
-                </select>
+                <h3 className="block text-base font-semibold text-gray-800 mb-4">
+                  Select a Chemistry Unit
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {getChemistryUnits().map((unit) => (
+                    <button
+                      key={unit.value}
+                      type="button"
+                      onClick={() => {
+                        setOptions({ ...options, chemistryUnit: unit.value });
+                        setSelectedTopic('');
+                        setSearchTopic('');
+                      }}
+                      className={`p-3 text-center border-2 rounded-lg transition-all duration-200 h-20 flex flex-col justify-center ${
+                        options.chemistryUnit === unit.value
+                          ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-500 ring-opacity-50'
+                          : 'border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50'
+                      }`}
+                    >
+                      <div className={`text-xl font-bold ${
+                        options.chemistryUnit === unit.value ? 'text-blue-600' : 'text-blue-500'
+                      }`}>
+                        {unit.number}
+                      </div>
+                      <div className={`text-sm font-semibold leading-tight ${
+                        options.chemistryUnit === unit.value ? 'text-gray-900' : 'text-gray-800'
+                      }`}>
+                        {unit.title}
+                      </div>
+                      {unit.subtitle && (
+                        <div className={`text-xs leading-tight ${
+                          options.chemistryUnit === unit.value ? 'text-gray-700' : 'text-gray-600'
+                        }`}>
+                          {unit.subtitle}
+                        </div>
+                      )}
+                    </button>
+                  ))}
+                </div>
               </div>
             )}
 
@@ -1892,7 +1916,9 @@ const QuestionGenerator: React.FC = () => {
                     ? 'Please select a component and religion/theme first to see available topics.'
                     : normalizedSubject === 'mathematics'
                     ? 'Please select a mathematics unit first to see available topics.'
-                    : 'Please select a biology unit first to see available topics.'
+                    : normalizedSubject === 'biology'
+                    ? 'Please select a biology unit first to see available topics.'
+                    : 'Please select a chemistry unit first to see available topics.'
                   }
                 </p>
               ) : null}
