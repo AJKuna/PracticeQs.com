@@ -18,7 +18,7 @@ import { biologyGcseAqaUnitsData, getBiologyUnits } from '../data/biologyGcseAqa
 import { chemistryGcseAqaUnitsData, getChemistryUnits } from '../data/chemistryGcseAqaUnitsData';
 import { chemistryGcseEdexcelUnitsData, getChemistryEdexcelUnits } from '../data/chemistryGcseEdexcelUnitsData';
 import { biologyGcseEdexcelUnits } from '../data/biologyGcseEdexcelUnits';
-import { physicsGcseAqaUnits } from '../data/physicsGcseAqaUnits';
+import { physicsGcseAqaUnitsData, getPhysicsUnits } from '../data/physicsGcseAqaUnitsData';
 import { mathGcseEdexcelUnits } from '../data/mathGcseEdexcelUnits';
 import { religiousStudiesGcseAqaUnits, getComponentDisplayName, getUnitDisplayName } from '../data/religiousStudiesGcseAqaUnits';
 import { getUserStreak, updateStreakOnGeneration, StreakData } from '../services/streakService';
@@ -289,7 +289,7 @@ const QuestionGenerator: React.FC = () => {
         return `e.g. ${sampleTopics}...`;
       }
     } else if (normalizedSubject === 'physics' && options.examLevel === 'gcse' && options.examBoard === 'aqa' && options.physicsUnit) {
-      const unitTopics = physicsGcseAqaUnits[options.physicsUnit];
+      const unitTopics = physicsGcseAqaUnitsData[options.physicsUnit];
       if (unitTopics && unitTopics.length > 0) {
         const averageLength = unitTopics.slice(0, 4).reduce((sum, topic) => sum + topic.length, 0) / Math.min(4, unitTopics.length);
         const numTopics = averageLength > 50 ? 2 : averageLength > 30 ? 3 : 4;
@@ -347,10 +347,13 @@ const QuestionGenerator: React.FC = () => {
     if (normalizedSubject === 'chemistry' && options.examLevel === 'gcse' && options.examBoard === 'edexcel' && options.chemistryEdexcelUnit) {
       return chemistryGcseEdexcelUnitsData[options.chemistryEdexcelUnit] || [];
     }
+    if (normalizedSubject === 'physics' && options.examLevel === 'gcse' && options.examBoard === 'aqa' && options.physicsUnit) {
+      return physicsGcseAqaUnitsData[options.physicsUnit] || [];
+    }
     return [];
   };
 
-  // Check if we should show topic grid (for Religious Studies, Mathematics Edexcel, Biology AQA, Chemistry AQA, and Chemistry Edexcel with proper selections)
+  // Check if we should show topic grid (for Religious Studies, Mathematics Edexcel, Biology AQA, Chemistry AQA, Chemistry Edexcel, and Physics AQA with proper selections)
   const shouldShowTopicGrid = (normalizedSubject === 'religious studies' && 
     options.examLevel === 'gcse' && 
     options.examBoard === 'aqa' && 
@@ -371,7 +374,11 @@ const QuestionGenerator: React.FC = () => {
     (normalizedSubject === 'chemistry' && 
     options.examLevel === 'gcse' && 
     options.examBoard === 'edexcel' && 
-    options.chemistryEdexcelUnit);
+    options.chemistryEdexcelUnit) ||
+    (normalizedSubject === 'physics' && 
+    options.examLevel === 'gcse' && 
+    options.examBoard === 'aqa' && 
+    options.physicsUnit);
 
   // Get filtered topics for display
   const availableTopics = getAvailableTopics();
@@ -1739,26 +1746,45 @@ const QuestionGenerator: React.FC = () => {
             {/* Physics Unit Selection - only for AQA GCSE Physics */}
             {normalizedSubject === 'physics' && options.examBoard === 'aqa' && (
               <div className="sm:col-span-3">
-                <label htmlFor="physicsUnit" className="block text-base font-semibold text-gray-800 mb-2">
-                  Physics Unit
-                </label>
-                <select
-                  id="physicsUnit"
-                  value={options.physicsUnit}
-                  onChange={(e) => setOptions({ ...options, physicsUnit: e.target.value })}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 px-3 py-2.5"
-                >
-                  <option value="">Select a Physics unit</option>
-                  <option value="energy">1. Energy</option>
-                  <option value="electricity">2. Electricity</option>
-                  <option value="particle-model-matter">3. Particle model of matter</option>
-                  <option value="atomic-structure">4. Atomic structure</option>
-                  <option value="forces">5. Forces</option>
-                  <option value="waves">6. Waves</option>
-                  <option value="magnetism-electromagnetism">7. Magnetism and electromagnetism</option>
-                  <option value="space-physics">8. Space physics (physics only)</option>
-                  <option value="required-practicals">9. Required Practicals</option>
-                </select>
+                <h3 className="block text-base font-semibold text-gray-800 mb-4">
+                  Select a Physics Unit
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {getPhysicsUnits().map((unit) => (
+                    <button
+                      key={unit.value}
+                      type="button"
+                      onClick={() => {
+                        setOptions({ ...options, physicsUnit: unit.value });
+                        setSelectedTopic('');
+                        setSearchTopic('');
+                      }}
+                      className={`p-3 text-center border-2 rounded-lg transition-all duration-200 h-20 flex flex-col justify-center ${
+                        options.physicsUnit === unit.value
+                          ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-500 ring-opacity-50'
+                          : 'border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50'
+                      }`}
+                    >
+                      <div className={`text-xl font-bold ${
+                        options.physicsUnit === unit.value ? 'text-blue-600' : 'text-blue-500'
+                      }`}>
+                        {unit.number}
+                      </div>
+                      <div className={`text-sm font-semibold leading-tight ${
+                        options.physicsUnit === unit.value ? 'text-gray-900' : 'text-gray-800'
+                      }`}>
+                        {unit.title}
+                      </div>
+                      {unit.subtitle && (
+                        <div className={`text-xs leading-tight ${
+                          options.physicsUnit === unit.value ? 'text-gray-700' : 'text-gray-600'
+                        }`}>
+                          {unit.subtitle}
+                        </div>
+                      )}
+                    </button>
+                  ))}
+                </div>
               </div>
             )}
 
@@ -1966,6 +1992,8 @@ const QuestionGenerator: React.FC = () => {
                     ? 'Please select a mathematics unit first to see available topics.'
                     : normalizedSubject === 'biology'
                     ? 'Please select a biology unit first to see available topics.'
+                    : normalizedSubject === 'physics'
+                    ? 'Please select a physics unit first to see available topics.'
                     : 'Please select a chemistry unit first to see available topics.'
                   }
                 </p>
