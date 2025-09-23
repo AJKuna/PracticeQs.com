@@ -20,6 +20,7 @@ import { chemistryGcseEdexcelUnitsData, getChemistryEdexcelUnits } from '../data
 import { biologyGcseEdexcelUnits } from '../data/biologyGcseEdexcelUnits';
 import { physicsGcseAqaUnitsData, getPhysicsUnits } from '../data/physicsGcseAqaUnitsData';
 import { mathGcseEdexcelUnits } from '../data/mathGcseEdexcelUnits';
+import { historyGcseAqaUnitsData, getHistoryUnits } from '../data/historyGcseAqaUnitsData';
 import { religiousStudiesGcseAqaUnits, getComponentDisplayName, getUnitDisplayName } from '../data/religiousStudiesGcseAqaUnits';
 import { getUserStreak, updateStreakOnGeneration, StreakData } from '../services/streakService';
 
@@ -304,6 +305,22 @@ const QuestionGenerator: React.FC = () => {
       }
       // Fallback if no topics are available yet
       return `e.g. Enter physics topics for ${options.physicsUnit}...`;
+    } else if (normalizedSubject === 'history' && options.examLevel === 'gcse' && options.examBoard === 'aqa' && options.historyUnit) {
+      const unitTopics = historyGcseAqaUnitsData[options.historyUnit];
+      if (unitTopics && unitTopics.length > 0) {
+        const averageLength = unitTopics.slice(0, 4).reduce((sum, topic) => sum + topic.length, 0) / Math.min(4, unitTopics.length);
+        const numTopics = averageLength > 50 ? 2 : averageLength > 30 ? 3 : 4;
+        
+        let sampleTopics = unitTopics.slice(0, numTopics).join(', ');
+        
+        if (sampleTopics.length > 80) {
+          sampleTopics = sampleTopics.substring(0, 77) + '...';
+        }
+        
+        return `e.g. ${sampleTopics}...`;
+      }
+      // Fallback if no topics are available yet
+      return `e.g. Enter history topics for ${options.historyUnit}...`;
     } else if (normalizedSubject === 'mathematics' && options.examLevel === 'gcse' && options.examBoard === 'edexcel' && options.mathUnit) {
       const unitTopics = mathGcseEdexcelUnits[options.mathUnit];
       if (unitTopics && unitTopics.length > 0) {
@@ -350,10 +367,13 @@ const QuestionGenerator: React.FC = () => {
     if (normalizedSubject === 'physics' && options.examLevel === 'gcse' && options.examBoard === 'aqa' && options.physicsUnit) {
       return physicsGcseAqaUnitsData[options.physicsUnit] || [];
     }
+    if (normalizedSubject === 'history' && options.examLevel === 'gcse' && options.examBoard === 'aqa' && options.historyUnit) {
+      return historyGcseAqaUnitsData[options.historyUnit] || [];
+    }
     return [];
   };
 
-  // Check if we should show topic grid (for Religious Studies, Mathematics Edexcel, Biology AQA, Chemistry AQA, Chemistry Edexcel, and Physics AQA with proper selections)
+  // Check if we should show topic grid (for Religious Studies, Mathematics Edexcel, Biology AQA, Chemistry AQA, Chemistry Edexcel, Physics AQA, and History AQA with proper selections)
   const shouldShowTopicGrid = (normalizedSubject === 'religious studies' && 
     options.examLevel === 'gcse' && 
     options.examBoard === 'aqa' && 
@@ -378,7 +398,11 @@ const QuestionGenerator: React.FC = () => {
     (normalizedSubject === 'physics' && 
     options.examLevel === 'gcse' && 
     options.examBoard === 'aqa' && 
-    options.physicsUnit);
+    options.physicsUnit) ||
+    (normalizedSubject === 'history' && 
+    options.examLevel === 'gcse' && 
+    options.examBoard === 'aqa' && 
+    options.historyUnit);
 
   // Get filtered topics for display
   const availableTopics = getAvailableTopics();
@@ -1441,33 +1465,40 @@ const QuestionGenerator: React.FC = () => {
             {/* History Unit Selection - only for AQA GCSE History */}
             {normalizedSubject === 'history' && options.examBoard === 'aqa' && (
               <div className="sm:col-span-3">
-                <label htmlFor="historyUnit" className="block text-base font-semibold text-gray-800 mb-2">
-                  History Unit
-                </label>
-                <select
-                  id="historyUnit"
-                  value={options.historyUnit}
-                  onChange={(e) => setOptions({ ...options, historyUnit: e.target.value })}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 px-3 py-2.5"
-                >
-                  <option value="">Select a History unit</option>
-                  <option value="america-1840-1895">America, 1840-1895: Expansion and consolidation</option>
-                  <option value="germany-1890-1945">Germany, 1890-1945: Democracy and dictatorship</option>
-                  <option value="russia-1894-1945">Russia, 1894-1945: Tsardom and communism</option>
-                  <option value="america-1920-1973">America, 1920-1973: Opportunity and inequality</option>
-                  <option value="conflict-first-world-war">Conflict and tension: The First World War, 1894–1918</option>
-                  <option value="conflict-inter-war">Conflict and tension: The inter-war years, 1918–1939</option>
-                  <option value="conflict-east-west">Conflict and tension between East and West, 1945–1972</option>
-                  <option value="conflict-asia">Conflict and tension in Asia, 1950–1975</option>
-                  <option value="conflict-gulf-afghanistan">Conflict and tension in the Gulf and Afghanistan, 1990–2009</option>
-                  <option value="britain-health">Britain: Health and the people: c1000 to the present day</option>
-                  <option value="britain-power">Britain: Power and the people: c1170 to the present day</option>
-                  <option value="britain-migration">Britain: Migration, empires and the people: c790 to the present day</option>
-                  <option value="norman-england">Norman England, c1066–c1100</option>
-                  <option value="medieval-england">Medieval England: the reign of Edward I, 1272–1307</option>
-                  <option value="elizabethan-england">Elizabethan England, c1568–1603</option>
-                  <option value="restoration-england">Restoration England, 1660–1685</option>
-                </select>
+                <h3 className="block text-base font-semibold text-gray-800 mb-4">
+                  Select a History Unit
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
+                  {getHistoryUnits().map((unit) => (
+                    <button
+                      key={unit.value}
+                      type="button"
+                      onClick={() => {
+                        setOptions({ ...options, historyUnit: unit.value });
+                        setSelectedTopic('');
+                        setSearchTopic('');
+                      }}
+                      className={`p-3 text-left border-2 rounded-lg transition-all duration-200 h-20 flex flex-col justify-center ${
+                        options.historyUnit === unit.value
+                          ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-500 ring-opacity-50'
+                          : 'border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50'
+                      }`}
+                    >
+                      <div className={`text-sm font-semibold leading-tight ${
+                        options.historyUnit === unit.value ? 'text-gray-900' : 'text-gray-800'
+                      }`}>
+                        {unit.title}
+                      </div>
+                      {unit.subtitle && (
+                        <div className={`text-xs leading-tight mt-1 ${
+                          options.historyUnit === unit.value ? 'text-gray-700' : 'text-gray-600'
+                        }`}>
+                          {unit.subtitle}
+                        </div>
+                      )}
+                    </button>
+                  ))}
+                </div>
               </div>
             )}
 
@@ -1994,6 +2025,8 @@ const QuestionGenerator: React.FC = () => {
                     ? 'Please select a biology unit first to see available topics.'
                     : normalizedSubject === 'physics'
                     ? 'Please select a physics unit first to see available topics.'
+                    : normalizedSubject === 'history'
+                    ? 'Please select a history unit first to see available topics.'
                     : 'Please select a chemistry unit first to see available topics.'
                   }
                 </p>
