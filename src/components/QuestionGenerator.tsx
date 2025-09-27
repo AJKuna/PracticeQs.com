@@ -17,7 +17,7 @@ import { biologyGcseAqaUnits } from '../data/biologyGcseAqaUnits';
 import { biologyGcseAqaUnitsData, getBiologyUnits } from '../data/biologyGcseAqaUnitsData';
 import { chemistryGcseAqaUnitsData, getChemistryUnits } from '../data/chemistryGcseAqaUnitsData';
 import { chemistryGcseEdexcelUnitsData, getChemistryEdexcelUnits } from '../data/chemistryGcseEdexcelUnitsData';
-import { biologyGcseEdexcelUnits } from '../data/biologyGcseEdexcelUnits';
+import { biologyGcseEdexcelUnitsData, getBiologyEdexcelUnits } from '../data/biologyGcseEdexcelUnitsData';
 import { physicsGcseAqaUnitsData, getPhysicsUnits } from '../data/physicsGcseAqaUnitsData';
 import { mathGcseEdexcelUnits } from '../data/mathGcseEdexcelUnits';
 import { historyGcseAqaUnitsData, getHistoryUnits } from '../data/historyGcseAqaUnitsData';
@@ -248,7 +248,7 @@ const QuestionGenerator: React.FC = () => {
         return `e.g. ${sampleTopics}...`;
       }
     } else if (normalizedSubject === 'biology' && options.examLevel === 'gcse' && options.examBoard === 'edexcel' && options.biologyEdexcelUnit) {
-      const unitTopics = biologyGcseEdexcelUnits[options.biologyEdexcelUnit];
+      const unitTopics = biologyGcseEdexcelUnitsData[options.biologyEdexcelUnit];
       if (unitTopics && unitTopics.length > 0) {
         const averageLength = unitTopics.slice(0, 4).reduce((sum, topic) => sum + topic.length, 0) / Math.min(4, unitTopics.length);
         const numTopics = averageLength > 50 ? 2 : averageLength > 30 ? 3 : 4;
@@ -344,7 +344,7 @@ const QuestionGenerator: React.FC = () => {
 
   const placeholder = getDynamicPlaceholder();
 
-  // Function to get available topics for Religious Studies, Mathematics Edexcel, Biology AQA, and Chemistry AQA
+  // Function to get available topics for Religious Studies, Mathematics Edexcel, Biology AQA, Biology Edexcel, and Chemistry AQA
   const getAvailableTopics = (): string[] => {
     if (normalizedSubject === 'religious studies' && options.examLevel === 'gcse' && options.examBoard === 'aqa' && options.religiousStudiesComponent && options.religiousStudiesUnit) {
       const componentData = religiousStudiesGcseAqaUnits[options.religiousStudiesComponent];
@@ -357,6 +357,9 @@ const QuestionGenerator: React.FC = () => {
     }
     if (normalizedSubject === 'biology' && options.examLevel === 'gcse' && options.examBoard === 'aqa' && options.biologyUnit) {
       return biologyGcseAqaUnitsData[options.biologyUnit] || [];
+    }
+    if (normalizedSubject === 'biology' && options.examLevel === 'gcse' && options.examBoard === 'edexcel' && options.biologyEdexcelUnit) {
+      return biologyGcseEdexcelUnitsData[options.biologyEdexcelUnit] || [];
     }
     if (normalizedSubject === 'chemistry' && options.examLevel === 'gcse' && options.examBoard === 'aqa' && options.chemistryUnit) {
       return chemistryGcseAqaUnitsData[options.chemistryUnit] || [];
@@ -373,7 +376,7 @@ const QuestionGenerator: React.FC = () => {
     return [];
   };
 
-  // Check if we should show topic grid (for Religious Studies, Mathematics Edexcel, Biology AQA, Chemistry AQA, Chemistry Edexcel, Physics AQA, and History AQA with proper selections)
+  // Check if we should show topic grid (for Religious Studies, Mathematics Edexcel, Biology AQA, Biology Edexcel, Chemistry AQA, Chemistry Edexcel, Physics AQA, and History AQA with proper selections)
   const shouldShowTopicGrid = (normalizedSubject === 'religious studies' && 
     options.examLevel === 'gcse' && 
     options.examBoard === 'aqa' && 
@@ -387,6 +390,10 @@ const QuestionGenerator: React.FC = () => {
     options.examLevel === 'gcse' && 
     options.examBoard === 'aqa' && 
     options.biologyUnit) ||
+    (normalizedSubject === 'biology' && 
+    options.examLevel === 'gcse' && 
+    options.examBoard === 'edexcel' && 
+    options.biologyEdexcelUnit) ||
     (normalizedSubject === 'chemistry' && 
     options.examLevel === 'gcse' && 
     options.examBoard === 'aqa' && 
@@ -1608,27 +1615,45 @@ const QuestionGenerator: React.FC = () => {
             {/* Biology Unit Selection - only for Edexcel GCSE Biology */}
             {normalizedSubject === 'biology' && options.examBoard === 'edexcel' && (
               <div className="sm:col-span-3">
-                <label htmlFor="biologyEdexcelUnit" className="block text-base font-semibold text-gray-800 mb-2">
-                  Biology Unit
-                </label>
-                <select
-                  id="biologyEdexcelUnit"
-                  value={options.biologyEdexcelUnit}
-                  onChange={(e) => setOptions({ ...options, biologyEdexcelUnit: e.target.value })}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 px-3 py-2.5"
-                >
-                  <option value="">Select a Biology unit</option>
-                  <option value="key-concepts-biology">1. Key concepts in biology</option>
-                  <option value="cells-control">2. Cells and control</option>
-                  <option value="genetics">3. Genetics</option>
-                  <option value="natural-selection-genetic-modification">4. Natural selection and genetic modification</option>
-                  <option value="health-disease-medicines">5. Health, disease and the development of medicines</option>
-                  <option value="plant-structures-functions">6. Plant structures and their functions</option>
-                  <option value="animal-coordination-control-homeostasis">7. Animal coordination, control and homeostasis</option>
-                  <option value="exchange-transport-animals">8. Exchange and transport in animals</option>
-                  <option value="ecosystems-material-cycles">9. Ecosystems and material cycles</option>
-                  <option value="required-practicals">10. Required Practicals</option>
-                </select>
+                <h3 className="block text-base font-semibold text-gray-800 mb-4">
+                  Select a Biology Unit
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {getBiologyEdexcelUnits().map((unit) => (
+                    <button
+                      key={unit.value}
+                      type="button"
+                      onClick={() => {
+                        setOptions({ ...options, biologyEdexcelUnit: unit.value });
+                        setSelectedTopic('');
+                        setSearchTopic('');
+                      }}
+                      className={`p-3 text-center border-2 rounded-lg transition-all duration-200 h-20 flex flex-col justify-center ${
+                        options.biologyEdexcelUnit === unit.value
+                          ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-500 ring-opacity-50'
+                          : 'border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50'
+                      }`}
+                    >
+                      <div className={`text-xl font-bold ${
+                        options.biologyEdexcelUnit === unit.value ? 'text-blue-600' : 'text-blue-500'
+                      }`}>
+                        {unit.number}
+                      </div>
+                      <div className={`text-sm font-semibold leading-tight ${
+                        options.biologyEdexcelUnit === unit.value ? 'text-gray-900' : 'text-gray-800'
+                      }`}>
+                        {unit.title}
+                      </div>
+                      {unit.subtitle && (
+                        <div className={`text-xs leading-tight ${
+                          options.biologyEdexcelUnit === unit.value ? 'text-gray-700' : 'text-gray-600'
+                        }`}>
+                          {unit.subtitle}
+                        </div>
+                      )}
+                    </button>
+                  ))}
+                </div>
               </div>
             )}
 
