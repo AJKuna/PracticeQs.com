@@ -21,6 +21,7 @@ import { biologyGcseEdexcelUnitsData, getBiologyEdexcelUnits } from '../data/bio
 import { physicsGcseAqaUnitsData, getPhysicsUnits } from '../data/physicsGcseAqaUnitsData';
 import { mathGcseEdexcelUnits } from '../data/mathGcseEdexcelUnits';
 import { historyGcseAqaUnitsData, getHistoryUnits } from '../data/historyGcseAqaUnitsData';
+import { getGeographyAqaUnits, getGeographyAqaSections, getGeographyAqaTopics } from '../data/geographyGcseAqaUnitsData';
 import { religiousStudiesGcseAqaUnits, getComponentDisplayName, getUnitDisplayName } from '../data/religiousStudiesGcseAqaUnits';
 import { getUserStreak, updateStreakOnGeneration, StreakData } from '../services/streakService';
 
@@ -337,6 +338,23 @@ const QuestionGenerator: React.FC = () => {
       }
       // Fallback if no topics are available yet
       return `e.g. Enter mathematics topics for ${options.mathUnit}...`;
+    } else if (normalizedSubject === 'geography' && options.examLevel === 'gcse' && options.examBoard === 'aqa' && options.geographyUnit) {
+      const unitTopics = getGeographyAqaTopics(options.geographyUnit, options.geographySection);
+      if (unitTopics && unitTopics.length > 0) {
+        const averageLength = unitTopics.slice(0, 4).reduce((sum, topic) => sum + topic.length, 0) / Math.min(4, unitTopics.length);
+        const numTopics = averageLength > 50 ? 2 : averageLength > 30 ? 3 : 4;
+        
+        let sampleTopics = unitTopics.slice(0, numTopics).join(', ');
+        
+        if (sampleTopics.length > 80) {
+          sampleTopics = sampleTopics.substring(0, 77) + '...';
+        }
+        
+        return `e.g. ${sampleTopics}...`;
+      }
+      // Fallback if no topics are available yet
+      const unitName = getGeographyAqaUnits().find(u => u.value === options.geographyUnit)?.title || 'selected unit';
+      return `e.g. Enter geography topics for ${unitName}...`;
     }
     
     return subjectPlaceholders[placeholderKey] || 'Enter a topic...';
@@ -344,7 +362,7 @@ const QuestionGenerator: React.FC = () => {
 
   const placeholder = getDynamicPlaceholder();
 
-  // Function to get available topics for Religious Studies, Mathematics Edexcel, Biology AQA, Biology Edexcel, and Chemistry AQA
+  // Function to get available topics for Religious Studies, Mathematics Edexcel, Biology AQA, Biology Edexcel, Chemistry AQA, Geography AQA, and History AQA
   const getAvailableTopics = (): string[] => {
     if (normalizedSubject === 'religious studies' && options.examLevel === 'gcse' && options.examBoard === 'aqa' && options.religiousStudiesComponent && options.religiousStudiesUnit) {
       const componentData = religiousStudiesGcseAqaUnits[options.religiousStudiesComponent];
@@ -370,13 +388,16 @@ const QuestionGenerator: React.FC = () => {
     if (normalizedSubject === 'physics' && options.examLevel === 'gcse' && options.examBoard === 'aqa' && options.physicsUnit) {
       return physicsGcseAqaUnitsData[options.physicsUnit] || [];
     }
+    if (normalizedSubject === 'geography' && options.examLevel === 'gcse' && options.examBoard === 'aqa' && options.geographyUnit) {
+      return getGeographyAqaTopics(options.geographyUnit, options.geographySection) || [];
+    }
     if (normalizedSubject === 'history' && options.examLevel === 'gcse' && options.examBoard === 'aqa' && options.historyUnit) {
       return historyGcseAqaUnitsData[options.historyUnit] || [];
     }
     return [];
   };
 
-  // Check if we should show topic grid (for Religious Studies, Mathematics Edexcel, Biology AQA, Biology Edexcel, Chemistry AQA, Chemistry Edexcel, Physics AQA, and History AQA with proper selections)
+  // Check if we should show topic grid (for Religious Studies, Mathematics Edexcel, Biology AQA, Biology Edexcel, Chemistry AQA, Chemistry Edexcel, Physics AQA, Geography AQA, and History AQA with proper selections)
   const shouldShowTopicGrid = (normalizedSubject === 'religious studies' && 
     options.examLevel === 'gcse' && 
     options.examBoard === 'aqa' && 
@@ -406,6 +427,11 @@ const QuestionGenerator: React.FC = () => {
     options.examLevel === 'gcse' && 
     options.examBoard === 'aqa' && 
     options.physicsUnit) ||
+    (normalizedSubject === 'geography' && 
+    options.examLevel === 'gcse' && 
+    options.examBoard === 'aqa' && 
+    options.geographyUnit && 
+    (options.geographySection || options.geographyUnit === 'geographical-skills')) ||
     (normalizedSubject === 'history' && 
     options.examLevel === 'gcse' && 
     options.examBoard === 'aqa' && 
@@ -1512,58 +1538,66 @@ const QuestionGenerator: React.FC = () => {
             {/* Geography Unit Selection - only for AQA GCSE Geography */}
             {normalizedSubject === 'geography' && options.examBoard === 'aqa' && (
               <div className="sm:col-span-3">
-                <label htmlFor="geographyUnit" className="block text-base font-semibold text-gray-800 mb-2">
-                  Geography Unit
-                </label>
-                <select
-                  id="geographyUnit"
-                  value={options.geographyUnit}
-                  onChange={(e) => setOptions({ ...options, geographyUnit: e.target.value, geographySection: '', biologyUnit: '', chemistryUnit: '', biologyEdexcelUnit: '', physicsUnit: '', mathUnit: '', religiousStudiesComponent: '', religiousStudiesUnit: '' })}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 px-3 py-2.5"
-                >
-                  <option value="">Select a Geography unit</option>
-                  <option value="living-physical-environment">Living with the physical environment</option>
-                  <option value="human-environment-challenges">Challenges in the human environment</option>
-                  <option value="geographical-applications-fieldwork">Geographical applications (Fieldwork)</option>
-                  <option value="geographical-skills">Geographical skills</option>
-                </select>
+                <h3 className="block text-base font-semibold text-gray-800 mb-4">
+                  Select a Geography Unit
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {getGeographyAqaUnits().map((unit) => (
+                    <button
+                      key={unit.value}
+                      type="button"
+                      onClick={() => {
+                        setOptions({ ...options, geographyUnit: unit.value, geographySection: '', biologyUnit: '', chemistryUnit: '', biologyEdexcelUnit: '', physicsUnit: '', mathUnit: '', religiousStudiesComponent: '', religiousStudiesUnit: '' });
+                        setSelectedTopic('');
+                        setSearchTopic('');
+                      }}
+                      className={`p-4 text-left border-2 rounded-lg transition-all duration-200 min-h-20 flex flex-col justify-center ${
+                        options.geographyUnit === unit.value
+                          ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-500 ring-opacity-50'
+                          : 'border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50'
+                      }`}
+                    >
+                      <div className={`text-sm font-semibold leading-tight ${
+                        options.geographyUnit === unit.value ? 'text-gray-900' : 'text-gray-800'
+                      }`}>
+                        {unit.title}
+                      </div>
+                    </button>
+                  ))}
+                </div>
               </div>
             )}
 
             {/* Geography Section Selection - only for AQA GCSE Geography with unit selected (except geographical-skills) */}
             {normalizedSubject === 'geography' && options.examBoard === 'aqa' && options.geographyUnit && options.geographyUnit !== 'geographical-skills' && (
               <div className="sm:col-span-3">
-                <label htmlFor="geographySection" className="block text-base font-semibold text-gray-800 mb-2">
-                  Geography Section
-                </label>
-                <select
-                  id="geographySection"
-                  value={options.geographySection}
-                  onChange={(e) => setOptions({ ...options, geographySection: e.target.value })}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 px-3 py-2.5"
-                >
-                  <option value="">Select a Geography section</option>
-                  {options.geographyUnit === 'living-physical-environment' && (
-                    <>
-                      <option value="challenge-natural-hazards">The Challenge of Natural Hazards</option>
-                      <option value="living-world">The Living World</option>
-                      <option value="physical-landscapes-uk">Physical Landscapes in the UK</option>
-                    </>
-                  )}
-                  {options.geographyUnit === 'human-environment-challenges' && (
-                    <>
-                      <option value="urban-issues-challenges">Urban Issues and Challenges</option>
-                      <option value="changing-economic-world">The Changing Economic World</option>
-                      <option value="challenge-resource-management">The Challenge of Resource Management</option>
-                    </>
-                  )}
-                  {options.geographyUnit === 'geographical-applications-fieldwork' && (
-                    <>
-                      <option value="issue-evaluation">Issue Evaluation</option>
-                      <option value="fieldwork">Fieldwork</option>
-                    </>
-                  )}
-                </select>
+                <h3 className="block text-base font-semibold text-gray-800 mb-4">
+                  Select a Geography Section
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {getGeographyAqaSections(options.geographyUnit).map((section) => (
+                    <button
+                      key={section.value}
+                      type="button"
+                      onClick={() => {
+                        setOptions({ ...options, geographySection: section.value });
+                        setSelectedTopic('');
+                        setSearchTopic('');
+                      }}
+                      className={`p-4 text-left border-2 rounded-lg transition-all duration-200 min-h-20 flex flex-col justify-center ${
+                        options.geographySection === section.value
+                          ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-500 ring-opacity-50'
+                          : 'border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50'
+                      }`}
+                    >
+                      <div className={`text-sm font-semibold leading-tight ${
+                        options.geographySection === section.value ? 'text-gray-900' : 'text-gray-800'
+                      }`}>
+                        {section.title}
+                      </div>
+                    </button>
+                  ))}
+                </div>
               </div>
             )}
 
@@ -2050,6 +2084,8 @@ const QuestionGenerator: React.FC = () => {
                     ? 'Please select a biology unit first to see available topics.'
                     : normalizedSubject === 'physics'
                     ? 'Please select a physics unit first to see available topics.'
+                    : normalizedSubject === 'geography'
+                    ? 'Please select a geography unit and section first to see available topics.'
                     : normalizedSubject === 'history'
                     ? 'Please select a history unit first to see available topics.'
                     : 'Please select a chemistry unit first to see available topics.'
