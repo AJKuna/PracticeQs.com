@@ -22,8 +22,9 @@ import { physicsGcseAqaUnitsData, getPhysicsUnits } from '../data/physicsGcseAqa
 import { mathGcseEdexcelUnits } from '../data/mathGcseEdexcelUnits';
 import { historyGcseAqaUnitsData, getHistoryUnits } from '../data/historyGcseAqaUnitsData';
 import { getGeographyAqaUnits, getGeographyAqaSections, getGeographyAqaTopics } from '../data/geographyGcseAqaUnitsData';
-import { religiousStudiesGcseAqaUnits, getComponentDisplayName, getUnitDisplayName } from '../data/religiousStudiesGcseAqaUnits';
+import { religiousStudiesGcseAqaUnits, getReligiousStudiesComponents, getReligiousStudiesReligions, getReligiousStudiesThemes } from '../data/religiousStudiesGcseAqaUnits';
 import { getUserStreak, updateStreakOnGeneration, StreakData } from '../services/streakService';
+
 
 // ... (interfaces and constants unchanged)
 
@@ -1881,54 +1882,118 @@ const QuestionGenerator: React.FC = () => {
             {/* Religious Studies Component Selection - only for AQA GCSE Religious Studies */}
             {normalizedSubject === 'religious studies' && options.examBoard === 'aqa' && (
               <div className="sm:col-span-3">
-                <label htmlFor="religiousStudiesComponent" className="block text-base font-semibold text-gray-800 mb-2">
-                  Religious Studies Component
-                </label>
-                <select
-                  id="religiousStudiesComponent"
-                  value={options.religiousStudiesComponent}
-                  onChange={(e) => {
-                    setOptions({ ...options, religiousStudiesComponent: e.target.value, religiousStudiesUnit: '' });
-                    setSelectedTopic('');
-                    setSearchTopic('');
-                  }}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 px-3 py-2.5"
-                >
-                  <option value="">Select a Religious Studies component</option>
-                  {Object.keys(religiousStudiesGcseAqaUnits).map((componentKey) => (
-                    <option key={componentKey} value={componentKey}>
-                      {getComponentDisplayName(componentKey)}
-                    </option>
+                <h3 className="block text-base font-semibold text-gray-800 mb-4">
+                  Select a Religious Studies Component
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {getReligiousStudiesComponents().map((component) => (
+                    <button
+                      key={component.value}
+                      type="button"
+                      onClick={() => {
+                        setOptions({ ...options, religiousStudiesComponent: component.value, religiousStudiesUnit: '' });
+                        setSelectedTopic('');
+                        setSearchTopic('');
+                      }}
+                      className={`p-3 text-center border-2 rounded-lg transition-all duration-200 h-20 flex flex-col justify-center ${
+                        options.religiousStudiesComponent === component.value
+                          ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-500 ring-opacity-50'
+                          : 'border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50'
+                      }`}
+                    >
+                      <div className={`text-xl font-bold ${
+                        options.religiousStudiesComponent === component.value ? 'text-blue-600' : 'text-blue-500'
+                      }`}>
+                        {component.number}
+                      </div>
+                      <div className={`text-sm font-semibold leading-tight ${
+                        options.religiousStudiesComponent === component.value ? 'text-gray-900' : 'text-gray-800'
+                      }`}>
+                        {component.title}
+                      </div>
+                      {component.subtitle && (
+                        <div className={`text-xs leading-tight ${
+                          options.religiousStudiesComponent === component.value ? 'text-gray-700' : 'text-gray-600'
+                        }`}>
+                          {component.subtitle}
+                        </div>
+                      )}
+                    </button>
                   ))}
-                </select>
+                </div>
               </div>
             )}
 
-            {/* Religious Studies Unit Selection - only for AQA GCSE Religious Studies with component selected */}
-            {normalizedSubject === 'religious studies' && options.examBoard === 'aqa' && options.religiousStudiesComponent && (
+            {/* Religious Studies Religion Selection - only for Component 1 */}
+            {normalizedSubject === 'religious studies' && options.examBoard === 'aqa' && options.religiousStudiesComponent === 'component-1' && (
               <div className="sm:col-span-3">
-                <label htmlFor="religiousStudiesUnit" className="block text-base font-semibold text-gray-800 mb-2">
-                  {options.religiousStudiesComponent === 'component-1' ? 'Religion' : 'Theme'}
-                </label>
-                <select
-                  id="religiousStudiesUnit"
-                  value={options.religiousStudiesUnit}
-                  onChange={(e) => {
-                    setOptions({ ...options, religiousStudiesUnit: e.target.value });
-                    setSelectedTopic('');
-                    setSearchTopic('');
-                  }}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 px-3 py-2.5"
-                >
-                  <option value="">
-                    {options.religiousStudiesComponent === 'component-1' ? 'Select a religion' : 'Choose a theme'}
-                  </option>
-                  {Object.keys(religiousStudiesGcseAqaUnits[options.religiousStudiesComponent]).map((unitKey) => (
-                    <option key={unitKey} value={unitKey}>
-                      {getUnitDisplayName(options.religiousStudiesComponent, unitKey)}
-                    </option>
+                <h3 className="block text-base font-semibold text-gray-800 mb-4">
+                  Select a Religion
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {getReligiousStudiesReligions().map((religion) => (
+                    <button
+                      key={religion.value}
+                      type="button"
+                      onClick={() => {
+                        setOptions({ ...options, religiousStudiesUnit: religion.value });
+                        setSelectedTopic('');
+                        setSearchTopic('');
+                      }}
+                      className={`p-4 text-center border-2 rounded-lg transition-all duration-200 h-20 flex flex-col justify-center ${
+                        options.religiousStudiesUnit === religion.value
+                          ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-500 ring-opacity-50'
+                          : 'border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50'
+                      }`}
+                    >
+                      <div className={`text-sm font-semibold leading-tight ${
+                        options.religiousStudiesUnit === religion.value ? 'text-gray-900' : 'text-gray-800'
+                      }`}>
+                        {religion.title}
+                      </div>
+                    </button>
                   ))}
-                </select>
+                </div>
+              </div>
+            )}
+
+            {/* Religious Studies Theme Selection - only for Component 2 */}
+            {normalizedSubject === 'religious studies' && options.examBoard === 'aqa' && options.religiousStudiesComponent === 'component-2' && (
+              <div className="sm:col-span-3">
+                <h3 className="block text-base font-semibold text-gray-800 mb-4">
+                  Select a Theme
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
+                  {getReligiousStudiesThemes().map((theme) => (
+                    <button
+                      key={theme.value}
+                      type="button"
+                      onClick={() => {
+                        setOptions({ ...options, religiousStudiesUnit: theme.value });
+                        setSelectedTopic('');
+                        setSearchTopic('');
+                      }}
+                      className={`p-4 text-left border-2 rounded-lg transition-all duration-200 min-h-20 flex flex-col justify-center ${
+                        options.religiousStudiesUnit === theme.value
+                          ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-500 ring-opacity-50'
+                          : 'border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50'
+                      }`}
+                    >
+                      <div className="flex items-center">
+                        <div className={`text-xl font-bold mr-3 ${
+                          options.religiousStudiesUnit === theme.value ? 'text-blue-600' : 'text-blue-500'
+                        }`}>
+                          {theme.code}
+                        </div>
+                        <div className={`text-sm font-semibold leading-tight ${
+                          options.religiousStudiesUnit === theme.value ? 'text-gray-900' : 'text-gray-800'
+                        }`}>
+                          {theme.title}
+                        </div>
+                      </div>
+                    </button>
+                  ))}
+                </div>
               </div>
             )}
 

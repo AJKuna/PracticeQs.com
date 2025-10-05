@@ -319,3 +319,38 @@ export const getUnitDisplayName = (componentKey: string, unitKey: string): strin
   };
   return unitNames[componentKey]?.[unitKey] || unitKey;
 };
+
+// Helper function to get components for button display
+export const getReligiousStudiesComponents = () => {
+  return [
+    { value: 'component-1', number: '1', title: 'Study of religions', subtitle: 'beliefs, teachings and practices' },
+    { value: 'component-2', number: '2', title: 'Thematic studies', subtitle: '' }
+  ];
+};
+
+// Helper function to get religions for Component 1
+export const getReligiousStudiesReligions = () => {
+  return [
+    { value: 'buddhism', title: 'Buddhism' },
+    { value: 'christianity', title: 'Christianity' },
+    { value: 'catholic-christianity', title: 'Catholic Christianity' },
+    { value: 'hinduism', title: 'Hinduism' },
+    { value: 'islam', title: 'Islam' },
+    { value: 'judaism', title: 'Judaism' },
+    { value: 'sikhism', title: 'Sikhism' }
+  ];
+};
+
+// Helper function to get themes for Component 2
+export const getReligiousStudiesThemes = () => {
+  return [
+    { value: 'theme-a-relationships-families', code: 'A', title: 'Relationships and families' },
+    { value: 'theme-b-religion-life', code: 'B', title: 'Religion and life' },
+    { value: 'theme-c-existence-god-revelation', code: 'C', title: 'The existence of God and revelation' },
+    { value: 'theme-d-religion-peace-conflict', code: 'D', title: 'Religion, peace and conflict' },
+    { value: 'theme-e-religion-crime-punishment', code: 'E', title: 'Religion, crime and punishment' },
+    { value: 'theme-f-religion-human-rights-social-justice', code: 'F', title: 'Religion, human rights and social justice' },
+    { value: 'theme-g-st-marks-gospel-life-jesus', code: 'G', title: 'St Mark\'s Gospel – the life of Jesus' },
+    { value: 'theme-h-st-marks-gospel-source-truths', code: 'H', title: 'St Mark\'s Gospel as a source of religious, moral and spiritual truths' }
+  ];
+};
