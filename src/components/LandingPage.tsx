@@ -86,7 +86,7 @@ const LandingPage: React.FC = () => {
           <img 
             src="/logo.svg" 
             alt="Logo" 
-            className="h-12 w-auto sm:h-16 lg:h-24"
+            className="h-8 w-auto sm:h-12 lg:h-16"
           />
         </button>
       </div>
