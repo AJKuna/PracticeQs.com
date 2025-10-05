@@ -196,7 +196,7 @@ const checkDailyUsage = async (userId) => {
   }
 };
 
-const logUsage = async (userId, questionsGenerated) => {
+const logUsage = async (userId, questionsGenerated, subject) => {
   const today = getTodaysDate();
   const now = new Date().toISOString();
 
@@ -231,7 +231,8 @@ const logUsage = async (userId, questionsGenerated) => {
         .update({
           questions_generated: existingLog.questions_generated + questionsGenerated,
           last_generated_at: now,
-          user_status: 'returning'
+          user_status: 'returning',
+          subject: subject
         })
         .eq('id', existingLog.id);
 
@@ -248,7 +249,8 @@ const logUsage = async (userId, questionsGenerated) => {
           date: today,
           questions_generated: questionsGenerated,
           last_generated_at: now,
-          user_status: userStatus
+          user_status: userStatus,
+          subject: subject
         });
 
       if (insertError) {
@@ -257,7 +259,7 @@ const logUsage = async (userId, questionsGenerated) => {
       }
     }
 
-    console.log(`✅ Logged usage for user ${userId}: ${questionsGenerated} questions, status: ${userStatus}`);
+    console.log(`✅ Logged usage for user ${userId}: ${questionsGenerated} questions, subject: ${subject}, status: ${userStatus}`);
     return true;
   } catch (error) {
     console.error('Error logging usage:', error);
@@ -1090,8 +1092,8 @@ if (subject === 'english-language') {
     }
 
     // Log the usage after successful generation
-    console.log('📊 Logging usage for user:', userId, 'Questions generated:', numQuestions);
-    const logSuccess = await logUsage(userId, numQuestions);
+    console.log('📊 Logging usage for user:', userId, 'Questions generated:', numQuestions, 'Subject:', subject);
+    const logSuccess = await logUsage(userId, numQuestions, subject);
     
     if (!logSuccess) {
       console.log('⚠️ Warning: Failed to log usage, but continuing with response');
