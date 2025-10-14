@@ -20,6 +20,7 @@ import { chemistryGcseEdexcelUnitsData, getChemistryEdexcelUnits } from '../data
 import { biologyGcseEdexcelUnitsData, getBiologyEdexcelUnits } from '../data/biologyGcseEdexcelUnitsData';
 import { physicsGcseAqaUnitsData, getPhysicsUnits } from '../data/physicsGcseAqaUnitsData';
 import { mathGcseEdexcelUnits } from '../data/mathGcseEdexcelUnits';
+import { mathGcseCambridgeUnits } from '../data/mathGcseCambridgeUnits';
 import { historyGcseAqaUnitsData, getHistoryUnits } from '../data/historyGcseAqaUnitsData';
 import { getGeographyAqaUnits, getGeographyAqaSections, getGeographyAqaTopics } from '../data/geographyGcseAqaUnitsData';
 import { religiousStudiesGcseAqaUnits, getReligiousStudiesComponents, getReligiousStudiesReligions, getReligiousStudiesThemes } from '../data/religiousStudiesGcseAqaUnits';
@@ -339,6 +340,22 @@ const QuestionGenerator: React.FC = () => {
       }
       // Fallback if no topics are available yet
       return `e.g. Enter mathematics topics for ${options.mathUnit}...`;
+    } else if (normalizedSubject === 'mathematics' && options.examLevel === 'gcse' && options.examBoard === 'ci' && options.mathUnit) {
+      const unitTopics = mathGcseCambridgeUnits[options.mathUnit];
+      if (unitTopics && unitTopics.length > 0) {
+        const averageLength = unitTopics.slice(0, 4).reduce((sum, topic) => sum + topic.length, 0) / Math.min(4, unitTopics.length);
+        const numTopics = averageLength > 50 ? 2 : averageLength > 30 ? 3 : 4;
+        
+        let sampleTopics = unitTopics.slice(0, numTopics).join(', ');
+        
+        if (sampleTopics.length > 80) {
+          sampleTopics = sampleTopics.substring(0, 77) + '...';
+        }
+        
+        return `e.g. ${sampleTopics}...`;
+      }
+      // Fallback if no topics are available yet
+      return `e.g. Enter mathematics topics for ${options.mathUnit}...`;
     } else if (normalizedSubject === 'geography' && options.examLevel === 'gcse' && options.examBoard === 'aqa' && options.geographyUnit) {
       const unitTopics = getGeographyAqaTopics(options.geographyUnit, options.geographySection);
       if (unitTopics && unitTopics.length > 0) {
@@ -374,6 +391,9 @@ const QuestionGenerator: React.FC = () => {
     if (normalizedSubject === 'mathematics' && options.examLevel === 'gcse' && options.examBoard === 'edexcel' && options.mathUnit) {
       return mathGcseEdexcelUnits[options.mathUnit] || [];
     }
+    if (normalizedSubject === 'mathematics' && options.examLevel === 'gcse' && options.examBoard === 'ci' && options.mathUnit) {
+      return mathGcseCambridgeUnits[options.mathUnit] || [];
+    }
     if (normalizedSubject === 'biology' && options.examLevel === 'gcse' && options.examBoard === 'aqa' && options.biologyUnit) {
       return biologyGcseAqaUnitsData[options.biologyUnit] || [];
     }
@@ -407,6 +427,10 @@ const QuestionGenerator: React.FC = () => {
     (normalizedSubject === 'mathematics' && 
     options.examLevel === 'gcse' && 
     options.examBoard === 'edexcel' && 
+    options.mathUnit) ||
+    (normalizedSubject === 'mathematics' && 
+    options.examLevel === 'gcse' && 
+    options.examBoard === 'ci' && 
     options.mathUnit) ||
     (normalizedSubject === 'biology' && 
     options.examLevel === 'gcse' && 
@@ -679,7 +703,7 @@ const QuestionGenerator: React.FC = () => {
     }
 
     // Check for Mathematics unit selection
-    if (normalizedSubject === 'mathematics' && options.examBoard === 'edexcel' && options.examLevel === 'gcse' && !options.mathUnit) {
+    if (normalizedSubject === 'mathematics' && (options.examBoard === 'edexcel' || options.examBoard === 'ci') && options.examLevel === 'gcse' && !options.mathUnit) {
       setAlert({ type: 'error', message: 'Please choose a Mathematics unit' });
       setIsGenerating(false);
       return;
@@ -1481,11 +1505,13 @@ const QuestionGenerator: React.FC = () => {
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 px-3 py-2.5"
                   >
                     <option value="">Select an exam board</option>
-                    <option value="aqa">AQA</option>
+                    {normalizedSubject !== 'mathematics' && (
+                      <option value="aqa">AQA</option>
+                    )}
                     {normalizedSubject !== 'religious studies' && normalizedSubject !== 'history' && normalizedSubject !== 'geography' && (
                       <option value="edexcel">Edexcel</option>
                     )}
-                    {(normalizedSubject === 'mathematics' || normalizedSubject === 'physics' || normalizedSubject === 'chemistry') && (
+                    {(normalizedSubject === 'physics' || normalizedSubject === 'chemistry') && (
                       <option value="ocr">
                         {(normalizedSubject === 'chemistry' || normalizedSubject === 'physics') ? 'OCR A' : 'OCR'}
                       </option>
@@ -1708,6 +1734,61 @@ const QuestionGenerator: React.FC = () => {
                     { value: 'geometry-measures', number: '4', title: 'Geometry and Measures' },
                     { value: 'probability', number: '5', title: 'Probability' },
                     { value: 'statistics', number: '6', title: 'Statistics' }
+                  ].map((unit) => (
+                    <button
+                      key={unit.value}
+                      type="button"
+                      onClick={() => {
+                        setOptions({ ...options, mathUnit: unit.value });
+                        setSelectedTopic('');
+                        setSearchTopic('');
+                      }}
+                      className={`p-3 text-center border-2 rounded-lg transition-all duration-200 h-20 flex flex-col justify-center ${
+                        options.mathUnit === unit.value
+                          ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-500 ring-opacity-50'
+                          : 'border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50'
+                      }`}
+                    >
+                      <div className={`text-xl font-bold ${
+                        options.mathUnit === unit.value ? 'text-blue-600' : 'text-blue-500'
+                      }`}>
+                        {unit.number}
+                      </div>
+                      <div className={`text-sm font-semibold leading-tight ${
+                        options.mathUnit === unit.value ? 'text-gray-900' : 'text-gray-800'
+                      }`}>
+                        {unit.title}
+                      </div>
+                      {unit.subtitle && (
+                        <div className={`text-xs leading-tight ${
+                          options.mathUnit === unit.value ? 'text-gray-700' : 'text-gray-600'
+                        }`}>
+                          {unit.subtitle}
+                        </div>
+                      )}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Mathematics Unit Selection - only for Cambridge IGCSE Mathematics */}
+            {normalizedSubject === 'mathematics' && options.examBoard === 'ci' && (
+              <div className="sm:col-span-3">
+                <h3 className="block text-base font-semibold text-gray-800 mb-4">
+                  Select a Mathematics Unit
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {[
+                    { value: 'number', number: '1', title: 'Number' },
+                    { value: 'algebra-graphs', number: '2', title: 'Algebra and graphs' },
+                    { value: 'coordinate-geometry', number: '3', title: 'Coordinate geometry' },
+                    { value: 'geometry', number: '4', title: 'Geometry' },
+                    { value: 'mensuration', number: '5', title: 'Mensuration' },
+                    { value: 'trigonometry', number: '6', title: 'Trigonometry' },
+                    { value: 'transformations-vectors', number: '7', title: 'Transformations', subtitle: 'and vectors' },
+                    { value: 'probability', number: '8', title: 'Probability' },
+                    { value: 'statistics', number: '9', title: 'Statistics' }
                   ].map((unit) => (
                     <button
                       key={unit.value}
