@@ -555,7 +555,7 @@ app.post('/api/generate-questions', async (req, res) => {
     }
 
     if (examLevel === "gcse") {
-      if (!['aqa', 'edexcel', 'ocr', 'wjec', 'ci'].includes(examBoard)) {
+      if (!['aqa', 'edexcel', 'edexcel-igcse', 'ocr', 'wjec', 'ci'].includes(examBoard)) {
         console.log('❌ Error: Invalid exam board');
         return res.status(400).json({ error: 'Invalid Exam Board - ' + examBoard });
       }
