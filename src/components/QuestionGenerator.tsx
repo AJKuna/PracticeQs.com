@@ -6,6 +6,7 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import PricingModal from './PricingModal';
 import TopicDropdown from './TopicDropdown';
+import CollapsibleUnit from './CollapsibleUnit';
 
 import LoadingBar from './LoadingBar';
 import StreakCounter, { StreakCounterRef } from './StreakCounter';
@@ -24,7 +25,7 @@ import { mathGcseEdexcelIgcseUnits } from '../data/mathGcseEdexcelIgcseUnits';
 import { mathGcseCambridgeUnits } from '../data/mathGcseCambridgeUnits';
 import { historyGcseAqaUnitsData, getHistoryUnits } from '../data/historyGcseAqaUnitsData';
 import { getGeographyAqaUnits, getGeographyAqaSections, getGeographyAqaTopics } from '../data/geographyGcseAqaUnitsData';
-import { religiousStudiesGcseAqaUnits, getReligiousStudiesComponents, getReligiousStudiesReligions, getReligiousStudiesThemes } from '../data/religiousStudiesGcseAqaUnits';
+import { religiousStudiesGcseAqaUnits, getReligiousStudiesReligions, getReligiousStudiesThemes } from '../data/religiousStudiesGcseAqaUnits';
 import { getUserStreak, updateStreakOnGeneration, StreakData } from '../services/streakService';
 
 
@@ -439,59 +440,43 @@ const QuestionGenerator: React.FC = () => {
     return [];
   };
 
-  // Check if we should show topic grid (for Religious Studies, Mathematics Edexcel, Biology AQA, Biology Edexcel, Chemistry AQA, Chemistry Edexcel, Physics AQA, Geography AQA, and History AQA with proper selections)
+  // Check if we should show topic grid (collapsible units) - now only requires exam board selection
   const shouldShowTopicGrid = (normalizedSubject === 'religious studies' && 
     options.examLevel === 'gcse' && 
-    options.examBoard === 'aqa' && 
-    options.religiousStudiesComponent && 
-    options.religiousStudiesUnit) ||
+    options.examBoard === 'aqa') ||
     (normalizedSubject === 'mathematics' && 
     options.examLevel === 'gcse' && 
-    options.examBoard === 'edexcel' && 
-    options.mathUnit) ||
+    options.examBoard === 'edexcel') ||
     (normalizedSubject === 'mathematics' && 
     options.examLevel === 'gcse' && 
-    options.examBoard === 'edexcel-igcse' && 
-    options.mathIgcseUnit) ||
+    options.examBoard === 'edexcel-igcse') ||
     (normalizedSubject === 'mathematics' && 
     options.examLevel === 'gcse' && 
-    options.examBoard === 'ci' && 
-    options.mathUnit) ||
+    options.examBoard === 'ci') ||
     (normalizedSubject === 'biology' && 
     options.examLevel === 'gcse' && 
-    options.examBoard === 'aqa' && 
-    options.biologyUnit) ||
+    options.examBoard === 'aqa') ||
     (normalizedSubject === 'biology' && 
     options.examLevel === 'gcse' && 
-    options.examBoard === 'edexcel' && 
-    options.biologyEdexcelUnit) ||
+    options.examBoard === 'edexcel') ||
     (normalizedSubject === 'chemistry' && 
     options.examLevel === 'gcse' && 
-    options.examBoard === 'aqa' && 
-    options.chemistryUnit) ||
+    options.examBoard === 'aqa') ||
     (normalizedSubject === 'chemistry' && 
     options.examLevel === 'gcse' && 
-    options.examBoard === 'edexcel' && 
-    options.chemistryEdexcelUnit) ||
+    options.examBoard === 'edexcel') ||
     (normalizedSubject === 'physics' && 
     options.examLevel === 'gcse' && 
-    options.examBoard === 'aqa' && 
-    options.physicsUnit) ||
+    options.examBoard === 'aqa') ||
     (normalizedSubject === 'geography' && 
     options.examLevel === 'gcse' && 
-    options.examBoard === 'aqa' && 
-    options.geographyUnit && 
-    (options.geographySection || options.geographyUnit === 'geographical-skills')) ||
+    options.examBoard === 'aqa') ||
     (normalizedSubject === 'history' && 
     options.examLevel === 'gcse' && 
-    options.examBoard === 'aqa' && 
-    options.historyUnit);
+    options.examBoard === 'aqa');
 
-  // Get filtered topics for display
+  // Get available topics for the current selection
   const availableTopics = getAvailableTopics();
-  const filteredTopicsForDisplay = searchTopic.trim() 
-    ? availableTopics.filter(topic => topic.toLowerCase().includes(searchTopic.toLowerCase()))
-    : availableTopics;
 
   // Clean question string to format values
   const cleanQuestion = (question: string) => {
@@ -685,75 +670,6 @@ const QuestionGenerator: React.FC = () => {
       return;
     }
 
-    // Check for History unit selection
-    if (normalizedSubject === 'history' && options.examBoard === 'aqa' && options.examLevel === 'gcse' && !options.historyUnit) {
-      setAlert({ type: 'error', message: 'Please choose a History unit' });
-      setIsGenerating(false);
-      return;
-    }
-
-    // Check for Biology unit selection
-    if (normalizedSubject === 'biology' && options.examBoard === 'aqa' && options.examLevel === 'gcse' && !options.biologyUnit) {
-      setAlert({ type: 'error', message: 'Please choose a Biology unit' });
-      setIsGenerating(false);
-      return;
-    }
-
-    // Check for Biology Edexcel unit selection
-    if (normalizedSubject === 'biology' && options.examBoard === 'edexcel' && options.examLevel === 'gcse' && !options.biologyEdexcelUnit) {
-      setAlert({ type: 'error', message: 'Please choose a Biology unit' });
-      setIsGenerating(false);
-      return;
-    }
-
-    // Check for Chemistry unit selection
-    if (normalizedSubject === 'chemistry' && options.examBoard === 'aqa' && options.examLevel === 'gcse' && !options.chemistryUnit) {
-      setAlert({ type: 'error', message: 'Please choose a Chemistry unit' });
-      setIsGenerating(false);
-      return;
-    }
-
-    // Check for Chemistry Edexcel unit selection
-    if (normalizedSubject === 'chemistry' && options.examBoard === 'edexcel' && options.examLevel === 'gcse' && !options.chemistryEdexcelUnit) {
-      setAlert({ type: 'error', message: 'Please choose a Chemistry unit' });
-      setIsGenerating(false);
-      return;
-    }
-
-    // Check for Physics unit selection
-    if (normalizedSubject === 'physics' && options.examBoard === 'aqa' && options.examLevel === 'gcse' && !options.physicsUnit) {
-      setAlert({ type: 'error', message: 'Please choose a Physics unit' });
-      setIsGenerating(false);
-      return;
-    }
-
-    // Check for Mathematics unit selection
-    if (normalizedSubject === 'mathematics' && (options.examBoard === 'edexcel' || options.examBoard === 'ci') && options.examLevel === 'gcse' && !options.mathUnit) {
-      setAlert({ type: 'error', message: 'Please choose a Mathematics unit' });
-      setIsGenerating(false);
-      return;
-    }
-
-    // Check for Mathematics IGCSE unit selection
-    if (normalizedSubject === 'mathematics' && options.examBoard === 'edexcel-igcse' && options.examLevel === 'gcse' && !options.mathIgcseUnit) {
-      setAlert({ type: 'error', message: 'Please choose a Mathematics unit' });
-      setIsGenerating(false);
-      return;
-    }
-
-    // Check for Religious Studies component selection
-    if (normalizedSubject === 'religious studies' && options.examBoard === 'aqa' && options.examLevel === 'gcse' && !options.religiousStudiesComponent) {
-      setAlert({ type: 'error', message: 'Please choose a Religious Studies component' });
-      setIsGenerating(false);
-      return;
-    }
-
-    // Check for Religious Studies unit selection
-    if (normalizedSubject === 'religious studies' && options.examBoard === 'aqa' && options.examLevel === 'gcse' && options.religiousStudiesComponent && !options.religiousStudiesUnit) {
-      setAlert({ type: 'error', message: 'Please choose a Religious Studies unit' });
-      setIsGenerating(false);
-      return;
-    }
 
     // Create AbortController for cancellation
     const abortController = new AbortController();
@@ -1232,18 +1148,12 @@ const QuestionGenerator: React.FC = () => {
     }
   };
 
-  // Handle topic selection from dropdown or grid
+  // Handle topic selection from collapsible units or dropdown
   const handleTopicSelect = (topic: string) => {
-    if (shouldShowTopicGrid) {
-      // For Religious Studies grid mode
+    // Set both selected topic and search topic for consistency
       setSelectedTopic(topic);
       setSearchTopic(topic);
       setShowDropdown(false);
-    } else {
-      // For other subjects (existing behavior)
-      setSearchTopic(topic);
-      setShowDropdown(false);
-    }
   };
 
   // Handle input change and show dropdown
@@ -1252,7 +1162,7 @@ const QuestionGenerator: React.FC = () => {
     setSearchTopic(value);
     
     if (shouldShowTopicGrid) {
-      // For Religious Studies, clear selected topic if typing something different
+      // For collapsible units mode, clear selected topic if typing something different
       if (value !== selectedTopic) {
         setSelectedTopic('');
       }
@@ -1486,9 +1396,9 @@ const QuestionGenerator: React.FC = () => {
 
         <form onSubmit={handleSubmit} className="space-y-8">
           {/* Options */}
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <div>
-              <label htmlFor="examLevel" className="block text-base font-semibold text-gray-800 mb-2">
+              <label htmlFor="examLevel" className="block text-sm font-semibold text-gray-800 mb-2 uppercase tracking-wide">
                 Exam Level
               </label>
               <select
@@ -1508,7 +1418,7 @@ const QuestionGenerator: React.FC = () => {
             {/* English Exam Type Selection - only for English + GCSE */}
             {normalizedSubject === 'english' && options.examLevel === 'gcse' && (
               <div>
-                <label htmlFor="englishExamType" className="block text-base font-semibold text-gray-800 mb-2">
+                <label htmlFor="englishExamType" className="block text-sm font-semibold text-gray-800 mb-2 uppercase tracking-wide">
                   English Exam
                 </label>
                 <select
@@ -1528,7 +1438,7 @@ const QuestionGenerator: React.FC = () => {
             {options.examLevel === 'gcse' && (
               (normalizedSubject !== 'english' || options.englishExamType) && (
                 <div>
-                  <label htmlFor="examBoard" className="block text-base font-semibold text-gray-800 mb-2">
+                  <label htmlFor="examBoard" className="block text-sm font-semibold text-gray-800 mb-2 uppercase tracking-wide">
                     Exam Board
                   </label>
                   <select
@@ -1560,616 +1470,17 @@ const QuestionGenerator: React.FC = () => {
               )
             )}
 
-            {/* History Unit Selection - only for AQA GCSE History */}
-            {normalizedSubject === 'history' && options.examBoard === 'aqa' && (
-              <div className="sm:col-span-3">
-                <h3 className="block text-base font-semibold text-gray-800 mb-4">
-                  Select a History Unit
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
-                  {getHistoryUnits().map((unit) => (
-                    <button
-                      key={unit.value}
-                      type="button"
-                      onClick={() => {
-                        setOptions({ ...options, historyUnit: unit.value });
-                        setSelectedTopic('');
-                        setSearchTopic('');
-                      }}
-                      className={`p-3 text-left border-2 rounded-lg transition-all duration-200 h-20 flex flex-col justify-center ${
-                        options.historyUnit === unit.value
-                          ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-500 ring-opacity-50'
-                          : 'border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50'
-                      }`}
-                    >
-                      <div className={`text-sm font-semibold leading-tight ${
-                        options.historyUnit === unit.value ? 'text-gray-900' : 'text-gray-800'
-                      }`}>
-                        {unit.title}
-                      </div>
-                      {unit.subtitle && (
-                        <div className={`text-xs leading-tight mt-1 ${
-                          options.historyUnit === unit.value ? 'text-gray-700' : 'text-gray-600'
-                        }`}>
-                          {unit.subtitle}
-                        </div>
-                      )}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
 
-            {/* Geography Unit Selection - only for AQA GCSE Geography */}
-            {normalizedSubject === 'geography' && options.examBoard === 'aqa' && (
-              <div className="sm:col-span-3">
-                <h3 className="block text-base font-semibold text-gray-800 mb-4">
-                  Select a Geography Unit
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {getGeographyAqaUnits().map((unit) => (
-                    <button
-                      key={unit.value}
-                      type="button"
-                      onClick={() => {
-                        setOptions({ ...options, geographyUnit: unit.value, geographySection: '', biologyUnit: '', chemistryUnit: '', biologyEdexcelUnit: '', physicsUnit: '', mathUnit: '', mathIgcseUnit: '', religiousStudiesComponent: '', religiousStudiesUnit: '' });
-                        setSelectedTopic('');
-                        setSearchTopic('');
-                      }}
-                      className={`p-4 text-left border-2 rounded-lg transition-all duration-200 min-h-20 flex flex-col justify-center ${
-                        options.geographyUnit === unit.value
-                          ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-500 ring-opacity-50'
-                          : 'border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50'
-                      }`}
-                    >
-                      <div className={`text-sm font-semibold leading-tight ${
-                        options.geographyUnit === unit.value ? 'text-gray-900' : 'text-gray-800'
-                      }`}>
-                        {unit.title}
-                      </div>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
 
-            {/* Geography Section Selection - only for AQA GCSE Geography with unit selected (except geographical-skills) */}
-            {normalizedSubject === 'geography' && options.examBoard === 'aqa' && options.geographyUnit && options.geographyUnit !== 'geographical-skills' && (
-              <div className="sm:col-span-3">
-                <h3 className="block text-base font-semibold text-gray-800 mb-4">
-                  Select a Geography Section
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {getGeographyAqaSections(options.geographyUnit).map((section) => (
-                    <button
-                      key={section.value}
-                      type="button"
-                      onClick={() => {
-                        setOptions({ ...options, geographySection: section.value });
-                        setSelectedTopic('');
-                        setSearchTopic('');
-                      }}
-                      className={`p-4 text-left border-2 rounded-lg transition-all duration-200 min-h-20 flex flex-col justify-center ${
-                        options.geographySection === section.value
-                          ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-500 ring-opacity-50'
-                          : 'border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50'
-                      }`}
-                    >
-                      <div className={`text-sm font-semibold leading-tight ${
-                        options.geographySection === section.value ? 'text-gray-900' : 'text-gray-800'
-                      }`}>
-                        {section.title}
-                      </div>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
 
-            {/* Biology Unit Selection - only for AQA GCSE Biology */}
-            {normalizedSubject === 'biology' && options.examBoard === 'aqa' && (
-              <div className="sm:col-span-3">
-                <h3 className="block text-base font-semibold text-gray-800 mb-4">
-                  Select a Biology Unit
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                  {getBiologyUnits().map((unit) => (
-                    <button
-                      key={unit.value}
-                      type="button"
-                      onClick={() => {
-                        setOptions({ ...options, biologyUnit: unit.value });
-                        setSelectedTopic('');
-                        setSearchTopic('');
-                      }}
-                      className={`p-3 text-center border-2 rounded-lg transition-all duration-200 h-20 flex flex-col justify-center ${
-                        options.biologyUnit === unit.value
-                          ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-500 ring-opacity-50'
-                          : 'border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50'
-                      }`}
-                    >
-                      <div className={`text-xl font-bold ${
-                        options.biologyUnit === unit.value ? 'text-blue-600' : 'text-blue-500'
-                      }`}>
-                        {unit.number}
-                      </div>
-                      <div className={`text-sm font-semibold leading-tight ${
-                        options.biologyUnit === unit.value ? 'text-gray-900' : 'text-gray-800'
-                      }`}>
-                        {unit.title}
-                      </div>
-                      {unit.subtitle && (
-                        <div className={`text-xs leading-tight ${
-                          options.biologyUnit === unit.value ? 'text-gray-700' : 'text-gray-600'
-                        }`}>
-                          {unit.subtitle}
-                        </div>
-                      )}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
 
-            {/* Biology Unit Selection - only for Edexcel GCSE Biology */}
-            {normalizedSubject === 'biology' && options.examBoard === 'edexcel' && (
-              <div className="sm:col-span-3">
-                <h3 className="block text-base font-semibold text-gray-800 mb-4">
-                  Select a Biology Unit
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                  {getBiologyEdexcelUnits().map((unit) => (
-                    <button
-                      key={unit.value}
-                      type="button"
-                      onClick={() => {
-                        setOptions({ ...options, biologyEdexcelUnit: unit.value });
-                        setSelectedTopic('');
-                        setSearchTopic('');
-                      }}
-                      className={`p-3 text-center border-2 rounded-lg transition-all duration-200 h-20 flex flex-col justify-center ${
-                        options.biologyEdexcelUnit === unit.value
-                          ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-500 ring-opacity-50'
-                          : 'border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50'
-                      }`}
-                    >
-                      <div className={`text-xl font-bold ${
-                        options.biologyEdexcelUnit === unit.value ? 'text-blue-600' : 'text-blue-500'
-                      }`}>
-                        {unit.number}
-                      </div>
-                      <div className={`text-sm font-semibold leading-tight ${
-                        options.biologyEdexcelUnit === unit.value ? 'text-gray-900' : 'text-gray-800'
-                      }`}>
-                        {unit.title}
-                      </div>
-                      {unit.subtitle && (
-                        <div className={`text-xs leading-tight ${
-                          options.biologyEdexcelUnit === unit.value ? 'text-gray-700' : 'text-gray-600'
-                        }`}>
-                          {unit.subtitle}
-                        </div>
-                      )}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
 
-            {/* Mathematics Unit Selection - only for Edexcel GCSE Mathematics */}
-            {normalizedSubject === 'mathematics' && options.examBoard === 'edexcel' && (
-              <div className="sm:col-span-3">
-                <h3 className="block text-base font-semibold text-gray-800 mb-4">
-                  Select a Mathematics Unit
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {[
-                    { value: 'number', number: '1', title: 'Number' },
-                    { value: 'algebra', number: '2', title: 'Algebra' },
-                    { value: 'ratio-proportion-rates', number: '3', title: 'Ratio, Proportion', subtitle: 'and Rates of Change' },
-                    { value: 'geometry-measures', number: '4', title: 'Geometry and Measures' },
-                    { value: 'probability', number: '5', title: 'Probability' },
-                    { value: 'statistics', number: '6', title: 'Statistics' }
-                  ].map((unit) => (
-                    <button
-                      key={unit.value}
-                      type="button"
-                      onClick={() => {
-                        setOptions({ ...options, mathUnit: unit.value });
-                        setSelectedTopic('');
-                        setSearchTopic('');
-                      }}
-                      className={`p-3 text-center border-2 rounded-lg transition-all duration-200 h-20 flex flex-col justify-center ${
-                        options.mathUnit === unit.value
-                          ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-500 ring-opacity-50'
-                          : 'border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50'
-                      }`}
-                    >
-                      <div className={`text-xl font-bold ${
-                        options.mathUnit === unit.value ? 'text-blue-600' : 'text-blue-500'
-                      }`}>
-                        {unit.number}
-                      </div>
-                      <div className={`text-sm font-semibold leading-tight ${
-                        options.mathUnit === unit.value ? 'text-gray-900' : 'text-gray-800'
-                      }`}>
-                        {unit.title}
-                      </div>
-                      {unit.subtitle && (
-                        <div className={`text-xs leading-tight ${
-                          options.mathUnit === unit.value ? 'text-gray-700' : 'text-gray-600'
-                        }`}>
-                          {unit.subtitle}
-                        </div>
-                      )}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
 
-            {/* Mathematics Unit Selection - only for Cambridge IGCSE Mathematics */}
-            {normalizedSubject === 'mathematics' && options.examBoard === 'ci' && (
-              <div className="sm:col-span-3">
-                <h3 className="block text-base font-semibold text-gray-800 mb-4">
-                  Select a Mathematics Unit
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {[
-                    { value: 'number', number: '1', title: 'Number' },
-                    { value: 'algebra-graphs', number: '2', title: 'Algebra and graphs' },
-                    { value: 'coordinate-geometry', number: '3', title: 'Coordinate geometry' },
-                    { value: 'geometry', number: '4', title: 'Geometry' },
-                    { value: 'mensuration', number: '5', title: 'Mensuration' },
-                    { value: 'trigonometry', number: '6', title: 'Trigonometry' },
-                    { value: 'transformations-vectors', number: '7', title: 'Transformations', subtitle: 'and vectors' },
-                    { value: 'probability', number: '8', title: 'Probability' },
-                    { value: 'statistics', number: '9', title: 'Statistics' }
-                  ].map((unit) => (
-                    <button
-                      key={unit.value}
-                      type="button"
-                      onClick={() => {
-                        setOptions({ ...options, mathUnit: unit.value });
-                        setSelectedTopic('');
-                        setSearchTopic('');
-                      }}
-                      className={`p-3 text-center border-2 rounded-lg transition-all duration-200 h-20 flex flex-col justify-center ${
-                        options.mathUnit === unit.value
-                          ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-500 ring-opacity-50'
-                          : 'border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50'
-                      }`}
-                    >
-                      <div className={`text-xl font-bold ${
-                        options.mathUnit === unit.value ? 'text-blue-600' : 'text-blue-500'
-                      }`}>
-                        {unit.number}
-                      </div>
-                      <div className={`text-sm font-semibold leading-tight ${
-                        options.mathUnit === unit.value ? 'text-gray-900' : 'text-gray-800'
-                      }`}>
-                        {unit.title}
-                      </div>
-                      {unit.subtitle && (
-                        <div className={`text-xs leading-tight ${
-                          options.mathUnit === unit.value ? 'text-gray-700' : 'text-gray-600'
-                        }`}>
-                          {unit.subtitle}
-                        </div>
-                      )}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
 
-            {/* Mathematics Unit Selection - only for Edexcel IGCSE Mathematics */}
-            {normalizedSubject === 'mathematics' && options.examBoard === 'edexcel-igcse' && (
-              <div className="sm:col-span-3">
-                <h3 className="block text-base font-semibold text-gray-800 mb-4">
-                  Select a Mathematics Unit
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {[
-                    { value: 'numbers-number-system', number: '1', title: 'Numbers and the', subtitle: 'number system' },
-                    { value: 'equations-formulae-identities', number: '2', title: 'Equations, formulae', subtitle: 'and identities' },
-                    { value: 'sequences-functions-graphs', number: '3', title: 'Sequences, functions', subtitle: 'and graphs' },
-                    { value: 'geometry-trigonometry', number: '4', title: 'Geometry and', subtitle: 'trigonometry' },
-                    { value: 'vectors-transformation-geometry', number: '5', title: 'Vectors and transformation', subtitle: 'geometry' },
-                    { value: 'statistics-probability', number: '6', title: 'Statistics and', subtitle: 'probability' }
-                  ].map((unit) => (
-                    <button
-                      key={unit.value}
-                      type="button"
-                      onClick={() => {
-                        setOptions({ ...options, mathIgcseUnit: unit.value });
-                        setSelectedTopic('');
-                        setSearchTopic('');
-                      }}
-                      className={`p-3 text-center border-2 rounded-lg transition-all duration-200 h-20 flex flex-col justify-center ${
-                        options.mathIgcseUnit === unit.value
-                          ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-500 ring-opacity-50'
-                          : 'border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50'
-                      }`}
-                    >
-                      <div className={`text-xl font-bold ${
-                        options.mathIgcseUnit === unit.value ? 'text-blue-600' : 'text-blue-500'
-                      }`}>
-                        {unit.number}
-                      </div>
-                      <div className={`text-sm font-semibold leading-tight ${
-                        options.mathIgcseUnit === unit.value ? 'text-gray-900' : 'text-gray-800'
-                      }`}>
-                        {unit.title}
-                      </div>
-                      {unit.subtitle && (
-                        <div className={`text-xs leading-tight ${
-                          options.mathIgcseUnit === unit.value ? 'text-gray-700' : 'text-gray-600'
-                        }`}>
-                          {unit.subtitle}
-                        </div>
-                      )}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
 
-            {/* Chemistry Unit Selection - only for AQA GCSE Chemistry */}
-            {normalizedSubject === 'chemistry' && options.examBoard === 'aqa' && (
-              <div className="sm:col-span-3">
-                <h3 className="block text-base font-semibold text-gray-800 mb-4">
-                  Select a Chemistry Unit
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                  {getChemistryUnits().map((unit) => (
-                    <button
-                      key={unit.value}
-                      type="button"
-                      onClick={() => {
-                        setOptions({ ...options, chemistryUnit: unit.value });
-                        setSelectedTopic('');
-                        setSearchTopic('');
-                      }}
-                      className={`p-3 text-center border-2 rounded-lg transition-all duration-200 h-20 flex flex-col justify-center ${
-                        options.chemistryUnit === unit.value
-                          ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-500 ring-opacity-50'
-                          : 'border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50'
-                      }`}
-                    >
-                      <div className={`text-xl font-bold ${
-                        options.chemistryUnit === unit.value ? 'text-blue-600' : 'text-blue-500'
-                      }`}>
-                        {unit.number}
-                      </div>
-                      <div className={`text-sm font-semibold leading-tight ${
-                        options.chemistryUnit === unit.value ? 'text-gray-900' : 'text-gray-800'
-                      }`}>
-                        {unit.title}
-                      </div>
-                      {unit.subtitle && (
-                        <div className={`text-xs leading-tight ${
-                          options.chemistryUnit === unit.value ? 'text-gray-700' : 'text-gray-600'
-                        }`}>
-                          {unit.subtitle}
-                        </div>
-                      )}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Chemistry Unit Selection - only for Edexcel GCSE Chemistry */}
-            {normalizedSubject === 'chemistry' && options.examBoard === 'edexcel' && (
-              <div className="sm:col-span-3">
-                <h3 className="block text-base font-semibold text-gray-800 mb-4">
-                  Select a Chemistry Unit
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                  {getChemistryEdexcelUnits().map((unit) => (
-                    <button
-                      key={unit.value}
-                      type="button"
-                      onClick={() => {
-                        setOptions({ ...options, chemistryEdexcelUnit: unit.value });
-                        setSelectedTopic('');
-                        setSearchTopic('');
-                      }}
-                      className={`p-3 text-center border-2 rounded-lg transition-all duration-200 h-20 flex flex-col justify-center ${
-                        options.chemistryEdexcelUnit === unit.value
-                          ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-500 ring-opacity-50'
-                          : 'border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50'
-                      }`}
-                    >
-                      <div className={`text-xl font-bold ${
-                        options.chemistryEdexcelUnit === unit.value ? 'text-blue-600' : 'text-blue-500'
-                      }`}>
-                        {unit.number}
-                      </div>
-                      <div className={`text-sm font-semibold leading-tight ${
-                        options.chemistryEdexcelUnit === unit.value ? 'text-gray-900' : 'text-gray-800'
-                      }`}>
-                        {unit.title}
-                      </div>
-                      {unit.subtitle && (
-                        <div className={`text-xs leading-tight ${
-                          options.chemistryEdexcelUnit === unit.value ? 'text-gray-700' : 'text-gray-600'
-                        }`}>
-                          {unit.subtitle}
-                        </div>
-                      )}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Physics Unit Selection - only for AQA GCSE Physics */}
-            {normalizedSubject === 'physics' && options.examBoard === 'aqa' && (
-              <div className="sm:col-span-3">
-                <h3 className="block text-base font-semibold text-gray-800 mb-4">
-                  Select a Physics Unit
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {getPhysicsUnits().map((unit) => (
-                    <button
-                      key={unit.value}
-                      type="button"
-                      onClick={() => {
-                        setOptions({ ...options, physicsUnit: unit.value });
-                        setSelectedTopic('');
-                        setSearchTopic('');
-                      }}
-                      className={`p-3 text-center border-2 rounded-lg transition-all duration-200 h-20 flex flex-col justify-center ${
-                        options.physicsUnit === unit.value
-                          ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-500 ring-opacity-50'
-                          : 'border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50'
-                      }`}
-                    >
-                      <div className={`text-xl font-bold ${
-                        options.physicsUnit === unit.value ? 'text-blue-600' : 'text-blue-500'
-                      }`}>
-                        {unit.number}
-                      </div>
-                      <div className={`text-sm font-semibold leading-tight ${
-                        options.physicsUnit === unit.value ? 'text-gray-900' : 'text-gray-800'
-                      }`}>
-                        {unit.title}
-                      </div>
-                      {unit.subtitle && (
-                        <div className={`text-xs leading-tight ${
-                          options.physicsUnit === unit.value ? 'text-gray-700' : 'text-gray-600'
-                        }`}>
-                          {unit.subtitle}
-                        </div>
-                      )}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Religious Studies Component Selection - only for AQA GCSE Religious Studies */}
-            {normalizedSubject === 'religious studies' && options.examBoard === 'aqa' && (
-              <div className="sm:col-span-3">
-                <h3 className="block text-base font-semibold text-gray-800 mb-4">
-                  Select a Religious Studies Component
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {getReligiousStudiesComponents().map((component) => (
-                    <button
-                      key={component.value}
-                      type="button"
-                      onClick={() => {
-                        setOptions({ ...options, religiousStudiesComponent: component.value, religiousStudiesUnit: '' });
-                        setSelectedTopic('');
-                        setSearchTopic('');
-                      }}
-                      className={`p-3 text-center border-2 rounded-lg transition-all duration-200 h-20 flex flex-col justify-center ${
-                        options.religiousStudiesComponent === component.value
-                          ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-500 ring-opacity-50'
-                          : 'border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50'
-                      }`}
-                    >
-                      <div className={`text-xl font-bold ${
-                        options.religiousStudiesComponent === component.value ? 'text-blue-600' : 'text-blue-500'
-                      }`}>
-                        {component.number}
-                      </div>
-                      <div className={`text-sm font-semibold leading-tight ${
-                        options.religiousStudiesComponent === component.value ? 'text-gray-900' : 'text-gray-800'
-                      }`}>
-                        {component.title}
-                      </div>
-                      {component.subtitle && (
-                        <div className={`text-xs leading-tight ${
-                          options.religiousStudiesComponent === component.value ? 'text-gray-700' : 'text-gray-600'
-                        }`}>
-                          {component.subtitle}
-                        </div>
-                      )}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Religious Studies Religion Selection - only for Component 1 */}
-            {normalizedSubject === 'religious studies' && options.examBoard === 'aqa' && options.religiousStudiesComponent === 'component-1' && (
-              <div className="sm:col-span-3">
-                <h3 className="block text-base font-semibold text-gray-800 mb-4">
-                  Select a Religion
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {getReligiousStudiesReligions().map((religion) => (
-                    <button
-                      key={religion.value}
-                      type="button"
-                      onClick={() => {
-                        setOptions({ ...options, religiousStudiesUnit: religion.value });
-                        setSelectedTopic('');
-                        setSearchTopic('');
-                      }}
-                      className={`p-4 text-center border-2 rounded-lg transition-all duration-200 h-20 flex flex-col justify-center ${
-                        options.religiousStudiesUnit === religion.value
-                          ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-500 ring-opacity-50'
-                          : 'border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50'
-                      }`}
-                    >
-                      <div className={`text-sm font-semibold leading-tight ${
-                        options.religiousStudiesUnit === religion.value ? 'text-gray-900' : 'text-gray-800'
-                      }`}>
-                        {religion.title}
-                      </div>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Religious Studies Theme Selection - only for Component 2 */}
-            {normalizedSubject === 'religious studies' && options.examBoard === 'aqa' && options.religiousStudiesComponent === 'component-2' && (
-              <div className="sm:col-span-3">
-                <h3 className="block text-base font-semibold text-gray-800 mb-4">
-                  Select a Theme
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
-                  {getReligiousStudiesThemes().map((theme) => (
-                    <button
-                      key={theme.value}
-                      type="button"
-                      onClick={() => {
-                        setOptions({ ...options, religiousStudiesUnit: theme.value });
-                        setSelectedTopic('');
-                        setSearchTopic('');
-                      }}
-                      className={`p-4 text-left border-2 rounded-lg transition-all duration-200 min-h-20 flex flex-col justify-center ${
-                        options.religiousStudiesUnit === theme.value
-                          ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-500 ring-opacity-50'
-                          : 'border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50'
-                      }`}
-                    >
-                      <div className="flex items-center">
-                        <div className={`text-xl font-bold mr-3 ${
-                          options.religiousStudiesUnit === theme.value ? 'text-blue-600' : 'text-blue-500'
-                        }`}>
-                          {theme.code}
-                        </div>
-                        <div className={`text-sm font-semibold leading-tight ${
-                          options.religiousStudiesUnit === theme.value ? 'text-gray-900' : 'text-gray-800'
-                        }`}>
-                          {theme.title}
-                        </div>
-                      </div>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
 
             <div>
-              <label htmlFor="difficulty" className="block text-base font-semibold text-gray-800 mb-2">
+              <label htmlFor="difficulty" className="block text-sm font-semibold text-gray-800 mb-2 uppercase tracking-wide">
                 Difficulty
               </label>
               <select
@@ -2186,8 +1497,8 @@ const QuestionGenerator: React.FC = () => {
             </div>
 
             <div>
-              <label htmlFor="questionCount" className="block text-base font-semibold text-gray-800 mb-2">
-                Number of Questions
+              <label htmlFor="questionCount" className="block text-sm font-semibold text-gray-800 mb-2 uppercase tracking-wide">
+                No. of Questions
               </label>
               <input
                 type="number"
@@ -2225,13 +1536,13 @@ const QuestionGenerator: React.FC = () => {
           {/* Search Topic Input */}
           <div>
             <div className="flex items-center gap-1 mb-2">
-              <label htmlFor="topic" className="block text-base font-semibold text-gray-800">
-                Search Topic
+              <label htmlFor="topic" className="block text-sm font-semibold text-gray-800 uppercase tracking-wide">
+                {shouldShowTopicGrid ? 'Search Topics' : 'Search Topic'}
               </label>
               <div className="relative group">
                 <span className="cursor-help text-sm">ℹ️</span>
                 <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 text-xs text-white bg-gray-800 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10">
-                  {shouldShowTopicGrid ? 'Search for a topic or select from below' : 'Type any topic you want to practice - the suggestions are just examples!'}
+                  {shouldShowTopicGrid ? 'Search to filter topics below, or browse and click to select' : 'Type any topic you want to practice - the suggestions are just examples!'}
                 </div>
               </div>
             </div>
@@ -2242,7 +1553,7 @@ const QuestionGenerator: React.FC = () => {
                 value={searchTopic}
                 onChange={handleTopicInputChange}
                 onFocus={handleTopicInputFocus}
-                placeholder={shouldShowTopicGrid ? 'Search for a topic or select from below...' : placeholder}
+                placeholder={shouldShowTopicGrid ? 'Search topics...' : placeholder}
                 autoComplete="off"
                 className="topic-search-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 !text-black !bg-white focus:!bg-white focus:!text-black px-3 py-2.5"
               />
@@ -2279,65 +1590,276 @@ const QuestionGenerator: React.FC = () => {
             </div>
           </div>
 
-          {/* Topic Grid for Religious Studies and Mathematics Edexcel */}
+          {/* Collapsible Units for Topic Selection */}
           {shouldShowTopicGrid && (
             <div>
-              {filteredTopicsForDisplay.length > 0 ? (
-                <>
-                  <p className="text-sm text-gray-600 mb-4">Showing {filteredTopicsForDisplay.length} topics</p>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
-                    {filteredTopicsForDisplay.map((topic: string, index: number) => (
-                      <button
-                        key={index}
-                        type="button"
-                        onClick={() => handleTopicSelect(topic)}
-                        className={`p-4 text-left border rounded-lg transition-all duration-200 ${
-                          selectedTopic === topic
-                            ? `border-blue-500 bg-blue-50 ring-2 ring-blue-500 ring-opacity-50`
-                            : 'border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50'
-                        }`}
-                      >
-                        <span className="text-sm text-gray-900">{topic}</span>
-                        {selectedTopic === topic && (
-                          <div className="mt-1 flex items-center">
-                            <svg className="w-4 h-4 text-green-500 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                            </svg>
-                            <span className="text-xs text-green-600 font-medium">Selected</span>
+              {/* Render ALL units as collapsible rows */}
+              {normalizedSubject === 'physics' && options.examBoard === 'aqa' && (
+                <div className="space-y-3">
+                  {getPhysicsUnits().map(unit => (
+                    <CollapsibleUnit
+                      key={unit.value}
+                      unitNumber={unit.number}
+                      unitTitle={unit.title}
+                      unitSubtitle={unit.subtitle}
+                      topics={physicsGcseAqaUnitsData[unit.value] || []}
+                      selectedTopic={selectedTopic}
+                      onTopicSelect={handleTopicSelect}
+                      searchQuery={searchTopic}
+                      defaultExpanded={false}
+                    />
+                  ))}
                           </div>
                         )}
-                      </button>
+
+              {normalizedSubject === 'biology' && options.examBoard === 'aqa' && (
+                <div className="space-y-3">
+                  {getBiologyUnits().map(unit => (
+                    <CollapsibleUnit
+                      key={unit.value}
+                      unitNumber={unit.number}
+                      unitTitle={unit.title}
+                      unitSubtitle={unit.subtitle}
+                      topics={biologyGcseAqaUnitsData[unit.value] || []}
+                      selectedTopic={selectedTopic}
+                      onTopicSelect={handleTopicSelect}
+                      searchQuery={searchTopic}
+                      defaultExpanded={false}
+                    />
                     ))}
                   </div>
-                </>
-              ) : !searchTopic.trim() ? (
-                <p className="text-gray-500 text-center py-8">
-                  {normalizedSubject === 'religious studies' 
-                    ? 'Please select a component and religion/theme first to see available topics.'
-                    : normalizedSubject === 'mathematics'
-                    ? 'Please select a mathematics unit first to see available topics.'
-                    : normalizedSubject === 'biology'
-                    ? 'Please select a biology unit first to see available topics.'
-                    : normalizedSubject === 'physics'
-                    ? 'Please select a physics unit first to see available topics.'
-                    : normalizedSubject === 'geography'
-                    ? 'Please select a geography unit and section first to see available topics.'
-                    : normalizedSubject === 'history'
-                    ? 'Please select a history unit first to see available topics.'
-                    : 'Please select a chemistry unit first to see available topics.'
-                  }
-                </p>
-              ) : null}
+              )}
 
-              {/* Selection status message - shows for both selected topics and custom topics */}
-              {(selectedTopic || (searchTopic.trim() && !availableTopics.includes(searchTopic.trim()))) && (
+              {normalizedSubject === 'biology' && options.examBoard === 'edexcel' && (
+                <div className="space-y-3">
+                  {getBiologyEdexcelUnits().map(unit => (
+                    <CollapsibleUnit
+                      key={unit.value}
+                      unitNumber={unit.number}
+                      unitTitle={unit.title}
+                      unitSubtitle={unit.subtitle}
+                      topics={biologyGcseEdexcelUnitsData[unit.value] || []}
+                      selectedTopic={selectedTopic}
+                      onTopicSelect={handleTopicSelect}
+                      searchQuery={searchTopic}
+                      defaultExpanded={false}
+                    />
+                  ))}
+                </div>
+              )}
+
+              {normalizedSubject === 'chemistry' && options.examBoard === 'aqa' && (
+                <div className="space-y-3">
+                  {getChemistryUnits().map(unit => (
+                    <CollapsibleUnit
+                      key={unit.value}
+                      unitNumber={unit.number}
+                      unitTitle={unit.title}
+                      unitSubtitle={unit.subtitle}
+                      topics={chemistryGcseAqaUnitsData[unit.value] || []}
+                      selectedTopic={selectedTopic}
+                      onTopicSelect={handleTopicSelect}
+                      searchQuery={searchTopic}
+                      defaultExpanded={false}
+                    />
+                  ))}
+                </div>
+              )}
+
+              {normalizedSubject === 'chemistry' && options.examBoard === 'edexcel' && (
+                <div className="space-y-3">
+                  {getChemistryEdexcelUnits().map(unit => (
+                    <CollapsibleUnit
+                      key={unit.value}
+                      unitNumber={unit.number}
+                      unitTitle={unit.title}
+                      unitSubtitle={unit.subtitle}
+                      topics={chemistryGcseEdexcelUnitsData[unit.value] || []}
+                      selectedTopic={selectedTopic}
+                      onTopicSelect={handleTopicSelect}
+                      searchQuery={searchTopic}
+                      defaultExpanded={false}
+                    />
+                  ))}
+                </div>
+              )}
+
+              {normalizedSubject === 'mathematics' && options.examBoard === 'edexcel' && (
+                <div className="space-y-3">
+                  {[
+                    { value: 'number', number: '1', title: 'Number' },
+                    { value: 'algebra', number: '2', title: 'Algebra' },
+                    { value: 'ratio-proportion-rates', number: '3', title: 'Ratio, Proportion', subtitle: 'and Rates of Change' },
+                    { value: 'geometry-measures', number: '4', title: 'Geometry and Measures' },
+                    { value: 'probability', number: '5', title: 'Probability' },
+                    { value: 'statistics', number: '6', title: 'Statistics' }
+                  ].map(unit => (
+                    <CollapsibleUnit
+                      key={unit.value}
+                      unitNumber={unit.number}
+                      unitTitle={unit.title}
+                      unitSubtitle={unit.subtitle}
+                      topics={mathGcseEdexcelUnits[unit.value] || []}
+                      selectedTopic={selectedTopic}
+                      onTopicSelect={handleTopicSelect}
+                      searchQuery={searchTopic}
+                      defaultExpanded={false}
+                    />
+                  ))}
+                </div>
+              )}
+
+              {normalizedSubject === 'mathematics' && options.examBoard === 'edexcel-igcse' && (
+                <div className="space-y-3">
+                  {[
+                    { value: 'numbers-number-system', number: '1', title: 'Numbers and the', subtitle: 'number system' },
+                    { value: 'equations-formulae-identities', number: '2', title: 'Equations, formulae', subtitle: 'and identities' },
+                    { value: 'sequences-functions-graphs', number: '3', title: 'Sequences, functions', subtitle: 'and graphs' },
+                    { value: 'geometry-trigonometry', number: '4', title: 'Geometry and', subtitle: 'trigonometry' },
+                    { value: 'vectors-transformation-geometry', number: '5', title: 'Vectors and transformation', subtitle: 'geometry' },
+                    { value: 'statistics-probability', number: '6', title: 'Statistics and', subtitle: 'probability' }
+                  ].map(unit => (
+                    <CollapsibleUnit
+                      key={unit.value}
+                      unitNumber={unit.number}
+                      unitTitle={unit.title}
+                      unitSubtitle={unit.subtitle}
+                      topics={mathGcseEdexcelIgcseUnits[unit.value] || []}
+                      selectedTopic={selectedTopic}
+                      onTopicSelect={handleTopicSelect}
+                      searchQuery={searchTopic}
+                      defaultExpanded={false}
+                    />
+                  ))}
+                </div>
+              )}
+
+              {normalizedSubject === 'mathematics' && options.examBoard === 'ci' && (
+                <div className="space-y-3">
+                  {[
+                    { value: 'number', number: '1', title: 'Number' },
+                    { value: 'algebra-graphs', number: '2', title: 'Algebra and graphs' },
+                    { value: 'coordinate-geometry', number: '3', title: 'Coordinate geometry' },
+                    { value: 'geometry', number: '4', title: 'Geometry' },
+                    { value: 'mensuration', number: '5', title: 'Mensuration' },
+                    { value: 'trigonometry', number: '6', title: 'Trigonometry' },
+                    { value: 'transformations-vectors', number: '7', title: 'Transformations', subtitle: 'and vectors' },
+                    { value: 'probability', number: '8', title: 'Probability' },
+                    { value: 'statistics', number: '9', title: 'Statistics' }
+                  ].map(unit => (
+                    <CollapsibleUnit
+                      key={unit.value}
+                      unitNumber={unit.number}
+                      unitTitle={unit.title}
+                      unitSubtitle={unit.subtitle}
+                      topics={mathGcseCambridgeUnits[unit.value] || []}
+                      selectedTopic={selectedTopic}
+                      onTopicSelect={handleTopicSelect}
+                      searchQuery={searchTopic}
+                      defaultExpanded={false}
+                    />
+                  ))}
+                </div>
+              )}
+
+              {normalizedSubject === 'history' && options.examBoard === 'aqa' && (
+                <div className="space-y-3">
+                  {getHistoryUnits().map(unit => (
+                    <CollapsibleUnit
+                      key={unit.value}
+                      unitTitle={unit.title}
+                      unitSubtitle={unit.subtitle}
+                      topics={historyGcseAqaUnitsData[unit.value] || []}
+                      selectedTopic={selectedTopic}
+                      onTopicSelect={handleTopicSelect}
+                      searchQuery={searchTopic}
+                      defaultExpanded={false}
+                    />
+                  ))}
+                </div>
+              )}
+
+              {normalizedSubject === 'geography' && options.examBoard === 'aqa' && (
+                <div className="space-y-3">
+                  {getGeographyAqaUnits().map(geographyUnit => {
+                    // For geographical-skills, show it directly
+                    if (geographyUnit.value === 'geographical-skills') {
+                      return (
+                        <CollapsibleUnit
+                          key={geographyUnit.value}
+                          unitTitle={geographyUnit.title}
+                          topics={getGeographyAqaTopics(geographyUnit.value, '') || []}
+                          selectedTopic={selectedTopic}
+                          onTopicSelect={handleTopicSelect}
+                          searchQuery={searchTopic}
+                          defaultExpanded={false}
+                        />
+                      );
+                    }
+                    
+                    // For other units, show each section as a collapsible unit
+                    return getGeographyAqaSections(geographyUnit.value).map(section => (
+                      <CollapsibleUnit
+                        key={`${geographyUnit.value}-${section.value}`}
+                        unitTitle={`${geographyUnit.title} - ${section.title}`}
+                        topics={getGeographyAqaTopics(geographyUnit.value, section.value) || []}
+                        selectedTopic={selectedTopic}
+                        onTopicSelect={handleTopicSelect}
+                        searchQuery={searchTopic}
+                        defaultExpanded={false}
+                      />
+                    ));
+                  })}
+                </div>
+              )}
+
+              {normalizedSubject === 'religious studies' && options.examBoard === 'aqa' && (
+                <div className="space-y-3">
+                  {/* Component 1 - Religions */}
+                  {getReligiousStudiesReligions().map(religion => {
+                    const componentData = religiousStudiesGcseAqaUnits['component-1'];
+                    const topics = componentData?.[religion.value] || [];
+                    return (
+                      <CollapsibleUnit
+                        key={religion.value}
+                        unitTitle={`Component 1: ${religion.title}`}
+                        topics={topics}
+                        selectedTopic={selectedTopic}
+                        onTopicSelect={handleTopicSelect}
+                        searchQuery={searchTopic}
+                        defaultExpanded={false}
+                      />
+                    );
+                  })}
+                  
+                  {/* Component 2 - Themes */}
+                  {getReligiousStudiesThemes().map(theme => {
+                    const componentData = religiousStudiesGcseAqaUnits['component-2'];
+                    const topics = componentData?.[theme.value] || [];
+                    return (
+                      <CollapsibleUnit
+                        key={theme.value}
+                        unitTitle={`Component 2: ${theme.code} - ${theme.title}`}
+                        topics={topics}
+                        selectedTopic={selectedTopic}
+                        onTopicSelect={handleTopicSelect}
+                        searchQuery={searchTopic}
+                        defaultExpanded={false}
+                      />
+                    );
+                  })}
+                </div>
+              )}
+
+              {/* Selection status message */}
+              {selectedTopic && (
                 <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg">
                   <div className="flex items-center">
                     <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                     <span className="text-sm text-green-800">
-                      Selected: "<strong>{selectedTopic || searchTopic.trim()}</strong>". Click "Generate Questions" to continue.
+                      Selected: "<strong>{selectedTopic}</strong>". Click "Generate Questions" to continue.
                     </span>
                   </div>
                 </div>
@@ -2349,9 +1871,9 @@ const QuestionGenerator: React.FC = () => {
           <div className="flex gap-6 pt-4">
             <button
               type="submit"
-              disabled={isGenerating || (shouldShowTopicGrid && !selectedTopic && !searchTopic.trim())}
+              disabled={isGenerating || (shouldShowTopicGrid && !selectedTopic)}
               className={`flex-1 flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium ${
-                isGenerating || (shouldShowTopicGrid && !selectedTopic && !searchTopic.trim())
+                isGenerating || (shouldShowTopicGrid && !selectedTopic)
                   ? 'text-gray-400 bg-gray-200 cursor-not-allowed'
                   : `text-gray-900 ${subjectTheme.bg} ${subjectTheme.hover} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${subjectTheme.bg.replace('bg-', '')}`
               }`}
