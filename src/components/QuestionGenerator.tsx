@@ -1852,14 +1852,14 @@ const QuestionGenerator: React.FC = () => {
               )}
 
               {/* Selection status message */}
-              {selectedTopic && (
+              {(selectedTopic || searchTopic.trim()) && (
                 <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg">
                   <div className="flex items-center">
                     <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                     <span className="text-sm text-green-800">
-                      Selected: "<strong>{selectedTopic}</strong>". Click "Generate Questions" to continue.
+                      Selected: "<strong>{selectedTopic || searchTopic.trim()}</strong>". Click "Generate Questions" to continue.
                     </span>
                   </div>
                 </div>
@@ -1871,9 +1871,9 @@ const QuestionGenerator: React.FC = () => {
           <div className="flex gap-6 pt-4">
             <button
               type="submit"
-              disabled={isGenerating || (shouldShowTopicGrid && !selectedTopic)}
+              disabled={isGenerating || (shouldShowTopicGrid && !selectedTopic && !searchTopic.trim())}
               className={`flex-1 flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium ${
-                isGenerating || (shouldShowTopicGrid && !selectedTopic)
+                isGenerating || (shouldShowTopicGrid && !selectedTopic && !searchTopic.trim())
                   ? 'text-gray-400 bg-gray-200 cursor-not-allowed'
                   : `text-gray-900 ${subjectTheme.bg} ${subjectTheme.hover} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${subjectTheme.bg.replace('bg-', '')}`
               }`}
