@@ -26,25 +26,25 @@ const LoadingBar = forwardRef<LoadingBarRef, LoadingBarProps>(({ onCancel, isVis
   const steps: ProgressStep[] = useMemo(() => [
     {
       id: 'analyzing',
-      text: 'Analyzing exam specification...',
+      text: 'Generating questions...',
       icon: Brain,
       maxProgress: 25
     },
     {
       id: 'generating',
-      text: 'Generating questions with AI...',
+      text: 'Generating questions...',
       icon: Sparkles,
       maxProgress: 85
     },
     {
       id: 'formatting',
-      text: 'Formatting questions...',
+      text: 'Generating questions...',
       icon: FileText,
       maxProgress: 95
     },
     {
       id: 'complete',
-      text: 'Complete!',
+      text: 'Generating questions...',
       icon: CheckCircle,
       maxProgress: 100
     }
@@ -147,26 +147,11 @@ const LoadingBar = forwardRef<LoadingBarRef, LoadingBarProps>(({ onCancel, isVis
       </div>
 
       {/* Progress Bar */}
-      <div className="w-full bg-blue-100 rounded-full h-2 mb-3">
+      <div className="w-full bg-blue-100 rounded-full h-2">
         <div 
           className="bg-blue-600 h-2 rounded-full transition-all duration-300 ease-out"
           style={{ width: `${progress}%` }}
         />
-      </div>
-
-      {/* Step indicators */}
-      <div className="flex justify-between items-center text-xs text-blue-600">
-        {steps.map((step, index) => (
-          <div 
-            key={step.id}
-            className={`flex items-center gap-1 ${
-              index <= currentStep ? 'text-blue-700' : 'text-blue-400'
-            }`}
-          >
-            <step.icon className="w-3 h-3" />
-            <span className="hidden sm:inline">{step.text.split(' ')[0]}</span>
-          </div>
-        ))}
       </div>
     </div>
   );
