@@ -27,6 +27,27 @@ export const SignUp: React.FC = () => {
     confirmPassword: '',
   });
 
+  // Floating emoji data with more emojis and bigger sizes
+  const floatingEmojis = [
+    // Top row
+    { emoji: '📐', size: '48px', left: '15%', top: '15%', delay: '0s', zIndex: 1 },
+    { emoji: '🧪', size: '50px', left: '85%', top: '15%', delay: '2s', zIndex: 1 },
+    
+    // Middle row (sides)
+    { emoji: '🧬', size: '44px', left: '5%', top: '45%', delay: '3s', zIndex: 2 },
+    { emoji: '🏛️', size: '46px', left: '95%', top: '45%', delay: '4s', zIndex: 1 },
+    
+    // Lower middle row
+    { emoji: '🌍', size: '52px', left: '20%', top: '60%', delay: '5s', zIndex: 1 },
+    { emoji: '💻', size: '48px', left: '80%', top: '60%', delay: '6s', zIndex: 2 },
+    
+    // Bottom row
+    { emoji: '📚', size: '44px', left: '10%', top: '80%', delay: '7s', zIndex: 1 },
+    { emoji: '🔬', size: '46px', left: '35%', top: '85%', delay: '1.5s', zIndex: 2 },
+    { emoji: '🎨', size: '50px', left: '65%', top: '85%', delay: '2.5s', zIndex: 1 },
+    { emoji: '🎭', size: '42px', left: '90%', top: '80%', delay: '3.5s', zIndex: 2 },
+  ];
+
   const validateForm = () => {
     if (formData.password.length < 8) {
       setError('Password must be at least 8 characters long');
@@ -99,8 +120,49 @@ export const SignUp: React.FC = () => {
   // It can be restored from git history when needed
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Floating Emoji Animations */}
+      <style>{`
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0px) rotate(0deg);
+          }
+          25% {
+            transform: translateY(-15px) rotate(2deg);
+          }
+          50% {
+            transform: translateY(-10px) rotate(-1deg);
+          }
+          75% {
+            transform: translateY(-20px) rotate(1deg);
+          }
+        }
+        
+        .floating-emoji {
+          animation: float 8s ease-in-out infinite;
+          pointer-events: none;
+          user-select: none;
+        }
+      `}</style>
+
+      {/* Floating Emojis */}
+      {floatingEmojis.map((item, index) => (
+        <div
+          key={index}
+          className="floating-emoji absolute opacity-60 text-4xl"
+          style={{
+            left: item.left,
+            top: item.top,
+            fontSize: item.size,
+            animationDelay: item.delay,
+            zIndex: item.zIndex
+          }}
+        >
+          {item.emoji}
+        </div>
+      ))}
+
+      <div className="max-w-md w-full space-y-8 relative z-10">
         <div>
           <img
             className="mx-auto h-16 w-auto"
