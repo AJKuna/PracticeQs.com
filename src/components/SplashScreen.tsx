@@ -111,18 +111,18 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ isOpen, onClose }) => {
             {/* Latest Updates Header */}
             <h2 className="text-xl font-bold text-gray-900 mb-4">Latest Updates</h2>
             
-            {/* New Design Card */}
+            {/* Progress Tracking Card */}
             <div 
-              className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-4 cursor-pointer transition-all duration-200 hover:bg-blue-100 hover:border-blue-300 hover:shadow-md transform hover:-translate-y-0.5"
+              className="bg-purple-50 border border-purple-200 rounded-xl p-4 mb-4 cursor-pointer transition-all duration-200 hover:bg-purple-100 hover:border-purple-300 hover:shadow-md transform hover:-translate-y-0.5"
               onClick={handleClose}
             >
               <div className="flex items-start space-x-3">
-                <div className="text-2xl">✨</div>
+                <div className="text-2xl">📊</div>
                 <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-blue-700 mb-1">
-                    New Design
+                  <h3 className="text-lg font-semibold text-purple-700 mb-1">
+                    Introducing Progress Tracking
                   </h3>
-                  <p className="text-gray-700 text-sm">Easier to browse topics with our new collapsible unit layout!</p>
+                  <p className="text-gray-700 text-sm">Premium users can now track progress and learning!</p>
                 </div>
               </div>
             </div>

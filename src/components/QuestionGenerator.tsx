@@ -130,6 +130,11 @@ const QuestionGenerator: React.FC = () => {
   // Copy to clipboard state
   const [copiedQuestions, setCopiedQuestions] = useState<Set<number>>(new Set());
 
+  // Progress tracking for premium users (topic -> questions generated out of 25)
+  const [topicProgress, setTopicProgress] = useState<{[key: string]: number}>(() => 
+    loadFromLocalStorage(getStorageKey('topicProgress'), {})
+  );
+
   // Save to localStorage whenever state changes
   useEffect(() => {
     saveToLocalStorage(getStorageKey('searchTopic'), searchTopic);
@@ -154,6 +159,10 @@ const QuestionGenerator: React.FC = () => {
   useEffect(() => {
     saveToLocalStorage(getStorageKey('showSolutions'), showSolutions);
   }, [showSolutions, normalizedSubject]);
+
+  useEffect(() => {
+    saveToLocalStorage(getStorageKey('topicProgress'), topicProgress);
+  }, [topicProgress, normalizedSubject]);
 
   // Fetch user usage and streak data on component mount and when user changes
   useEffect(() => {
@@ -753,6 +762,18 @@ const QuestionGenerator: React.FC = () => {
         // Track subject-specific question generation for popularity analysis
         // trackSubjectQuestionGeneration(normalizedSubject, searchTopic, data.length, options.difficulty, options.examLevel, options.examBoard); // This line was removed from imports
         
+        // Update progress tracking for premium users
+        if (profile?.subscription_tier === 'premium') {
+          setTopicProgress(prevProgress => {
+            const currentProgress = prevProgress[topicToUse] || 0;
+            const newProgress = Math.min(currentProgress + data.length, 25); // Cap at 25
+            return {
+              ...prevProgress,
+              [topicToUse]: newProgress
+            };
+          });
+        }
+        
         // Handle streak logic - check if this is their first generation of the day
         if (user && !streakData.hasGeneratedToday) {
           try {
@@ -1118,7 +1139,7 @@ const QuestionGenerator: React.FC = () => {
     clearFromLocalStorage(getStorageKey('questions'));
     clearFromLocalStorage(getStorageKey('solutions'));
     clearFromLocalStorage(getStorageKey('showSolutions'));
-    // Note: We don't clear options as they might want to keep their exam level/board settings
+    // Note: We don't clear options or topicProgress as they might want to keep their exam level/board settings and progress
   };
 
   const handleManageSubscription = async () => {
@@ -1607,6 +1628,8 @@ const QuestionGenerator: React.FC = () => {
                       onTopicSelect={handleTopicSelect}
                       searchQuery={searchTopic}
                       defaultExpanded={false}
+                      topicProgress={topicProgress}
+                      isPremium={profile?.subscription_tier === 'premium'}
                     />
                   ))}
                           </div>
@@ -1625,6 +1648,8 @@ const QuestionGenerator: React.FC = () => {
                       onTopicSelect={handleTopicSelect}
                       searchQuery={searchTopic}
                       defaultExpanded={false}
+                      topicProgress={topicProgress}
+                      isPremium={profile?.subscription_tier === 'premium'}
                     />
                     ))}
                   </div>
@@ -1643,6 +1668,8 @@ const QuestionGenerator: React.FC = () => {
                       onTopicSelect={handleTopicSelect}
                       searchQuery={searchTopic}
                       defaultExpanded={false}
+                      topicProgress={topicProgress}
+                      isPremium={profile?.subscription_tier === 'premium'}
                     />
                   ))}
                 </div>
@@ -1661,6 +1688,8 @@ const QuestionGenerator: React.FC = () => {
                       onTopicSelect={handleTopicSelect}
                       searchQuery={searchTopic}
                       defaultExpanded={false}
+                      topicProgress={topicProgress}
+                      isPremium={profile?.subscription_tier === 'premium'}
                     />
                   ))}
                 </div>
@@ -1679,6 +1708,8 @@ const QuestionGenerator: React.FC = () => {
                       onTopicSelect={handleTopicSelect}
                       searchQuery={searchTopic}
                       defaultExpanded={false}
+                      topicProgress={topicProgress}
+                      isPremium={profile?.subscription_tier === 'premium'}
                     />
                   ))}
                 </div>
@@ -1704,6 +1735,8 @@ const QuestionGenerator: React.FC = () => {
                       onTopicSelect={handleTopicSelect}
                       searchQuery={searchTopic}
                       defaultExpanded={false}
+                      topicProgress={topicProgress}
+                      isPremium={profile?.subscription_tier === 'premium'}
                     />
                   ))}
                 </div>
@@ -1729,6 +1762,8 @@ const QuestionGenerator: React.FC = () => {
                       onTopicSelect={handleTopicSelect}
                       searchQuery={searchTopic}
                       defaultExpanded={false}
+                      topicProgress={topicProgress}
+                      isPremium={profile?.subscription_tier === 'premium'}
                     />
                   ))}
                 </div>
@@ -1757,6 +1792,8 @@ const QuestionGenerator: React.FC = () => {
                       onTopicSelect={handleTopicSelect}
                       searchQuery={searchTopic}
                       defaultExpanded={false}
+                      topicProgress={topicProgress}
+                      isPremium={profile?.subscription_tier === 'premium'}
                     />
                   ))}
                 </div>
@@ -1774,6 +1811,8 @@ const QuestionGenerator: React.FC = () => {
                       onTopicSelect={handleTopicSelect}
                       searchQuery={searchTopic}
                       defaultExpanded={false}
+                      topicProgress={topicProgress}
+                      isPremium={profile?.subscription_tier === 'premium'}
                     />
                   ))}
                 </div>
@@ -1793,6 +1832,8 @@ const QuestionGenerator: React.FC = () => {
                           onTopicSelect={handleTopicSelect}
                           searchQuery={searchTopic}
                           defaultExpanded={false}
+                          topicProgress={topicProgress}
+                          isPremium={profile?.subscription_tier === 'premium'}
                         />
                       );
                     }
@@ -1807,6 +1848,8 @@ const QuestionGenerator: React.FC = () => {
                         onTopicSelect={handleTopicSelect}
                         searchQuery={searchTopic}
                         defaultExpanded={false}
+                        topicProgress={topicProgress}
+                        isPremium={profile?.subscription_tier === 'premium'}
                       />
                     ));
                   })}
@@ -1828,6 +1871,8 @@ const QuestionGenerator: React.FC = () => {
                         onTopicSelect={handleTopicSelect}
                         searchQuery={searchTopic}
                         defaultExpanded={false}
+                        topicProgress={topicProgress}
+                        isPremium={profile?.subscription_tier === 'premium'}
                       />
                     );
                   })}
@@ -1845,6 +1890,8 @@ const QuestionGenerator: React.FC = () => {
                         onTopicSelect={handleTopicSelect}
                         searchQuery={searchTopic}
                         defaultExpanded={false}
+                        topicProgress={topicProgress}
+                        isPremium={profile?.subscription_tier === 'premium'}
                       />
                     );
                   })}
