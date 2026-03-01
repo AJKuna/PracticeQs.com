@@ -162,7 +162,33 @@ const QuestionGenerator: React.FC = () => {
 
   useEffect(() => {
     saveToLocalStorage(getStorageKey('topicProgress'), topicProgress);
-  }, [topicProgress, normalizedSubject]);
+    
+    // Sync to backend for premium users
+    if (user && (profile?.subscription_tier === 'premium' || profile?.subscription_tier === 'enterprise')) {
+      const syncToBackend = async () => {
+        try {
+          await fetch(API_CONFIG.ENDPOINTS.TOPIC_PROGRESS_SAVE, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              userId: user.id,
+              subject: normalizedSubject,
+              topicProgress: topicProgress
+            })
+          });
+        } catch (error) {
+          console.error('Error syncing progress to backend:', error);
+          // Silent fail - localStorage still has the data
+        }
+      };
+      
+      // Debounce the sync to avoid too many API calls
+      const timeoutId = setTimeout(syncToBackend, 1000);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [topicProgress, normalizedSubject, user, profile?.subscription_tier]);
 
   // Fetch user usage and streak data on component mount and when user changes
   useEffect(() => {
@@ -186,6 +212,24 @@ const QuestionGenerator: React.FC = () => {
           if (streakResponse.success && streakResponse.data) {
             setStreakData(streakResponse.data);
           }
+
+          // Fetch topic progress from backend for premium users
+          if (profile?.subscription_tier === 'premium' || profile?.subscription_tier === 'enterprise') {
+            try {
+              const progressResponse = await fetch(API_CONFIG.ENDPOINTS.TOPIC_PROGRESS_GET(user.id, normalizedSubject));
+              if (progressResponse.ok) {
+                const progressData = await progressResponse.json();
+                if (progressData.success && progressData.progress) {
+                  setTopicProgress(progressData.progress);
+                  // Also save to localStorage as backup
+                  saveToLocalStorage(getStorageKey('topicProgress'), progressData.progress);
+                }
+              }
+            } catch (error) {
+              console.error('Error fetching topic progress:', error);
+              // Fall back to localStorage if backend fails
+            }
+          }
         } catch (error) {
           console.error('Error fetching usage and streak:', error);
         }
@@ -193,7 +237,7 @@ const QuestionGenerator: React.FC = () => {
       
       fetchUsageAndStreak();
     }
-  }, [user, profile?.subscription_tier]); // Include profile tier to refresh usage when subscription changes
+  }, [user, profile?.subscription_tier, normalizedSubject]); // Include profile tier to refresh usage when subscription changes
 
   // Reset exam level to GCSE if KS3 is selected but subject is not mathematics
   useEffect(() => {

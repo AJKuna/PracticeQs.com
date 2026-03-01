@@ -12,6 +12,8 @@ export const API_CONFIG = {
     GENERATE_SOLUTIONS: `${API_BASE_URL}/api/generate-solutions`,
     USAGE: (userId: string) => `${API_BASE_URL}/api/usage/${userId}`,
     STREAK: (userId: string) => `${API_BASE_URL}/api/streak/${userId}`,
+    TOPIC_PROGRESS_SAVE: `${API_BASE_URL}/api/topic-progress/save`,
+    TOPIC_PROGRESS_GET: (userId: string, subject: string) => `${API_BASE_URL}/api/topic-progress/${userId}/${subject}`,
   }
 };
 

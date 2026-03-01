@@ -2198,6 +2198,102 @@ app.get('/api/webhook-diagnostics', async (req, res) => {
   }
 });
 
+// Topic Progress endpoints for premium users
+app.post('/api/topic-progress/save', async (req, res) => {
+  try {
+    const { userId, subject, topicProgress } = req.body;
+
+    if (!userId || !subject || !topicProgress) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+
+    // Verify user is premium
+    const { data: profile, error: profileError } = await supabase
+      .from('profiles')
+      .select('subscription_tier')
+      .eq('id', userId)
+      .single();
+
+    if (profileError || !profile) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    if (profile.subscription_tier !== 'premium' && profile.subscription_tier !== 'enterprise') {
+      return res.status(403).json({ error: 'This feature is only available for premium users' });
+    }
+
+    // Upsert topic progress (insert or update if exists)
+    const { data, error } = await supabase
+      .from('topic_progress')
+      .upsert({
+        user_id: userId,
+        subject: subject,
+        progress_data: topicProgress,
+        updated_at: new Date().toISOString()
+      }, {
+        onConflict: 'user_id,subject'
+      })
+      .select();
+
+    if (error) {
+      console.error('Error saving topic progress:', error);
+      return res.status(500).json({ error: 'Failed to save progress' });
+    }
+
+    res.json({ success: true, data });
+  } catch (error) {
+    console.error('Error in save topic progress:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+app.get('/api/topic-progress/:userId/:subject', async (req, res) => {
+  try {
+    const { userId, subject } = req.params;
+
+    if (!userId || !subject) {
+      return res.status(400).json({ error: 'Missing required parameters' });
+    }
+
+    // Verify user is premium
+    const { data: profile, error: profileError } = await supabase
+      .from('profiles')
+      .select('subscription_tier')
+      .eq('id', userId)
+      .single();
+
+    if (profileError || !profile) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    if (profile.subscription_tier !== 'premium' && profile.subscription_tier !== 'enterprise') {
+      return res.status(403).json({ error: 'This feature is only available for premium users' });
+    }
+
+    // Retrieve topic progress
+    const { data, error } = await supabase
+      .from('topic_progress')
+      .select('progress_data')
+      .eq('user_id', userId)
+      .eq('subject', subject)
+      .single();
+
+    if (error) {
+      if (error.code === 'PGRST116') {
+        // No progress found, return empty object
+        return res.json({ success: true, progress: {} });
+      }
+      console.error('Error retrieving topic progress:', error);
+      return res.status(500).json({ error: 'Failed to retrieve progress' });
+    }
+
+    res.json({ success: true, progress: data.progress_data || {} });
+  } catch (error) {
+    console.error('Error in get topic progress:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 // Webhook test endpoint (for manual testing)
 app.post('/api/webhook-test', async (req, res) => {
   console.log('\n🧪 ===========================================');
